@@ -3,127 +3,169 @@
 We explicitly set the background color in case this layout is inflated using a theme different from the app theme (via
 the 'message view theme' setting).
 -->
-<com.fsck.k9.ui.messageview.MessageTopView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/message_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_weight="1"
-    android:background="?android:attr/windowBackground"
-    tools:context=".messageview.MessageViewFragment"
-    >
-
-    <com.fsck.k9.view.NonLockingScrollView
-        android:id="@+id/message_scrollview"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+    android:layout_height="match_parent">
+    <com.fsck.k9.ui.messageview.MessageTopView
+        android:id="@+id/message_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="?android:attr/windowBackground"
+        tools:context=".messageview.MessageViewFragment"
         >
 
-        <LinearLayout
-            android:orientation="vertical"
+        <com.fsck.k9.view.NonLockingScrollView
+            android:id="@+id/message_scrollview"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             >
 
-            <!-- Header area -->
-            <include layout="@layout/message_view_header" />
-
-            <FrameLayout
-                android:id="@+id/extra_header_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="4dp"
-                android:visibility="gone"
-                tools:visibility="visible"
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 >
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/show_pictures"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/message_view_show_remote_images_action"
-                    app:icon="@drawable/ic_image"
-                    />
-
-            </FrameLayout>
-
-            <Space
-                android:id="@+id/line_of_death"
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                />
-
-            <com.fsck.k9.view.ToolableViewAnimator
-                android:id="@+id/message_layout_animator"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inAnimation="@anim/fade_in"
-                android:outAnimation="@anim/fade_out"
-                app:previewInitialChild="1"
-                >
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    >
-
-                    <ProgressBar
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="30dp"
-                        android:paddingBottom="30dp"
-                        android:indeterminate="false"
-                        android:id="@+id/message_progress"
-                        android:max="1000"
-                        tools:progress="300"
-                        style="@android:style/Widget.Holo.ProgressBar.Horizontal"
-                        />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/message_progress"
-                        android:layout_centerInParent="true"
-                        android:id="@+id/message_progress_text"
-                        android:text="@string/message_progress_text"
-                        />
-
-                </RelativeLayout>
+                <!-- Header area -->
+                <include layout="@layout/message_view_header" />
 
                 <FrameLayout
-                    android:orientation="vertical"
-                    android:id="@+id/message_container"
-                    android:layout_width="fill_parent"
+                    android:id="@+id/extra_header_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:paddingVertical="4dp"
+                    android:visibility="gone"
+                    >
 
-            </com.fsck.k9.view.ToolableViewAnimator>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/show_pictures"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/message_view_show_remote_images_action"
+                        app:icon="@drawable/ic_image"
+                        />
 
-        </LinearLayout>
+                </FrameLayout>
 
-    </com.fsck.k9.view.NonLockingScrollView>
+                <com.fsck.k9.view.ToolableViewAnimator
+                    android:id="@+id/message_layout_animator"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inAnimation="@anim/fade_in"
+                    android:outAnimation="@anim/fade_out"
+                    app:previewInitialChild="1"
+                    >
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/download_remainder"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_marginHorizontal="16dp"
-        android:text="@string/message_view_download_remainder"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_width="fill_parent"
-        tools:visibility="visible"
-        />
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
 
-</com.fsck.k9.ui.messageview.MessageTopView>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        >
+
+                        <ProgressBar
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="30dp"
+                            android:paddingBottom="30dp"
+                            android:indeterminate="false"
+                            android:id="@+id/message_progress"
+                            android:max="1000"
+                            tools:progress="300"
+                            style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                            />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/message_progress"
+                            android:layout_centerInParent="true"
+                            android:id="@+id/message_progress_text"
+                            android:text="@string/message_progress_text"
+                            />
+
+                    </RelativeLayout>
+
+                    <FrameLayout
+                        android:orientation="vertical"
+                        android:id="@+id/message_container"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                </com.fsck.k9.view.ToolableViewAnimator>
+
+            </LinearLayout>
+
+        </com.fsck.k9.view.NonLockingScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/download_remainder"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/message_view_download_remainder"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            tools:visibility="visible"
+            />
+
+    </com.fsck.k9.ui.messageview.MessageTopView>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/floatingActionButtonMargin"
+        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_colorNormal="?colorPrimary"
+        app:menu_colorPressed="@android:color/transparent"
+        app:menu_icon="@drawable/ic_reply_all"
+        app:menu_labels_colorNormal="@color/color_white"
+        app:menu_labels_colorPressed="@android:color/transparent"
+        app:menu_labels_position="left"
+        app:menu_labels_showShadow="true"
+        app:menu_labels_cornerRadius="20dp"
+        app:menu_labels_textColor="@color/color_black"
+        app:menu_labels_textSize="14sp"
+        app:menu_labels_paddingLeft="16dp"
+        app:menu_labels_paddingRight="16dp"
+        app:menu_labels_paddingTop="8dp"
+        app:menu_labels_paddingBottom="8dp"
+        app:menu_shadowRadius="1dp"
+        app:menu_showShadow="false">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_reply_all"
+            style="@style/ClansFabMenuMini"
+            android:src="@drawable/ic_reply_all"
+            android:visibility="gone"
+            app:fab_label="@string/reply_all" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_forward"
+            style="@style/ClansFabMenuMini"
+            android:src="@drawable/ic_float_forward"
+            app:fab_label="@string/forward" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_reply"
+            style="@style/ClansFabMenu"
+            android:src="@drawable/ic_reply_2"
+            app:fab_label="@string/reply" />
+    </com.github.clans.fab.FloatingActionMenu>
+
+</RelativeLayout>

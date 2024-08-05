@@ -9,6 +9,7 @@ import android.content.IntentSender.SendIntentException
 import android.os.Bundle
 import android.os.Parcelable
 import android.os.SystemClock
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.Menu
@@ -223,11 +224,17 @@ class MessageViewFragment :
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
+        Log.d("TAG", "onPrepareOptionsMenu: NamTD8 - 88")
         if (!isActive) return
 
         menu.findItem(R.id.delete).apply {
             isVisible = K9.isMessageViewDeleteActionVisible
             isEnabled = !isDeleteMenuItemDisabled
+        }
+
+        menu.findItem(R.id.menu_star).apply {
+            isVisible = true
+            setIcon(if (isMessageFlagged) R.drawable.ic_save_yellow_tag else R.drawable.ic_unsave_white_tag)
         }
 
         val showToggleUnread = !isOutbox
@@ -305,6 +312,11 @@ class MessageViewFragment :
         when (item.itemId) {
             R.id.toggle_message_view_theme -> onToggleTheme()
             R.id.delete -> onDelete()
+            R.id.menu_star -> {
+                item.setIcon(if (isMessageFlagged) R.drawable.ic_save_yellow_tag else R.drawable.ic_unsave_white_tag)
+                onToggleFlagged()
+            }
+
             R.id.reply -> onReply()
             R.id.reply_all -> onReplyAll()
             R.id.forward -> onForward()
@@ -760,6 +772,9 @@ class MessageViewFragment :
 
     private val isMessageRead: Boolean
         get() = message?.isSet(Flag.SEEN) == true
+
+    private val isMessageFlagged: Boolean
+        get() = message?.isSet(Flag.FLAGGED) == true
 
     private val isCopyCapable: Boolean
         get() = !isOutbox && messagingController.isCopyCapable(account)

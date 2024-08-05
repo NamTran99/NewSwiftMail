@@ -50,8 +50,8 @@
         <item name="colorSurfaceContainerHigh">@color/k9_neutral_092</item>
         <item name="colorSurfaceContainerLowest">@color/k9_neutral_100</item>
         <item name="colorSurfaceContainerHighest">@color/k9_neutral_090</item>
-        <item name="colorOutline">@color/k9_neutral_variant_050</item>
-        <item name="colorOutlineVariant">@color/k9_neutral_variant_080</item>
+        <item name="colorOutline">@color/color_898989</item>
+        <item name="colorOutlineVariant">@color/color_f1f1f1</item>
         <item name="colorError">@color/k9_error_040</item>
         <item name="colorOnError">@color/k9_error_100</item>
         <item name="colorErrorContainer">@color/k9_error_090</item>

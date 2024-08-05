@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -1896,6 +1897,7 @@ class MessageListFragment :
         }
 
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+            Log.d("TAG", "onCreateActionMode: NamTD8 ")
             mode.menuInflater.inflate(R.menu.message_list_context_menu, menu)
 
             setContextCapabilities(account, menu)

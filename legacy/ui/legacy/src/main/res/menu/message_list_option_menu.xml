@@ -29,6 +29,15 @@
         />
 
     <!-- MessageView -->
+
+    <item
+        android:id="@+id/menu_star"
+        android:icon="@drawable/btn_select_star"
+        android:title="@string/delete_action"
+        android:visible="false"
+        app:showAsAction="always"
+        />
+
     <item
         android:id="@+id/delete"
         android:icon="@drawable/ic_trash"

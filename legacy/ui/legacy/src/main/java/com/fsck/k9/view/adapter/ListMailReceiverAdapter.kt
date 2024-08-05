@@ -1,15 +1,36 @@
 package com.fsck.k9.view.adapter
 
 import android.content.Context
-import com.fsck.k9.mailstore.MessageDetails
+import com.fsck.k9.helper.MessageHelper
+import com.fsck.k9.mail.Address
+import com.fsck.k9.ui.R
+import com.fsck.k9.ui.base.extensions.createTransactionID
+import com.fsck.k9.ui.base.extensions.show
 import com.fsck.k9.ui.base.recyclerview.SingleHolderBindingAdapter
 import com.fsck.k9.ui.databinding.ItemMailReceiverBinding
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class ListMailReceiverAdapter: SingleHolderBindingAdapter<MessageDetails, ItemMailReceiverBinding>() {
+class ListMailReceiverAdapter : SingleHolderBindingAdapter<AddressWithKeyModel, ItemMailReceiverBinding>(),
+    KoinComponent {
+
     override val layoutId: Int
-        get() = TODO("Not yet implemented")
+        get() = R.layout.item_mail_receiver
 
-    override fun onBind(binding: ItemMailReceiverBinding, context: Context, item: MessageDetails, position: Int) {
-        TODO("Not yet implemented")
+    private val messageHelper: MessageHelper by inject()
+    fun submitAddress(list: MutableList<Address>?) {
+        submitList(
+            list?.map {
+                AddressWithKeyModel(address = it, id = createTransactionID())
+            },
+        )
+    }
+
+    override fun onBind(binding: ItemMailReceiverBinding, context: Context, item: AddressWithKeyModel, position: Int) {
+        binding.apply {
+            tvTo.show(position == 0)
+            viewUser.name = item.address.address
+            viewUser.setIconContact(item.address)
+        }
     }
 }

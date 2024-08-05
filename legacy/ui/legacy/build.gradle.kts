@@ -12,6 +12,7 @@ dependencies {
     implementation(projects.legacy.core)
     implementation(projects.mail.common)
     implementation(projects.uiUtils.toolbarBottomSheet)
+    implementation("com.github.clans:fab:1.6.4")
 
     implementation(projects.core.featureflags)
     implementation(projects.feature.launcher)

@@ -15,9 +15,8 @@ import androidx.annotation.LayoutRes
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import java.util.UUID
 
-typealias CallBackNoParam = (() -> Unit)
-typealias CallBackParam<T> = ((T) -> Unit)
 
 fun <T : ViewDataBinding> ViewGroup.inflateBinding(
     @LayoutRes layoutId: Int,

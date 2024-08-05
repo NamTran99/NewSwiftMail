@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
@@ -882,6 +883,8 @@ open class MessageList :
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        Log.d("TAG", "onCreateActionMode: NamTD8-1 ")
+
         menuInflater.inflate(R.menu.message_list_option_menu, menu)
 
         val searchItem = menu.findItem(R.id.search)

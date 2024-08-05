@@ -2,7 +2,6 @@ package com.fsck.k9.view;
 
 
 import java.util.List;
-import java.util.Timer;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -17,6 +16,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.TooltipCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import app.k9mail.core.ui.legacy.designsystem.atom.icon.Icons;
 import com.fsck.k9.Account;
 import com.fsck.k9.DI;
@@ -44,6 +44,7 @@ import com.fsck.k9.ui.messageview.DisplayRecipientsExtractor;
 import com.fsck.k9.ui.messageview.MessageHeaderClickListener;
 import com.fsck.k9.ui.messageview.MessageViewRecipientFormatter;
 import com.fsck.k9.ui.messageview.RecipientNamesView;
+import com.fsck.k9.view.adapter.ListMailReceiverAdapter;
 import com.google.android.material.textview.MaterialTextView;
 import timber.log.Timber;
 
@@ -57,12 +58,14 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
     private final MessageRepository messageRepository = DI.get(MessageRepository.class);
     private final FontSizes fontSizes = K9.getFontSizes();
 
+    private RecyclerView listMailRecyclerView;
+    private ListMailReceiverAdapter listMailReceiverAdapter;
     private BottomBaselineTextView subjectView;
-    private ImageView starView;
+//    private ImageView starView;
     private ImageView contactPictureView;
-    private MaterialTextView fromView;
-    private ImageView cryptoStatusIcon;
-    private RecipientNamesView recipientNamesView;
+//    private MaterialTextView fromView;
+//    private ImageView cryptoStatusIcon;
+//    private RecipientNamesView recipientNamesView;
     private MaterialTextView dateView;
     private ImageView menuPrimaryActionView;
 
@@ -87,22 +90,25 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
         super.onFinishInflate();
 
         subjectView = findViewById(R.id.subject);
-        starView = findViewById(R.id.flagged);
+//        starView = findViewById(R.id.flagged);
         contactPictureView = findViewById(R.id.contact_picture);
-        fromView = findViewById(R.id.from);
-        cryptoStatusIcon = findViewById(R.id.crypto_status_icon);
-        recipientNamesView = findViewById(R.id.recipients);
+//        fromView = findViewById(R.id.from);
+//        cryptoStatusIcon = findViewById(R.id.crypto_status_icon);
+//        recipientNamesView = findViewById(R.id.recipients);
         dateView = findViewById(R.id.date);
         viewSenderUser = findViewById(R.id.viewSenderUser);
+        listMailRecyclerView = findViewById(R.id.rvListMailTo);
+        listMailReceiverAdapter = new ListMailReceiverAdapter();
 
         fontSizes.setViewTextSize(subjectView, fontSizes.getMessageViewSubject());
         fontSizes.setViewTextSize(dateView, fontSizes.getMessageViewDate());
-        fontSizes.setViewTextSize(fromView, fontSizes.getMessageViewSender());
+//        fontSizes.setViewTextSize(fromView, fontSizes.getMessageViewSender());
+        listMailRecyclerView.setAdapter(listMailReceiverAdapter);
 
         int recipientTextSize = fontSizes.getMessageViewRecipients();
-        if (recipientTextSize != FontSizes.FONT_DEFAULT) {
-            recipientNamesView.setTextSize(recipientTextSize);
-        }
+//        if (recipientTextSize != FontSizes.FONT_DEFAULT) {
+//            recipientNamesView.setTextSize(recipientTextSize);
+//        }
 
         subjectView.setOnClickListener(this);
         subjectView.setOnLongClickListener(this);
@@ -196,7 +202,7 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
     }
 
     public void setOnFlagListener(OnClickListener listener) {
-        starView.setOnClickListener(listener);
+//        starView.setOnClickListener(listener);
     }
 
 
@@ -224,15 +230,16 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
             contactPictureView.setVisibility(View.GONE);
         }
 
+        listMailReceiverAdapter.submitAddress(messageDetail.getTo());
         CharSequence from = messageHelper.getSenderDisplayName(fromAddress);
         viewSenderUser.setName(from.toString());
 
-        if (showStar) {
-            starView.setVisibility(View.VISIBLE);
-            starView.setSelected(message.isSet(Flag.FLAGGED));
-        } else {
-            starView.setVisibility(View.GONE);
-        }
+//        if (showStar) {
+//            starView.setVisibility(View.VISIBLE);
+//            starView.setSelected(message.isSet(Flag.FLAGGED));
+//        } else {
+//            starView.setVisibility(View.GONE);
+//        }
 
         if (message.getSentDate() != null) {
             dateView.setText(relativeDateTimeFormatter.formatDate(message.getSentDate().getTime()));
@@ -248,13 +255,13 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
     }
 
     private void setRecipientNames(Message message, Account account) {
-        DisplayRecipientsExtractor displayRecipientsExtractor = new DisplayRecipientsExtractor(recipientFormatter,
-                recipientNamesView.getMaxNumberOfRecipientNames());
+//        DisplayRecipientsExtractor displayRecipientsExtractor = new DisplayRecipientsExtractor(recipientFormatter,
+//                recipientNamesView.getMaxNumberOfRecipientNames());
 
-        DisplayRecipients displayRecipients = displayRecipientsExtractor.extractDisplayRecipients(message, account);
+//        DisplayRecipients displayRecipients = displayRecipientsExtractor.extractDisplayRecipients(message, account);
 
-        recipientNamesView.setRecipients(displayRecipients.getRecipientNames(),
-                displayRecipients.getNumberOfRecipients());
+//        recipientNamesView.setRecipients(displayRecipients.getRecipientNames(),
+//                displayRecipients.getNumberOfRecipients());
     }
 
     private void setReplyActions(Message message, Account account) {
@@ -324,7 +331,7 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
     }
 
     public void hideCryptoStatus() {
-        cryptoStatusIcon.setVisibility(View.GONE);
+//        cryptoStatusIcon.setVisibility(View.GONE);
     }
 
     public void setCryptoStatusLoading() {
@@ -340,11 +347,11 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
     }
 
     private void setCryptoDisplayStatus(MessageCryptoDisplayStatus displayStatus) {
-        int color = ThemeUtils.getStyledColor(getContext(), displayStatus.getColorAttr());
-        cryptoStatusIcon.setEnabled(displayStatus.isEnabled());
-        cryptoStatusIcon.setVisibility(View.VISIBLE);
-        cryptoStatusIcon.setImageResource(displayStatus.getStatusIconRes());
-        cryptoStatusIcon.setColorFilter(color);
+//        int color = ThemeUtils.getStyledColor(getContext(), displayStatus.getColorAttr());
+//        cryptoStatusIcon.setEnabled(displayStatus.isEnabled());
+//        cryptoStatusIcon.setVisibility(View.VISIBLE);
+//        cryptoStatusIcon.setImageResource(displayStatus.getStatusIconRes());
+//        cryptoStatusIcon.setColorFilter(color);
     }
 
     public void setMessageHeaderClickListener(MessageHeaderClickListener messageHeaderClickListener) {
