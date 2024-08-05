@@ -10,25 +10,23 @@
     </data>
 
     <LinearLayout
-        android:id="@+id/header_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
         android:background="@drawable/bg_corner_circle"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgContactPicture"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@color/light_black"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:tint="@color/light_black"
             tools:backgroundTint="@color/light_black"
             tools:src="@drawable/ic_add"
+            tools:tint="@color/light_black"
             />
 
         <TextView
@@ -37,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            tools:text="Ngoc Anh Do"/>
+            tools:text="Ngoc Anh Do"
+            />
 
     </LinearLayout>
 </layout>

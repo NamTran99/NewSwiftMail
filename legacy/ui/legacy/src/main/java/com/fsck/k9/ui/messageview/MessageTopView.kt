@@ -22,6 +22,7 @@ import com.fsck.k9.Account
 import com.fsck.k9.Account.ShowPictures
 import com.fsck.k9.mail.Message
 import com.fsck.k9.mailstore.AttachmentViewInfo
+import com.fsck.k9.mailstore.LocalMessage
 import com.fsck.k9.mailstore.MessageViewInfo
 import com.fsck.k9.ui.R
 import com.fsck.k9.ui.messageview.MessageContainerView.OnRenderingFinishedListener
@@ -196,7 +197,7 @@ class MessageTopView(
         }
     }
 
-    fun setHeaders(message: Message?, account: Account?, showStar: Boolean) {
+    fun setHeaders(message: LocalMessage?, account: Account?, showStar: Boolean) {
         messageHeaderView.populate(message, account, showStar, showAccountChip)
         messageHeaderView.visibility = VISIBLE
     }

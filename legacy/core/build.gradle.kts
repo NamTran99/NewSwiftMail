@@ -34,6 +34,7 @@ dependencies {
     testImplementation(projects.mail.protocols.smtp)
     testImplementation(projects.legacy.storage)
     testImplementation(projects.legacy.testing)
+    testImplementation(projects.legacy.ui.base)
 
     testImplementation(libs.kotlin.test)
     testImplementation(libs.kotlin.reflect)

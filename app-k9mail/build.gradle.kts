@@ -38,6 +38,10 @@ dependencies {
 android {
     namespace = "com.fsck.k9"
 
+    dataBinding{
+        enable = true
+    }
+
     defaultConfig {
         applicationId = "com.fsck.k9"
         testApplicationId = "com.fsck.k9.tests"

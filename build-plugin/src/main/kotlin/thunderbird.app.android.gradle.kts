@@ -15,6 +15,10 @@ android {
         buildConfig = true
     }
 
+    dataBinding{
+        enable = true
+    }
+
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }

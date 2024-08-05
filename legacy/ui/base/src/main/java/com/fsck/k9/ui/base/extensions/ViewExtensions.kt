@@ -4,15 +4,27 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.AttrRes
+import androidx.annotation.LayoutRes
 import androidx.core.widget.addTextChangedListener
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 
 typealias CallBackNoParam = (() -> Unit)
 typealias CallBackParam<T> = ((T) -> Unit)
+
+fun <T : ViewDataBinding> ViewGroup.inflateBinding(
+    @LayoutRes layoutId: Int,
+    attach: Boolean = false,
+): T {
+    return DataBindingUtil.inflate(LayoutInflater.from(context), layoutId, this, attach)
+}
 
 fun <T : View> T.show(b: Boolean = true, function: T.() -> Unit = {}) {
     visibility = if (b) {

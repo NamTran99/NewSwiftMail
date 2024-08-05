@@ -7,6 +7,10 @@ plugins {
 android {
     configureSharedComposeConfig(libs)
 
+    dataBinding{
+        enable = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false

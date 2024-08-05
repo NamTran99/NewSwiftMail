@@ -12,13 +12,51 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ori
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/from"
+            />
+
+        <com.fsck.k9.ui.compose.view.ViewUserComposePreview
+            android:id="@+id/viewSenderUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/FocusClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/details"
+            android:textColor="@color/color_3698d9"
+            />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListMailTo"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-
 
         <com.fsck.k9.ui.helper.BottomBaselineTextView
             android:id="@+id/subject"
@@ -31,18 +69,18 @@
             android:layout_marginBottom="16dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textAppearance="?attr/textAppearanceTitleLarge"
-            app:layout_goneMarginTop="16dp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/flagged"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/account_name"
             app:layout_constraintVertical_bias="0.0"
+            app:layout_goneMarginTop="16dp"
             tools:text="Message subject"
             />
 
         <ImageView
-
             android:id="@+id/flagged"
             android:layout_width="44dp"
             android:layout_height="48dp"
@@ -50,8 +88,9 @@
             android:baseline="33dp"
             android:paddingHorizontal="12dp"
             android:src="@drawable/btn_select_star"
-            app:layout_constraintBaseline_toBaselineOf="@+id/subject"
+            app:layout_constraintBottom_toBottomOf="@+id/subject"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/subject"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -90,7 +129,8 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@+id/date"
             app:layout_constraintHorizontal_bias="0.0"
@@ -108,7 +148,7 @@
             android:ellipsize="none"
             android:singleLine="true"
             android:textAppearance="?attr/textAppearanceCaption"
-            android:textColor="?attr/colorSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintBaseline_toBaselineOf="@+id/from"
             app:layout_constraintEnd_toStartOf="@+id/menu_primary_action"
             app:layout_constraintStart_toEndOf="@id/from"
