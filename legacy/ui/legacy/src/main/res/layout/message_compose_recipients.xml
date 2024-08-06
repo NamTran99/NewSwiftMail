@@ -26,7 +26,7 @@
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
             android:minWidth="50dp"
-            android:text="@string/recipient_from"
+            android:text="@string/from_2"
             android:textColor="@color/color_656565"
             />
 
@@ -282,7 +282,7 @@
             android:id="@+id/to_label"
             android:labelFor="@+id/to"
             android:minWidth="50dp"
-            android:text="@string/recipient_to"
+            android:text="@string/to_2"
             android:textColor="@color/color_656565"
             />
 

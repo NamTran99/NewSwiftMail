@@ -46,6 +46,9 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.content.IntentCompat;
 import androidx.core.os.BundleCompat;
+import androidx.core.view.MenuProvider;
+import androidx.lifecycle.Lifecycle.State;
+import androidx.lifecycle.LifecycleOwner;
 import app.k9mail.core.ui.legacy.designsystem.atom.icon.Icons;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -125,9 +128,9 @@ import timber.log.Timber;
 
 @SuppressWarnings("deprecation") // TODO get rid of activity dialogs and indeterminate progress bars
 public class MessageCompose extends K9Activity implements OnClickListener,
-        CancelListener, AttachmentDownloadCancelListener, OnFocusChangeListener,
-        OnOpenPgpInlineChangeListener, OnOpenPgpSignOnlyChangeListener, MessageBuilder.Callback,
-        AttachmentPresenter.AttachmentsChangedListener, OnOpenPgpDisableListener {
+    CancelListener, AttachmentDownloadCancelListener, OnFocusChangeListener,
+    OnOpenPgpInlineChangeListener, OnOpenPgpSignOnlyChangeListener, MessageBuilder.Callback,
+    AttachmentPresenter.AttachmentsChangedListener, OnOpenPgpDisableListener {
 
     private static final int DIALOG_SAVE_OR_DISCARD_DRAFT_MESSAGE = 1;
     private static final int DIALOG_CONFIRM_DISCARD_ON_BACK = 2;
@@ -147,16 +150,17 @@ public class MessageCompose extends K9Activity implements OnClickListener,
     public static final String EXTRA_MESSAGE_DECRYPTION_RESULT = "message_decryption_result";
 
     private static final String STATE_KEY_SOURCE_MESSAGE_PROCED =
-            "com.fsck.k9.activity.MessageCompose.stateKeySourceMessageProced";
+        "com.fsck.k9.activity.MessageCompose.stateKeySourceMessageProced";
     private static final String STATE_KEY_DRAFT_ID = "com.fsck.k9.activity.MessageCompose.draftId";
     private static final String STATE_IDENTITY_CHANGED =
-            "com.fsck.k9.activity.MessageCompose.identityChanged";
+        "com.fsck.k9.activity.MessageCompose.identityChanged";
     private static final String STATE_IDENTITY =
-            "com.fsck.k9.activity.MessageCompose.identity";
+        "com.fsck.k9.activity.MessageCompose.identity";
     private static final String STATE_IN_REPLY_TO = "com.fsck.k9.activity.MessageCompose.inReplyTo";
     private static final String STATE_REFERENCES = "com.fsck.k9.activity.MessageCompose.references";
     private static final String STATE_KEY_READ_RECEIPT = "com.fsck.k9.activity.MessageCompose.messageReadReceipt";
-    private static final String STATE_KEY_CHANGES_MADE_SINCE_LAST_SAVE = "com.fsck.k9.activity.MessageCompose.changesMadeSinceLastSave";
+    private static final String STATE_KEY_CHANGES_MADE_SINCE_LAST_SAVE =
+        "com.fsck.k9.activity.MessageCompose.changesMadeSinceLastSave";
     private static final String STATE_ALREADY_NOTIFIED_USER_OF_EMPTY_SUBJECT = "alreadyNotifiedUserOfEmptySubject";
 
     private static final String FRAGMENT_WAITING_FOR_ATTACHMENT = "waitingForAttachment";
@@ -174,9 +178,8 @@ public class MessageCompose extends K9Activity implements OnClickListener,
 
     /**
      * Regular expression to remove the first localized "Re:" prefix in subjects.
-     *
-     * Currently:
-     * - "Aw:" (german: abbreviation for "Antwort")
+     * <p>
+     * Currently: - "Aw:" (german: abbreviation for "Antwort")
      */
     private static final Pattern PREFIX = Pattern.compile("^AW[:\\s]\\s*", Pattern.CASE_INSENSITIVE);
 
@@ -204,9 +207,8 @@ public class MessageCompose extends K9Activity implements OnClickListener,
     private MessageReference relatedMessageReference;
     private Flag relatedFlag = null;
     /**
-     * Indicates that the source message has been processed at least once and should not
-     * be processed on any subsequent loads. This protects us from adding attachments that
-     * have already been added from the restore of the view state.
+     * Indicates that the source message has been processed at least once and should not be processed on any subsequent
+     * loads. This protects us from adding attachments that have already been added from the restore of the view state.
      */
     private boolean relatedMessageProcessed = false;
     private MessageViewInfo currentMessageViewInfo;
@@ -276,8 +278,8 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         relatedMessageReference = MessageReference.parse(messageReferenceString);
 
         final String accountUuid = (relatedMessageReference != null) ?
-                relatedMessageReference.getAccountUuid() :
-                intent.getStringExtra(EXTRA_ACCOUNT);
+            relatedMessageReference.getAccountUuid() :
+            intent.getStringExtra(EXTRA_ACCOUNT);
 
         if (accountUuid != null) {
             account = preferences.getAccount(accountUuid);
@@ -310,9 +312,9 @@ public class MessageCompose extends K9Activity implements OnClickListener,
 
         OpenPgpApiManager openPgpApiManager = new OpenPgpApiManager(getApplicationContext(), this);
         recipientPresenter = new RecipientPresenter(getApplicationContext(), getSupportLoaderManager(),
-                openPgpApiManager, recipientMvpView, account, composePgpInlineDecider, composePgpEnableByDefaultDecider,
-                AutocryptStatusInteractor.getInstance(), new ReplyToParser(),
-                DI.get(AutocryptDraftStateHeaderParser.class));
+            openPgpApiManager, recipientMvpView, account, composePgpInlineDecider, composePgpEnableByDefaultDecider,
+            AutocryptStatusInteractor.getInstance(), new ReplyToParser(),
+            DI.get(AutocryptDraftStateHeaderParser.class));
         recipientPresenter.asyncUpdateCryptoStatus();
 
 
@@ -325,7 +327,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         QuotedMessageMvpView quotedMessageMvpView = new QuotedMessageMvpView(this);
         quotedMessagePresenter = new QuotedMessagePresenter(this, quotedMessageMvpView, account);
         attachmentPresenter = new AttachmentPresenter(getApplicationContext(), attachmentMvpView,
-                getSupportLoaderManager(), this);
+            getSupportLoaderManager(), this);
 
         messageContentView = findViewById(R.id.message_content);
         messageContentView.getInputExtras(true).putBoolean("allowEmoji", true);
@@ -424,10 +426,10 @@ public class MessageCompose extends K9Activity implements OnClickListener,
 
         if (!relatedMessageProcessed) {
             if (action == Action.REPLY || action == Action.REPLY_ALL ||
-                    action == Action.FORWARD || action == Action.FORWARD_AS_ATTACHMENT ||
-                    action == Action.EDIT_DRAFT) {
+                action == Action.FORWARD || action == Action.FORWARD_AS_ATTACHMENT ||
+                action == Action.EDIT_DRAFT) {
                 messageLoaderHelper = messageLoaderHelperFactory.createForMessageCompose(this,
-                        getSupportLoaderManager(), getSupportFragmentManager(), messageLoaderCallbacks);
+                    getSupportLoaderManager(), getSupportFragmentManager(), messageLoaderCallbacks);
                 internalMessageHandler.sendEmptyMessage(MSG_PROGRESS_ON);
 
                 if (action == Action.FORWARD_AS_ATTACHMENT) {
@@ -439,7 +441,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
                         Parcelable.class
                     );
                     messageLoaderHelper.asyncStartOrResumeLoadingMessage(
-                            relatedMessageReference, cachedDecryptionResult);
+                        relatedMessageReference, cachedDecryptionResult);
                 }
             }
         }
@@ -451,7 +453,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         }
 
         if (action == Action.REPLY || action == Action.REPLY_ALL ||
-                action == Action.EDIT_DRAFT) {
+            action == Action.EDIT_DRAFT) {
             //change focus to message body.
             messageContentView.requestFocus();
         } else {
@@ -495,17 +497,15 @@ public class MessageCompose extends K9Activity implements OnClickListener,
      * </ul>
      * </p>
      *
-     * @param intent
-     *         The (external) intent that started the activity.
-     *
-     * @return {@code true}, if this activity was started by an external intent. {@code false},
-     *         otherwise.
+     * @param intent The (external) intent that started the activity.
+     * @return {@code true}, if this activity was started by an external intent. {@code false}, otherwise.
      */
     private boolean initFromIntent(final Intent intent) {
         boolean startedByExternalIntent = false;
         final String action = intent.getAction();
 
-        if (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_SENDTO.equals(action) || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+        if (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_SENDTO.equals(action) ||
+            NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
             /*
              * Someone has clicked a mailto: link, or scanned an NFC tag. The address is in the URI.
              */
@@ -528,7 +528,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         }
 
         if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action) ||
-                Intent.ACTION_SENDTO.equals(action) || Intent.ACTION_VIEW.equals(action)) {
+            Intent.ACTION_SENDTO.equals(action) || Intent.ACTION_VIEW.equals(action)) {
             startedByExternalIntent = true;
 
             /*
@@ -545,7 +545,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
 
             String type = intent.getType();
             if (Intent.ACTION_SEND.equals(action)) {
-                Uri stream = IntentCompat.getParcelableExtra(intent,Intent.EXTRA_STREAM, Uri.class);
+                Uri stream = IntentCompat.getParcelableExtra(intent, Intent.EXTRA_STREAM, Uri.class);
                 if (stream != null) {
                     attachmentPresenter.addExternalAttachment(stream, type);
                 }
@@ -597,7 +597,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         messagingController.removeListener(messagingListener);
 
         boolean isPausingOnConfigurationChange = (getChangingConfigurations() & ActivityInfo.CONFIG_ORIENTATION)
-                == ActivityInfo.CONFIG_ORIENTATION;
+            == ActivityInfo.CONFIG_ORIENTATION;
         boolean isCurrentlyBuildingMessage = currentMessageBuilder != null;
 
         if (isPausingOnConfigurationChange || isCurrentlyBuildingMessage || isInSubActivity) {
@@ -608,12 +608,8 @@ public class MessageCompose extends K9Activity implements OnClickListener,
     }
 
     /**
-     * The framework handles most of the fields, but we need to handle stuff that we
-     * dynamically show and hide:
-     * Attachment list,
-     * Cc field,
-     * Bcc field,
-     * Quoted text,
+     * The framework handles most of the fields, but we need to handle stuff that we dynamically show and hide:
+     * Attachment list, Cc field, Bcc field, Quoted text,
      */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -706,25 +702,25 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         }
 
         builder.setSubject(Utility.stripNewLines(subjectView.getText().toString()))
-                .setSentDate(new Date())
-                .setHideTimeZone(K9.isHideTimeZone())
-                .setInReplyTo(repliedToMessageId)
-                .setReferences(referencedMessageIds)
-                .setRequestReadReceipt(requestReadReceipt)
-                .setIdentity(identity)
-                .setReplyTo(replyToPresenter.getAddresses())
-                .setMessageFormat(currentMessageFormat)
-                .setText(CrLfConverter.toCrLf(messageContentView.getText()))
-                .setAttachments(attachmentPresenter.getAttachments())
-                .setInlineAttachments(attachmentPresenter.getInlineAttachments())
-                .setSignature(CrLfConverter.toCrLf(signatureView.getText()))
-                .setSignatureBeforeQuotedText(account.isSignatureBeforeQuotedText())
-                .setIdentityChanged(identityChanged)
-                .setSignatureChanged(signatureChanged)
-                .setCursorPosition(messageContentView.getSelectionStart())
-                .setMessageReference(relatedMessageReference)
-                .setDraft(isDraft)
-                .setIsPgpInlineEnabled(cryptoStatus.isPgpInlineModeEnabled());
+            .setSentDate(new Date())
+            .setHideTimeZone(K9.isHideTimeZone())
+            .setInReplyTo(repliedToMessageId)
+            .setReferences(referencedMessageIds)
+            .setRequestReadReceipt(requestReadReceipt)
+            .setIdentity(identity)
+            .setReplyTo(replyToPresenter.getAddresses())
+            .setMessageFormat(currentMessageFormat)
+            .setText(CrLfConverter.toCrLf(messageContentView.getText()))
+            .setAttachments(attachmentPresenter.getAttachments())
+            .setInlineAttachments(attachmentPresenter.getInlineAttachments())
+            .setSignature(CrLfConverter.toCrLf(signatureView.getText()))
+            .setSignatureBeforeQuotedText(account.isSignatureBeforeQuotedText())
+            .setIdentityChanged(identityChanged)
+            .setSignatureChanged(signatureChanged)
+            .setCursorPosition(messageContentView.getSelectionStart())
+            .setMessageReference(relatedMessageReference)
+            .setDraft(isDraft)
+            .setIsPgpInlineEnabled(cryptoStatus.isPgpInlineModeEnabled());
 
         quotedMessagePresenter.builderSetProperties(builder);
 
@@ -851,7 +847,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
                 requestCode ^= REQUEST_MASK_MESSAGE_BUILDER;
                 if (currentMessageBuilder == null) {
                     Timber.e("Got a message builder activity result for no message builder, " +
-                            "this is an illegal state!");
+                        "this is an illegal state!");
                     return;
                 }
                 currentMessageBuilder.onActivityResult(requestCode, resultCode, data, this);
@@ -1113,9 +1109,9 @@ public class MessageCompose extends K9Activity implements OnClickListener,
             return true;
         }
         return subjectView.getText().length() != 0 ||
-                !recipientPresenter.getToAddresses().isEmpty() ||
-                !recipientPresenter.getCcAddresses().isEmpty() ||
-                !recipientPresenter.getBccAddresses().isEmpty();
+            !recipientPresenter.getToAddresses().isEmpty() ||
+            !recipientPresenter.getCcAddresses().isEmpty() ||
+            !recipientPresenter.getBccAddresses().isEmpty();
     }
 
     @Override
@@ -1133,58 +1129,59 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         switch (id) {
             case DIALOG_SAVE_OR_DISCARD_DRAFT_MESSAGE:
                 builder = new MaterialAlertDialogBuilder(this)
-                        .setTitle(R.string.save_or_discard_draft_message_dlg_title);
+                    .setTitle(R.string.save_or_discard_draft_message_dlg_title);
                 if (draftMessageId == null) {
                     builder
-                            .setMessage(R.string.save_or_discard_draft_message_instructions_fmt)
-                            .setNegativeButton(R.string.discard_action, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    dismissDialog(DIALOG_SAVE_OR_DISCARD_DRAFT_MESSAGE);
-                                    onDiscard();
-                                }
-                            });
-                } else {
-                    builder
-                            .setMessage(R.string.save_or_discard_draft_message_changes)
-                            .setNegativeButton(R.string.discard_action, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    dismissDialog(DIALOG_SAVE_OR_DISCARD_DRAFT_MESSAGE);
-                                    finishWithoutChanges();
-                                }
-                            });
-                }
-                return builder
-                        .setPositiveButton(R.string.save_draft_action, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                dismissDialog(DIALOG_SAVE_OR_DISCARD_DRAFT_MESSAGE);
-                                checkToSaveDraftAndSave();
-                            }
-                        })
-                        .create();
-            case DIALOG_CONFIRM_DISCARD_ON_BACK:
-                return new MaterialAlertDialogBuilder(this)
-                        .setTitle(R.string.confirm_discard_draft_message_title)
-                        .setMessage(R.string.confirm_discard_draft_message)
-                        .setPositiveButton(com.fsck.k9.ui.base.R.string.cancel_action, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                dismissDialog(DIALOG_CONFIRM_DISCARD_ON_BACK);
-                            }
-                        })
+                        .setMessage(R.string.save_or_discard_draft_message_instructions_fmt)
                         .setNegativeButton(R.string.discard_action, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                dismissDialog(DIALOG_CONFIRM_DISCARD_ON_BACK);
-                                Toast.makeText(MessageCompose.this,
-                                        getString(R.string.message_discarded_toast),
-                                        Toast.LENGTH_LONG).show();
+                                dismissDialog(DIALOG_SAVE_OR_DISCARD_DRAFT_MESSAGE);
                                 onDiscard();
                             }
+                        });
+                } else {
+                    builder
+                        .setMessage(R.string.save_or_discard_draft_message_changes)
+                        .setNegativeButton(R.string.discard_action, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                dismissDialog(DIALOG_SAVE_OR_DISCARD_DRAFT_MESSAGE);
+                                finishWithoutChanges();
+                            }
+                        });
+                }
+                return builder
+                    .setPositiveButton(R.string.save_draft_action, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            dismissDialog(DIALOG_SAVE_OR_DISCARD_DRAFT_MESSAGE);
+                            checkToSaveDraftAndSave();
+                        }
+                    })
+                    .create();
+            case DIALOG_CONFIRM_DISCARD_ON_BACK:
+                return new MaterialAlertDialogBuilder(this)
+                    .setTitle(R.string.confirm_discard_draft_message_title)
+                    .setMessage(R.string.confirm_discard_draft_message)
+                    .setPositiveButton(com.fsck.k9.ui.base.R.string.cancel_action,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                dismissDialog(DIALOG_CONFIRM_DISCARD_ON_BACK);
+                            }
                         })
-                        .create();
+                    .setNegativeButton(R.string.discard_action, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            dismissDialog(DIALOG_CONFIRM_DISCARD_ON_BACK);
+                            Toast.makeText(MessageCompose.this,
+                                getString(R.string.message_discarded_toast),
+                                Toast.LENGTH_LONG).show();
+                            onDiscard();
+                        }
+                    })
+                    .create();
             case DIALOG_CHOOSE_IDENTITY:
                 int dialogThemeResourceId = getThemeManager().getDialogThemeResourceId();
                 Context context = new ContextThemeWrapper(this, dialogThemeResourceId);
@@ -1202,20 +1199,20 @@ public class MessageCompose extends K9Activity implements OnClickListener,
                 return builder.create();
             case DIALOG_CONFIRM_DISCARD: {
                 return new MaterialAlertDialogBuilder(this)
-                        .setTitle(R.string.dialog_confirm_delete_title)
-                        .setMessage(R.string.dialog_confirm_delete_message)
-                        .setPositiveButton(R.string.dialog_confirm_delete_confirm_button,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        onDiscard();
-                                    }
-                                })
-                        .setNegativeButton(R.string.dialog_confirm_delete_cancel_button,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
-                                })
-                        .create();
+                    .setTitle(R.string.dialog_confirm_delete_title)
+                    .setMessage(R.string.dialog_confirm_delete_message)
+                    .setPositiveButton(R.string.dialog_confirm_delete_confirm_button,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                onDiscard();
+                            }
+                        })
+                    .setNegativeButton(R.string.dialog_confirm_delete_cancel_button,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                    .create();
             }
         }
         return super.onCreateDialog(id);
@@ -1236,11 +1233,10 @@ public class MessageCompose extends K9Activity implements OnClickListener,
     }
 
     /**
-     * Pull out the parts of the now loaded source message and apply them to the new message
-     * depending on the type of message being composed.
+     * Pull out the parts of the now loaded source message and apply them to the new message depending on the type of
+     * message being composed.
      *
-     * @param messageViewInfo
-     *         The source message used to populate the various text fields.
+     * @param messageViewInfo The source message used to populate the various text fields.
      */
     private void processSourceMessage(MessageViewInfo messageViewInfo) {
         try {
@@ -1326,7 +1322,8 @@ public class MessageCompose extends K9Activity implements OnClickListener,
 
     }
 
-    private void processMessageToForward(MessageViewInfo messageViewInfo, boolean asAttachment) throws MessagingException {
+    private void processMessageToForward(MessageViewInfo messageViewInfo, boolean asAttachment)
+        throws MessagingException {
         Message message = messageViewInfo.message;
 
         String subject = messageViewInfo.subject;
@@ -1404,8 +1401,8 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         Identity newIdentity = new Identity();
         if (k9identity.containsKey(IdentityField.SIGNATURE)) {
             newIdentity = newIdentity
-                    .withSignatureUse(true)
-                    .withSignature(k9identity.get(IdentityField.SIGNATURE));
+                .withSignatureUse(true)
+                .withSignature(k9identity.get(IdentityField.SIGNATURE));
             signatureChanged = true;
         } else {
             if (message instanceof LocalMessage) {
@@ -1451,6 +1448,11 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         quotedMessagePresenter.processDraftMessage(messageViewInfo, k9identity);
     }
 
+    @Override
+    public void addMenuProvider(@NonNull MenuProvider provider, @NonNull LifecycleOwner owner, @NonNull State state) {
+        super.addMenuProvider(provider, owner, state);
+    }
+
     static class SendMessageTask extends AsyncTask<Void, Void, Void> {
         final MessagingController messagingController;
         final Preferences preferences;
@@ -1463,8 +1465,8 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         final Flag flag;
 
         SendMessageTask(MessagingController messagingController, Preferences preferences, Account account,
-                Contacts contacts, Message message, Long draftId, String plaintextSubject,
-                MessageReference messageReference, Flag flag) {
+            Contacts contacts, Message message, Long draftId, String plaintextSubject,
+            MessageReference messageReference, Flag flag) {
             this.messagingController = messagingController;
             this.preferences = preferences;
             this.account = account;
@@ -1514,11 +1516,10 @@ public class MessageCompose extends K9Activity implements OnClickListener,
     }
 
     /**
-     * When we are launched with an intent that includes a mailto: URI, we can actually
-     * gather quite a few of our message fields from it.
+     * When we are launched with an intent that includes a mailto: URI, we can actually gather quite a few of our
+     * message fields from it.
      *
-     * @param mailTo
-     *         The MailTo object we use to initialize message field
+     * @param mailTo The MailTo object we use to initialize message field
      */
     private void initializeFromMailto(MailTo mailTo) {
         recipientPresenter.initFromMailto(mailTo);
@@ -1553,7 +1554,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
             // any circumstances.
             messageFormat = SimpleMessageFormat.TEXT;
         } else if (quotedMessagePresenter.isForcePlainText()
-                && quotedMessagePresenter.includeQuotedText()) {
+            && quotedMessagePresenter.includeQuotedText()) {
             // Right now we send a text/plain-only message when the quoted text was edited, no
             // matter what the user selected for the message format.
             messageFormat = SimpleMessageFormat.TEXT;
@@ -1563,7 +1564,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
             messageFormat = SimpleMessageFormat.TEXT;
         } else if (origMessageFormat == MessageFormat.AUTO) {
             if (action == Action.COMPOSE || quotedMessagePresenter.isQuotedTextText() ||
-                    !quotedMessagePresenter.includeQuotedText()) {
+                !quotedMessagePresenter.includeQuotedText()) {
                 // If the message format is set to "AUTO" we use text/plain whenever possible. That
                 // is, when composing new messages and replying to or forwarding text/plain
                 // messages.
@@ -1582,14 +1583,14 @@ public class MessageCompose extends K9Activity implements OnClickListener,
     @Override
     public void onMessageBuildSuccess(MimeMessage message, boolean isDraft) {
         String plaintextSubject =
-                (currentMessageBuilder instanceof PgpMessageBuilder) ? currentMessageBuilder.getSubject() : null;
+            (currentMessageBuilder instanceof PgpMessageBuilder) ? currentMessageBuilder.getSubject() : null;
 
         if (isDraft) {
             changesMadeSinceLastSave = false;
             currentMessageBuilder = null;
 
             new SaveMessageTask(messagingController, account, internalMessageHandler, message, draftMessageId,
-                    plaintextSubject).execute();
+                plaintextSubject).execute();
             if (finishAfterDraftSaved) {
                 finish();
             } else {
@@ -1598,7 +1599,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         } else {
             currentMessageBuilder = null;
             new SendMessageTask(messagingController, preferences, account, contacts, message,
-                    draftMessageId, plaintextSubject, relatedMessageReference, relatedFlag).execute();
+                draftMessageId, plaintextSubject, relatedMessageReference, relatedFlag).execute();
             finish();
         }
     }
@@ -1614,7 +1615,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
     public void onMessageBuildException(MessagingException me) {
         Timber.e(me, "Error sending message");
         Toast.makeText(MessageCompose.this,
-                getString(R.string.send_failed_reason, me.getLocalizedMessage()), Toast.LENGTH_LONG).show();
+            getString(R.string.send_failed_reason, me.getLocalizedMessage()), Toast.LENGTH_LONG).show();
         sendMessageHasBeenTriggered = false;
         currentMessageBuilder = null;
         setProgressBarIndeterminateVisibility(false);
@@ -1742,8 +1743,8 @@ public class MessageCompose extends K9Activity implements OnClickListener,
             String sourceMessageUid = relatedMessageReference.getUid();
 
             boolean changedMessageIsCurrent = account.getUuid().equals(sourceAccountUuid) &&
-                    folderId == sourceFolderId &&
-                    oldUid.equals(sourceMessageUid);
+                folderId == sourceFolderId &&
+                oldUid.equals(sourceMessageUid);
 
             if (changedMessageIsCurrent) {
                 relatedMessageReference = relatedMessageReference.withModifiedUid(newUid);
@@ -1774,14 +1775,14 @@ public class MessageCompose extends K9Activity implements OnClickListener,
             }
 
             ProgressDialogFragment fragment = ProgressDialogFragment.newInstance(title,
-                    getString(R.string.fetching_attachment_dialog_message));
+                getString(R.string.fetching_attachment_dialog_message));
             fragment.show(getSupportFragmentManager(), FRAGMENT_WAITING_FOR_ATTACHMENT);
         }
 
         @Override
         public void dismissWaitingForAttachmentDialog() {
             ProgressDialogFragment fragment = (ProgressDialogFragment)
-                    getSupportFragmentManager().findFragmentByTag(FRAGMENT_WAITING_FOR_ATTACHMENT);
+                getSupportFragmentManager().findFragmentByTag(FRAGMENT_WAITING_FOR_ATTACHMENT);
 
             if (fragment != null) {
                 fragment.dismiss();
@@ -1851,10 +1852,10 @@ public class MessageCompose extends K9Activity implements OnClickListener,
                     ImageView preview = view.findViewById(R.id.attachment_preview);
                     preview.setVisibility(View.VISIBLE);
                     Glide.with(MessageCompose.this)
-                            .load(new File(attachment.filename))
-                            .centerCrop()
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .into(preview);
+                        .load(new File(attachment.filename))
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .into(preview);
                 }
                 progressBar.setVisibility(View.GONE);
             } else {
@@ -1886,13 +1887,13 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         @Override
         public void showMissingAttachmentsPartialMessageWarning() {
             Toast.makeText(MessageCompose.this,
-                    getString(R.string.message_compose_attachments_skipped_toast), Toast.LENGTH_LONG).show();
+                getString(R.string.message_compose_attachments_skipped_toast), Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void showMissingAttachmentsPartialMessageForwardWarning() {
             Toast.makeText(MessageCompose.this,
-                    getString(R.string.message_compose_attachments_forward_toast), Toast.LENGTH_LONG).show();
+                getString(R.string.message_compose_attachments_forward_toast), Toast.LENGTH_LONG).show();
         }
     };
 
@@ -1909,15 +1910,15 @@ public class MessageCompose extends K9Activity implements OnClickListener,
                 case MSG_SAVED_DRAFT:
                     draftMessageId = (Long) msg.obj;
                     Toast.makeText(
-                            MessageCompose.this,
-                            getString(R.string.message_saved_toast),
-                            Toast.LENGTH_LONG).show();
+                        MessageCompose.this,
+                        getString(R.string.message_saved_toast),
+                        Toast.LENGTH_LONG).show();
                     break;
                 case MSG_DISCARDED_DRAFT:
                     Toast.makeText(
-                            MessageCompose.this,
-                            getString(R.string.message_discarded_toast),
-                            Toast.LENGTH_LONG).show();
+                        MessageCompose.this,
+                        getString(R.string.message_discarded_toast),
+                        Toast.LENGTH_LONG).show();
                     break;
                 default:
                     super.handleMessage(msg);

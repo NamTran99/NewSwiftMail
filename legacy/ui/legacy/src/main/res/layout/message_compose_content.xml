@@ -27,9 +27,20 @@ the 'composer theme' setting).
             android:layout_width="match_parent"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="?attr/colorSurfaceContainerLow"
             android:minHeight="50dp"
             >
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subject"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:minWidth="50dp"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/color_656565"
+/>
 
             <EditText
                 android:id="@+id/subject"
@@ -39,7 +50,6 @@ the 'composer theme' setting).
                 android:inputType="textEmailSubject|textAutoCorrect|textCapSentences"
                 android:imeOptions="actionNext|flagNoExtractUi"
                 android:singleLine="true"
-                android:layout_marginLeft="12dip"
                 android:layout_marginRight="12dip"
                 android:background="@android:color/transparent"
                 android:paddingTop="10dp"

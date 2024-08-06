@@ -59,8 +59,8 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
     private final MessageRepository messageRepository = DI.get(MessageRepository.class);
     private final FontSizes fontSizes = K9.getFontSizes();
 
-    private RecyclerView listMailRecyclerView;
-    private ListMailReceiverAdapter listMailReceiverAdapter;
+//    private RecyclerView listMailRecyclerView;
+//    private ListMailReceiverAdapter listMailReceiverAdapter;
     private BottomBaselineTextView subjectView;
 //    private ImageView starView;
     private ImageView contactPictureView;
@@ -102,14 +102,14 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
         recipientNamesView = findViewById(R.id.recipients);
         dateView = findViewById(R.id.date);
 //        viewSenderUser = findViewById(R.id.viewSenderUser);
-        listMailRecyclerView = findViewById(R.id.rvListMailTo);
+//        listMailRecyclerView = findViewById(R.id.rvListMailTo);
 //        btDetails = findViewById(R.id.btDetail);
-        listMailReceiverAdapter = new ListMailReceiverAdapter();
+//        listMailReceiverAdapter = new ListMailReceiverAdapter();
 
         fontSizes.setViewTextSize(subjectView, fontSizes.getMessageViewSubject());
         fontSizes.setViewTextSize(dateView, fontSizes.getMessageViewDate());
         fontSizes.setViewTextSize(fromView, fontSizes.getMessageViewSender());
-        listMailRecyclerView.setAdapter(listMailReceiverAdapter);
+//        listMailRecyclerView.setAdapter(listMailReceiverAdapter);
 
         int recipientTextSize = fontSizes.getMessageViewRecipients();
         if (recipientTextSize != FontSizes.FONT_DEFAULT) {
@@ -213,9 +213,7 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
 
 
     public void populate(final LocalMessage message, final Account account, boolean showStar, boolean showAccountChip) {
-        MessageDetails messageDetail  = messageRepository.getMessageDetails(message.makeMessageReference());
-
-        Timber.d("NamTD8 %s", messageDetail.getTo().toString());
+//        MessageDetails messageDetail  = messageRepository.getMessageDetails(message.makeMessageReference());
 
         Address fromAddress = null;
         Address[] fromAddresses = message.getFrom();
@@ -235,7 +233,7 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
             contactPictureView.setVisibility(View.GONE);
         }
 
-        listMailReceiverAdapter.submitAddress(messageDetail.getTo());
+//        listMailReceiverAdapter.submitAddress(messageDetail.getTo());
         CharSequence from = messageHelper.getSenderDisplayName(fromAddress);
         fromView.setText(from);
 //        if (showStar) {
