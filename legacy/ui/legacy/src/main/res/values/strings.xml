@@ -1132,6 +1132,7 @@ You can keep this message and use it as a backup for your secret key. If you wan
     <string name="message_list_content_description_unread_prefix">unread, %s</string>
     <string name="from">From:</string>
     <string name="details">DETAILS</string>
+    <string name="hide">HIDE</string>
     <string name="to">To:</string>
     <string name="reply_all">Reply all</string>
     <string name="forward">Forward</string>

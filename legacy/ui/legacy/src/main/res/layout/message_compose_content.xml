@@ -32,7 +32,7 @@ the 'composer theme' setting).
             >
 
             <EditText
-                android:id="@+id/tvSender"
+                android:id="@+id/subject"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/message_compose_subject_hint"

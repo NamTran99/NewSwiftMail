@@ -39,6 +39,14 @@
         />
 
     <item
+        android:id="@+id/toggle_unread"
+        android:icon="@drawable/ic_mark_email_unread"
+        android:title="@string/mark_as_unread_action"
+        android:visible="false"
+        app:showAsAction="always"
+        />
+
+    <item
         android:id="@+id/delete"
         android:icon="@drawable/ic_trash"
         android:title="@string/delete_action"
@@ -47,13 +55,7 @@
         />
 
     <!-- MessageView -->
-    <item
-        android:id="@+id/toggle_unread"
-        android:icon="@drawable/ic_mark_email_unread"
-        android:title="@string/mark_as_unread_action"
-        android:visible="false"
-        app:showAsAction="always"
-        />
+
 
     <!-- MessageView -->
     <item

@@ -133,7 +133,7 @@ the 'message view theme' setting).
         app:menu_backgroundColor="@android:color/transparent"
         app:menu_colorNormal="?colorPrimary"
         app:menu_colorPressed="@android:color/transparent"
-        app:menu_icon="@drawable/ic_reply_all"
+        app:menu_icon="@drawable/ic_reply_2"
         app:menu_labels_colorNormal="@color/color_white"
         app:menu_labels_colorPressed="@android:color/transparent"
         app:menu_labels_position="left"

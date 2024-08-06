@@ -45,6 +45,7 @@ import com.fsck.k9.ui.messageview.MessageHeaderClickListener;
 import com.fsck.k9.ui.messageview.MessageViewRecipientFormatter;
 import com.fsck.k9.ui.messageview.RecipientNamesView;
 import com.fsck.k9.view.adapter.ListMailReceiverAdapter;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import timber.log.Timber;
 
@@ -76,6 +77,10 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
     private MessageHeaderClickListener messageHeaderClickListener;
     private ReplyActions replyActions;
 
+    private MaterialButton btDetails;
+
+    private Boolean isShowDetailUser = false;
+
 
     public MessageHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -98,6 +103,7 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
         dateView = findViewById(R.id.date);
         viewSenderUser = findViewById(R.id.viewSenderUser);
         listMailRecyclerView = findViewById(R.id.rvListMailTo);
+        btDetails = findViewById(R.id.btDetail);
         listMailReceiverAdapter = new ListMailReceiverAdapter();
 
         fontSizes.setViewTextSize(subjectView, fontSizes.getMessageViewSubject());
@@ -112,6 +118,7 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
 
         subjectView.setOnClickListener(this);
         subjectView.setOnLongClickListener(this);
+        btDetails.setOnClickListener(this);
 
         menuPrimaryActionView = findViewById(R.id.menu_primary_action);
         menuPrimaryActionView.setOnClickListener(this);
@@ -136,6 +143,19 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
             showOverflowMenu(view);
         } else if (id == R.id.participants_container) {
             messageHeaderClickListener.onParticipantsContainerClick();
+        } else if(id == R.id.btDetail){
+            toggleShowHideStatus();
+        }
+    }
+
+    private void toggleShowHideStatus(){
+        isShowDetailUser = !isShowDetailUser;
+        if(isShowDetailUser){
+            listMailRecyclerView.setVisibility(View.VISIBLE);
+            btDetails.setText(R.string.hide);
+        }else{
+            listMailRecyclerView.setVisibility(View.GONE);
+            btDetails.setText(R.string.details);
         }
     }
 

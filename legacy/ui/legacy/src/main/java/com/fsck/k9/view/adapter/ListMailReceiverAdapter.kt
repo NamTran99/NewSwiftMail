@@ -17,7 +17,6 @@ class ListMailReceiverAdapter : SingleHolderBindingAdapter<AddressWithKeyModel, 
     override val layoutId: Int
         get() = R.layout.item_mail_receiver
 
-    private val messageHelper: MessageHelper by inject()
     fun submitAddress(list: MutableList<Address>?) {
         submitList(
             list?.map {

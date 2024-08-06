@@ -54,6 +54,7 @@ import com.fsck.k9.ui.messagesource.MessageSourceActivity
 import com.fsck.k9.ui.messageview.MessageCryptoPresenter.MessageCryptoMvpView
 import com.fsck.k9.ui.settings.account.AccountSettingsActivity
 import com.fsck.k9.ui.share.ShareIntentBuilder
+import com.github.clans.fab.FloatingActionButton
 import java.util.Locale
 import org.koin.android.ext.android.inject
 import org.openintents.openpgp.util.OpenPgpIntentStarter
@@ -72,6 +73,9 @@ class MessageViewFragment :
     private val generalSettingsManager: GeneralSettingsManager by inject()
 
     private lateinit var messageTopView: MessageTopView
+    private lateinit var fabReplyAll: FloatingActionButton
+    private lateinit var fabReply: FloatingActionButton
+    private lateinit var fabForward: FloatingActionButton
 
     private var message: LocalMessage? = null
     private lateinit var messageLoaderHelper: MessageLoaderHelper
@@ -95,7 +99,6 @@ class MessageViewFragment :
     private var wasMessageMarkedAsOpened: Boolean = false
 
     private var isActive: Boolean = false
-        private set
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -147,10 +150,28 @@ class MessageViewFragment :
 
         val view = layoutInflater.inflate(R.layout.message, container, false)
         messageTopView = view.findViewById(R.id.message_view)
+        fabReplyAll  = view.findViewById(R.id.fab_reply_all)
+        fabReply  = view.findViewById(R.id.fab_reply)
+        fabForward  = view.findViewById(R.id.fab_forward)
 
         initializeMessageTopView(messageTopView)
+        initListener()
 
         return view
+    }
+
+    private fun initListener() {
+        fabReplyAll.setOnClickListener {
+            onReplyAll()
+        }
+
+        fabReply.setOnClickListener {
+            onReply()
+        }
+
+        fabForward.setOnClickListener {
+            onForward()
+        }
     }
 
     private fun initializeMessageTopView(messageTopView: MessageTopView) {
@@ -402,7 +423,7 @@ class MessageViewFragment :
             messageDetailsFragment.cryptoResult = messageCryptoPresenter.cryptoResultAnnotation
             messageDetailsFragment.show(parentFragmentManager, "message_details")
         }
-
+    // NamTD8
         override fun onMenuItemClick(itemId: Int) {
             when (itemId) {
                 R.id.reply -> onReply()
