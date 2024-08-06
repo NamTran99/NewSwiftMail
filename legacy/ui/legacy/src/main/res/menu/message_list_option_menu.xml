@@ -15,6 +15,7 @@
         android:id="@+id/search"
         android:icon="@drawable/ic_search"
         android:title="@string/search_action"
+        app:iconTint="@color/blue"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always"
         />
@@ -47,6 +48,15 @@
         />
 
     <item
+        android:id="@+id/move"
+        android:icon="@drawable/ic_drive_file_move"
+        android:title="@string/move_action"
+        android:visible="false"
+        app:showAsAction="ifRoom"
+        />
+
+
+    <item
         android:id="@+id/delete"
         android:icon="@drawable/ic_trash"
         android:title="@string/delete_action"
@@ -76,13 +86,6 @@
         />
 
     <!-- MessageView -->
-    <item
-        android:id="@+id/move"
-        android:icon="@drawable/ic_drive_file_move"
-        android:title="@string/move_action"
-        android:visible="false"
-        app:showAsAction="ifRoom"
-        />
 
     <!-- MessageView -->
     <item
@@ -101,35 +104,7 @@
         app:showAsAction="never"
         />
 
-    <!-- MessageView -->
-    <item
-        android:id="@+id/refile"
-        android:title="@string/refile_action"
-        android:visible="false"
-        app:showAsAction="never"
-        >
-        <menu>
-            <item
-                android:id="@+id/refile_archive"
-                android:title="@string/archive_action"
-                />
 
-            <item
-                android:id="@+id/refile_spam"
-                android:title="@string/spam_action"
-                />
-
-            <item
-                android:id="@+id/refile_move"
-                android:title="@string/move_action"
-                />
-
-            <item
-                android:id="@+id/refile_copy"
-                android:title="@string/copy_action"
-                />
-        </menu>
-    </item>
 
     <!-- MessageView -->
     <item
