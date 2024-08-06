@@ -40,7 +40,7 @@
         <item name="colorSurface">@color/color_4ca5df</item>
         <item name="colorOnSurface">@color/color_white</item>
         <item name="colorSurfaceVariant">@color/k9_neutral_variant_090</item>
-        <item name="colorOnSurfaceVariant">@color/color_white</item>
+        <item name="colorOnSurfaceVariant">@color/color_black</item>
         <item name="colorSurfaceInverse">@color/k9_neutral_020</item>
         <item name="colorOnSurfaceInverse">@color/k9_neutral_095</item>
         <item name="colorSurfaceBright">@color/k9_neutral_098</item>

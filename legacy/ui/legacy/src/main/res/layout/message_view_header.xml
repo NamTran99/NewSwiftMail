@@ -9,129 +9,12 @@
     android:orientation="vertical"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="10dp"
-        >
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/from"
-            />
-
-        <com.fsck.k9.ui.compose.view.ViewUserComposePreview
-            android:id="@+id/viewSenderUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btDetail"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="@string/details"
-            android:textSize="12sp"
-            />
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListMailTo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
-        android:visibility="gone"
-        android:paddingBottom="10dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
-
-
-    <View style="@style/LineHorizontal"
-       />
-
-    <com.fsck.k9.ui.helper.BottomBaselineTextView
-        android:id="@+id/subject"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="15dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:textColor="?android:attr/textColorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/flagged"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_goneMarginTop="16dp"
-        tools:text="Message subject"
-        />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ellipsize="none"
-        android:singleLine="true"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
-        android:textAppearance="?attr/textAppearanceCaption"
-        android:textColor="?colorOutline"
-        app:layout_constraintBaseline_toBaselineOf="@+id/from"
-        app:layout_constraintEnd_toStartOf="@+id/menu_primary_action"
-        app:layout_constraintStart_toEndOf="@id/from"
-        tools:text="Sep 19"
-        />
-
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        >-->
-
-<!--       -->
-
-
-
-        <ImageView
-            android:id="@+id/flagged"
-            android:layout_width="44dp"
-            android:layout_height="48dp"
-            android:background="?attr/controlBackground"
-            android:baseline="33dp"
-            android:paddingHorizontal="12dp"
-            android:src="@drawable/btn_select_star"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/subject"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/subject"
-            />
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    <View style="@style/LineHorizontal"
-        android:layout_marginTop="12dp"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/participants_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:visibility="gone"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -150,39 +33,97 @@
             tools:src="@drawable/ic_account_circle"
             />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="?android:attr/textColorPrimary"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@+id/date"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/contact_picture"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Sender name"
+            />
 
-        <ImageView
-            android:id="@+id/menu_primary_action"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:visibility="gone"
-            android:background="?attr/controlBackground"
-            android:contentDescription="@string/reply_action"
-            android:paddingHorizontal="12dp"
-            app:layout_constraintEnd_toStartOf="@id/menu_overflow"
-            app:layout_constraintTop_toTopOf="@+id/menu_overflow"
-            tools:srcCompat="@drawable/ic_reply_all"
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="none"
+            android:singleLine="true"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBaseline_toBaselineOf="@+id/from"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/from"
+            tools:text="Sep 19"
             />
 
         <ImageView
-            android:id="@+id/menu_overflow"
-            android:layout_width="40dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
+            android:id="@+id/crypto_status_icon"
+            android:layout_width="18sp"
+            android:layout_height="18sp"
+            android:layout_marginStart="16dp"
             android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/recipients"
+            app:layout_constraintStart_toEndOf="@id/contact_picture"
+            app:srcCompat="@drawable/ic_no_encryption"
+            app:tint="?attr/openpgp_grey"
+            tools:visibility="visible"
+            />
+
+        <com.fsck.k9.ui.messageview.RecipientNamesView
+            android:id="@+id/recipients"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="?attr/controlBackground"
-            android:clickable="true"
-            android:contentDescription="@string/abc_action_menu_overflow_description"
-            android:focusable="true"
-            android:paddingStart="6dp"
-            android:paddingEnd="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_more_vert"
+            app:layout_constraintStart_toEndOf="@id/crypto_status_icon"
+            app:layout_constraintTop_toBottomOf="@+id/from"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_goneMarginStart="16dp"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View style="@style/LineHorizontal" />
+
+    <com.fsck.k9.ui.helper.BottomBaselineTextView
+        android:id="@+id/subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="15dp"
+
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/flagged"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_goneMarginTop="16dp"
+        tools:text="Message subject"
+        />
+
+    <View
+        style="@style/LineHorizontal"
+        android:layout_marginTop="12dp"
+        />
+
 
 </com.fsck.k9.view.MessageHeader>

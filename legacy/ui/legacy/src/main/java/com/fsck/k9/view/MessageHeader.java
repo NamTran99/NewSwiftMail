@@ -64,20 +64,20 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
     private BottomBaselineTextView subjectView;
 //    private ImageView starView;
     private ImageView contactPictureView;
-//    private MaterialTextView fromView;
+    private MaterialTextView fromView;
 //    private ImageView cryptoStatusIcon;
-//    private RecipientNamesView recipientNamesView;
+    private RecipientNamesView recipientNamesView;
     private MaterialTextView dateView;
-    private ImageView menuPrimaryActionView;
+//    private ImageView menuPrimaryActionView;
 
-    private ViewUserComposePreview viewSenderUser;
+//    private ViewUserComposePreview viewSenderUser;
 
     private RelativeDateTimeFormatter relativeDateTimeFormatter;
 
     private MessageHeaderClickListener messageHeaderClickListener;
     private ReplyActions replyActions;
 
-    private MaterialButton btDetails;
+//    private MaterialButton btDetails;
 
     private Boolean isShowDetailUser = false;
 
@@ -97,37 +97,37 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
         subjectView = findViewById(R.id.subject);
 //        starView = findViewById(R.id.flagged);
         contactPictureView = findViewById(R.id.contact_picture);
-//        fromView = findViewById(R.id.from);
+        fromView = findViewById(R.id.from);
 //        cryptoStatusIcon = findViewById(R.id.crypto_status_icon);
-//        recipientNamesView = findViewById(R.id.recipients);
+        recipientNamesView = findViewById(R.id.recipients);
         dateView = findViewById(R.id.date);
-        viewSenderUser = findViewById(R.id.viewSenderUser);
+//        viewSenderUser = findViewById(R.id.viewSenderUser);
         listMailRecyclerView = findViewById(R.id.rvListMailTo);
-        btDetails = findViewById(R.id.btDetail);
+//        btDetails = findViewById(R.id.btDetail);
         listMailReceiverAdapter = new ListMailReceiverAdapter();
 
         fontSizes.setViewTextSize(subjectView, fontSizes.getMessageViewSubject());
         fontSizes.setViewTextSize(dateView, fontSizes.getMessageViewDate());
-//        fontSizes.setViewTextSize(fromView, fontSizes.getMessageViewSender());
+        fontSizes.setViewTextSize(fromView, fontSizes.getMessageViewSender());
         listMailRecyclerView.setAdapter(listMailReceiverAdapter);
 
         int recipientTextSize = fontSizes.getMessageViewRecipients();
-//        if (recipientTextSize != FontSizes.FONT_DEFAULT) {
-//            recipientNamesView.setTextSize(recipientTextSize);
-//        }
+        if (recipientTextSize != FontSizes.FONT_DEFAULT) {
+            recipientNamesView.setTextSize(recipientTextSize);
+        }
 
         subjectView.setOnClickListener(this);
         subjectView.setOnLongClickListener(this);
-        btDetails.setOnClickListener(this);
+//        btDetails.setOnClickListener(this);
+//
+//        menuPrimaryActionView = findViewById(R.id.menu_primary_action);
+//        menuPrimaryActionView.setOnClickListener(this);
 
-        menuPrimaryActionView = findViewById(R.id.menu_primary_action);
-        menuPrimaryActionView.setOnClickListener(this);
-
-        View menuOverflowView = findViewById(R.id.menu_overflow);
-        menuOverflowView.setOnClickListener(this);
-        String menuOverflowDescription =
-                getContext().getString(androidx.appcompat.R.string.abc_action_menu_overflow_description);
-        TooltipCompat.setTooltipText(menuOverflowView, menuOverflowDescription);
+//        View menuOverflowView = findViewById(R.id.menu_overflow);
+//        menuOverflowView.setOnClickListener(this);
+//        String menuOverflowDescription =
+//                getContext().getString(androidx.appcompat.R.string.abc_action_menu_overflow_description);
+//        TooltipCompat.setTooltipText(menuOverflowView, menuOverflowDescription);
 
         findViewById(R.id.participants_container).setOnClickListener(this);
     }
@@ -137,25 +137,11 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
         int id = view.getId();
         if (id == R.id.subject) {
             toggleSubjectViewMaxLines();
-        } else if (id == R.id.menu_primary_action) {
-            performPrimaryReplyAction();
-        } else if (id == R.id.menu_overflow) {
+        }
+         else if (id == R.id.menu_overflow) {
             showOverflowMenu(view);
         } else if (id == R.id.participants_container) {
             messageHeaderClickListener.onParticipantsContainerClick();
-        } else if(id == R.id.btDetail){
-            toggleShowHideStatus();
-        }
-    }
-
-    private void toggleShowHideStatus(){
-        isShowDetailUser = !isShowDetailUser;
-        if(isShowDetailUser){
-            listMailRecyclerView.setVisibility(View.VISIBLE);
-            btDetails.setText(R.string.hide);
-        }else{
-            listMailRecyclerView.setVisibility(View.GONE);
-            btDetails.setText(R.string.details);
         }
     }
 
@@ -239,7 +225,6 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
 
         if (K9.isShowContactPicture()) {
             contactPictureView.setVisibility(View.VISIBLE);
-            viewSenderUser.setIconContact(fromAddress);
             if (fromAddress != null) {
                 ContactPictureLoader contactsPictureLoader = ContactPicture.getContactPictureLoader();
                 contactsPictureLoader.setContactPicture(contactPictureView, fromAddress);
@@ -252,8 +237,7 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
 
         listMailReceiverAdapter.submitAddress(messageDetail.getTo());
         CharSequence from = messageHelper.getSenderDisplayName(fromAddress);
-        viewSenderUser.setName(from.toString());
-
+        fromView.setText(from);
 //        if (showStar) {
 //            starView.setVisibility(View.VISIBLE);
 //            starView.setSelected(message.isSet(Flag.FLAGGED));
@@ -275,35 +259,33 @@ public class MessageHeader extends LinearLayout implements OnClickListener, OnLo
     }
 
     private void setRecipientNames(Message message, Account account) {
-//        DisplayRecipientsExtractor displayRecipientsExtractor = new DisplayRecipientsExtractor(recipientFormatter,
-//                recipientNamesView.getMaxNumberOfRecipientNames());
-
-//        DisplayRecipients displayRecipients = displayRecipientsExtractor.extractDisplayRecipients(message, account);
-
-//        recipientNamesView.setRecipients(displayRecipients.getRecipientNames(),
-//                displayRecipients.getNumberOfRecipients());
+        DisplayRecipientsExtractor displayRecipientsExtractor = new DisplayRecipientsExtractor(recipientFormatter,
+                recipientNamesView.getMaxNumberOfRecipientNames());
+        DisplayRecipients displayRecipients = displayRecipientsExtractor.extractDisplayRecipients(message, account);
+        recipientNamesView.setRecipients(displayRecipients.getRecipientNames(),
+                displayRecipients.getNumberOfRecipients());
     }
 
     private void setReplyActions(Message message, Account account) {
         ReplyActions replyActions = replyActionStrategy.getReplyActions(account, message);
         this.replyActions = replyActions;
 
-        setDefaultReplyAction(replyActions.getDefaultAction());
+//        setDefaultReplyAction(replyActions.getDefaultAction());
     }
 
-    private void setDefaultReplyAction(ReplyAction defaultAction) {
-        if (defaultAction == null) {
-            menuPrimaryActionView.setVisibility(View.GONE);
-        } else {
-            int replyIconResource = getReplyImageResource(defaultAction);
-            menuPrimaryActionView.setImageResource(replyIconResource);
-
-            String replyActionName = getReplyActionName(defaultAction);
-            TooltipCompat.setTooltipText(menuPrimaryActionView, replyActionName);
-
-            menuPrimaryActionView.setVisibility(View.VISIBLE);
-        }
-    }
+//    private void setDefaultReplyAction(ReplyAction defaultAction) {
+//        if (defaultAction == null) {
+//            menuPrimaryActionView.setVisibility(View.GONE);
+//        } else {
+//            int replyIconResource = getReplyImageResource(defaultAction);
+//            menuPrimaryActionView.setImageResource(replyIconResource);
+//
+//            String replyActionName = getReplyActionName(defaultAction);
+//            TooltipCompat.setTooltipText(menuPrimaryActionView, replyActionName);
+//
+//            menuPrimaryActionView.setVisibility(View.VISIBLE);
+//        }
+//    }
 
     @DrawableRes
     private int getReplyImageResource(@NonNull ReplyAction replyAction) {
