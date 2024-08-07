@@ -49,6 +49,7 @@ import androidx.core.os.BundleCompat;
 import androidx.core.view.MenuProvider;
 import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
+import app.k9mail.core.android.permissions.PermissionChecker;
 import app.k9mail.core.ui.legacy.designsystem.atom.icon.Icons;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -186,6 +187,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
     private final MessageLoaderHelperFactory messageLoaderHelperFactory = DI.get(MessageLoaderHelperFactory.class);
     private final DefaultFolderProvider defaultFolderProvider = DI.get(DefaultFolderProvider.class);
     private final MessagingController messagingController = DI.get(MessagingController.class);
+    private final PermissionChecker permissionChecker = DI.get(PermissionChecker.class);
     private final Preferences preferences = DI.get(Preferences.class);
 
     private final Contacts contacts = DI.get(Contacts.class);
@@ -1446,11 +1448,6 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         replyToPresenter.setIdentity(identity);
 
         quotedMessagePresenter.processDraftMessage(messageViewInfo, k9identity);
-    }
-
-    @Override
-    public void addMenuProvider(@NonNull MenuProvider provider, @NonNull LifecycleOwner owner, @NonNull State state) {
-        super.addMenuProvider(provider, owner, state);
     }
 
     static class SendMessageTask extends AsyncTask<Void, Void, Void> {

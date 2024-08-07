@@ -12,7 +12,8 @@ dependencies {
     implementation(projects.legacy.core)
     implementation(projects.mail.common)
     implementation(projects.uiUtils.toolbarBottomSheet)
-    implementation("com.github.clans:fab:1.6.4")
+    implementation(libs.fab)
+    implementation(projects.core.android.permissions)
 
     implementation(projects.core.featureflags)
     implementation(projects.feature.launcher)

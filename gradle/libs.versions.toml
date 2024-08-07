@@ -51,6 +51,7 @@ dependencyCheckPlugin = "0.51.0"
 dependencyGuardPlugin = "0.5.0"
 detektPlugin = "1.23.5"
 detektPluginCompose = "0.3.21"
+fab = "1.6.4"
 fastAdapter = "5.7.0"
 forkhandlesBom = "2.18.0.1"
 glide = "4.16.0"
@@ -168,6 +169,7 @@ clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
 commons-io = { module = "commons-io:commons-io", version.ref = "commonsIo" }
 detekt-plugin-compose = { module = "io.nlopez.compose.rules:detekt", version.ref = "detektPluginCompose" }
 diff-utils = { module = "io.github.java-diff-utils:java-diff-utils", version.ref = "javaDiffUtils" }
+fab = { module = "com.github.clans:fab", version.ref = "fab" }
 fastadapter = { module = "com.mikepenz:fastadapter", version.ref = "fastAdapter" }
 fastadapter-extensions-drag = { module = "com.mikepenz:fastadapter-extensions-drag", version.ref = "fastAdapter" }
 fastadapter-extensions-utils = { module = "com.mikepenz:fastadapter-extensions-utils", version.ref = "fastAdapter" }

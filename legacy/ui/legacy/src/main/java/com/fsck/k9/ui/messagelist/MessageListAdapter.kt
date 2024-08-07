@@ -366,7 +366,6 @@ class MessageListAdapter internal constructor(
         }
 
         with(messageListItem) {
-            val maybeBoldTypeface = if (isRead) Typeface.NORMAL else Typeface.BOLD
             val displayDate = relativeDateTimeFormatter.formatDate(messageDate)
             val displayThreadCount = if (appearance.showingThreadedList) threadCount else 0
             val subject = MlfUtils.buildSubject(subject, res.getString(R.string.general_no_subject), displayThreadCount)
@@ -400,12 +399,15 @@ class MessageListAdapter internal constructor(
 ////                    messageStringBuilder.append(" – ").append(preview)
 //                }
 //            }
+            val maybeBoldTypeface = if (isRead) Typeface.NORMAL else Typeface.BOLD
+
             holder.preview.text = getPreview(isMessageEncrypted, previewText)
             holder.tvSender.text = displayName
 //            formatPreviewText(holder.preview, beforePreviewText, isRead)
+            holder.subject.setTypeface(null, maybeBoldTypeface)
+            holder.tvSender.setTypeface(null, maybeBoldTypeface)
+            holder.date.setTypeface(null, maybeBoldTypeface)
 
-            holder.subject.typeface = Typeface.create(holder.subject.typeface, maybeBoldTypeface)
-            holder.tvSender.typeface = Typeface.create(holder.tvSender.typeface, maybeBoldTypeface)
             holder.subject.text = subject
             holder.imgDot.show(!isRead)
             holder.subject.contentDescription = if (isRead) {
@@ -414,7 +416,6 @@ class MessageListAdapter internal constructor(
                 res.getString(R.string.message_list_content_description_unread_prefix, subject)
             }
 
-            holder.date.typeface = Typeface.create(holder.date.typeface, maybeBoldTypeface)
             holder.date.text = displayDate
             holder.attachment.isVisible = hasAttachments
 

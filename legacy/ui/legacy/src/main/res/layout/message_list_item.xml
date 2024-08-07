@@ -85,85 +85,96 @@
         tools:text="Sender – Message preview text that can span multiple lines. Users can specify in settings how much of that is displayed."
         />
 
-    <ImageView
-        android:id="@+id/account_color_chip"
-        android:layout_width="7dp"
-        android:layout_height="12dp"
-        android:contentDescription="@null"
-        android:paddingStart="0dp"
-        android:paddingEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvSender"
+    <LinearLayout
+        android:id="@+id/lvSubjectArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/subject"
         app:layout_constraintStart_toEndOf="@+id/barrier_start"
-        app:layout_constraintTop_toTopOf="@+id/tvSender"
-        app:srcCompat="@drawable/ic_account_color"
-        tools:tint="@color/material_blue_700"
-        />
+        app:layout_constraintTop_toTopOf="@id/top_guideline"
+        >
 
-    <ImageView
-        android:id="@+id/status"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:paddingEnd="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvSender"
-        app:layout_constraintStart_toEndOf="@+id/account_color_chip"
-        app:layout_constraintTop_toTopOf="@+id/top_guideline"
-        app:srcCompat="@drawable/ic_reply"
-        tools:ignore="RtlSymmetry"
-        />
+        <ImageView
+            android:id="@+id/account_color_chip"
+            android:layout_width="7dp"
+            android:layout_height="12dp"
+            android:contentDescription="@null"
+            android:paddingStart="0dp"
+            android:paddingEnd="4dp"
+            app:srcCompat="@drawable/ic_account_color"
+            tools:tint="@color/material_blue_700"
+            />
 
-    <ImageView
-        android:id="@+id/imgDot"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:src="@drawable/ic_dot"
-        app:layout_constraintBottom_toBottomOf="@+id/tvSender"
-        app:layout_constraintStart_toEndOf="@+id/status"
-        app:layout_constraintTop_toTopOf="@+id/tvSender"
-        tools:ignore="RtlSymmetry"
-        />
+        <ImageView
+            android:id="@+id/status"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:paddingEnd="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSender"
+            app:layout_constraintStart_toEndOf="@+id/account_color_chip"
+            app:layout_constraintTop_toTopOf="@+id/top_guideline"
+            app:srcCompat="@drawable/ic_reply"
+            tools:ignore="RtlSymmetry"
+            />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvSender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"
-        android:ellipsize="end"
-        android:includeFontPadding="false"
-        android:singleLine="true"
-        android:textAppearance="?attr/textAppearanceBodyLarge"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintEnd_toStartOf="@+id/thread_count"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/imgDot"
-        app:layout_constraintTop_toTopOf="@+id/top_guideline"
-        tools:text="Subject"
-        />
+        <ImageView
+            android:id="@+id/imgDot"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/ic_dot"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSender"
+            app:layout_constraintStart_toEndOf="@+id/status"
+            app:layout_constraintTop_toTopOf="@+id/tvSender"
+            android:layout_marginEnd="6dp"
+            tools:ignore="RtlSymmetry"
+            />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/thread_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:focusable="false"
-        android:textAppearance="?attr/textAppearanceBodyMedium"
-        android:textColor="?attr/colorSecondary"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvSender"
-        app:layout_constraintEnd_toStartOf="@+id/attachment"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvSender"
-        app:layout_goneMarginEnd="8dp"
-        tools:text="3"
-        />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@+id/thread_count"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/imgDot"
+            app:layout_constraintTop_toTopOf="@+id/top_guideline"
+            tools:text="Subject"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/thread_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:focusable="false"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorSecondary"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvSender"
+            app:layout_constraintEnd_toStartOf="@+id/attachment"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tvSender"
+            app:layout_goneMarginEnd="8dp"
+            tools:text="3"
+            />
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/attachment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lvSubjectArea"
         app:layout_constraintEnd_toStartOf="@+id/date"
-        app:layout_constraintTop_toTopOf="@+id/top_guideline"
+        app:layout_constraintTop_toTopOf="@+id/lvSubjectArea"
         app:srcCompat="@drawable/ic_attachment"
         />
 
@@ -176,7 +187,8 @@
         android:singleLine="true"
         android:textAppearance="?attr/textAppearanceBodyMedium"
         android:textColor="@color/color_4ca5df"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvSender"
+        app:layout_constraintBottom_toBottomOf="@+id/attachment"
+        app:layout_constraintTop_toTopOf="@+id/attachment"
         app:layout_constraintEnd_toStartOf="@+id/star"
         app:layout_goneMarginEnd="16dp"
         tools:text="Oct 27"
@@ -224,7 +236,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="tvSender,date,thread_count,status,attachment,account_color_chip"
+        app:constraint_referenced_ids="date,attachment,lvSubjectArea"
         />
 
     <androidx.constraintlayout.widget.Barrier

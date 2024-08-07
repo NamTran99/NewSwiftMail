@@ -7,6 +7,7 @@
 
     <style name="Theme.K9.Light" parent="Theme2.Main.Light">
         <item name="colorPrimary">@color/color_4ca5df</item>
+        <item name="fontFamily">@color/color_4ca5df</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">@color/color_3598d8</item>
         <item name="colorControlNormal">@color/color_white</item>
