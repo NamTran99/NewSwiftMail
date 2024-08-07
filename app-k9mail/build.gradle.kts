@@ -43,10 +43,10 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.fsck.k9"
+        applicationId = "com.hungbang.email2018"
         testApplicationId = "com.fsck.k9.tests"
 
-        versionCode = 39004
+        versionCode = 109
         versionName = "6.905-SNAPSHOT"
 
         // Keep in sync with the resource string array "supported_languages"
@@ -125,7 +125,7 @@ android {
         }
 
         debug {
-            applicationIdSuffix = ".debug"
+//            applicationIdSuffix = ".debug"
             enableUnitTestCoverage = testCoverageEnabled
             enableAndroidTestCoverage = testCoverageEnabled
 

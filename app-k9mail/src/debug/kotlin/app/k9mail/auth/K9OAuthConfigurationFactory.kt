@@ -35,7 +35,7 @@ class K9OAuthConfigurationFactory : OAuthConfigurationFactory {
             "smtp.gmail.com",
             "smtp.googlemail.com",
         ) to OAuthConfiguration(
-            clientId = "262622259280-5qb3vtj68d5dtudmaif4g9vd3cpar8r3.apps.googleusercontent.com",
+            clientId = "105205095331-5qamqp5i5q47t4kd30mrbvrekmrdlflm.apps.googleusercontent.com",
             scopes = listOf("https://mail.google.com/"),
             authorizationEndpoint = "https://accounts.google.com/o/oauth2/v2/auth",
             tokenEndpoint = "https://oauth2.googleapis.com/token",

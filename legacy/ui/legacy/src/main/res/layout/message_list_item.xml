@@ -89,9 +89,11 @@
         android:id="@+id/lvSubjectArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
+        app:layout_constraintHorizontal_bias="0"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/subject"
+        app:layout_constraintEnd_toStartOf="@+id/attachment"
         app:layout_constraintStart_toEndOf="@+id/barrier_start"
         app:layout_constraintTop_toTopOf="@id/top_guideline"
         >
@@ -123,11 +125,11 @@
             android:id="@+id/imgDot"
             android:layout_width="10dp"
             android:layout_height="10dp"
+            android:layout_marginEnd="6dp"
             android:src="@drawable/ic_dot"
             app:layout_constraintBottom_toBottomOf="@+id/tvSender"
             app:layout_constraintStart_toEndOf="@+id/status"
             app:layout_constraintTop_toTopOf="@+id/tvSender"
-            android:layout_marginEnd="6dp"
             tools:ignore="RtlSymmetry"
             />
 
