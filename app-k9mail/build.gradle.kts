@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.hungbang.email2018"
+        applicationId = "com.mail.emailapp.easymail2018"
         testApplicationId = "com.fsck.k9.tests"
 
         versionCode = 109
