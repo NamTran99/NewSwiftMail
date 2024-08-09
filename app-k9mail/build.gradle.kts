@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.mail.emailapp.easymail2018"
+        applicationId = "com.mail.emailapp.easymail2024"
         testApplicationId = "com.fsck.k9.tests"
 
         versionCode = 109

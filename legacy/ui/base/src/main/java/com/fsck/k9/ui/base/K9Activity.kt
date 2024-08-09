@@ -3,6 +3,7 @@ package com.fsck.k9.ui.base
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -32,6 +33,7 @@ abstract class K9Activity(private val themeType: ThemeType) : AppCompatActivity(
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("TAG", "onCreate: NamTD8 ${this::class.java.name}")
         initializeTheme()
         initializePushController()
         super.onCreate(savedInstanceState)

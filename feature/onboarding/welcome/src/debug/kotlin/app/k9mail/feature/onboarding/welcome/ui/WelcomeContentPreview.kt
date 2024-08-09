@@ -8,7 +8,7 @@ import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
 @PreviewDevices
 internal fun WelcomeContentPreview() {
     PreviewWithTheme {
-        WelcomeContent(
+        ListHostMailContent(
             onStartClick = {},
             onImportClick = {},
             appName = "AppName",

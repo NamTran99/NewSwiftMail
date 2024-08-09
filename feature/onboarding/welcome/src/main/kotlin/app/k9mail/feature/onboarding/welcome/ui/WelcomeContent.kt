@@ -34,7 +34,7 @@ private const val CIRCLE_SIZE_DP = 300
 private const val LOGO_SIZE_DP = 200
 
 @Composable
-internal fun WelcomeContent(
+internal fun ListHostMailContent(
     onStartClick: () -> Unit,
     onImportClick: () -> Unit,
     appName: String,

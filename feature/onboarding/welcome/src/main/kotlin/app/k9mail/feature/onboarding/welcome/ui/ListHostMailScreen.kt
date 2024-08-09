@@ -4,12 +4,12 @@ import androidx.compose.runtime.Composable
 import app.k9mail.core.common.provider.AppNameProvider
 
 @Composable
-fun WelcomeScreen(
+fun ListHostMailScreen(
     onStartClick: () -> Unit,
     onImportClick: () -> Unit,
     appNameProvider: AppNameProvider,
 ) {
-    WelcomeContent(
+    ListHostMailContent(
         onStartClick = onStartClick,
         onImportClick = onImportClick,
         appName = appNameProvider.appName,
