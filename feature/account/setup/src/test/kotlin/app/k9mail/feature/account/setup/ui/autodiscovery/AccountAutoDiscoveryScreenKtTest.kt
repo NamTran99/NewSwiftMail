@@ -21,7 +21,7 @@ class AccountAutoDiscoveryScreenKtTest : ComposeTest() {
         var onBackCounter = 0
 
         setContentWithTheme {
-            AccountAutoDiscoveryScreen(
+            MailLoginScreen(
                 onNext = { onNextCounter++ },
                 onBack = { onBackCounter++ },
                 viewModel = viewModel,

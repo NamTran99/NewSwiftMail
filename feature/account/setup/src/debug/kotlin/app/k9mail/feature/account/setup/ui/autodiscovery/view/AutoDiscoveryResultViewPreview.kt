@@ -9,7 +9,7 @@ import app.k9mail.feature.account.setup.ui.autodiscovery.fake.fakeAutoDiscoveryR
 @Preview(showBackground = true)
 internal fun AutoDiscoveryResultViewTrustedPreview() {
     PreviewWithThemes {
-        AutoDiscoveryResultView(
+        ListMailLoginView(
             settings = fakeAutoDiscoveryResultSettings(isTrusted = true),
             onEditConfigurationClick = {},
         )
@@ -20,7 +20,7 @@ internal fun AutoDiscoveryResultViewTrustedPreview() {
 @Preview(showBackground = true)
 internal fun AutoDiscoveryResultViewUntrustedPreview() {
     PreviewWithThemes {
-        AutoDiscoveryResultView(
+        ListMailLoginView(
             settings = fakeAutoDiscoveryResultSettings(isTrusted = false),
             onEditConfigurationClick = {},
         )

@@ -12,7 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import app.k9mail.feature.account.setup.navigation.AccountSetupNavHost
 import app.k9mail.feature.onboarding.permissions.domain.PermissionsDomainContract.UseCase.HasRuntimePermissions
 import app.k9mail.feature.onboarding.permissions.ui.PermissionsScreen
-import app.k9mail.feature.onboarding.welcome.ui.ListHostMailScreen
+import app.k9mail.feature.onboarding.welcome.ui.WelcomeScreenScreen
 import app.k9mail.feature.settings.import.ui.SettingsImportScreen
 import org.koin.compose.koinInject
 
@@ -50,7 +50,7 @@ fun OnboardingNavHost(
         startDestination = NESTED_NAVIGATION_ROUTE_WELCOME,
     ) {
         composable(route = NESTED_NAVIGATION_ROUTE_WELCOME) {
-            ListHostMailScreen(
+            WelcomeScreenScreen(
                 onStartClick = { navController.navigateToAccountSetup() },
                 onImportClick = { navController.navigateToSettingsImport() },
                 appNameProvider = koinInject(),

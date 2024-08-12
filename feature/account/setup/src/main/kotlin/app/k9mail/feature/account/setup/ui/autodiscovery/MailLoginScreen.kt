@@ -11,7 +11,7 @@ import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryCon
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.ViewModel
 
 @Composable
-internal fun AccountAutoDiscoveryScreen(
+internal fun MailLoginScreen(
     onNext: (AutoDiscoveryUiResult) -> Unit,
     onBack: () -> Unit,
     viewModel: ViewModel,

@@ -9,7 +9,7 @@ import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
 @PreviewDevices
 internal fun WelcomeScreenPreview() {
     PreviewWithTheme {
-        ListHostMailScreen(
+        WelcomeScreenScreen(
             onStartClick = {},
             onImportClick = {},
             appNameProvider = object : AppNameProvider {

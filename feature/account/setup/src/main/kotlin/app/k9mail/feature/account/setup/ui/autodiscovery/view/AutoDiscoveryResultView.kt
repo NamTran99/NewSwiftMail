@@ -16,7 +16,7 @@ import app.k9mail.core.ui.compose.designsystem.atom.Surface
 import app.k9mail.core.ui.compose.theme2.MainTheme
 
 @Composable
-internal fun AutoDiscoveryResultView(
+internal fun ListMailLoginView(
     settings: AutoDiscoveryResult.Settings?,
     onEditConfigurationClick: () -> Unit,
     modifier: Modifier = Modifier,

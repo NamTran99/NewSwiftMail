@@ -12,7 +12,7 @@ import app.k9mail.feature.account.setup.ui.fake.FakeAppNameProvider
 @PreviewDevicesWithBackground
 internal fun AccountAutoDiscoveryScreenPreview() {
     PreviewWithTheme {
-        AccountAutoDiscoveryScreen(
+        MailLoginScreen(
             onNext = {},
             onBack = {},
             viewModel = AccountAutoDiscoveryViewModel(

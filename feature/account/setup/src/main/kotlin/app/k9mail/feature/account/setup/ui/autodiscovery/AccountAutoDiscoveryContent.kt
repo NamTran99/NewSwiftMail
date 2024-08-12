@@ -32,7 +32,8 @@ import app.k9mail.feature.account.setup.R
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.AutoDiscoveryResultApprovalView
-import app.k9mail.feature.account.setup.ui.autodiscovery.view.AutoDiscoveryResultView
+import app.k9mail.feature.account.setup.ui.autodiscovery.view.ListMailLoginView
+import app.k9mail.feature.account.setup.ui.autodiscovery.view.MailState
 
 @Composable
 internal fun AccountAutoDiscoveryContent(
@@ -63,11 +64,7 @@ internal fun AccountAutoDiscoveryContent(
                     title = appName,
                 )
                 Spacer(modifier = Modifier.weight(1f))
-                AutoDiscoveryContent(
-                    state = state,
-                    onEvent = onEvent,
-                    oAuthViewModel = oAuthViewModel,
-                )
+                ListMailLoginView(listOf(MailState.GMAIL, MailState.OUTLOOK, MailState.YANDEX, MailState.OTHER), {})
                 Spacer(modifier = Modifier.weight(1f))
             }
 
@@ -134,7 +131,7 @@ internal fun ContentView(
             .then(modifier),
     ) {
         if (state.configStep != AccountAutoDiscoveryContract.ConfigStep.EMAIL_ADDRESS) {
-            AutoDiscoveryResultView(
+            ListMailLoginView(
                 settings = state.autoDiscoverySettings,
                 onEditConfigurationClick = { onEvent(Event.OnEditConfigurationClicked) },
             )
