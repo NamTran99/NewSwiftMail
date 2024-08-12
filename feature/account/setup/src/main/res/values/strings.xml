@@ -67,4 +67,5 @@
     <string name="account_setup_create_account_created">Account successfully created</string>
 
     <string name="account_setup_select_server">Select your server you want to login with</string>
+    <string name="account_setup_other_server">OTHER</string>
 </resources>

@@ -10,13 +10,18 @@ import app.k9mail.feature.account.common.domain.input.StringInputField
 import app.k9mail.feature.account.common.ui.loadingerror.LoadingErrorState
 import app.k9mail.feature.account.oauth.domain.entity.OAuthResult
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract
+import app.k9mail.feature.account.setup.R
+import app.k9mail.feature.account.setup.ui.autodiscovery.view.MailState
 
 interface AccountAutoDiscoveryContract {
 
     enum class ConfigStep {
-        EMAIL_ADDRESS,
+        LIST_MAIL_SERVER,
         OAUTH,
         PASSWORD,
+        YANDEX,
+        GMAIL,
+        OUTLOOK,
         MANUAL_SETUP,
     }
 
@@ -27,18 +32,21 @@ interface AccountAutoDiscoveryContract {
     }
 
     data class State(
-        val configStep: ConfigStep = ConfigStep.EMAIL_ADDRESS,
+        val configStep: ConfigStep = ConfigStep.LIST_MAIL_SERVER,
         val emailAddress: StringInputField = StringInputField(),
         val password: StringInputField = StringInputField(),
         val autoDiscoverySettings: AutoDiscoveryResult.Settings? = null,
         val configurationApproved: BooleanInputField = BooleanInputField(),
         val authorizationState: AuthorizationState? = null,
+        val instructionContent: Int = R.string.account_setup_select_server,
+        val listMailState: List<MailState> = listOf(MailState.GMAIL, MailState.OUTLOOK, MailState.YANDEX, MailState.OTHER),
 
         val isSuccess: Boolean = false,
         override val error: Error? = null,
         override val isLoading: Boolean = false,
 
-        val isNextButtonVisible: Boolean = true,
+        val isNextButtonVisible: Boolean = false,
+        val isShowToolbar: Boolean = false
     ) : LoadingErrorState<Error>
 
     sealed interface Event {
@@ -46,6 +54,9 @@ interface AccountAutoDiscoveryContract {
         data class PasswordChanged(val password: String) : Event
         data class ResultApprovalChanged(val confirmed: Boolean) : Event
         data class OnOAuthResult(val result: OAuthResult) : Event
+
+        data class OnSelectServer(val state: MailState) : Event
+
 
         data object OnNextClicked : Event
         data object OnBackClicked : Event

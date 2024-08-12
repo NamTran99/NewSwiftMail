@@ -21,6 +21,7 @@ import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryCon
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Validator
+import app.k9mail.feature.account.setup.ui.autodiscovery.view.MailState
 import kotlinx.coroutines.launch
 
 @Suppress("TooManyFunctions")
@@ -51,6 +52,15 @@ internal class AccountAutoDiscoveryViewModel(
             Event.OnEditConfigurationClicked -> {
                 navigateNext(isAutomaticConfig = false)
             }
+
+            is Event.OnSelectServer -> {
+                when(event.state){
+                    MailState.GMAIL -> TODO()
+                    MailState.OUTLOOK -> TODO()
+                    MailState.YANDEX -> TODO()
+                    MailState.OTHER -> TODO()
+                }
+            }
         }
     }
 
@@ -59,7 +69,7 @@ internal class AccountAutoDiscoveryViewModel(
         updateState {
             State(
                 emailAddress = StringInputField(value = emailAddress),
-                isNextButtonVisible = true,
+                isNextButtonVisible = false,
             )
         }
     }
@@ -82,7 +92,7 @@ internal class AccountAutoDiscoveryViewModel(
 
     private fun onNext() {
         when (state.value.configStep) {
-            ConfigStep.EMAIL_ADDRESS ->
+            ConfigStep.LIST_MAIL_SERVER ->
                 if (state.value.error != null) {
                     updateState {
                         it.copy(
@@ -97,6 +107,9 @@ internal class AccountAutoDiscoveryViewModel(
             ConfigStep.PASSWORD -> submitPassword()
             ConfigStep.OAUTH -> Unit
             ConfigStep.MANUAL_SETUP -> navigateNext(isAutomaticConfig = false)
+            ConfigStep.YANDEX -> Unit
+            ConfigStep.GMAIL -> Unit
+            ConfigStep.OUTLOOK -> Unit
         }
     }
 
@@ -132,8 +145,7 @@ internal class AccountAutoDiscoveryViewModel(
                 )
             }
 
-            val result = getAutoDiscovery.execute(state.value.emailAddress.value)
-            when (result) {
+            when (val result = getAutoDiscovery.execute(state.value.emailAddress.value)) {
                 AutoDiscoveryResult.NoUsableSettingsFound -> updateNoSettingsFound()
                 is AutoDiscoveryResult.Settings -> updateAutoDiscoverySettings(result)
                 is AutoDiscoveryResult.NetworkError -> updateError(Error.NetworkError)
@@ -159,7 +171,7 @@ internal class AccountAutoDiscoveryViewModel(
                     isLoading = false,
                     autoDiscoverySettings = settings,
                     configStep = ConfigStep.PASSWORD,
-                    isNextButtonVisible = true,
+                    isNextButtonVisible = false,
                 )
             }
             return
@@ -228,7 +240,7 @@ internal class AccountAutoDiscoveryViewModel(
 
     private fun onBack() {
         when (state.value.configStep) {
-            ConfigStep.EMAIL_ADDRESS -> {
+            ConfigStep.LIST_MAIL_SERVER -> {
                 if (state.value.error != null) {
                     updateState {
                         it.copy(error = null)
@@ -243,11 +255,15 @@ internal class AccountAutoDiscoveryViewModel(
             ConfigStep.MANUAL_SETUP,
             -> updateState {
                 it.copy(
-                    configStep = ConfigStep.EMAIL_ADDRESS,
+                    configStep = ConfigStep.LIST_MAIL_SERVER,
                     password = StringInputField(),
                     isNextButtonVisible = true,
                 )
             }
+
+            ConfigStep.YANDEX -> TODO()
+            ConfigStep.GMAIL -> TODO()
+            ConfigStep.OUTLOOK -> TODO()
         }
     }
 

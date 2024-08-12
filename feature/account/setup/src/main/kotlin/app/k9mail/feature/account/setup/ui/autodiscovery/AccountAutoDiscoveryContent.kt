@@ -1,6 +1,7 @@
 package app.k9mail.feature.account.setup.ui.autodiscovery
 
 import android.content.res.Resources
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +18,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import app.k9mail.core.ui.compose.designsystem.atom.text.TextBodyLarge
-import app.k9mail.core.ui.compose.designsystem.atom.text.TextHeadlineLarge
 import app.k9mail.core.ui.compose.designsystem.molecule.ContentLoadingErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.ErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.LoadingView
@@ -48,6 +48,8 @@ internal fun AccountAutoDiscoveryContent(
 ) {
     val scrollState = rememberScrollState()
 
+    Log.d("TAG", "AccountAutoDiscoveryContent: NamTD8 ${state}")
+
     ResponsiveWidthContainer(
         modifier = Modifier
             .fillMaxSize()
@@ -62,27 +64,30 @@ internal fun AccountAutoDiscoveryContent(
                     .weight(1f)
                     .verticalScroll(scrollState)
                     .imePadding(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 AppTitleTopHeader(
                     title = appName,
                 )
-                TextBodyLarge(text = stringResource(R.string.account_setup_select_server))
+                TextBodyLarge(text = stringResource(state.instructionContent))
                 Spacer(modifier = Modifier.weight(1f))
-                AutoDiscoveryContent(
-                    state = state,
-                    onEvent = onEvent,
-                    oAuthViewModel = oAuthViewModel,
-                )
-//                ListMailLoginView(listOf(MailState.GMAIL, MailState.OUTLOOK, MailState.YANDEX, MailState.OTHER), {})
+//                AutoDiscoveryContent(
+//                    state = state,
+//                    onEvent = onEvent,
+//                    oAuthViewModel = oAuthViewModel,
+//                )
+                ListMailLoginView(state.listMailState, {
+                    onEvent(Event.OnSelectServer(it))
+                })
                 Spacer(modifier = Modifier.weight(1f))
             }
-
-            WizardNavigationBar(
-                onNextClick = { onEvent(Event.OnNextClicked) },
-                onBackClick = { onEvent(Event.OnBackClicked) },
-                state = WizardNavigationBarState(showNext = state.isNextButtonVisible),
-            )
+            if(state.isShowToolbar){
+                WizardNavigationBar(
+                    onNextClick = { onEvent(Event.OnNextClicked) },
+                    onBackClick = { onEvent(Event.OnBackClicked) },
+                    state = WizardNavigationBarState(showNext = state.isNextButtonVisible),
+                )
+            }
         }
     }
 }
@@ -140,7 +145,7 @@ internal fun ContentView(
             .padding(MainTheme.spacings.quadruple)
             .then(modifier),
     ) {
-        if (state.configStep != AccountAutoDiscoveryContract.ConfigStep.EMAIL_ADDRESS) {
+        if (state.configStep != AccountAutoDiscoveryContract.ConfigStep.LIST_MAIL_SERVER) {
             ListMailLoginView(
                 settings = state.autoDiscoverySettings,
                 onEditConfigurationClick = { onEvent(Event.OnEditConfigurationClicked) },

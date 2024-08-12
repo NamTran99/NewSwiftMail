@@ -16,7 +16,7 @@ class AccountAutoDiscoveryStateTest {
 
         assertThat(state).isEqualTo(
             State(
-                configStep = ConfigStep.EMAIL_ADDRESS,
+                configStep = ConfigStep.LIST_MAIL_SERVER,
                 emailAddress = StringInputField(),
                 password = StringInputField(),
                 autoDiscoverySettings = null,

@@ -47,7 +47,7 @@ class AccountAutoDiscoveryViewModelTest {
             initialState = initialState,
             event = Event.EmailAddressChanged("email"),
             expectedState = State(
-                configStep = ConfigStep.EMAIL_ADDRESS,
+                configStep = ConfigStep.LIST_MAIL_SERVER,
                 emailAddress = StringInputField(value = "email"),
                 password = StringInputField(),
             ),
@@ -86,7 +86,7 @@ class AccountAutoDiscoveryViewModelTest {
         runTest {
             val autoDiscoverySettings = AutoDiscoverySettingsFixture.settings
             val initialState = State(
-                configStep = ConfigStep.EMAIL_ADDRESS,
+                configStep = ConfigStep.LIST_MAIL_SERVER,
                 emailAddress = StringInputField(value = "email"),
             )
             val testSubject = AccountAutoDiscoveryViewModel(
@@ -134,7 +134,7 @@ class AccountAutoDiscoveryViewModelTest {
     fun `should not change state when OnNextClicked event is received, input valid but discovery failed`() =
         runTest {
             val initialState = State(
-                configStep = ConfigStep.EMAIL_ADDRESS,
+                configStep = ConfigStep.LIST_MAIL_SERVER,
                 emailAddress = StringInputField(value = "email"),
             )
             val discoveryError = Exception("discovery error")
@@ -182,7 +182,7 @@ class AccountAutoDiscoveryViewModelTest {
     fun `should reset error state and change to password step when OnNextClicked event received when having error`() =
         runTest {
             val initialState = State(
-                configStep = ConfigStep.EMAIL_ADDRESS,
+                configStep = ConfigStep.LIST_MAIL_SERVER,
                 emailAddress = StringInputField(
                     value = "email",
                     isValid = true,
@@ -210,7 +210,7 @@ class AccountAutoDiscoveryViewModelTest {
     @Test
     fun `should not change config step to password when OnNextClicked event is received and input invalid`() = runTest {
         val initialState = State(
-            configStep = ConfigStep.EMAIL_ADDRESS,
+            configStep = ConfigStep.LIST_MAIL_SERVER,
             emailAddress = StringInputField(value = "invalid email"),
         )
         val testSubject = AccountAutoDiscoveryViewModel(
@@ -228,7 +228,7 @@ class AccountAutoDiscoveryViewModelTest {
             initialState = initialState,
             event = Event.OnNextClicked,
             expectedState = State(
-                configStep = ConfigStep.EMAIL_ADDRESS,
+                configStep = ConfigStep.LIST_MAIL_SERVER,
                 emailAddress = StringInputField(
                     value = "invalid email",
                     error = TestError,
@@ -385,7 +385,7 @@ class AccountAutoDiscoveryViewModelTest {
             ) {
                 isEqualTo(
                     State(
-                        configStep = ConfigStep.EMAIL_ADDRESS,
+                        configStep = ConfigStep.LIST_MAIL_SERVER,
                         emailAddress = StringInputField(value = "email"),
                     ),
                 )
@@ -396,7 +396,7 @@ class AccountAutoDiscoveryViewModelTest {
     fun `should reset error state when OnBackClicked event received when having error and in email address step`() =
         runTest {
             val initialState = State(
-                configStep = ConfigStep.EMAIL_ADDRESS,
+                configStep = ConfigStep.LIST_MAIL_SERVER,
                 emailAddress = StringInputField(
                     value = "email",
                     isValid = true,
@@ -410,7 +410,7 @@ class AccountAutoDiscoveryViewModelTest {
                 initialState = initialState,
                 event = Event.OnBackClicked,
                 expectedState = State(
-                    configStep = ConfigStep.EMAIL_ADDRESS,
+                    configStep = ConfigStep.LIST_MAIL_SERVER,
                     emailAddress = StringInputField(
                         value = "email",
                         isValid = true,
