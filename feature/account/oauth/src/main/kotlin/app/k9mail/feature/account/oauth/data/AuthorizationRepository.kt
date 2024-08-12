@@ -53,12 +53,12 @@ class AuthorizationRepository(
         response: AuthorizationResponse,
     ): AuthorizationResult = suspendCoroutine { continuation ->
         val tokenRequest = response.createTokenExchangeRequest()
-
         service.performTokenRequest(tokenRequest) { tokenResponse, authorizationException ->
             val result = if (authorizationException != null) {
                 AuthorizationResult.Failure(authorizationException)
             } else if (tokenResponse != null) {
                 val authState = AuthState(response, tokenResponse, null)
+                authState.idToken
                 AuthorizationResult.Success(authState.toAuthorizationState())
             } else {
                 AuthorizationResult.Failure(Exception("Unknown error"))
@@ -86,7 +86,7 @@ class AuthorizationRepository(
         val authRequest = authRequestBuilder
             .setScope(configuration.scopes.joinToString(" "))
             .setCodeVerifier(codeVerifier)
-            .setLoginHint(emailAddress)
+//            .setLoginHint(emailAddress)
             .build()
 
         return service.getAuthorizationRequestIntent(authRequest)

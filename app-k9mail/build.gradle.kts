@@ -43,8 +43,9 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.mail.emailapp.easymail2024"
-        testApplicationId = "com.fsck.k9.tests"
+//        applicationId = "com.mail.emailapp.easymail2024"
+        applicationId = "email.swift.ai.smart.allmail"
+        testApplicationId = "email.swift.ai.smart.allmail"
 
         versionCode = 109
         versionName = "6.905-SNAPSHOT"
@@ -125,7 +126,7 @@ android {
         }
 
         debug {
-//            applicationIdSuffix = ".debug"
+            applicationIdSuffix = ".debug"
             enableUnitTestCoverage = testCoverageEnabled
             enableAndroidTestCoverage = testCoverageEnabled
 

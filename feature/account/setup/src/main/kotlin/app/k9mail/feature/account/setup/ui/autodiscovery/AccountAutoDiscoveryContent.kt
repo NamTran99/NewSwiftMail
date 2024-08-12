@@ -11,10 +11,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import app.k9mail.core.ui.compose.designsystem.atom.text.TextBodyLarge
+import app.k9mail.core.ui.compose.designsystem.atom.text.TextHeadlineLarge
 import app.k9mail.core.ui.compose.designsystem.molecule.ContentLoadingErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.ErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.LoadingView
@@ -59,12 +62,19 @@ internal fun AccountAutoDiscoveryContent(
                     .weight(1f)
                     .verticalScroll(scrollState)
                     .imePadding(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 AppTitleTopHeader(
                     title = appName,
                 )
+                TextBodyLarge(text = stringResource(R.string.account_setup_select_server))
                 Spacer(modifier = Modifier.weight(1f))
-                ListMailLoginView(listOf(MailState.GMAIL, MailState.OUTLOOK, MailState.YANDEX, MailState.OTHER), {})
+                AutoDiscoveryContent(
+                    state = state,
+                    onEvent = onEvent,
+                    oAuthViewModel = oAuthViewModel,
+                )
+//                ListMailLoginView(listOf(MailState.GMAIL, MailState.OUTLOOK, MailState.YANDEX, MailState.OTHER), {})
                 Spacer(modifier = Modifier.weight(1f))
             }
 

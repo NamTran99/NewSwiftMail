@@ -65,4 +65,6 @@
     <string name="account_setup_create_account_creating">Creating account…</string>
     <string name="account_setup_create_account_error">An error occurred while trying to create the account</string>
     <string name="account_setup_create_account_created">Account successfully created</string>
+
+    <string name="account_setup_select_server">Select your server you want to login with</string>
 </resources>

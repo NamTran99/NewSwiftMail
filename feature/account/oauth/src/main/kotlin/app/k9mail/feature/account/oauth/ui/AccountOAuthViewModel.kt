@@ -2,6 +2,7 @@ package app.k9mail.feature.account.oauth.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import app.k9mail.core.ui.compose.common.mvi.BaseViewModel
 import app.k9mail.feature.account.common.domain.entity.AuthorizationState
@@ -45,6 +46,7 @@ class AccountOAuthViewModel(
     }
 
     private fun onSignIn() {
+        Log.d("TAG", "onSignIn: hotname ${state.value.hostname} - ${state.value.emailAddress}")
         val result = getOAuthRequestIntent.execute(
             hostname = state.value.hostname,
             emailAddress = state.value.emailAddress,

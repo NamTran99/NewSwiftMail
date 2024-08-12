@@ -35,7 +35,7 @@ class K9OAuthConfigurationFactory : OAuthConfigurationFactory {
             "smtp.gmail.com",
             "smtp.googlemail.com",
         ) to OAuthConfiguration(
-            clientId = "105205095331-5qamqp5i5q47t4kd30mrbvrekmrdlflm.apps.googleusercontent.com",
+            clientId = "540233075051-1aj16r7ft55rdpo77pnpo27oc5mqevt5.apps.googleusercontent.com",
             scopes = listOf("https://mail.google.com/"),
             authorizationEndpoint = "https://accounts.google.com/o/oauth2/v2/auth",
             tokenEndpoint = "https://oauth2.googleapis.com/token",
@@ -48,7 +48,7 @@ class K9OAuthConfigurationFactory : OAuthConfigurationFactory {
             "outlook.office365.com",
             "smtp.office365.com",
         ) to OAuthConfiguration(
-            clientId = "e647013a-ada4-4114-b419-e43d250f99c5",
+            clientId = "c9363971-7ecd-45d0-a33d-a111b0524c4b",
             scopes = listOf(
                 "https://outlook.office.com/IMAP.AccessAsUser.All",
                 "https://outlook.office.com/SMTP.Send",
@@ -56,7 +56,7 @@ class K9OAuthConfigurationFactory : OAuthConfigurationFactory {
             ),
             authorizationEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
             tokenEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-            redirectUri = "msauth://com.fsck.k9.debug/VZF2DYuLYAu4TurFd6usQB2JPts%3D",
+            redirectUri = "msauth://email.swift.ai.smart.allmail.debug/fjyCkiR1q5vNsweleYpAD4%2FgFUs%3D",
         )
     }
 
