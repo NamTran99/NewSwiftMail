@@ -5,6 +5,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonIcon
 import app.k9mail.core.ui.compose.designsystem.atom.icon.Icons
 import app.k9mail.core.ui.compose.designsystem.atom.text.TextTitleLarge
@@ -15,12 +16,13 @@ import androidx.compose.material3.TopAppBar as Material3TopAppBar
 @Composable
 fun TopAppBar(
     title: String,
+    textColor: Color? =  null,
     modifier: Modifier = Modifier,
     navigationIcon: @Composable (() -> Unit) = {},
     actions: @Composable RowScope.() -> Unit = {},
 ) {
     Material3TopAppBar(
-        title = { TextTitleLarge(text = title) },
+        title = { TextTitleLarge(text = title, color = textColor?: MainTheme.colors.onDarkSurface) },
         modifier = modifier,
         navigationIcon = navigationIcon,
         actions = actions,
@@ -44,6 +46,7 @@ fun TopAppBarWithMenuButton(
             ButtonIcon(
                 onClick = onMenuClick,
                 imageVector = Icons.Outlined.Menu,
+                iconColor = MainTheme.colors.onDarkSurface
             )
         },
         actions = actions,
@@ -64,6 +67,7 @@ fun TopAppBarWithBackButton(
             ButtonIcon(
                 onClick = onBackClick,
                 imageVector = Icons.Outlined.ArrowBack,
+                iconColor = MainTheme.colors.onDarkSurface
             )
         },
         actions = actions,

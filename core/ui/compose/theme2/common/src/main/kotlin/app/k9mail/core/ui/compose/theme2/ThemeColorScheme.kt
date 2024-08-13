@@ -71,6 +71,7 @@ data class ThemeColorScheme(
     val onWarning: Color,
     val warningContainer: Color,
     val onWarningContainer: Color,
+    val onDarkSurface: Color,
 )
 
 /**

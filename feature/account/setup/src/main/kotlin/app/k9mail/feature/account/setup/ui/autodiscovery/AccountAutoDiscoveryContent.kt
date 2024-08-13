@@ -17,15 +17,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import app.k9mail.core.ui.compose.designsystem.atom.text.TextBodyLarge
+import androidx.compose.ui.unit.dp
 import app.k9mail.core.ui.compose.designsystem.molecule.ContentLoadingErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.ErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.LoadingView
 import app.k9mail.core.ui.compose.designsystem.molecule.input.EmailAddressInput
 import app.k9mail.core.ui.compose.designsystem.molecule.input.PasswordInput
+import app.k9mail.core.ui.compose.designsystem.organism.TopAppBarWithBackButton
 import app.k9mail.core.ui.compose.designsystem.template.ResponsiveWidthContainer
 import app.k9mail.core.ui.compose.theme2.MainTheme
-import app.k9mail.feature.account.common.ui.AppTitleTopHeader
 import app.k9mail.feature.account.common.ui.WizardNavigationBar
 import app.k9mail.feature.account.common.ui.WizardNavigationBarState
 import app.k9mail.feature.account.common.ui.loadingerror.rememberContentLoadingErrorViewState
@@ -35,8 +35,8 @@ import app.k9mail.feature.account.setup.R
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.AutoDiscoveryResultApprovalView
+import app.k9mail.feature.account.setup.ui.autodiscovery.view.AutoDiscoveryResultView
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.ListMailLoginView
-import app.k9mail.feature.account.setup.ui.autodiscovery.view.MailState
 
 @Composable
 internal fun AccountAutoDiscoveryContent(
@@ -66,22 +66,26 @@ internal fun AccountAutoDiscoveryContent(
                     .imePadding(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                AppTitleTopHeader(
+                TopAppBarWithBackButton(
                     title = appName,
+                    onBackClick = {
+                        onEvent(Event.OnBackClicked)
+                    },
                 )
-                TextBodyLarge(text = stringResource(state.instructionContent))
-                Spacer(modifier = Modifier.weight(1f))
 //                AutoDiscoveryContent(
 //                    state = state,
 //                    onEvent = onEvent,
 //                    oAuthViewModel = oAuthViewModel,
 //                )
-                ListMailLoginView(state.listMailState, {
-                    onEvent(Event.OnSelectServer(it))
-                })
-                Spacer(modifier = Modifier.weight(1f))
+                ListMailLoginView(
+                    modifier = Modifier.padding(0.dp, MainTheme.spacings.double, 0.dp, 0.dp),
+                    listMail = state.listMailState,
+                    onItemClick = {
+                        onEvent(Event.OnSelectServer(it))
+                    },
+                )
             }
-            if(state.isShowToolbar){
+            if (state.isShowToolbar) {
                 WizardNavigationBar(
                     onNextClick = { onEvent(Event.OnNextClicked) },
                     onBackClick = { onEvent(Event.OnBackClicked) },
@@ -146,7 +150,7 @@ internal fun ContentView(
             .then(modifier),
     ) {
         if (state.configStep != AccountAutoDiscoveryContract.ConfigStep.LIST_MAIL_SERVER) {
-            ListMailLoginView(
+            AutoDiscoveryResultView(
                 settings = state.autoDiscoverySettings,
                 onEditConfigurationClick = { onEvent(Event.OnEditConfigurationClicked) },
             )

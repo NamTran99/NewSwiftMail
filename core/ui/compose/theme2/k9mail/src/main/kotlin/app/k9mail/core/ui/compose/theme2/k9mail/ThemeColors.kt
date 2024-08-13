@@ -1,5 +1,6 @@
 package app.k9mail.core.ui.compose.theme2.k9mail
 
+import androidx.compose.ui.graphics.Color
 import app.k9mail.core.ui.compose.theme2.ThemeColorScheme
 
 internal val darkThemeColorScheme = ThemeColorScheme(
@@ -31,6 +32,8 @@ internal val darkThemeColorScheme = ThemeColorScheme(
     surfaceContainer = TonalColorPalette.neutral012,
     surfaceContainerHigh = TonalColorPalette.neutral017,
     surfaceContainerHighest = TonalColorPalette.neutral022,
+    onDarkSurface = Color(0xffffffff),
+
 
     inverseSurface = TonalColorPalette.neutral090,
     inverseOnSurface = TonalColorPalette.neutral020,
@@ -61,8 +64,8 @@ internal val darkThemeColorScheme = ThemeColorScheme(
 )
 
 internal val lightThemeColorScheme = ThemeColorScheme(
-    primary = TonalColorPalette.primary040,
-    onPrimary = TonalColorPalette.primary100,
+    primary = Color(0xff4ca5df),
+    onPrimary = Color(0xffffffff),
     primaryContainer = TonalColorPalette.primary090,
     onPrimaryContainer = TonalColorPalette.primary010,
 
@@ -81,12 +84,13 @@ internal val lightThemeColorScheme = ThemeColorScheme(
     errorContainer = TonalColorPalette.error090,
     onErrorContainer = TonalColorPalette.error010,
 
-    surface = TonalColorPalette.neutral098,
+    surface = Color(0xfff1f7f7),
     onSurface = TonalColorPalette.neutral010,
     onSurfaceVariant = TonalColorPalette.neutralVariant030,
+    onDarkSurface = Color(0xffffffff),
     surfaceContainerLowest = TonalColorPalette.neutral100,
-    surfaceContainerLow = TonalColorPalette.neutral096,
-    surfaceContainer = TonalColorPalette.neutral094,
+    surfaceContainerLow = Color(0xff3598d8),
+    surfaceContainer = Color(0xff4ca5df),
     surfaceContainerHigh = TonalColorPalette.neutral092,
     surfaceContainerHighest = TonalColorPalette.neutral090,
 
@@ -94,10 +98,10 @@ internal val lightThemeColorScheme = ThemeColorScheme(
     inverseOnSurface = TonalColorPalette.neutral095,
     inversePrimary = TonalColorPalette.primary080,
 
-    outline = TonalColorPalette.neutralVariant050,
+    outline = Color(0xff5caa1cd),
     outlineVariant = TonalColorPalette.neutralVariant080,
 
-    surfaceBright = TonalColorPalette.neutral098,
+    surfaceBright = Color(0xffffffff),
     surfaceDim = TonalColorPalette.neutral087,
 
     scrim = TonalColorPalette.neutral000,

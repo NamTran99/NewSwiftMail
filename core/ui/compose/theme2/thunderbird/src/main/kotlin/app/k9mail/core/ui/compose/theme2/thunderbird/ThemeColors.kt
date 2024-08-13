@@ -1,5 +1,6 @@
 package app.k9mail.core.ui.compose.theme2.thunderbird
 
+import androidx.compose.ui.graphics.Color
 import app.k9mail.core.ui.compose.theme2.ThemeColorScheme
 
 internal val darkThemeColorScheme = ThemeColorScheme(
@@ -58,6 +59,7 @@ internal val darkThemeColorScheme = ThemeColorScheme(
     onWarning = TonalColorPalette.warning020,
     warningContainer = TonalColorPalette.warning030,
     onWarningContainer = TonalColorPalette.warning090,
+    onDarkSurface = Color(0xffffffff),
 )
 
 internal val lightThemeColorScheme = ThemeColorScheme(
@@ -116,4 +118,5 @@ internal val lightThemeColorScheme = ThemeColorScheme(
     onWarning = TonalColorPalette.warning100,
     warningContainer = TonalColorPalette.warning090,
     onWarningContainer = TonalColorPalette.warning010,
+    onDarkSurface = Color(0xffffffff),
 )

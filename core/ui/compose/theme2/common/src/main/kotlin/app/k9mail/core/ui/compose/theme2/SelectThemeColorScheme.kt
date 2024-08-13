@@ -110,6 +110,7 @@ private fun ColorScheme.toDynamicThemeColorScheme(
         onWarning = onWarning,
         warningContainer = warningContainer,
         onWarningContainer = onWarningContainer,
+        onDarkSurface = Color(0xffffffff),
     )
 }
 

@@ -16,7 +16,7 @@ fun SystemBar(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.surfaceContainer.toArgb()
+            window.statusBarColor = colorScheme.surfaceContainerLow.toArgb()
             window.navigationBarColor = colorScheme.surfaceContainer.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
