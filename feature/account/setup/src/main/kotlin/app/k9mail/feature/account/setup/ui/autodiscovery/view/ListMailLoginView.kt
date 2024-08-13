@@ -24,10 +24,8 @@ import app.k9mail.core.ui.compose.designsystem.atom.DividerHorizontal
 import app.k9mail.core.ui.compose.designsystem.atom.text.TextTitleLarge
 import app.k9mail.core.ui.compose.theme2.MainTheme
 import app.k9mail.feature.account.setup.R
+import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.MailState
 
-enum class MailState(val drawableResID: Int) {
-    GMAIL(R.drawable.ic_mail), OUTLOOK(R.drawable.ic_outlook), YANDEX(R.drawable.ic_yandex), OTHER(R.drawable.ic_mail)
-}
 
 @Composable
 internal fun ListMailLoginView(

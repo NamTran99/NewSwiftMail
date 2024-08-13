@@ -99,7 +99,7 @@ internal val lightThemeColorScheme = ThemeColorScheme(
     inversePrimary = TonalColorPalette.primary080,
 
     outline = Color(0xff5caa1cd),
-    outlineVariant = TonalColorPalette.neutralVariant080,
+    outlineVariant = Color(0xff5caa1cd),
 
     surfaceBright = Color(0xffffffff),
     surfaceDim = TonalColorPalette.neutral087,

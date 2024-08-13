@@ -21,7 +21,7 @@ import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryCon
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Validator
-import app.k9mail.feature.account.setup.ui.autodiscovery.view.MailState
+import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.MailState
 import kotlinx.coroutines.launch
 
 @Suppress("TooManyFunctions")
@@ -54,11 +54,15 @@ internal class AccountAutoDiscoveryViewModel(
             }
 
             is Event.OnSelectServer -> {
-                when(event.state){
-                    MailState.GMAIL -> TODO()
-                    MailState.OUTLOOK -> TODO()
-                    MailState.YANDEX -> TODO()
-                    MailState.OTHER -> TODO()
+                val configStep = when(event.state){
+                    MailState.GMAIL -> ConfigStep.GMAIL
+                    MailState.OUTLOOK -> ConfigStep.OUTLOOK
+                    MailState.YANDEX -> ConfigStep.YANDEX
+                    MailState.OTHER -> ConfigStep.PASSWORD
+                }
+
+                updateState {
+                    it.copy(configStep = configStep)
                 }
             }
         }
@@ -261,9 +265,13 @@ internal class AccountAutoDiscoveryViewModel(
                 )
             }
 
-            ConfigStep.YANDEX -> TODO()
-            ConfigStep.GMAIL -> TODO()
-            ConfigStep.OUTLOOK -> TODO()
+            ConfigStep.YANDEX,ConfigStep.GMAIL, ConfigStep.OUTLOOK -> {
+                updateState {
+                    it.copy(
+                        configStep = ConfigStep.LIST_MAIL_SERVER,
+                    )
+                }
+            }
         }
     }
 

@@ -2,6 +2,8 @@ package app.k9mail.feature.account.setup.ui.autodiscovery
 
 import android.content.res.Resources
 import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -16,8 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import app.k9mail.core.ui.compose.designsystem.atom.text.TextBodyMedium
 import app.k9mail.core.ui.compose.designsystem.molecule.ContentLoadingErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.ErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.LoadingView
@@ -72,18 +76,12 @@ internal fun AccountAutoDiscoveryContent(
                         onEvent(Event.OnBackClicked)
                     },
                 )
-//                AutoDiscoveryContent(
-//                    state = state,
-//                    onEvent = onEvent,
-//                    oAuthViewModel = oAuthViewModel,
-//                )
-                ListMailLoginView(
-                    modifier = Modifier.padding(0.dp, MainTheme.spacings.double, 0.dp, 0.dp),
-                    listMail = state.listMailState,
-                    onItemClick = {
-                        onEvent(Event.OnSelectServer(it))
-                    },
+                AutoDiscoveryContent(
+                    state = state,
+                    onEvent = onEvent,
+                    oAuthViewModel = oAuthViewModel,
                 )
+
             }
             if (state.isShowToolbar) {
                 WizardNavigationBar(
@@ -146,7 +144,6 @@ internal fun ContentView(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(MainTheme.spacings.quadruple)
             .then(modifier),
     ) {
         if (state.configStep != AccountAutoDiscoveryContract.ConfigStep.LIST_MAIL_SERVER) {
@@ -163,14 +160,38 @@ internal fun ContentView(
             Spacer(modifier = Modifier.height(MainTheme.spacings.double))
         }
 
-        EmailAddressInput(
-            emailAddress = state.emailAddress.value,
-            errorMessage = state.emailAddress.error?.toAutoDiscoveryValidationErrorString(resources),
-            onEmailAddressChange = { onEvent(Event.EmailAddressChanged(it)) },
-            contentPadding = PaddingValues(),
-        )
+        AnimatedVisibility(
+            visible = state.configStep in listOf(
+                AccountAutoDiscoveryContract.ConfigStep.GMAIL,
+                AccountAutoDiscoveryContract.ConfigStep.OUTLOOK,
+            ),
+        ) {
+            Image(
+                painter = painterResource(id = state.currentMailState?.drawableResID ?: return@AnimatedVisibility),
+                null,
+                modifier = Modifier.height(100.dp),
+            )
+            Spacer(modifier = Modifier.height(MainTheme.spacings.double))
+            TextBodyMedium(text = stringResource(id = R.string.account_setup_sign_in_to_your_account))
+        }
+
+        if (state.configStep == AccountAutoDiscoveryContract.ConfigStep.LIST_MAIL_SERVER) {
+            ListMailLoginView(
+                modifier = Modifier.padding(0.dp, MainTheme.spacings.double, 0.dp, 0.dp),
+                listMail = state.listMailState,
+                onItemClick = {
+                    onEvent(Event.OnSelectServer(it))
+                },
+            )
+        }
 
         if (state.configStep == AccountAutoDiscoveryContract.ConfigStep.PASSWORD) {
+            EmailAddressInput(
+                emailAddress = state.emailAddress.value,
+                errorMessage = state.emailAddress.error?.toAutoDiscoveryValidationErrorString(resources),
+                onEmailAddressChange = { onEvent(Event.EmailAddressChanged(it)) },
+                contentPadding = PaddingValues(),
+            )
             Spacer(modifier = Modifier.height(MainTheme.spacings.double))
             PasswordInput(
                 password = state.password.value,

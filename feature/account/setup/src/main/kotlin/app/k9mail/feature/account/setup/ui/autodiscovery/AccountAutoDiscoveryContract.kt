@@ -11,7 +11,6 @@ import app.k9mail.feature.account.common.ui.loadingerror.LoadingErrorState
 import app.k9mail.feature.account.oauth.domain.entity.OAuthResult
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract
 import app.k9mail.feature.account.setup.R
-import app.k9mail.feature.account.setup.ui.autodiscovery.view.MailState
 
 interface AccountAutoDiscoveryContract {
 
@@ -23,6 +22,10 @@ interface AccountAutoDiscoveryContract {
         GMAIL,
         OUTLOOK,
         MANUAL_SETUP,
+    }
+
+    enum class MailState(val drawableResID: Int) {
+        GMAIL(R.drawable.ic_mail), OUTLOOK(R.drawable.ic_outlook), YANDEX(R.drawable.ic_yandex), OTHER(R.drawable.ic_mail);
     }
 
     interface ViewModel : UnidirectionalViewModel<State, Event, Effect> {
@@ -39,14 +42,20 @@ interface AccountAutoDiscoveryContract {
         val configurationApproved: BooleanInputField = BooleanInputField(),
         val authorizationState: AuthorizationState? = null,
         val instructionContent: Int = R.string.account_setup_select_server,
-        val listMailState: List<MailState> = listOf(MailState.GMAIL, MailState.OUTLOOK, MailState.YANDEX, MailState.OTHER),
+        val listMailState: List<MailState> = listOf(
+            MailState.GMAIL,
+            MailState.OUTLOOK,
+            MailState.YANDEX,
+            MailState.OTHER,
+        ),
+        val currentMailState: MailState? = null,
 
         val isSuccess: Boolean = false,
         override val error: Error? = null,
         override val isLoading: Boolean = false,
 
         val isNextButtonVisible: Boolean = false,
-        val isShowToolbar: Boolean = false
+        val isShowToolbar: Boolean = false,
     ) : LoadingErrorState<Error>
 
     sealed interface Event {

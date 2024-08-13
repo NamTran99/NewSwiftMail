@@ -68,4 +68,5 @@
 
     <string name="account_setup_select_server">Select your server you want to login with</string>
     <string name="account_setup_other_server">Other</string>
+    <string name="account_setup_sign_in_to_your_account">Sign in to your account</string>
 </resources>
