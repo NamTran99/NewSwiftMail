@@ -101,3 +101,22 @@ internal fun AccountAutoDiscoveryContentOAuthPreview() {
         )
     }
 }
+
+
+//@Composable
+//@Preview(showBackground = true)
+//internal fun AccountAutoDiscoveryContentGmailPreview() {
+//    PreviewWithTheme {
+//        AccountAutoDiscoveryContent(
+//            state = AccountAutoDiscoveryContract.State(
+//                configStep = AccountAutoDiscoveryContract.ConfigStep.GMAIL,
+//                currentMailState = AccountAutoDiscoveryContract.MailState.GMAIL,
+//                emailAddress = StringInputField(value = "test@example.com"),
+//                autoDiscoverySettings = fakeAutoDiscoveryResultSettings(isTrusted = true),
+//            ),
+//            onEvent = {},
+//            oAuthViewModel = FakeAccountOAuthViewModel(),
+//            appName = "AppName",
+//        )
+//    }
+//}

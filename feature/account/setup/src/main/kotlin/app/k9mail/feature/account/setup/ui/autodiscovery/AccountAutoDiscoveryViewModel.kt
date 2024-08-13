@@ -62,7 +62,7 @@ internal class AccountAutoDiscoveryViewModel(
                 }
 
                 updateState {
-                    it.copy(configStep = configStep)
+                    it.copy(configStep = configStep, currentMailState = event.state )
                 }
             }
         }

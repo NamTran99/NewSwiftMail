@@ -3,24 +3,31 @@ package app.k9mail.feature.account.setup.ui.autodiscovery
 import android.content.res.Resources
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
 import app.k9mail.core.ui.compose.designsystem.atom.text.TextBodyMedium
 import app.k9mail.core.ui.compose.designsystem.molecule.ContentLoadingErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.ErrorView
@@ -30,14 +37,17 @@ import app.k9mail.core.ui.compose.designsystem.molecule.input.PasswordInput
 import app.k9mail.core.ui.compose.designsystem.organism.TopAppBarWithBackButton
 import app.k9mail.core.ui.compose.designsystem.template.ResponsiveWidthContainer
 import app.k9mail.core.ui.compose.theme2.MainTheme
+import app.k9mail.feature.account.common.domain.input.StringInputField
 import app.k9mail.feature.account.common.ui.WizardNavigationBar
 import app.k9mail.feature.account.common.ui.WizardNavigationBarState
 import app.k9mail.feature.account.common.ui.loadingerror.rememberContentLoadingErrorViewState
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract
 import app.k9mail.feature.account.oauth.ui.AccountOAuthView
+import app.k9mail.feature.account.server.validation.ui.fake.FakeAccountOAuthViewModel
 import app.k9mail.feature.account.setup.R
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
+import app.k9mail.feature.account.setup.ui.autodiscovery.fake.fakeAutoDiscoveryResultSettings
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.AutoDiscoveryResultApprovalView
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.AutoDiscoveryResultView
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.ListMailLoginView
@@ -145,6 +155,7 @@ internal fun ContentView(
         modifier = Modifier
             .fillMaxSize()
             .then(modifier),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (state.configStep != AccountAutoDiscoveryContract.ConfigStep.LIST_MAIL_SERVER) {
             AutoDiscoveryResultView(
@@ -164,15 +175,18 @@ internal fun ContentView(
             visible = state.configStep in listOf(
                 AccountAutoDiscoveryContract.ConfigStep.GMAIL,
                 AccountAutoDiscoveryContract.ConfigStep.OUTLOOK,
-            ),
+            ), exit = ExitTransition.None
         ) {
-            Image(
-                painter = painterResource(id = state.currentMailState?.drawableResID ?: return@AnimatedVisibility),
-                null,
-                modifier = Modifier.height(100.dp),
-            )
-            Spacer(modifier = Modifier.height(MainTheme.spacings.double))
-            TextBodyMedium(text = stringResource(id = R.string.account_setup_sign_in_to_your_account))
+            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Image(
+                    painter = painterResource(id = state.currentMailState?.drawableResID ?: return@AnimatedVisibility),
+                    null,
+                    modifier = Modifier.height(80.dp),
+                    contentScale = ContentScale.FillHeight
+                )
+                Spacer(modifier = Modifier.height(MainTheme.spacings.double))
+                TextBodyMedium(text = stringResource(id = R.string.account_setup_sign_in_to_your_account), color = MainTheme.colors.primary)
+            }
         }
 
         if (state.configStep == AccountAutoDiscoveryContract.ConfigStep.LIST_MAIL_SERVER) {
@@ -209,5 +223,23 @@ internal fun ContentView(
                 isEnabled = isAutoDiscoverySettingsTrusted || isConfigurationApproved,
             )
         }
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+internal fun AccountAutoDiscoveryContentGmailPreview() {
+    PreviewWithTheme {
+        AccountAutoDiscoveryContent(
+            state = State(
+                configStep = AccountAutoDiscoveryContract.ConfigStep.GMAIL,
+                currentMailState = AccountAutoDiscoveryContract.MailState.GMAIL,
+                emailAddress = StringInputField(value = "test@example.com"),
+                autoDiscoverySettings = fakeAutoDiscoveryResultSettings(isTrusted = true),
+            ),
+            onEvent = {},
+            oAuthViewModel = FakeAccountOAuthViewModel(),
+            appName = "AppName",
+        )
     }
 }
