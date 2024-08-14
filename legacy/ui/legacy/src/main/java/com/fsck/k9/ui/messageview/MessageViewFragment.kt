@@ -245,7 +245,6 @@ class MessageViewFragment :
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
-        Log.d("TAG", "onPrepareOptionsMenu: NamTD8 - 88")
         if (!isActive) return
 
         menu.findItem(R.id.delete).apply {
@@ -392,7 +391,6 @@ class MessageViewFragment :
             messageDetailsFragment.cryptoResult = messageCryptoPresenter.cryptoResultAnnotation
             messageDetailsFragment.show(parentFragmentManager, "message_details")
         }
-    // NamTD8
         override fun onMenuItemClick(itemId: Int) {
             when (itemId) {
                 R.id.reply -> onReply()

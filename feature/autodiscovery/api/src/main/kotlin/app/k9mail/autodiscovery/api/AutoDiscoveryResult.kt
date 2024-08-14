@@ -28,7 +28,15 @@ sealed interface AutoDiscoveryResult {
          * String describing the source of the server settings. Use a URI if possible.
          */
         val source: String,
-    ) : AutoDiscoveryResult
+    ) : AutoDiscoveryResult{
+        fun changeAddress(address: String): Settings {
+            val mIncomingServerSettings =( incomingServerSettings as? ImapServerSettings)?.copy(username = address)
+            val mOutgoingServerSettings = (outgoingServerSettings as? SmtpServerSettings)?.copy(username = address)
+
+            if(mIncomingServerSettings == null || mOutgoingServerSettings == null) return  this
+            else   return this.copy(incomingServerSettings = mIncomingServerSettings, outgoingServerSettings = mOutgoingServerSettings)
+        }
+    }
 
     /**
      * No usable mail server settings were found.

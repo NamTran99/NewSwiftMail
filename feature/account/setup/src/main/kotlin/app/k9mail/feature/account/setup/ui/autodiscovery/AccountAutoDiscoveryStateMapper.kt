@@ -13,9 +13,9 @@ import app.k9mail.feature.account.setup.domain.entity.toIncomingProtocolType
 import app.k9mail.feature.account.setup.domain.toServerSettings
 import app.k9mail.feature.account.setup.ui.options.display.DisplayOptionsContract
 
-internal fun AccountAutoDiscoveryContract.State.toAccountState(): AccountState {
+internal fun AccountAutoDiscoveryContract.State.toAccountState(address: String): AccountState {
     return AccountState(
-        emailAddress = emailAddress.value,
+        emailAddress =address,
         incomingServerSettings = autoDiscoverySettings?.incomingServerSettings?.toServerSettings(password.value),
         outgoingServerSettings = autoDiscoverySettings?.outgoingServerSettings?.toServerSettings(password.value),
         authorizationState = authorizationState,

@@ -36,7 +36,7 @@ class K9OAuthConfigurationFactory : OAuthConfigurationFactory {
             "smtp.googlemail.com",
         ) to OAuthConfiguration(
             clientId = "540233075051-1aj16r7ft55rdpo77pnpo27oc5mqevt5.apps.googleusercontent.com",
-            scopes = listOf("https://mail.google.com/"),
+            scopes =  listOf("https://mail.google.com/", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile", "openid"),
             authorizationEndpoint = "https://accounts.google.com/o/oauth2/v2/auth",
             tokenEndpoint = "https://oauth2.googleapis.com/token",
             redirectUri = "${BuildConfig.APPLICATION_ID}:/oauth2redirect",
@@ -53,6 +53,8 @@ class K9OAuthConfigurationFactory : OAuthConfigurationFactory {
                 "https://outlook.office.com/IMAP.AccessAsUser.All",
                 "https://outlook.office.com/SMTP.Send",
                 "offline_access",
+                "openid",
+                "email"
             ),
             authorizationEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
             tokenEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/token",

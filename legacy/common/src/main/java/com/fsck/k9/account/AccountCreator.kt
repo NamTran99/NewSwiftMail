@@ -1,6 +1,7 @@
 package com.fsck.k9.account
 
 import android.content.Context
+import android.util.Log
 import app.k9mail.core.common.mail.Protocols
 import app.k9mail.feature.account.common.domain.entity.Account
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderOption

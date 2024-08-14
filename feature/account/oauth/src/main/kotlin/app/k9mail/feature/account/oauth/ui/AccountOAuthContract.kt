@@ -9,6 +9,7 @@ interface AccountOAuthContract {
 
     interface ViewModel : UnidirectionalViewModel<State, Event, Effect> {
         fun initState(state: State)
+
     }
 
     data class State(

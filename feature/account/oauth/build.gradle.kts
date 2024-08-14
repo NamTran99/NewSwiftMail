@@ -20,4 +20,5 @@ dependencies {
     implementation(libs.timber)
 
     testImplementation(projects.core.ui.compose.testing)
+    implementation("com.auth0.android:jwtdecode:2.0.2")
 }

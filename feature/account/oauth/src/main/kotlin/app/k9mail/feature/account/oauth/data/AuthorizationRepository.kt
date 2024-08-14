@@ -1,11 +1,14 @@
 package app.k9mail.feature.account.oauth.data
 
 import android.content.Intent
+import android.util.Log
 import androidx.core.net.toUri
 import app.k9mail.core.common.oauth.OAuthConfiguration
+import app.k9mail.feature.account.common.domain.AccountDomainContract
 import app.k9mail.feature.account.oauth.domain.AccountOAuthDomainContract
 import app.k9mail.feature.account.oauth.domain.entity.AuthorizationIntentResult
 import app.k9mail.feature.account.oauth.domain.entity.AuthorizationResult
+import com.auth0.android.jwt.JWT
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import net.openid.appauth.AuthState
@@ -20,6 +23,7 @@ import timber.log.Timber
 
 class AuthorizationRepository(
     private val service: AuthorizationService,
+    private val accountStateRepository: AccountDomainContract.AccountStateRepository,
 ) : AccountOAuthDomainContract.AuthorizationRepository {
 
     override fun getAuthorizationRequestIntent(
@@ -58,7 +62,12 @@ class AuthorizationRepository(
                 AuthorizationResult.Failure(authorizationException)
             } else if (tokenResponse != null) {
                 val authState = AuthState(response, tokenResponse, null)
-                authState.idToken
+                Log.d("TAG", "getExchangeToken: NamTD8-1 ${authState.idToken} ")
+                authState.idToken?.let{
+                    JWT(it).claims["email"]?.asString()?.let{
+                        accountStateRepository.setEmailAddress(it)
+                    }
+                }
                 AuthorizationResult.Success(authState.toAuthorizationState())
             } else {
                 AuthorizationResult.Failure(Exception("Unknown error"))

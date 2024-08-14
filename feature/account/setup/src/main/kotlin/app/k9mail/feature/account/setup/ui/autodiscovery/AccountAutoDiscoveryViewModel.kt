@@ -33,6 +33,11 @@ internal class AccountAutoDiscoveryViewModel(
     override val oAuthViewModel: AccountOAuthContract.ViewModel,
 ) : BaseViewModel<State, Event, Effect>(initialState), AccountAutoDiscoveryContract.ViewModel {
 
+    companion object{
+        const val MAIL_SERVER  = "imap.gmail.com"
+        const val OUTLOOK_SERVER  = "outlook.office365.com"
+    }
+
     override fun initState(state: State) {
         updateState {
             state.copy()
@@ -60,13 +65,38 @@ internal class AccountAutoDiscoveryViewModel(
                     MailState.YANDEX -> ConfigStep.YANDEX
                     MailState.OTHER -> ConfigStep.PASSWORD
                 }
-
-                updateState {
-                    it.copy(configStep = configStep, currentMailState = event.state )
+//                setServerOauth(event.state)
+                val emailTest = when(event.state){
+                    MailState.GMAIL -> "test@gmail.com"
+                    MailState.OUTLOOK -> "test@outlook.com"
+                    else -> null
                 }
+                updateState {
+                    it.copy(configStep = configStep, currentMailState = event.state, emailAddress =StringInputField(emailTest?:"")  )
+                }
+                submitEmail()
+
             }
         }
     }
+
+
+    private fun setServerOauth(mailState: MailState){
+       val hostName = when(mailState){
+           MailState.GMAIL -> MAIL_SERVER
+           MailState.OUTLOOK -> OUTLOOK_SERVER
+           else -> null
+        }
+
+        hostName?.let{
+            oAuthViewModel.initState(
+                AccountOAuthContract.State(
+                    hostname = it,
+                ),
+            )
+        }
+    }
+
 
     private fun changeEmailAddress(emailAddress: String) {
         accountStateRepository.clear()
@@ -197,7 +227,7 @@ internal class AccountAutoDiscoveryViewModel(
             it.copy(
                 isLoading = false,
                 autoDiscoverySettings = settings,
-                configStep = if (isOAuth) ConfigStep.OAUTH else ConfigStep.PASSWORD,
+//                configStep = if (isOAuth) ConfigStep.OAUTH else ConfigStep.PASSWORD,
                 isNextButtonVisible = !isOAuth,
             )
         }
@@ -292,7 +322,11 @@ internal class AccountAutoDiscoveryViewModel(
     private fun navigateBack() = emitEffect(Effect.NavigateBack)
 
     private fun navigateNext(isAutomaticConfig: Boolean) {
-        accountStateRepository.setState(state.value.toAccountState())
+        val addressOauth = accountStateRepository.getState().emailAddress?:""
+        updateState {
+            it.copy(autoDiscoverySettings = it.autoDiscoverySettings?.changeAddress(addressOauth), emailAddress = StringInputField(addressOauth))
+        }
+        accountStateRepository.setState(state.value.toAccountState(addressOauth?:""))
 
         emitEffect(
             Effect.NavigateNext(

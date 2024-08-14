@@ -27,6 +27,7 @@ val featureAccountOAuthModule: Module = module {
     factory<AccountOAuthDomainContract.AuthorizationRepository> {
         AuthorizationRepository(
             service = get(),
+            accountStateRepository = get()
         )
     }
 

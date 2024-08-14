@@ -1897,7 +1897,6 @@ class MessageListFragment :
         }
 
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
-            Log.d("TAG", "onCreateActionMode: NamTD8 ")
             mode.menuInflater.inflate(R.menu.message_list_context_menu, menu)
 
             setContextCapabilities(account, menu)

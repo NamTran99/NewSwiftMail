@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -51,6 +52,7 @@ import app.k9mail.feature.account.setup.ui.autodiscovery.fake.fakeAutoDiscoveryR
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.AutoDiscoveryResultApprovalView
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.AutoDiscoveryResultView
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.ListMailLoginView
+import kotlin.math.log
 
 @Composable
 internal fun AccountAutoDiscoveryContent(
@@ -61,8 +63,6 @@ internal fun AccountAutoDiscoveryContent(
     modifier: Modifier = Modifier,
 ) {
     val scrollState = rememberScrollState()
-
-    Log.d("TAG", "AccountAutoDiscoveryContent: NamTD8 ${state}")
 
     ResponsiveWidthContainer(
         modifier = Modifier
@@ -157,7 +157,7 @@ internal fun ContentView(
             .then(modifier),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (state.configStep != AccountAutoDiscoveryContract.ConfigStep.LIST_MAIL_SERVER) {
+        if (state.configStep == AccountAutoDiscoveryContract.ConfigStep.PASSWORD) {
             AutoDiscoveryResultView(
                 settings = state.autoDiscoverySettings,
                 onEditConfigurationClick = { onEvent(Event.OnEditConfigurationClicked) },
@@ -177,7 +177,9 @@ internal fun ContentView(
                 AccountAutoDiscoveryContract.ConfigStep.OUTLOOK,
             ), exit = ExitTransition.None
         ) {
+
             Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Spacer(modifier = Modifier.height(MainTheme.spacings.double))
                 Image(
                     painter = painterResource(id = state.currentMailState?.drawableResID ?: return@AnimatedVisibility),
                     null,
@@ -186,6 +188,15 @@ internal fun ContentView(
                 )
                 Spacer(modifier = Modifier.height(MainTheme.spacings.double))
                 TextBodyMedium(text = stringResource(id = R.string.account_setup_sign_in_to_your_account), color = MainTheme.colors.primary)
+
+                val isAutoDiscoverySettingsTrusted = state.autoDiscoverySettings?.isTrusted ?: false
+                val isConfigurationApproved = state.configurationApproved.value ?: false
+                Spacer(modifier = Modifier.height(MainTheme.spacings.double))
+                AccountOAuthView(
+                    onOAuthResult = { result -> onEvent(Event.OnOAuthResult(result)) },
+                    viewModel = oAuthViewModel,
+                    isEnabled = isAutoDiscoverySettingsTrusted || isConfigurationApproved,
+                )
             }
         }
 
@@ -214,14 +225,7 @@ internal fun ContentView(
                 contentPadding = PaddingValues(),
             )
         } else if (state.configStep == AccountAutoDiscoveryContract.ConfigStep.OAUTH) {
-            val isAutoDiscoverySettingsTrusted = state.autoDiscoverySettings?.isTrusted ?: false
-            val isConfigurationApproved = state.configurationApproved.value ?: false
-            Spacer(modifier = Modifier.height(MainTheme.spacings.double))
-            AccountOAuthView(
-                onOAuthResult = { result -> onEvent(Event.OnOAuthResult(result)) },
-                viewModel = oAuthViewModel,
-                isEnabled = isAutoDiscoverySettingsTrusted || isConfigurationApproved,
-            )
+
         }
     }
 }

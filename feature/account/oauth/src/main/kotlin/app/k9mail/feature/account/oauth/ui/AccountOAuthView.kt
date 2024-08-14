@@ -1,14 +1,17 @@
 package app.k9mail.feature.account.oauth.ui
 
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import app.k9mail.core.ui.compose.common.mvi.observe
 import app.k9mail.feature.account.oauth.domain.entity.OAuthResult
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract.Effect
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract.Event
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract.ViewModel
+import kotlinx.coroutines.delay
 
 @Composable
 fun AccountOAuthView(
@@ -24,6 +27,7 @@ fun AccountOAuthView(
     }
 
     val (state, dispatch) = viewModel.observe { effect ->
+        Log.d("TAG", "AccountOAuthView: NamTD8 ${effect}")
         when (effect) {
             is Effect.NavigateNext -> onOAuthResult(OAuthResult.Success(effect.state))
             is Effect.NavigateBack -> onOAuthResult(OAuthResult.Failure)
@@ -37,4 +41,9 @@ fun AccountOAuthView(
         modifier = modifier,
         isEnabled = isEnabled,
     )
+
+    LaunchedEffect(Unit) {
+        delay(100)
+        dispatch(Event.SignInClicked)
+    }
 }
