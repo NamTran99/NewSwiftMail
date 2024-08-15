@@ -133,7 +133,7 @@ internal class AccountAutoDiscoveryViewModel(
                     hostname = Hostname("imap.yandex.com"),
                     port = Port(993),
                     connectionSecurity = ConnectionSecurity.TLS,
-                    authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                    authenticationTypes = listOf(AuthenticationType.PasswordCleartext),
                     username = "",
                 ),
                 isTrusted = true,
@@ -141,7 +141,7 @@ internal class AccountAutoDiscoveryViewModel(
                     hostname = Hostname("smtp.yandex.com"),
                     port = Port(465),
                     connectionSecurity = ConnectionSecurity.TLS,
-                    authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                    authenticationTypes = listOf(AuthenticationType.PasswordCleartext),
                     username = "",
                 ),
                 source = "",
@@ -174,9 +174,8 @@ internal class AccountAutoDiscoveryViewModel(
     private fun changeEmailAddress(emailAddress: String) {
         accountStateRepository.clear()
         updateState {
-            State(
+            it.copy(
                 emailAddress = StringInputField(value = emailAddress),
-                isNextButtonVisible = false,
             )
         }
     }
@@ -396,14 +395,14 @@ internal class AccountAutoDiscoveryViewModel(
     private fun navigateBack() = emitEffect(Effect.NavigateBack)
 
     private fun navigateNext(isAutomaticConfig: Boolean) {
-        val addressOauth = accountStateRepository.getState().emailAddress ?: ""
+        val addressOauth = accountStateRepository.getState().emailAddress ?: state.value.emailAddress.value
         updateState {
             it.copy(
                 autoDiscoverySettings = it.autoDiscoverySettings?.changeAddress(addressOauth),
                 emailAddress = StringInputField(addressOauth),
             )
         }
-        accountStateRepository.setState(state.value.toAccountState(addressOauth ?: ""))
+        accountStateRepository.setState(state.value.toAccountState(addressOauth))
 
         emitEffect(
             Effect.NavigateNext(

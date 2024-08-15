@@ -250,8 +250,6 @@ internal fun ContentView(
                     onEvent(Event.OnSignInPasswordClicked)
                 },
             )
-
-            onEvent(Event.OnNextClicked)
         }
     }
 }
