@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">OAuth 2.0 non è supportato con questo provider</string>
     <string name="account_oauth_error_canceled">Autorizzazione annullata</string>
     <string name="account_oauth_loading_message">Accedi tramite OAuth</string>
-    <string name="account_oauth_sign_in_description">Sarai reindirizzato al tuo provider di posta elettronica per accedere. Autorizza l\'app ad accedere al tuo account di posta elettronica.</string>
     <string name="account_oauth_sign_in_button">Accedi</string>
 </resources>

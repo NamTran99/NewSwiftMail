@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">OAuth 2.0 støttes ikke med denne tilbyderen.</string>
     <string name="account_oauth_error_canceled">Identitetsbekreftelse avbrutt</string>
     <string name="account_oauth_loading_message">Logger inn med OAuth</string>
-    <string name="account_oauth_sign_in_description">Du vil bli sendt til din e-posttilbyder for innlogging. Du må innvilge programmet tilgang til e-postkontoen din.</string>
     <string name="account_oauth_sign_in_button">Logg inn</string>
 </resources>

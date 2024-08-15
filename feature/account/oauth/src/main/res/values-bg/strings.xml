@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">OAuth 2.0 с този доставчик не се поддържа в момента.</string>
     <string name="account_oauth_error_canceled">Разрешението е отменено</string>
     <string name="account_oauth_loading_message">Вписване чрез OAuth</string>
-    <string name="account_oauth_sign_in_description">Пренасочваме Ви към Вашият доставчик на имейл услуги. Трябва да дадете на приложението достъп до акаунта си.</string>
     <string name="account_oauth_sign_in_button">Вписване</string>
 </resources>

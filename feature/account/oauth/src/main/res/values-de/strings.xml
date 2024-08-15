@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">OAuth 2.0 wird von diesem Anbieter derzeit nicht unterstützt.</string>
     <string name="account_oauth_error_canceled">Autorisierung aufgehoben</string>
     <string name="account_oauth_loading_message">Mit OAuth anmelden</string>
-    <string name="account_oauth_sign_in_description">Wir leiten dich zu deinem E-Mail-Anbieter weiter, damit du dich anmelden kannst. Du musst der App Zugriff auf dein E-Mail-Konto gewähren.</string>
     <string name="account_oauth_sign_in_button">Anmelden</string>
 </resources>

@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">OAuth 2.0 não é atualmente suportado com este fornecedor.</string>
     <string name="account_oauth_error_canceled">Autorização cancelada</string>
     <string name="account_oauth_loading_message">Fazer login utilizando OAuth</string>
-    <string name="account_oauth_sign_in_description">Iremos redireccioná-lo para o seu fornecedor de correio eletrónico para iniciar sessão. Tem de permitir à aplicação acesso à sua conta de correio eletrónico.</string>
     <string name="account_oauth_sign_in_button">Fazer login</string>
 </resources>

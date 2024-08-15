@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">Το OAuth 2.o δεν υποστηρίζεται προς το παρόν από αυτόν τον πάροχο.</string>
     <string name="account_oauth_error_canceled">Η εξουσιοδότηση ακυρώθηκε</string>
     <string name="account_oauth_loading_message">Είσοδος χρησιμοποιώντας OAuth</string>
-    <string name="account_oauth_sign_in_description">Θα σας ανακατευθύνουμε στον πάροχο email σας για να συνδεθείτε. Θα πρέπει να παραχωρήσετε στην εφαρμογή πρόσβαση στον λογαριασμό email σας.</string>
     <string name="account_oauth_sign_in_button">Είσοδος</string>
 </resources>

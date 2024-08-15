@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">OAuth 2.0 is currently not supported with this provider.</string>
     <string name="account_oauth_error_canceled">Authorisation cancelled</string>
     <string name="account_oauth_loading_message">Signing in using OAuth</string>
-    <string name="account_oauth_sign_in_description">We\'ll redirect you to your email provider to sign in. You need to grant the app access to your email account.</string>
     <string name="account_oauth_sign_in_button">Sign in</string>
 </resources>

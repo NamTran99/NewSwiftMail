@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="account_oauth_sign_in_description">Kami akan mengarahkan Anda ke penyedia surel Anda untuk masuk. Anda harus memberikan akses aplikasi ke akun surel Anda.</string>
     <string name="account_oauth_sign_in_button">Masuk</string>
     <string name="account_oauth_sign_in_with_google_button">Masuk dengan Google</string>
     <string name="account_oauth_loading_message">Masuk dengan OAuth</string>

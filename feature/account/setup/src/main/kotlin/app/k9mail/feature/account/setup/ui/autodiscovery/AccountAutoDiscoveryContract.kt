@@ -68,6 +68,7 @@ interface AccountAutoDiscoveryContract {
 
 
         data object OnNextClicked : Event
+        data object OnSignInPasswordClicked : Event
         data object OnBackClicked : Event
         data object OnRetryClicked : Event
         data object OnEditConfigurationClicked : Event

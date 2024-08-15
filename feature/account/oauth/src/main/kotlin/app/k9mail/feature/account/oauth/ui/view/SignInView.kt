@@ -28,18 +28,5 @@ internal fun SignInView(
             text = stringResource(id = R.string.account_oauth_sign_in_description),
             textAlign = TextAlign.Center,
         )
-
-        if (isGoogleSignIn) {
-            SignInWithGoogleButton(
-                onClick = onSignInClick,
-                enabled = isEnabled,
-            )
-        } else {
-            ButtonFilled(
-                text = stringResource(id = R.string.account_oauth_sign_in_button),
-                onClick = onSignInClick,
-                enabled = isEnabled,
-            )
-        }
     }
 }

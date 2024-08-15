@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="account_oauth_sign_in_description">Za vpis je zahtevana preusmeritev k ponudniku elektronske pošte. Programu je treba odobriti dostop do računa.</string>
     <string name="account_oauth_sign_in_with_google_button">Prijava z računom Google</string>
     <string name="account_oauth_loading_error">Vpis z OAuth je spodletel</string>
     <string name="account_oauth_error_canceled">Overitev je preklicana</string>

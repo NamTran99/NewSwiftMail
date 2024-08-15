@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">OAuth 2.0 não é compatível com esse provedor.</string>
     <string name="account_oauth_error_canceled">Autorização cancelada</string>
     <string name="account_oauth_loading_message">Entrar com OAuth</string>
-    <string name="account_oauth_sign_in_description">Iremos lhe redirecionar para seu provedor de email. Você deve habilitar o acesso do aplicativo à sua conta.</string>
     <string name="account_oauth_sign_in_button">Entrar</string>
 </resources>

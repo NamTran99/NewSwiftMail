@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">OAuth 2.0 hiện không được nhà cung cấp này hỗ trợ.</string>
     <string name="account_oauth_error_canceled">Đã hủy ủy quyền</string>
     <string name="account_oauth_loading_message">Đăng nhập bằng OAuth</string>
-    <string name="account_oauth_sign_in_description">Chúng tôi sẽ chuyển hướng bạn đến nhà cung cấp email của bạn để đăng nhập. Bạn cần cấp cho ứng dụng quyền truy cập vào tài khoản email của mình.</string>
     <string name="account_oauth_sign_in_button">Đăng nhập</string>
 </resources>

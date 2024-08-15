@@ -1,11 +1,16 @@
 package app.k9mail.feature.account.setup.ui.autodiscovery
 
 import androidx.lifecycle.viewModelScope
+import app.k9mail.autodiscovery.api.AuthenticationType
 import app.k9mail.autodiscovery.api.AutoDiscoveryResult
+import app.k9mail.autodiscovery.api.ConnectionSecurity
 import app.k9mail.autodiscovery.api.ImapServerSettings
 import app.k9mail.autodiscovery.api.IncomingServerSettings
+import app.k9mail.autodiscovery.api.SmtpServerSettings
 import app.k9mail.autodiscovery.demo.DemoServerSettings
 import app.k9mail.core.common.domain.usecase.validation.ValidationResult
+import app.k9mail.core.common.net.Hostname
+import app.k9mail.core.common.net.Port
 import app.k9mail.core.ui.compose.common.mvi.BaseViewModel
 import app.k9mail.feature.account.common.domain.AccountDomainContract
 import app.k9mail.feature.account.common.domain.entity.IncomingProtocolType
@@ -19,9 +24,9 @@ import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryCon
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Effect
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Error
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
+import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.MailState
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Validator
-import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.MailState
 import kotlinx.coroutines.launch
 
 @Suppress("TooManyFunctions")
@@ -33,9 +38,9 @@ internal class AccountAutoDiscoveryViewModel(
     override val oAuthViewModel: AccountOAuthContract.ViewModel,
 ) : BaseViewModel<State, Event, Effect>(initialState), AccountAutoDiscoveryContract.ViewModel {
 
-    companion object{
-        const val MAIL_SERVER  = "imap.gmail.com"
-        const val OUTLOOK_SERVER  = "outlook.office365.com"
+    companion object {
+        const val MAIL_SERVER = "imap.gmail.com"
+        const val OUTLOOK_SERVER = "outlook.office365.com"
     }
 
     override fun initState(state: State) {
@@ -59,36 +64,104 @@ internal class AccountAutoDiscoveryViewModel(
             }
 
             is Event.OnSelectServer -> {
-                val configStep = when(event.state){
+                val configStep = when (event.state) {
                     MailState.GMAIL -> ConfigStep.GMAIL
                     MailState.OUTLOOK -> ConfigStep.OUTLOOK
                     MailState.YANDEX -> ConfigStep.YANDEX
                     MailState.OTHER -> ConfigStep.PASSWORD
                 }
 //                setServerOauth(event.state)
-                val emailTest = when(event.state){
-                    MailState.GMAIL -> "test@gmail.com"
-                    MailState.OUTLOOK -> "test@outlook.com"
-                    else -> null
-                }
                 updateState {
-                    it.copy(configStep = configStep, currentMailState = event.state, emailAddress =StringInputField(emailTest?:"")  )
+                    it.copy(
+                        configStep = configStep,
+                        currentMailState = event.state,
+                    )
                 }
-                submitEmail()
+                setUpMailServerConfig(event.state)
+            }
 
+            Event.OnSignInPasswordClicked -> {
+                submitPassword()
             }
         }
     }
 
+    private fun setUpMailServerConfig(mailState: MailState) {
+        val result = when (mailState) {
+            MailState.GMAIL -> {
+                AutoDiscoveryResult.Settings(
+                    incomingServerSettings = ImapServerSettings(
+                        hostname = Hostname("imap.gmail.com"),
+                        port = Port(993),
+                        connectionSecurity = ConnectionSecurity.TLS,
+                        authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                        username = "",
+                    ),
+                    isTrusted = true,
+                    outgoingServerSettings = SmtpServerSettings(
+                        hostname = Hostname("smtp.gmail.com"),
+                        port = Port(465),
+                        connectionSecurity = ConnectionSecurity.TLS,
+                        authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                        username = "",
+                    ),
+                    source = "",
+                )
+            }
 
-    private fun setServerOauth(mailState: MailState){
-       val hostName = when(mailState){
-           MailState.GMAIL -> MAIL_SERVER
-           MailState.OUTLOOK -> OUTLOOK_SERVER
-           else -> null
+            MailState.OUTLOOK -> AutoDiscoveryResult.Settings(
+                incomingServerSettings = ImapServerSettings(
+                    hostname = Hostname("outlook.office365.com"),
+                    port = Port(993),
+                    connectionSecurity = ConnectionSecurity.TLS,
+                    authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                    username = "",
+                ),
+                isTrusted = true,
+                outgoingServerSettings = SmtpServerSettings(
+                    hostname = Hostname("smtp.office365.com"),
+                    port = Port(587),
+                    connectionSecurity = ConnectionSecurity.TLS,
+                    authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                    username = "",
+                ),
+                source = "",
+            )
+
+            MailState.YANDEX -> AutoDiscoveryResult.Settings(
+                incomingServerSettings = ImapServerSettings(
+                    hostname = Hostname("imap.yandex.com"),
+                    port = Port(993),
+                    connectionSecurity = ConnectionSecurity.TLS,
+                    authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                    username = "",
+                ),
+                isTrusted = true,
+                outgoingServerSettings = SmtpServerSettings(
+                    hostname = Hostname("smtp.yandex.com"),
+                    port = Port(465),
+                    connectionSecurity = ConnectionSecurity.TLS,
+                    authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                    username = "",
+                ),
+                source = "",
+            )
+
+            else -> null
+        }
+        updateAutoDiscoverySettings(result?: return)
+
+    }
+
+
+    private fun setServerOauth(mailState: MailState) {
+        val hostName = when (mailState) {
+            MailState.GMAIL -> MAIL_SERVER
+            MailState.OUTLOOK -> OUTLOOK_SERVER
+            else -> null
         }
 
-        hostName?.let{
+        hostName?.let {
             oAuthViewModel.initState(
                 AccountOAuthContract.State(
                     hostname = it,
@@ -187,6 +260,7 @@ internal class AccountAutoDiscoveryViewModel(
             }
         }
     }
+
 
     private fun updateNoSettingsFound() {
         updateState {
@@ -295,7 +369,7 @@ internal class AccountAutoDiscoveryViewModel(
                 )
             }
 
-            ConfigStep.YANDEX,ConfigStep.GMAIL, ConfigStep.OUTLOOK -> {
+            ConfigStep.YANDEX, ConfigStep.GMAIL, ConfigStep.OUTLOOK -> {
                 updateState {
                     it.copy(
                         configStep = ConfigStep.LIST_MAIL_SERVER,
@@ -322,11 +396,14 @@ internal class AccountAutoDiscoveryViewModel(
     private fun navigateBack() = emitEffect(Effect.NavigateBack)
 
     private fun navigateNext(isAutomaticConfig: Boolean) {
-        val addressOauth = accountStateRepository.getState().emailAddress?:""
+        val addressOauth = accountStateRepository.getState().emailAddress ?: ""
         updateState {
-            it.copy(autoDiscoverySettings = it.autoDiscoverySettings?.changeAddress(addressOauth), emailAddress = StringInputField(addressOauth))
+            it.copy(
+                autoDiscoverySettings = it.autoDiscoverySettings?.changeAddress(addressOauth),
+                emailAddress = StringInputField(addressOauth),
+            )
         }
-        accountStateRepository.setState(state.value.toAccountState(addressOauth?:""))
+        accountStateRepository.setState(state.value.toAccountState(addressOauth ?: ""))
 
         emitEffect(
             Effect.NavigateNext(

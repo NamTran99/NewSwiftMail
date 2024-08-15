@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">OAuth 2.0 şu anda bu sağlayıcı ile desteklenmiyor.</string>
     <string name="account_oauth_error_canceled">Yetkilendirme iptal edildi</string>
     <string name="account_oauth_loading_message">OAuth ile oturum aç</string>
-    <string name="account_oauth_sign_in_description">Oturum açmanız için sizi e-posta sağlayıcınıza yönlendireceğiz. Uygulamaya e-posta hesabınıza erişim izni vermeniz gerekir.</string>
     <string name="account_oauth_sign_in_button">Oturum aç</string>
 </resources>

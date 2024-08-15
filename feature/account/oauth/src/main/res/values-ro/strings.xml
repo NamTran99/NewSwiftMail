@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">OAuth 2.0 nu este acceptat în prezent cu acest furnizor.</string>
     <string name="account_oauth_error_canceled">Autorizație anulată</string>
     <string name="account_oauth_loading_message">Conectare folosind OAuth</string>
-    <string name="account_oauth_sign_in_description">Te vom redirecționa către furnizorul de e-mail pentru a te conecta. Trebuie să acorzi aplicației acces la contul de e-mail.</string>
     <string name="account_oauth_sign_in_button">Conectează-te</string>
 </resources>

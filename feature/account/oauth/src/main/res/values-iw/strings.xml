@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="account_oauth_sign_in_description">אנו נפנה אותך אל ספק הדוא\"ל שלך כדי להיכנס. עליך להעניק לאפליקציה גישה לחשבון הדוא\"ל שלך.</string>
     <string name="account_oauth_sign_in_button">התחבר</string>
     <string name="account_oauth_sign_in_with_google_button">התחבר עם Google</string>
     <string name="account_oauth_loading_message">כניסה באמצעות OAuth</string>

@@ -7,6 +7,5 @@
     <string name="account_oauth_error_not_supported">ये प्रोवाइडर अभी ओऑथ 2.0 सपोर्ट नहीं करता।</string>
     <string name="account_oauth_error_canceled">ऑथराइज़ेशन कैंसिल किया गया</string>
     <string name="account_oauth_loading_message">ओऑथ से साइनइन कर रहे</string>
-    <string name="account_oauth_sign_in_description">हम आपको साइनइन करने के लिए आपके ईमेल प्रोवाइडर पे रीडायरेक्ट करेंगे। आपको ऐप को अपने ईमेल अकाउंट का ऐक्सेस देना होगा।</string>
     <string name="account_oauth_sign_in_button">साइनइन करें</string>
 </resources>

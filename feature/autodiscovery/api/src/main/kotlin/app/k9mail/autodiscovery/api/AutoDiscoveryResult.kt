@@ -33,8 +33,8 @@ sealed interface AutoDiscoveryResult {
             val mIncomingServerSettings =( incomingServerSettings as? ImapServerSettings)?.copy(username = address)
             val mOutgoingServerSettings = (outgoingServerSettings as? SmtpServerSettings)?.copy(username = address)
 
-            if(mIncomingServerSettings == null || mOutgoingServerSettings == null) return  this
-            else   return this.copy(incomingServerSettings = mIncomingServerSettings, outgoingServerSettings = mOutgoingServerSettings)
+            return if(mIncomingServerSettings == null || mOutgoingServerSettings == null) this
+            else this.copy(incomingServerSettings = mIncomingServerSettings, outgoingServerSettings = mOutgoingServerSettings)
         }
     }
 
