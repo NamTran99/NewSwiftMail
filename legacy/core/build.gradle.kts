@@ -14,6 +14,7 @@ dependencies {
     api(libs.koin.android)
 
     api(libs.androidx.annotation)
+    api (libs.paperbook)
 
     implementation(libs.okio)
     implementation(libs.commons.io)

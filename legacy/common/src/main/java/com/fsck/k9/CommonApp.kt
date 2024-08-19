@@ -10,6 +10,7 @@ import com.fsck.k9.notification.NotificationChannelManager
 import com.fsck.k9.ui.base.AppLanguageManager
 import com.fsck.k9.ui.base.ThemeManager
 import com.fsck.k9.ui.base.extensions.currentLocale
+import io.paperdb.Paper
 import java.util.Locale
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -44,6 +45,7 @@ abstract class CommonApp : Application(), WorkManagerConfiguration.Provider {
         K9.init(this)
         Core.init(this)
         initializeAppLanguage()
+        Paper.init(this)
         updateNotificationChannelsOnAppLanguageChanges()
         themeManager.init()
         messageListWidgetManager.init()

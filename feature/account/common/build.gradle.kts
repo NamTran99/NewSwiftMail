@@ -12,6 +12,7 @@ dependencies {
     implementation(projects.core.common)
 
     implementation(projects.mail.common)
+    api(libs.paperbook)
 
     testImplementation(projects.core.ui.compose.testing)
 }
