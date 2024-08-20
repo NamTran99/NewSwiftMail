@@ -107,7 +107,7 @@ internal class AccountAutoDiscoveryViewModel(
                 outgoingServerSettings = SmtpServerSettings(
                     hostname = Hostname("smtp.office365.com"),
                     port = Port(587),
-                    connectionSecurity = ConnectionSecurity.TLS,
+                    connectionSecurity = ConnectionSecurity.StartTLS,
                     authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
                     username = "",
                 ),
