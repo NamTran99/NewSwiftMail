@@ -1,13 +1,19 @@
 package app.k9mail.feature.account.server.settings.ui.incoming
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import app.k9mail.core.ui.compose.common.mvi.observe
+import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonFilled
 import app.k9mail.core.ui.compose.designsystem.organism.TopAppBarWithBackButton
 import app.k9mail.core.ui.compose.designsystem.template.Scaffold
+import app.k9mail.core.ui.compose.theme2.MainTheme
 import app.k9mail.feature.account.common.domain.entity.InteractionMode
 import app.k9mail.feature.account.common.ui.AccountTopAppBar
 import app.k9mail.feature.account.common.ui.WizardNavigationBar
@@ -42,19 +48,26 @@ fun IncomingServerSettingsScreen(
         topBar = {
             if (viewModel.mode == InteractionMode.Edit) {
                 TopAppBarWithBackButton(
-                    title = stringResource(id = R.string.account_server_settings_incoming_top_bar_title),
+                    title = stringResource(id = R.string.account_server_settings_configuration),
                     onBackClick = { dispatch(Event.OnBackClicked) },
                 )
             } else {
-                AccountTopAppBar(
-                    title = stringResource(id = R.string.account_server_settings_incoming_top_bar_title),
+                TopAppBarWithBackButton(
+                    title = stringResource(id = R.string.account_server_settings_configuration),
+                    onBackClick = {
+                        dispatch(Event.OnBackClicked)
+                    }
                 )
             }
         },
         bottomBar = {
-            WizardNavigationBar(
-                onNextClick = { dispatch(Event.OnNextClicked) },
-                onBackClick = { dispatch(Event.OnBackClicked) },
+            ButtonFilled(
+                modifier = Modifier
+                    .padding(horizontal = MainTheme.spacings.double),
+                text = stringResource(id = R.string.account_server_settings_sign_in),
+                onClick = {
+                    dispatch(Event.OnNextClicked)
+                },
             )
         },
         modifier = modifier,

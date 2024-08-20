@@ -1,6 +1,7 @@
 package app.k9mail.feature.account.setup.ui.autodiscovery
 
 import android.content.res.Resources
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.Image
@@ -23,11 +24,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
 import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonFilled
+import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonText
 import app.k9mail.core.ui.compose.designsystem.atom.text.TextBodyLarge
+import app.k9mail.core.ui.compose.designsystem.atom.text.TextTitleLarge
 import app.k9mail.core.ui.compose.designsystem.molecule.ContentLoadingErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.ErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.LoadingView
@@ -37,8 +41,6 @@ import app.k9mail.core.ui.compose.designsystem.organism.TopAppBarWithBackButton
 import app.k9mail.core.ui.compose.designsystem.template.ResponsiveWidthContainer
 import app.k9mail.core.ui.compose.theme2.MainTheme
 import app.k9mail.feature.account.common.domain.input.StringInputField
-import app.k9mail.feature.account.common.ui.WizardNavigationBar
-import app.k9mail.feature.account.common.ui.WizardNavigationBarState
 import app.k9mail.feature.account.common.ui.loadingerror.rememberContentLoadingErrorViewState
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract
 import app.k9mail.feature.account.oauth.ui.AccountOAuthView
@@ -47,8 +49,6 @@ import app.k9mail.feature.account.setup.R
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
 import app.k9mail.feature.account.setup.ui.autodiscovery.fake.fakeAutoDiscoveryResultSettings
-import app.k9mail.feature.account.setup.ui.autodiscovery.view.AutoDiscoveryResultApprovalView
-import app.k9mail.feature.account.setup.ui.autodiscovery.view.AutoDiscoveryResultView
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.ListMailLoginView
 
 @Composable
@@ -59,6 +59,7 @@ internal fun AccountAutoDiscoveryContent(
     appName: String,
     modifier: Modifier = Modifier,
 ) {
+    Log.d("TAG", "AccountAutoDiscoveryContent: NamTD8 configStep ${state.configStep}")
     val scrollState = rememberScrollState()
 
     ResponsiveWidthContainer(
@@ -91,13 +92,13 @@ internal fun AccountAutoDiscoveryContent(
                 )
 
             }
-            if (state.isShowToolbar) {
-                WizardNavigationBar(
-                    onNextClick = { onEvent(Event.OnNextClicked) },
-                    onBackClick = { onEvent(Event.OnBackClicked) },
-                    state = WizardNavigationBarState(showNext = state.isNextButtonVisible),
-                )
-            }
+//            if (state.isShowToolbar) {
+//                WizardNavigationBar(
+//                    onNextClick = { onEvent(Event.OnNextClicked) },
+//                    onBackClick = { onEvent(Event.OnBackClicked) },
+//                    state = WizardNavigationBarState(showNext = state.isNextButtonVisible),
+//                )
+//            }
         }
     }
 }
@@ -149,6 +150,7 @@ internal fun ContentView(
     resources: Resources,
     modifier: Modifier = Modifier,
 ) {
+    Log.d("TAG", "NamTD8 ContentView: check state${state.configStep}")
     Column(
         modifier = Modifier
             .padding(MainTheme.spacings.double)
@@ -156,22 +158,9 @@ internal fun ContentView(
             .then(modifier),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        if (state.configStep == AccountAutoDiscoveryContract.ConfigStep.PASSWORD) {
-            AutoDiscoveryResultView(
-                settings = state.autoDiscoverySettings,
-                onEditConfigurationClick = { onEvent(Event.OnEditConfigurationClicked) },
-            )
-            if (state.autoDiscoverySettings != null && state.autoDiscoverySettings.isTrusted.not()) {
-                AutoDiscoveryResultApprovalView(
-                    approvalState = state.configurationApproved,
-                    onApprovalChange = { onEvent(Event.ResultApprovalChanged(it)) },
-                )
-            }
-            Spacer(modifier = Modifier.height(MainTheme.spacings.double))
-        }
 
         AnimatedVisibility(
-            modifier= Modifier.wrapContentHeight(),
+            modifier = Modifier.wrapContentHeight(),
             visible = state.configStep in listOf(
                 AccountAutoDiscoveryContract.ConfigStep.GMAIL,
                 AccountAutoDiscoveryContract.ConfigStep.OUTLOOK,
@@ -183,22 +172,23 @@ internal fun ContentView(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Spacer(modifier = Modifier.height(MainTheme.spacings.double))
-                Image(
-                    painter = painterResource(id = state.currentMailState?.drawableResID ?: return@AnimatedVisibility),
-                    null,
-                    modifier = Modifier
-                        .height(80.dp)
-                        .fillMaxWidth(),
-                    contentScale = ContentScale.Fit,
-                )
+                state.configStep.getDrawable()?.let { drawableID ->
+                    Image(
+                        painter = painterResource(id = drawableID),
+                        null,
+                        modifier = Modifier
+                            .height(80.dp)
+                            .fillMaxWidth(),
+                        contentScale = ContentScale.Fit,
+                    )
+                }
+
                 Spacer(modifier = Modifier.height(MainTheme.spacings.double))
                 TextBodyLarge(
                     text = stringResource(id = R.string.account_setup_sign_in_to_your_account),
                     color = MainTheme.colors.primary,
                 )
 
-                val isAutoDiscoverySettingsTrusted = state.autoDiscoverySettings?.isTrusted ?: false
-                val isConfigurationApproved = state.configurationApproved.value ?: false
                 Spacer(modifier = Modifier.height(MainTheme.spacings.double))
                 if (state.configStep in listOf(
                         AccountAutoDiscoveryContract.ConfigStep.GMAIL,
@@ -208,7 +198,6 @@ internal fun ContentView(
                     AccountOAuthView(
                         onOAuthResult = { result -> onEvent(Event.OnOAuthResult(result)) },
                         viewModel = oAuthViewModel,
-                        isEnabled = isAutoDiscoverySettingsTrusted || isConfigurationApproved,
                     )
                 }
             }
@@ -226,9 +215,32 @@ internal fun ContentView(
 
         if (state.configStep in listOf(
                 AccountAutoDiscoveryContract.ConfigStep.YANDEX,
-                AccountAutoDiscoveryContract.ConfigStep.PASSWORD,
+                AccountAutoDiscoveryContract.ConfigStep.OTHER,
             )
         ) {
+            if (state.configStep == AccountAutoDiscoveryContract.ConfigStep.OTHER) {
+                TextTitleLarge(
+                    text = stringResource(id = R.string.account_setup_other_server),
+                    color = MainTheme.colors.primary,
+                )
+                Spacer(modifier = Modifier.height(MainTheme.spacings.quadruple))
+
+                TextBodyLarge(
+                    text = stringResource(id = R.string.account_setup_sign_in_to_your_account),
+                    color = MainTheme.colors.primary,
+                    configTextStyle = {it.copy(fontWeight = FontWeight.Medium)}
+                )
+
+                if (state.autoDiscoverySettings != null) {
+                    Spacer(modifier = Modifier.height(MainTheme.spacings.double))
+//                    AutoDiscoveryResultView(
+//                        settings = state.autoDiscoverySettings,
+//                        onEditConfigurationClick = { onEvent(Event.OnEditConfigurationClicked) },
+//                    )
+                }
+                Spacer(modifier = Modifier.height(MainTheme.spacings.double))
+            }
+
             EmailAddressInput(
                 emailAddress = state.emailAddress.value,
                 errorMessage = state.emailAddress.error?.toAutoDiscoveryValidationErrorString(resources),
@@ -242,13 +254,26 @@ internal fun ContentView(
                 onPasswordChange = { onEvent(Event.PasswordChanged(it)) },
                 contentPadding = PaddingValues(),
             )
+
             Spacer(modifier = Modifier.height(MainTheme.spacings.triple))
             ButtonFilled(
-                modifier = Modifier.fillMaxWidth().height(50.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
                 text = stringResource(id = R.string.account_setup_login),
                 onClick = {
                     onEvent(Event.OnSignInPasswordClicked)
                 },
+            )
+
+            Spacer(modifier = Modifier.height(MainTheme.spacings.double))
+
+            ButtonText(
+                text = stringResource(id = R.string.account_setup_manual_configuration),
+                color = MainTheme.colors.primary,
+                onClick = {
+                    onEvent(Event.OnManualConfigurationClicked)
+                }
             )
         }
     }
@@ -260,9 +285,9 @@ internal fun AccountAutoDiscoveryContentGmailPreview() {
     PreviewWithTheme {
         AccountAutoDiscoveryContent(
             state = State(
-                configStep = AccountAutoDiscoveryContract.ConfigStep.YANDEX,
-                currentMailState = AccountAutoDiscoveryContract.MailState.YANDEX,
+                configStep = AccountAutoDiscoveryContract.ConfigStep.OTHER,
                 emailAddress = StringInputField(value = "test@example.com"),
+                isShowToolbar = true,
                 autoDiscoverySettings = fakeAutoDiscoveryResultSettings(isTrusted = true),
             ),
             onEvent = {},

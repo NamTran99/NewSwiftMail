@@ -24,6 +24,5 @@ internal fun fakeAutoDiscoveryResultSettings(isTrusted: Boolean) =
             authenticationTypes = listOf(AuthenticationType.PasswordEncrypted),
             username = "",
         ),
-        isTrusted = isTrusted,
         source = "preview",
     )

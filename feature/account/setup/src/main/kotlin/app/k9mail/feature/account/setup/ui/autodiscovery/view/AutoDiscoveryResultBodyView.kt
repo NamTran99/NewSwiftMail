@@ -31,15 +31,6 @@ internal fun AutoDiscoveryResultBodyView(
             .then(modifier),
         verticalArrangement = Arrangement.spacedBy(MainTheme.spacings.default),
     ) {
-        if (settings.isTrusted.not()) {
-            Spacer(modifier = Modifier.height(MainTheme.sizes.smaller))
-            TextBodyMedium(
-                text = stringResource(
-                    id = R.string.account_setup_auto_discovery_result_disclaimer_untrusted_configuration,
-                ),
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
 
         val incomingServerSettings = settings.incomingServerSettings
         if (incomingServerSettings is ImapServerSettings) {

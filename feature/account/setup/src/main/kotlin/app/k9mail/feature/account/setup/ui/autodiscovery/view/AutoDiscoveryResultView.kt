@@ -21,46 +21,46 @@ internal fun AutoDiscoveryResultView(
     onEditConfigurationClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val expanded = rememberSaveable {
-        mutableStateOf(settings?.isTrusted?.not() ?: false)
-    }
-
-    Column(
-        modifier = modifier,
-    ) {
-        Surface(
-            shape = MainTheme.shapes.small,
-            modifier = Modifier
-                .border(
-                    width = 1.dp,
-                    color = Color.Gray.copy(alpha = 0.5f),
-                    shape = MainTheme.shapes.small,
-                )
-                .clickable { expanded.value = !expanded.value },
-        ) {
-            Column(
-                modifier = Modifier.padding(MainTheme.spacings.default),
-            ) {
-                AutoDiscoveryResultHeaderView(
-                    state = if (settings == null) {
-                        AutoDiscoveryResultHeaderState.NoSettings
-                    } else if (settings.isTrusted) {
-                        AutoDiscoveryResultHeaderState.Trusted
-                    } else {
-                        AutoDiscoveryResultHeaderState.Untrusted
-                    },
-                    isExpanded = expanded.value,
-                )
-
-                if (settings != null) {
-                    AnimatedVisibility(visible = expanded.value) {
-                        AutoDiscoveryResultBodyView(
-                            settings = settings,
-                            onEditConfigurationClick = onEditConfigurationClick,
-                        )
-                    }
-                }
-            }
-        }
-    }
+//    val expanded = rememberSaveable {
+//        mutableStateOf(settings?.isTrusted?.not() ?: false)
+//    }
+//
+//    Column(
+//        modifier = modifier,
+//    ) {
+//        Surface(
+//            shape = MainTheme.shapes.small,
+//            modifier = Modifier
+//                .border(
+//                    width = 1.dp,
+//                    color = Color.Gray.copy(alpha = 0.5f),
+//                    shape = MainTheme.shapes.small,
+//                )
+//                .clickable { expanded.value = !expanded.value },
+//        ) {
+//            Column(
+//                modifier = Modifier.padding(MainTheme.spacings.default),
+//            ) {
+//                AutoDiscoveryResultHeaderView(
+//                    state = if (settings == null) {
+//                        AutoDiscoveryResultHeaderState.NoSettings
+//                    } else if (settings.isTrusted) {
+//                        AutoDiscoveryResultHeaderState.Trusted
+//                    } else {
+//                        AutoDiscoveryResultHeaderState.Untrusted
+//                    },
+//                    isExpanded = expanded.value,
+//                )
+//
+//                if (settings != null) {
+//                    AnimatedVisibility(visible = expanded.value) {
+//                        AutoDiscoveryResultBodyView(
+//                            settings = settings,
+//                            onEditConfigurationClick = onEditConfigurationClick,
+//                        )
+//                    }
+//                }
+//            }
+//        }
+//    }
 }

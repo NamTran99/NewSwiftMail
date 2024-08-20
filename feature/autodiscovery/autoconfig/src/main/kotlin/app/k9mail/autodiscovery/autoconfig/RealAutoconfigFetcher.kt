@@ -40,7 +40,6 @@ internal class RealAutoconfigFetcher(
                         AutoDiscoveryResult.Settings(
                             incomingServerSettings = parserResult.incomingServerSettings.first(),
                             outgoingServerSettings = parserResult.outgoingServerSettings.first(),
-                            isTrusted = fetchResult.isTrusted,
                             source = autoconfigUrl.toString(),
                         )
                     }

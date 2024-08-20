@@ -24,13 +24,12 @@ import app.k9mail.core.ui.compose.designsystem.atom.DividerHorizontal
 import app.k9mail.core.ui.compose.designsystem.atom.text.TextTitleLarge
 import app.k9mail.core.ui.compose.theme2.MainTheme
 import app.k9mail.feature.account.setup.R
-import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.MailState
-
+import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.ConfigStep
 
 @Composable
 internal fun ListMailLoginView(
-    listMail: List<MailState>,
-    onItemClick: (MailState) -> Unit,
+    listMail: List<ConfigStep>,
+    onItemClick: (ConfigStep) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -49,7 +48,7 @@ internal fun ListMailLoginView(
                     },
             ) {
                 Spacer(modifier = Modifier.weight(1f))
-                if (it == MailState.OTHER) {
+                if (it == ConfigStep.OTHER) {
                     TextTitleLarge(
                         text = stringResource(id = R.string.account_setup_other_server),
                         modifier = Modifier
@@ -59,7 +58,9 @@ internal fun ListMailLoginView(
                         color = MainTheme.colors.primary,
                     )
                 } else {
-                    Image(painter = painterResource(id = it.drawableResID), null, modifier = Modifier.weight(2f))
+                    it.getDrawable()?.let{ drawableID ->
+                        Image(painter = painterResource(id = drawableID), null, modifier = Modifier.weight(2f))
+                    }
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 DividerHorizontal(modifier = Modifier.padding(MainTheme.spacings.double, 0.dp))
@@ -76,7 +77,7 @@ internal fun ListMailLoginView(
 internal fun ColorContentPreview() {
     PreviewWithTheme {
         ListMailLoginView(
-            listMail = listOf(MailState.GMAIL, MailState.OUTLOOK, MailState.YANDEX, MailState.OTHER), {},
+            listMail = listOf(ConfigStep.GMAIL, ConfigStep.OUTLOOK, ConfigStep.YANDEX, ConfigStep.OTHER), {},
         )
     }
 }

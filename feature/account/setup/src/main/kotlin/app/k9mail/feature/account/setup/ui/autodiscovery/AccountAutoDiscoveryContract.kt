@@ -5,7 +5,6 @@ import app.k9mail.core.common.domain.usecase.validation.ValidationResult
 import app.k9mail.core.ui.compose.common.mvi.UnidirectionalViewModel
 import app.k9mail.feature.account.common.domain.entity.AuthorizationState
 import app.k9mail.feature.account.common.domain.entity.IncomingProtocolType
-import app.k9mail.feature.account.common.domain.input.BooleanInputField
 import app.k9mail.feature.account.common.domain.input.StringInputField
 import app.k9mail.feature.account.common.ui.loadingerror.LoadingErrorState
 import app.k9mail.feature.account.oauth.domain.entity.OAuthResult
@@ -17,15 +16,21 @@ interface AccountAutoDiscoveryContract {
     enum class ConfigStep {
         LIST_MAIL_SERVER,
         OAUTH,
-        PASSWORD,
         YANDEX,
         GMAIL,
         OUTLOOK,
-        MANUAL_SETUP,
-    }
+        OTHER,
+        PASSWORD,
+        MANUAL_SETUP;
 
-    enum class MailState(val drawableResID: Int) {
-        GMAIL(R.drawable.ic_mail), OUTLOOK(R.drawable.ic_outlook), YANDEX(R.drawable.ic_yandex), OTHER(R.drawable.ic_mail);
+        fun getDrawable(): Int?{
+            return when(this){
+                GMAIL -> R.drawable.ic_mail
+                OUTLOOK -> R.drawable.ic_outlook
+                YANDEX -> R.drawable.ic_yandex
+                else -> null
+            }
+        }
     }
 
     interface ViewModel : UnidirectionalViewModel<State, Event, Effect> {
@@ -39,16 +44,16 @@ interface AccountAutoDiscoveryContract {
         val emailAddress: StringInputField = StringInputField(),
         val password: StringInputField = StringInputField(),
         val autoDiscoverySettings: AutoDiscoveryResult.Settings? = null,
-        val configurationApproved: BooleanInputField = BooleanInputField(),
+//        val configurationApproved: BooleanInputField = BooleanInputField(),
         val authorizationState: AuthorizationState? = null,
         val instructionContent: Int = R.string.account_setup_select_server,
-        val listMailState: List<MailState> = listOf(
-            MailState.GMAIL,
-            MailState.OUTLOOK,
-            MailState.YANDEX,
-            MailState.OTHER,
+        val listMailState: List<ConfigStep> = listOf(
+            ConfigStep.GMAIL,
+            ConfigStep.OUTLOOK,
+            ConfigStep.YANDEX,
+            ConfigStep.OTHER,
         ),
-        val currentMailState: MailState? = null,
+//        val currentMailState: MailState? = null,
 
         val isSuccess: Boolean = false,
         override val error: Error? = null,
@@ -61,17 +66,13 @@ interface AccountAutoDiscoveryContract {
     sealed interface Event {
         data class EmailAddressChanged(val emailAddress: String) : Event
         data class PasswordChanged(val password: String) : Event
-        data class ResultApprovalChanged(val confirmed: Boolean) : Event
         data class OnOAuthResult(val result: OAuthResult) : Event
-
-        data class OnSelectServer(val state: MailState) : Event
-
-
+        data class OnSelectServer(val state: ConfigStep) : Event
         data object OnNextClicked : Event
         data object OnSignInPasswordClicked : Event
         data object OnBackClicked : Event
         data object OnRetryClicked : Event
-        data object OnEditConfigurationClicked : Event
+        data object OnManualConfigurationClicked : Event
     }
 
     sealed class Effect {

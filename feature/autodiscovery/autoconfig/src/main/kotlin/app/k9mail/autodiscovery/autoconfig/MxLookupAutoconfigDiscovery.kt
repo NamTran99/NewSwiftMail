@@ -49,11 +49,6 @@ class MxLookupAutoconfigDiscovery internal constructor(
         for (domainToCheck in listOfNotNull(mxSubDomain, mxBaseDomain)) {
             for (autoconfigUrl in urlProvider.getAutoconfigUrls(domainToCheck)) {
                 val discoveryResult = autoconfigFetcher.fetchAutoconfig(autoconfigUrl, email)
-                if (discoveryResult is Settings) {
-                    return discoveryResult.copy(
-                        isTrusted = mxLookupResult.isTrusted && discoveryResult.isTrusted,
-                    )
-                }
 
                 latestResult = discoveryResult
             }

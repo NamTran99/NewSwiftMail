@@ -1,5 +1,6 @@
 package app.k9mail.feature.account.setup.ui.autodiscovery
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import app.k9mail.autodiscovery.api.AuthenticationType
 import app.k9mail.autodiscovery.api.AutoDiscoveryResult
@@ -24,7 +25,6 @@ import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryCon
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Effect
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Error
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
-import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.MailState
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Validator
 import kotlinx.coroutines.launch
@@ -37,12 +37,6 @@ internal class AccountAutoDiscoveryViewModel(
     private val accountStateRepository: AccountDomainContract.AccountStateRepository,
     override val oAuthViewModel: AccountOAuthContract.ViewModel,
 ) : BaseViewModel<State, Event, Effect>(initialState), AccountAutoDiscoveryContract.ViewModel {
-
-    companion object {
-        const val MAIL_SERVER = "imap.gmail.com"
-        const val OUTLOOK_SERVER = "outlook.office365.com"
-    }
-
     override fun initState(state: State) {
         updateState {
             state.copy()
@@ -53,42 +47,36 @@ internal class AccountAutoDiscoveryViewModel(
         when (event) {
             is Event.EmailAddressChanged -> changeEmailAddress(event.emailAddress)
             is Event.PasswordChanged -> changePassword(event.password)
-            is Event.ResultApprovalChanged -> changeConfigurationApproval(event.confirmed)
             is Event.OnOAuthResult -> onOAuthResult(event.result)
-
-            Event.OnNextClicked -> onNext()
-            Event.OnBackClicked -> onBack()
-            Event.OnRetryClicked -> onRetry()
-            Event.OnEditConfigurationClicked -> {
-                navigateNext(isAutomaticConfig = false)
-            }
-
             is Event.OnSelectServer -> {
-                val configStep = when (event.state) {
-                    MailState.GMAIL -> ConfigStep.GMAIL
-                    MailState.OUTLOOK -> ConfigStep.OUTLOOK
-                    MailState.YANDEX -> ConfigStep.YANDEX
-                    MailState.OTHER -> ConfigStep.PASSWORD
-                }
-//                setServerOauth(event.state)
                 updateState {
                     it.copy(
-                        configStep = configStep,
-                        currentMailState = event.state,
+                        configStep = event.state,
+                        autoDiscoverySettings = if (event.state == ConfigStep.OTHER) null else it.autoDiscoverySettings,
+                        isShowToolbar = event.state == ConfigStep.OTHER,
+                        isNextButtonVisible = event.state == ConfigStep.OTHER,
                     )
                 }
                 setUpMailServerConfig(event.state)
             }
 
+            Event.OnNextClicked -> onNext()
+            Event.OnBackClicked -> onBack()
+            Event.OnRetryClicked -> onRetry()
             Event.OnSignInPasswordClicked -> {
+                submitEmail()
                 submitPassword()
+            }
+
+            Event.OnManualConfigurationClicked -> {
+                navigateNext(isAutomaticConfig = false)
             }
         }
     }
 
-    private fun setUpMailServerConfig(mailState: MailState) {
+    private fun setUpMailServerConfig(mailState: ConfigStep) {
         val result = when (mailState) {
-            MailState.GMAIL -> {
+            ConfigStep.GMAIL -> {
                 AutoDiscoveryResult.Settings(
                     incomingServerSettings = ImapServerSettings(
                         hostname = Hostname("imap.gmail.com"),
@@ -97,7 +85,6 @@ internal class AccountAutoDiscoveryViewModel(
                         authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
                         username = "",
                     ),
-                    isTrusted = true,
                     outgoingServerSettings = SmtpServerSettings(
                         hostname = Hostname("smtp.gmail.com"),
                         port = Port(465),
@@ -109,7 +96,7 @@ internal class AccountAutoDiscoveryViewModel(
                 )
             }
 
-            MailState.OUTLOOK -> AutoDiscoveryResult.Settings(
+            ConfigStep.OUTLOOK -> AutoDiscoveryResult.Settings(
                 incomingServerSettings = ImapServerSettings(
                     hostname = Hostname("outlook.office365.com"),
                     port = Port(993),
@@ -117,7 +104,6 @@ internal class AccountAutoDiscoveryViewModel(
                     authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
                     username = "",
                 ),
-                isTrusted = true,
                 outgoingServerSettings = SmtpServerSettings(
                     hostname = Hostname("smtp.office365.com"),
                     port = Port(587),
@@ -128,7 +114,7 @@ internal class AccountAutoDiscoveryViewModel(
                 source = "",
             )
 
-            MailState.YANDEX -> AutoDiscoveryResult.Settings(
+            ConfigStep.YANDEX -> AutoDiscoveryResult.Settings(
                 incomingServerSettings = ImapServerSettings(
                     hostname = Hostname("imap.yandex.com"),
                     port = Port(993),
@@ -136,7 +122,6 @@ internal class AccountAutoDiscoveryViewModel(
                     authenticationTypes = listOf(AuthenticationType.PasswordCleartext),
                     username = "",
                 ),
-                isTrusted = true,
                 outgoingServerSettings = SmtpServerSettings(
                     hostname = Hostname("smtp.yandex.com"),
                     port = Port(465),
@@ -149,27 +134,9 @@ internal class AccountAutoDiscoveryViewModel(
 
             else -> null
         }
-        updateAutoDiscoverySettings(result?: return)
+        updateAutoDiscoverySettings(result ?: return)
 
     }
-
-
-    private fun setServerOauth(mailState: MailState) {
-        val hostName = when (mailState) {
-            MailState.GMAIL -> MAIL_SERVER
-            MailState.OUTLOOK -> OUTLOOK_SERVER
-            else -> null
-        }
-
-        hostName?.let {
-            oAuthViewModel.initState(
-                AccountOAuthContract.State(
-                    hostname = it,
-                ),
-            )
-        }
-    }
-
 
     private fun changeEmailAddress(emailAddress: String) {
         accountStateRepository.clear()
@@ -188,15 +155,8 @@ internal class AccountAutoDiscoveryViewModel(
         }
     }
 
-    private fun changeConfigurationApproval(approved: Boolean) {
-        updateState {
-            it.copy(
-                configurationApproved = it.configurationApproved.updateValue(approved),
-            )
-        }
-    }
-
     private fun onNext() {
+        Log.d("TAG", "onNext: NamTD8 func này có gọi")
         when (state.value.configStep) {
             ConfigStep.LIST_MAIL_SERVER ->
                 if (state.value.error != null) {
@@ -211,11 +171,12 @@ internal class AccountAutoDiscoveryViewModel(
                 }
 
             ConfigStep.PASSWORD -> submitPassword()
-            ConfigStep.OAUTH -> Unit
             ConfigStep.MANUAL_SETUP -> navigateNext(isAutomaticConfig = false)
-            ConfigStep.YANDEX -> Unit
-            ConfigStep.GMAIL -> Unit
-            ConfigStep.OUTLOOK -> Unit
+            ConfigStep.OTHER -> {
+                submitEmail()
+            }
+
+            else -> Unit
         }
     }
 
@@ -272,18 +233,6 @@ internal class AccountAutoDiscoveryViewModel(
     }
 
     private fun updateAutoDiscoverySettings(settings: AutoDiscoveryResult.Settings) {
-        if (settings.incomingServerSettings is DemoServerSettings) {
-            updateState {
-                it.copy(
-                    isLoading = false,
-                    autoDiscoverySettings = settings,
-                    configStep = ConfigStep.PASSWORD,
-                    isNextButtonVisible = false,
-                )
-            }
-            return
-        }
-
         val imapServerSettings = settings.incomingServerSettings as ImapServerSettings
         val isOAuth = imapServerSettings.authenticationTypes.first() == AutoDiscoveryAuthenticationType.OAuth2
 
@@ -319,23 +268,20 @@ internal class AccountAutoDiscoveryViewModel(
         with(state.value) {
             val emailValidationResult = validator.validateEmailAddress(emailAddress.value)
             val passwordValidationResult = validator.validatePassword(password.value)
-            val configurationApprovalValidationResult = validator.validateConfigurationApproval(
-                isApproved = configurationApproved.value,
-                isAutoDiscoveryTrusted = autoDiscoverySettings?.isTrusted,
-            )
+//            val configurationApprovalValidationResult = validator.validateConfigurationApproval(
+//                isApproved = configurationApproved.value,
+//                isAutoDiscoveryTrusted = autoDiscoverySettings?.isTrusted,
+//            )
             val hasError = listOf(
                 emailValidationResult,
                 passwordValidationResult,
-                configurationApprovalValidationResult,
+//                configurationApprovalValidationResult,
             ).any { it is ValidationResult.Failure }
 
             updateState {
                 it.copy(
                     emailAddress = it.emailAddress.updateFromValidationResult(emailValidationResult),
                     password = it.password.updateFromValidationResult(passwordValidationResult),
-                    configurationApproved = it.configurationApproved.updateFromValidationResult(
-                        configurationApprovalValidationResult,
-                    ),
                 )
             }
 
@@ -346,6 +292,7 @@ internal class AccountAutoDiscoveryViewModel(
     }
 
     private fun onBack() {
+        Log.d("TAG", "onBack: NamTD8 ${state.value.configStep}")
         when (state.value.configStep) {
             ConfigStep.LIST_MAIL_SERVER -> {
                 if (state.value.error != null) {
@@ -365,13 +312,15 @@ internal class AccountAutoDiscoveryViewModel(
                     configStep = ConfigStep.LIST_MAIL_SERVER,
                     password = StringInputField(),
                     isNextButtonVisible = true,
+                    isShowToolbar = false,
                 )
             }
 
-            ConfigStep.YANDEX, ConfigStep.GMAIL, ConfigStep.OUTLOOK -> {
+            ConfigStep.YANDEX, ConfigStep.GMAIL, ConfigStep.OUTLOOK, ConfigStep.OTHER -> {
                 updateState {
                     it.copy(
                         configStep = ConfigStep.LIST_MAIL_SERVER,
+                        isShowToolbar = false,
                     )
                 }
             }
@@ -383,8 +332,6 @@ internal class AccountAutoDiscoveryViewModel(
             updateState {
                 it.copy(authorizationState = result.authorizationState)
             }
-
-            navigateNext(isAutomaticConfig = true)
         } else {
             updateState {
                 it.copy(authorizationState = null)

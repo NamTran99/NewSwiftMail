@@ -67,7 +67,8 @@
     <string name="account_setup_create_account_created">Account successfully created</string>
 
     <string name="account_setup_select_server">Select your server you want to login with</string>
-    <string name="account_setup_other_server">Other</string>
+    <string name="account_setup_other_server">Other mail</string>
     <string name="account_setup_sign_in_to_your_account">Sign in to your account</string>
     <string name="account_setup_login">Login</string>
+    <string name="account_setup_manual_configuration">Manual configuration</string>
 </resources>

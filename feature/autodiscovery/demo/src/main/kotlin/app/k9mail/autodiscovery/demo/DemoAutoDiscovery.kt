@@ -21,7 +21,6 @@ class DemoAutoDiscovery : AutoDiscovery {
                     AutoDiscoveryResult.Settings(
                         incomingServerSettings = DemoServerSettings,
                         outgoingServerSettings = DemoServerSettings,
-                        isTrusted = true,
                         source = "DemoAutoDiscovery",
                     )
                 } else {

@@ -14,17 +14,6 @@ sealed interface AutoDiscoveryResult {
         val outgoingServerSettings: OutgoingServerSettings,
 
         /**
-         * Indicates whether the mail server settings lookup was using only trusted channels.
-         *
-         * `true` if the settings lookup was only using trusted channels, e.g. lookup via HTTPS where the server
-         * presented a trusted certificate. `false´ otherwise.
-         *
-         * IMPORTANT: When this value is `false`, the settings should be presented to the user and only be used after
-         * the user has given consent.
-         */
-        val isTrusted: Boolean,
-
-        /**
          * String describing the source of the server settings. Use a URI if possible.
          */
         val source: String,
