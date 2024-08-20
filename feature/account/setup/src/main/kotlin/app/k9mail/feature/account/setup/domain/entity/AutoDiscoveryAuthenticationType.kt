@@ -8,6 +8,6 @@ internal fun AutoDiscoveryAuthenticationType.toAuthenticationType(): Authenticat
     return when (this) {
         AutoDiscoveryAuthenticationType.PasswordCleartext -> AuthenticationType.PasswordCleartext
         AutoDiscoveryAuthenticationType.PasswordEncrypted -> AuthenticationType.PasswordEncrypted
-        AutoDiscoveryAuthenticationType.OAuth2 -> AuthenticationType.PasswordCleartext
+        AutoDiscoveryAuthenticationType.OAuth2 -> AuthenticationType.OAuth2
     }
 }

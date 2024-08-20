@@ -8,7 +8,6 @@ import app.k9mail.autodiscovery.api.ConnectionSecurity
 import app.k9mail.autodiscovery.api.ImapServerSettings
 import app.k9mail.autodiscovery.api.IncomingServerSettings
 import app.k9mail.autodiscovery.api.SmtpServerSettings
-import app.k9mail.autodiscovery.demo.DemoServerSettings
 import app.k9mail.core.common.domain.usecase.validation.ValidationResult
 import app.k9mail.core.common.net.Hostname
 import app.k9mail.core.common.net.Port
@@ -51,6 +50,8 @@ internal class AccountAutoDiscoveryViewModel(
             is Event.OnSelectServer -> {
                 updateState {
                     it.copy(
+                        emailAddress = StringInputField(),
+                        password = StringInputField(),
                         configStep = event.state,
                         autoDiscoverySettings = if (event.state == ConfigStep.OTHER) null else it.autoDiscoverySettings,
                         isShowToolbar = event.state == ConfigStep.OTHER,
@@ -65,7 +66,6 @@ internal class AccountAutoDiscoveryViewModel(
             Event.OnRetryClicked -> onRetry()
             Event.OnSignInPasswordClicked -> {
                 submitEmail()
-                submitPassword()
             }
 
             Event.OnManualConfigurationClicked -> {
@@ -199,7 +199,10 @@ internal class AccountAutoDiscoveryViewModel(
             }
 
             if (!hasError) {
-                loadAutoDiscovery()
+                if (state.value.configStep == ConfigStep.YANDEX) {
+                    submitPassword()
+                } else
+                    loadAutoDiscovery()
             }
         }
     }
@@ -217,6 +220,10 @@ internal class AccountAutoDiscoveryViewModel(
                 is AutoDiscoveryResult.Settings -> updateAutoDiscoverySettings(result)
                 is AutoDiscoveryResult.NetworkError -> updateError(Error.NetworkError)
                 is AutoDiscoveryResult.UnexpectedException -> updateError(Error.UnknownError)
+            }
+
+            if (state.value.configStep == ConfigStep.OTHER) {
+                submitPassword()
             }
         }
     }
@@ -332,6 +339,8 @@ internal class AccountAutoDiscoveryViewModel(
             updateState {
                 it.copy(authorizationState = result.authorizationState)
             }
+
+            navigateNext(isAutomaticConfig = true)
         } else {
             updateState {
                 it.copy(authorizationState = null)

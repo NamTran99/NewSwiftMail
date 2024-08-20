@@ -63,6 +63,7 @@ fun IncomingServerSettingsScreen(
         bottomBar = {
             ButtonFilled(
                 modifier = Modifier
+                    .fillMaxWidth()
                     .padding(horizontal = MainTheme.spacings.double),
                 text = stringResource(id = R.string.account_server_settings_sign_in),
                 onClick = {
