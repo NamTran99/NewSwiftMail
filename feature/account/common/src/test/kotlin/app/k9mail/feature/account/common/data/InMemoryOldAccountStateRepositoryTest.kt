@@ -11,7 +11,7 @@ import com.fsck.k9.mail.ConnectionSecurity
 import com.fsck.k9.mail.ServerSettings
 import org.junit.Test
 
-class InMemoryAccountStateRepositoryTest {
+class InMemoryOldAccountStateRepositoryTest {
 
     @Test
     fun `should initialize with empty state`() {

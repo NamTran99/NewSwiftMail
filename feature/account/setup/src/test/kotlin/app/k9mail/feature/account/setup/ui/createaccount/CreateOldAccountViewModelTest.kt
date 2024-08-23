@@ -28,7 +28,7 @@ import kotlin.test.Test
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 
-class CreateAccountViewModelTest {
+class CreateOldAccountViewModelTest {
 
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()

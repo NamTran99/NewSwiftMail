@@ -35,11 +35,10 @@ interface AccountAutoDiscoveryContract {
 
     interface ViewModel : UnidirectionalViewModel<State, Event, Effect> {
         val oAuthViewModel: AccountOAuthContract.ViewModel
-
-        fun initState(state: State)
     }
 
     data class State(
+        val isReLogin : Boolean = false,
         val configStep: ConfigStep = ConfigStep.LIST_MAIL_SERVER,
         val emailAddress: StringInputField = StringInputField(),
         val password: StringInputField = StringInputField(),
@@ -73,6 +72,7 @@ interface AccountAutoDiscoveryContract {
         data object OnBackClicked : Event
         data object OnRetryClicked : Event
         data object OnManualConfigurationClicked : Event
+        data object OnScreenShown : Event
     }
 
     sealed class Effect {

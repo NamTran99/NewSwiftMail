@@ -17,7 +17,7 @@ import com.fsck.k9.mail.ServerSettings
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
-class GetAccountStateTest {
+class GetOldAccountStateTest {
 
     @Test
     fun `should get account state from repository`() = runTest {

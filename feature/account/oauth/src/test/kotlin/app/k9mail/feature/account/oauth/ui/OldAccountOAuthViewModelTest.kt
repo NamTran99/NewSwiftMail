@@ -22,7 +22,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class AccountOAuthViewModelTest {
+class OldAccountOAuthViewModelTest {
 
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()

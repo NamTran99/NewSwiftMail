@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import app.k9mail.core.ui.compose.common.activity.LocalActivity
 import app.k9mail.feature.account.setup.navigation.AccountSetupNavHost
 import app.k9mail.feature.onboarding.permissions.domain.PermissionsDomainContract.UseCase.HasRuntimePermissions
 import app.k9mail.feature.onboarding.permissions.ui.PermissionsScreen
@@ -44,22 +45,16 @@ fun OnboardingNavHost(
 ) {
     val navController = rememberNavController()
     var accountUuid by rememberSaveable { mutableStateOf<String?>(null) }
+    val activity = LocalActivity.current
 
     NavHost(
         navController = navController,
-        startDestination = NESTED_NAVIGATION_ROUTE_WELCOME,
+        startDestination = NESTED_NAVIGATION_ROUTE_ACCOUNT_SETUP,
     ) {
-        composable(route = NESTED_NAVIGATION_ROUTE_WELCOME) {
-            WelcomeScreenScreen(
-                onStartClick = { navController.navigateToAccountSetup() },
-                onImportClick = { navController.navigateToSettingsImport() },
-                appNameProvider = koinInject(),
-            )
-        }
 
         composable(route = NESTED_NAVIGATION_ROUTE_ACCOUNT_SETUP) {
             AccountSetupNavHost(
-                onBack = { navController.popBackStack() },
+                onBack = { if(!navController.popBackStack()) activity.finish() },
                 onFinish = { createdAccountUuid: String ->
                     accountUuid = createdAccountUuid
                     if (hasRuntimePermissions()) {
@@ -68,6 +63,14 @@ fun OnboardingNavHost(
                         onFinish(createdAccountUuid)
                     }
                 },
+            )
+        }
+
+        composable(route = NESTED_NAVIGATION_ROUTE_WELCOME) {
+            WelcomeScreenScreen(
+                onStartClick = { navController.navigateToAccountSetup() },
+                onImportClick = { navController.navigateToSettingsImport() },
+                appNameProvider = koinInject(),
             )
         }
 

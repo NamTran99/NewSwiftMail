@@ -12,7 +12,7 @@ import assertk.assertions.isNull
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
-class AccountOAuthViewKtTest : ComposeTest() {
+class OldAccountOAuthViewKtTest : ComposeTest() {
 
     @Test
     fun `should delegate navigation effects`() = runTest {

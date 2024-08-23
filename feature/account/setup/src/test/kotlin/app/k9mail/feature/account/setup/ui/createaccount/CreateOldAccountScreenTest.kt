@@ -13,7 +13,7 @@ import assertk.assertions.isEqualTo
 import kotlin.test.Test
 import kotlinx.coroutines.test.runTest
 
-class CreateAccountScreenTest : ComposeTest() {
+class CreateOldAccountScreenTest : ComposeTest() {
 
     @Test
     fun `should delegate navigation effects`() = runTest {

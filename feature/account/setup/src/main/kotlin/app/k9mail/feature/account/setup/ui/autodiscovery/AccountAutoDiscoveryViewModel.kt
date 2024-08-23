@@ -19,6 +19,7 @@ import app.k9mail.feature.account.oauth.domain.entity.OAuthResult
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract
 import app.k9mail.feature.account.setup.domain.DomainContract.UseCase
 import app.k9mail.feature.account.setup.domain.entity.AutoDiscoveryAuthenticationType
+import app.k9mail.feature.account.setup.domain.oldMail.EasyMailUtil
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.AutoDiscoveryUiResult
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.ConfigStep
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Effect
@@ -36,10 +37,10 @@ internal class AccountAutoDiscoveryViewModel(
     private val accountStateRepository: AccountDomainContract.AccountStateRepository,
     override val oAuthViewModel: AccountOAuthContract.ViewModel,
 ) : BaseViewModel<State, Event, Effect>(initialState), AccountAutoDiscoveryContract.ViewModel {
-    override fun initState(state: State) {
-        updateState {
-            state.copy()
-        }
+
+
+    init {
+        convertLocalConfig()
     }
 
     override fun event(event: Event) {
@@ -48,6 +49,9 @@ internal class AccountAutoDiscoveryViewModel(
             is Event.PasswordChanged -> changePassword(event.password)
             is Event.OnOAuthResult -> onOAuthResult(event.result)
             is Event.OnSelectServer -> {
+                if(event.state in listOf(ConfigStep.OTHER, ConfigStep.YANDEX)){
+                    accountStateRepository.clear()
+                }
                 updateState {
                     it.copy(
                         emailAddress = StringInputField(),
@@ -74,6 +78,53 @@ internal class AccountAutoDiscoveryViewModel(
             Event.OnManualConfigurationClicked -> {
                 navigateNext(isAutomaticConfig = false)
             }
+
+            Event.OnScreenShown -> {
+                with(state.value) {
+                    if (configStep == ConfigStep.OTHER && isReLogin) {
+                        updateState {
+                            copy(isReLogin = false)
+                        }
+                        submitPassword()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun convertLocalConfig() {
+        val savedAccount = EasyMailUtil.getSavedAccountFromEasyMail()
+        val savedMailSigning = EasyMailUtil.getSavedSignInConfigFromEasyMail(savedAccount?.accountEmail)
+
+        if (savedAccount != null && savedMailSigning != null) {
+            accountStateRepository.clear()
+            val result = AutoDiscoveryResult.Settings(
+                incomingServerSettings = ImapServerSettings(
+                    hostname = Hostname(savedMailSigning.imap_host),
+                    port = Port(savedMailSigning.imap_port.toInt()),
+                    connectionSecurity = ConnectionSecurity.TLS,
+                    authenticationTypes = listOf(AuthenticationType.PasswordCleartext),
+                    username = savedAccount.accountEmail,
+                ),
+                outgoingServerSettings = SmtpServerSettings(
+                    hostname = Hostname(savedMailSigning.smtp_host),
+                    port = Port(savedMailSigning.smtp_port.toInt()),
+                    connectionSecurity = if (savedMailSigning.isSmtpStartTLS()) ConnectionSecurity.StartTLS else ConnectionSecurity.TLS,
+                    authenticationTypes = listOf(AuthenticationType.PasswordCleartext),
+                    username = savedAccount.accountEmail,
+                ),
+                source = "",
+            )
+
+            updateState {
+                it.copy(
+                    isReLogin = true,
+                    configStep = ConfigStep.OTHER,
+                    emailAddress = StringInputField(savedAccount.accountEmail),
+                    password = StringInputField(savedAccount.password ?: ""),
+                )
+            }
+            updateAutoDiscoverySettings(result)
         }
     }
 
@@ -176,6 +227,7 @@ internal class AccountAutoDiscoveryViewModel(
             ConfigStep.PASSWORD -> submitPassword()
             ConfigStep.MANUAL_SETUP -> navigateNext(isAutomaticConfig = false)
             ConfigStep.OTHER -> {
+
                 submitEmail()
             }
 
@@ -259,7 +311,6 @@ internal class AccountAutoDiscoveryViewModel(
             it.copy(
                 isLoading = false,
                 autoDiscoverySettings = settings,
-//                configStep = if (isOAuth) ConfigStep.OAUTH else ConfigStep.PASSWORD,
                 isNextButtonVisible = !isOAuth,
             )
         }
@@ -302,7 +353,6 @@ internal class AccountAutoDiscoveryViewModel(
     }
 
     private fun onBack() {
-        Log.d("TAG", "onBack: NamTD8 ${state.value.configStep}")
         when (state.value.configStep) {
             ConfigStep.LIST_MAIL_SERVER -> {
                 if (state.value.error != null) {
@@ -342,7 +392,6 @@ internal class AccountAutoDiscoveryViewModel(
             updateState {
                 it.copy(authorizationState = result.authorizationState)
             }
-
             navigateNext(isAutomaticConfig = true)
         } else {
             updateState {

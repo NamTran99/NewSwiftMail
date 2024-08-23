@@ -30,7 +30,7 @@ import org.robolectric.RuntimeEnvironment
 
 @OptIn(KoinExperimentalAPI::class)
 @RunWith(RobolectricTestRunner::class)
-class AccountEditModuleKtTest : KoinTest {
+class OldAccountEditModuleKtTest : KoinTest {
 
     private val externalModule: Module = module {
         single<AccountCommonExternalContract.AccountStateLoader> { Mockito.mock() }

@@ -7,7 +7,7 @@ import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
 import org.junit.Test
 
-class ValidateAccountNameTest {
+class ValidateOldAccountNameTest {
 
     private val testSubject = ValidateAccountName()
 

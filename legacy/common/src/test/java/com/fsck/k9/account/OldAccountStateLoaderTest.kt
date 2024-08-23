@@ -13,7 +13,7 @@ import com.fsck.k9.mail.ServerSettings
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
-class AccountStateLoaderTest {
+class OldAccountStateLoaderTest {
 
     @Test
     fun `loadAccountState() SHOULD return null when accountManager returns null`() = runTest {

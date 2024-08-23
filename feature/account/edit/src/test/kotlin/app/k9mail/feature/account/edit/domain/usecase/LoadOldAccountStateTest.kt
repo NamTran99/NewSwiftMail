@@ -16,7 +16,7 @@ import com.fsck.k9.mail.ServerSettings
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
-class LoadAccountStateTest {
+class LoadOldAccountStateTest {
 
     @Test
     fun `should load account state and update account state repository`() = runTest {

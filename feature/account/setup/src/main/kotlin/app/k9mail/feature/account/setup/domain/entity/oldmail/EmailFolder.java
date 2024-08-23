@@ -1,4 +1,4 @@
-package com.hungbang.email2018.data.entity;
+package app.k9mail.feature.account.setup.domain.entity.oldmail;
 
 import javax.mail.URLName;
 

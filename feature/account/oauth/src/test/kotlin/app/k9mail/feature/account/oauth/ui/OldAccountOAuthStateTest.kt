@@ -8,7 +8,7 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.prop
 import org.junit.Test
 
-class AccountOAuthStateTest {
+class OldAccountOAuthStateTest {
 
     @Test
     fun `should set default values`() {

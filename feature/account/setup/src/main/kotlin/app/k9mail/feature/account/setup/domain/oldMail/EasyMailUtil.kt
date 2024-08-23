@@ -1,17 +1,16 @@
-package app.k9mail.feature.account.common.data
+package app.k9mail.feature.account.setup.domain.oldMail
 
 import android.util.Log
 import com.fsck.k9.helper.EmailHelper
-import com.hungbang.email2018.data.entity.Account
-import com.hungbang.email2018.data.entity.SignInConfigs
-import io.paperdb.Paper
+import app.k9mail.feature.account.setup.domain.entity.oldmail.OldAccount
+import app.k9mail.feature.account.setup.domain.entity.oldmail.SignInConfigs
 
 object EasyMailUtil {
     /**
      * used to get account email & password
      */
-    fun getSavedAccountFromEasyMail(): Account? {
-        val fakeAcc = Account().apply {
+    fun getSavedAccountFromEasyMail(): OldAccount? {
+        val fakeAcc = OldAccount().apply {
             accountEmail = "easyai.group@mailo.com"
             password = "Matkhausieumanh1"
         }
@@ -22,15 +21,15 @@ object EasyMailUtil {
     /**
      * used to get host, port...
      */
-    fun getSavedSignInConfigFromEasyMail(mailDomain: String): SignInConfigs? {
+    fun getSavedSignInConfigFromEasyMail(mailDomain: String?): SignInConfigs? {
         val fakeConfigs = SignInConfigs(
-            mailDomain,
+            mailDomain?:"",
             "mail.mailo.com",
             "993",
             "1",
             "mail.mailo.com",
             "465",
-            "1"
+            "0"
         )
         return fakeConfigs
 //        return Paper.book().read<SignInConfigs>("KEY_CONFIG_SIGNIN$mailDomain", null)

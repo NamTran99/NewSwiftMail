@@ -6,7 +6,7 @@ import assertk.assertions.isNull
 import assertk.assertions.prop
 import org.junit.Test
 
-class AccountStateTest {
+class OldAccountStateTest {
 
     @Test
     fun `should default to null state`() {
