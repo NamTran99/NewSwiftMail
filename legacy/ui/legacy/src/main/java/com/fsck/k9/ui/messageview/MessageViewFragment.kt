@@ -259,7 +259,6 @@ class MessageViewFragment :
 
         val showToggleUnread = !isOutbox
         menu.findItem(R.id.toggle_unread).isVisible = showToggleUnread
-        menu.findItem(R.id.move).isVisible = true
 
         if (showToggleUnread) {
             // Set title of menu item to toggle the read state of the currently displayed message
@@ -279,8 +278,39 @@ class MessageViewFragment :
             menu.findItem(R.id.toggle_unread).icon = drawable
         }
 
+        if (isMoveCapable) {
+            val canMessageBeArchived = canMessageBeArchived()
+            val canMessageBeMovedToSpam = canMessageBeMovedToSpam()
+
+            menu.findItem(R.id.move).isVisible = K9.isMessageViewMoveActionVisible
+            menu.findItem(R.id.archive).isVisible = canMessageBeArchived && K9.isMessageViewArchiveActionVisible
+            menu.findItem(R.id.spam).isVisible = canMessageBeMovedToSpam && K9.isMessageViewSpamActionVisible
+
+            menu.findItem(R.id.refile_move).isVisible = true
+            menu.findItem(R.id.refile_archive).isVisible = canMessageBeArchived
+            menu.findItem(R.id.refile_spam).isVisible = canMessageBeMovedToSpam
+
+            menu.findItem(R.id.refile).isVisible = true
+        } else {
+            menu.findItem(R.id.move).isVisible = false
+            menu.findItem(R.id.archive).isVisible = false
+            menu.findItem(R.id.spam).isVisible = false
+
+            menu.findItem(R.id.refile).isVisible = false
+        }
+
+        if (isCopyCapable) {
+            menu.findItem(R.id.copy).isVisible = K9.isMessageViewCopyActionVisible
+            menu.findItem(R.id.refile_copy).isVisible = true
+        } else {
+            menu.findItem(R.id.copy).isVisible = false
+            menu.findItem(R.id.refile_copy).isVisible = false
+        }
+
         menu.findItem(R.id.move_to_drafts).isVisible = isOutbox
         menu.findItem(R.id.unsubscribe).isVisible = canMessageBeUnsubscribed()
+        menu.findItem(R.id.show_headers).isVisible = true
+        menu.findItem(R.id.compose).isVisible = true
 
         val toggleTheme = menu.findItem(R.id.toggle_message_view_theme)
         if (generalSettingsManager.getSettings().fixedMessageViewTheme) {
@@ -314,12 +344,13 @@ class MessageViewFragment :
             R.id.edit_as_new_message -> onEditAsNewMessage()
             R.id.share -> onSendAlternate()
             R.id.toggle_unread -> onToggleRead()
-            R.id.archive,-> onArchive()
-            R.id.spam, -> onSpam()
-            R.id.move, -> onMove()
-            R.id.copy, -> onCopy()
+            R.id.archive, R.id.refile_archive -> onArchive()
+            R.id.spam, R.id.refile_spam -> onSpam()
+            R.id.move, R.id.refile_move -> onMove()
+            R.id.copy, R.id.refile_copy -> onCopy()
             R.id.move_to_drafts -> onMoveToDrafts()
             R.id.unsubscribe -> onUnsubscribe()
+            R.id.show_headers -> onShowHeaders()
             else -> return false
         }
 

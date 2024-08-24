@@ -150,7 +150,7 @@ fun AccountSetupNavHost(
 
         composable(route = NESTED_NAVIGATION_DISPLAY_OPTIONS) {
             DisplayOptionsScreen(
-                onNext = { navController.navigate(NESTED_NAVIGATION_SYNC_OPTIONS) },
+                onNext = { navController.navigate(NESTED_NAVIGATION_CREATE_ACCOUNT) },
                 onBack = { navController.popBackStack() },
                 viewModel = koinViewModel<DisplayOptionsViewModel>(),
                 appNameProvider = koinInject(),
