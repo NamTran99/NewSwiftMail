@@ -28,7 +28,7 @@
             android:contentDescription="@string/account_settings_action"
             android:padding="8dp"
             app:srcCompat="@drawable/ic_settings"
-            />
+            app:tint="@color/color_black" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
