@@ -9,6 +9,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
+
+import com.fsck.k9.ui.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import timber.log.Timber;
 
@@ -59,7 +61,7 @@ public class ConfirmationDialogFragment extends DialogFragment implements OnClic
         String confirmText = args.getString(ARG_CONFIRM_TEXT);
         String cancelText = args.getString(ARG_CANCEL_TEXT);
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity());
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.Theme_K9_Light_Dialog);
         builder.setTitle(title);
         builder.setMessage(message);
         if (confirmText != null && cancelText != null) {

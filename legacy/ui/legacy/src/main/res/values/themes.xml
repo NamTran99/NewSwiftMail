@@ -242,7 +242,11 @@
         <item name="materialDrawerHeaderStyle">@style/Widget.MaterialDrawerHeaderStyle.K9.Dark</item>
     </style>
 
-    <style name="Theme.K9.Light.Dialog" parent="Theme.K9.Light" />
+    <style name="Theme.K9.Light.Dialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog" >
+        <item name="colorOnSurface">@color/color_black</item>
+        <item name="background">@color/color_white</item>
+        <item name="colorSurface">@color/color_white</item>
+    </style>
     <style name="Theme.K9.Dark.Dialog" parent="Theme.K9.Dark" />
 
     <style name="Theme.K9.Dark.Dialog.Translucent" parent="Theme.Material3.Dark.Dialog">

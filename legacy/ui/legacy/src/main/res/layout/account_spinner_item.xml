@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textColor="?colorControlNormal"
         android:textAppearance="?attr/textAppearanceTitleMedium"
         tools:text="Personal"
         />
@@ -26,6 +27,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textColor="?colorControlNormal"
         android:textAppearance="?attr/textAppearanceBodyMedium"
         tools:text="test@example.org"
         />

@@ -61,7 +61,7 @@ object Icons {
         val Link = R.drawable.ic_link
         val Lock = R.drawable.ic_lock
         val Login = R.drawable.ic_login
-        val Mail = R.drawable.ic_mail
+        val Mail = R.drawable.ic_mail_1
         val MarkEmailRead = R.drawable.ic_mark_email_read
         val MarkEmailUnread = R.drawable.ic_mark_email_unread
         val Menu = R.drawable.ic_menu

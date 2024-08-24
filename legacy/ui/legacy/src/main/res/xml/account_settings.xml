@@ -410,7 +410,7 @@
     </PreferenceScreen>
 
     <PreferenceScreen
-        android:icon="@drawable/ic_search"
+        android:icon="@drawable/ic_search_black"
         android:key="search"
         android:title="@string/account_settings_search"
         >

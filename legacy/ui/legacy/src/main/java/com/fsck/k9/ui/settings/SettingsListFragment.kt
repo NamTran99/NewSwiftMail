@@ -103,40 +103,6 @@ class SettingsListFragment : Fragment(), ItemTouchCallback {
                     icon = Icons.Outlined.Add,
                 )
             }
-
-            addSection(title = getString(R.string.settings_list_backup_category)) {
-                addAction(
-                    text = getString(R.string.settings_export_title),
-                    navigationAction = R.id.action_settingsListScreen_to_settingsExportScreen,
-                    icon = Icons.Outlined.Upload,
-                )
-
-                addAction(
-                    text = getString(SettingsImportR.string.settings_import_title),
-                    navigationAction = R.id.action_settingsListScreen_to_settingsImportScreen,
-                    icon = Icons.Outlined.Download,
-                )
-            }
-
-            addSection(title = getString(R.string.settings_list_miscellaneous_category)) {
-                addAction(
-                    text = getString(R.string.about_action),
-                    navigationAction = R.id.action_settingsListScreen_to_aboutScreen,
-                    icon = Icons.Outlined.Info,
-                )
-
-                addUrlAction(
-                    text = getString(R.string.user_manual_title),
-                    url = getString(R.string.user_manual_url),
-                    icon = Icons.Outlined.MenuBook,
-                )
-
-                addUrlAction(
-                    text = getString(R.string.get_help_title),
-                    url = getString(R.string.user_forum_url),
-                    icon = Icons.Outlined.Help,
-                )
-            }
         }
 
         itemAdapter.setNewList(listItems)

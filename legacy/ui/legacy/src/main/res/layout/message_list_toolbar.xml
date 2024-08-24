@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.appbar.MaterialToolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     style="?attr/toolbarStyle"
     android:background="@color/color_4ca5df"
@@ -10,7 +10,7 @@
     android:layout_alignParentTop="true"
     android:minHeight="?attr/actionBarSize"
     tools:navigationIcon="@drawable/ic_arrow_back"
-    >
+    app:navigationIconTint="?colorControlNormal">
 
     <!-- We're not using MaterialToolbar's title/subtitle support because it is broken when using large system
          font sizes. See https://issuetracker.google.com/issues/135865267 -->

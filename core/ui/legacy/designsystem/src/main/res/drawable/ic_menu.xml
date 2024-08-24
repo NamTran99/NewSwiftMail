@@ -4,7 +4,7 @@
     android:height="24dp"
     android:viewportWidth="960"
     android:viewportHeight="960"
-    android:tint="#000"
+    android:tint="?attr/colorControlNormal"
     >
     <path
         android:fillColor="@android:color/white"
