@@ -16,6 +16,7 @@ import timber.log.Timber.DebugTree
 // TODO "Use GeneralSettingsManager and GeneralSettings instead"
 object K9 : EarlyInit {
     private val generalSettingsManager: RealGeneralSettingsManager by inject()
+    const val INTERNAL_TIME_MAIL_SYNC_MINUTE: Long = 30000
 
     /**
      * If this is `true`, various development settings will be enabled.

@@ -86,9 +86,7 @@ class AccountCreator(
 
         messagingController.refreshFolderListBlocking(newAccount)
 
-        if (account.options.checkFrequencyInMinutes == -1) {
-            messagingController.checkMail(newAccount, false, true, false, null)
-        }
+            messagingController.checkMail(newAccount, false, true, false,true, null)
 
         return newAccount.uuid
     }

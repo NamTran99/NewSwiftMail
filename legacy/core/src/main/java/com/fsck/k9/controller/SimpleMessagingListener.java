@@ -13,6 +13,9 @@ import com.fsck.k9.mail.Part;
 
 public abstract class SimpleMessagingListener implements MessagingListener {
     @Override
+    public void setIfUserInteract(boolean isUserInteract) {
+    }
+    @Override
     public void synchronizeMailboxStarted(Account account, long folderId) {
     }
 

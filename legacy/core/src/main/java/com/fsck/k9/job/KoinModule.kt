@@ -19,6 +19,6 @@ val jobModule = module {
     }
     factory { MailSyncWorkerManager(workManager = get(), clock = get()) }
     factory { (parameters: WorkerParameters) ->
-        MailSyncWorker(messagingController = get(), preferences = get(), context = get(), parameters)
+        MailSyncWorker(messagingController = get(), preferences = get(), mailSyncWorkerManager = get(),context = get(), parameters)
     }
 }

@@ -1,5 +1,8 @@
 package com.fsck.k9.job
 
+import android.app.ActivityManager
+import android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+import android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE
 import android.content.ContentResolver
 import android.content.Context
 import androidx.work.Worker
@@ -14,6 +17,7 @@ import timber.log.Timber
 class MailSyncWorker(
     private val messagingController: MessagingController,
     private val preferences: Preferences,
+    private val mailSyncWorkerManager: MailSyncWorkerManager,
     context: Context,
     parameters: WorkerParameters,
 ) : Worker(context, parameters) {
@@ -35,11 +39,6 @@ class MailSyncWorker(
             return Result.failure()
         }
 
-        if (account.isPeriodicMailSyncDisabled) {
-            Timber.d("Periodic mail sync has been disabled for this account. Skipping mail sync.")
-            return Result.success()
-        }
-
         if (account.incomingServerSettings.isMissingCredentials) {
             Timber.d("Password for this account is missing. Skipping mail sync.")
             return Result.success()
@@ -50,9 +49,16 @@ class MailSyncWorker(
             return Result.success()
         }
 
-        val success = messagingController.performPeriodicMailSync(account)
-
+        val success = messagingController.performPeriodicMailSync(account, isForeGrounded())
+        Timber.d("Account sync state ${success}")
+        mailSyncWorkerManager.scheduleMailSync(account)
         return if (success) Result.success() else Result.retry()
+    }
+
+    private fun isForeGrounded(): Boolean {
+        val appProcessInfo = ActivityManager.RunningAppProcessInfo()
+        ActivityManager.getMyMemoryState(appProcessInfo);
+        return (appProcessInfo.importance == IMPORTANCE_FOREGROUND || appProcessInfo.importance == IMPORTANCE_VISIBLE)
     }
 
     private fun isBackgroundSyncDisabled(): Boolean {
@@ -62,9 +68,6 @@ class MailSyncWorker(
             K9.BACKGROUND_OPS.WHEN_CHECKED_AUTO_SYNC -> !ContentResolver.getMasterSyncAutomatically()
         }
     }
-
-    private val Account.isPeriodicMailSyncDisabled
-        get() = automaticCheckIntervalMinutes <= 0
 
     companion object {
         const val EXTRA_ACCOUNT_UUID = "accountUuid"

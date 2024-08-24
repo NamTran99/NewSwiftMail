@@ -13,6 +13,7 @@ import com.fsck.k9.mailstore.LocalMessage;
 
 
 public interface MessagingListener {
+    void setIfUserInteract(boolean isUserInteract);
     void synchronizeMailboxStarted(Account account, long folderId);
     void synchronizeMailboxHeadersStarted(Account account, String folderServerId);
     void synchronizeMailboxHeadersProgress(Account account, String folderServerId, int completed, int total);

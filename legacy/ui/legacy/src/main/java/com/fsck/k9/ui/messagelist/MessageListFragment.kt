@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -285,13 +284,21 @@ class MessageListFragment :
         loadMessageList()
     }
 
+    private fun loadDataWhenResume() {
+        if (isRemoteSearchAllowed) {
+            onRemoteSearchRequested()
+        } else if (isCheckMailSupported) {
+            checkMail(false)
+        }
+    }
+
     private fun initializeSwipeRefreshLayout(view: View) {
         val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh)
 
         if (isRemoteSearchAllowed) {
             swipeRefreshLayout.setOnRefreshListener { onRemoteSearchRequested() }
         } else if (isCheckMailSupported) {
-            swipeRefreshLayout.setOnRefreshListener { checkMail() }
+            swipeRefreshLayout.setOnRefreshListener { checkMail(true) }
         }
 
         // Disable pull-to-refresh until the message list has been loaded
@@ -588,6 +595,7 @@ class MessageListFragment :
         messagingController.addListener(activityListener)
 
         updateTitle()
+        loadDataWhenResume()
     }
 
     override fun onPause() {
@@ -1258,17 +1266,17 @@ class MessageListFragment :
         doNegativeClick(dialogId)
     }
 
-    private fun checkMail() {
+    private fun checkMail(isUserInteract: Boolean) {
         if (isSingleAccountMode && isSingleFolderMode) {
             val folderId = currentFolder!!.databaseId
             messagingController.synchronizeMailbox(account, folderId, false, activityListener)
             messagingController.sendPendingMessages(account, activityListener)
         } else if (allAccounts) {
-            messagingController.checkMail(null, true, true, false, activityListener)
+            messagingController.checkMail(null, true, true, false, isUserInteract,activityListener)
         } else {
             for (accountUuid in accountUuids) {
                 val account = accountManager.getAccount(accountUuid)
-                messagingController.checkMail(account, true, true, false, activityListener)
+                messagingController.checkMail(account, true, true, false,isUserInteract, activityListener)
             }
         }
     }
@@ -1699,6 +1707,13 @@ class MessageListFragment :
 
         @GuardedBy("lock")
         private var folderTotal = 0
+
+        private var isUserInteract = true
+
+        override fun setIfUserInteract(isUserInteract: Boolean) {
+            handler.progress(isUserInteract)
+            this@MessageListActivityListener.isUserInteract = isUserInteract
+        }
 
         override fun remoteSearchFailed(folderServerId: String?, err: String?) {
             handler.post {
