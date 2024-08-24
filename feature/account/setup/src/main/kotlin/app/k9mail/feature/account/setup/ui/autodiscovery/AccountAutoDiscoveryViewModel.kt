@@ -58,6 +58,9 @@ internal class AccountAutoDiscoveryViewModel(
                         isNextButtonVisible = event.state == ConfigStep.OTHER,
                     )
                 }
+                if(event.state in listOf(ConfigStep.GMAIL, ConfigStep.OUTLOOK)){
+                    oAuthViewModel.event(AccountOAuthContract.Event.SignInClicked)
+                }
                 setUpMailServerConfig(event.state)
             }
 

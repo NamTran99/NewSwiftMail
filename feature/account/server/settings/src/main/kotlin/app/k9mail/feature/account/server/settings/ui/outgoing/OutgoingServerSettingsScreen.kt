@@ -12,6 +12,7 @@ import app.k9mail.feature.account.common.domain.entity.InteractionMode
 import app.k9mail.feature.account.common.ui.AccountTopAppBar
 import app.k9mail.feature.account.common.ui.WizardNavigationBar
 import app.k9mail.feature.account.server.settings.R
+import app.k9mail.feature.account.server.settings.ui.incoming.IncomingServerSettingsContract
 import app.k9mail.feature.account.server.settings.ui.outgoing.OutgoingServerSettingsContract.Effect
 import app.k9mail.feature.account.server.settings.ui.outgoing.OutgoingServerSettingsContract.Event
 import app.k9mail.feature.account.server.settings.ui.outgoing.OutgoingServerSettingsContract.ViewModel
@@ -40,16 +41,10 @@ fun OutgoingServerSettingsScreen(
 
     Scaffold(
         topBar = {
-            if (viewModel.mode == InteractionMode.Edit) {
-                TopAppBarWithBackButton(
-                    title = stringResource(id = R.string.account_server_settings_outgoing_top_bar_title),
-                    onBackClick = { dispatch(Event.OnBackClicked) },
-                )
-            } else {
-                AccountTopAppBar(
-                    title = stringResource(id = R.string.account_server_settings_outgoing_top_bar_title),
-                )
-            }
+            TopAppBarWithBackButton(
+                title = stringResource(id = R.string.account_server_settings_outgoing_top_bar_title),
+                onBackClick = { dispatch(Event.OnBackClicked) },
+            )
         },
         bottomBar = {
             WizardNavigationBar(

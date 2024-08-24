@@ -27,7 +27,6 @@ fun AccountOAuthView(
     }
 
     val (state, dispatch) = viewModel.observe { effect ->
-        Log.d("TAG", "AccountOAuthView: NamTD8 ${effect}")
         when (effect) {
             is Effect.NavigateNext -> onOAuthResult(OAuthResult.Success(effect.state))
             is Effect.NavigateBack -> onOAuthResult(OAuthResult.Failure)
@@ -42,8 +41,5 @@ fun AccountOAuthView(
         isEnabled = isEnabled,
     )
 
-    LaunchedEffect(Unit) {
-        delay(100)
-        dispatch(Event.SignInClicked)
-    }
+
 }

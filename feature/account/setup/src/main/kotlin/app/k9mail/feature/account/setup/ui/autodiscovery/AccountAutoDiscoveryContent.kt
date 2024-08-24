@@ -2,6 +2,8 @@ package app.k9mail.feature.account.setup.ui.autodiscovery
 
 import android.content.res.Resources
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.Image
@@ -17,6 +19,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -27,6 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.k9mail.core.ui.compose.common.mvi.observe
 import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
 import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonFilled
 import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonText
@@ -42,14 +46,16 @@ import app.k9mail.core.ui.compose.designsystem.template.ResponsiveWidthContainer
 import app.k9mail.core.ui.compose.theme2.MainTheme
 import app.k9mail.feature.account.common.domain.input.StringInputField
 import app.k9mail.feature.account.common.ui.loadingerror.rememberContentLoadingErrorViewState
+import app.k9mail.feature.account.oauth.domain.entity.OAuthResult
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract
-import app.k9mail.feature.account.oauth.ui.AccountOAuthView
+import app.k9mail.feature.account.oauth.ui.AccountOAuthContract.Effect
 import app.k9mail.feature.account.server.validation.ui.fake.FakeAccountOAuthViewModel
 import app.k9mail.feature.account.setup.R
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
 import app.k9mail.feature.account.setup.ui.autodiscovery.fake.fakeAutoDiscoveryResultSettings
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.ListMailLoginView
+import kotlinx.coroutines.delay
 
 @Composable
 internal fun AccountAutoDiscoveryContent(
@@ -112,6 +118,20 @@ internal fun AutoDiscoveryContent(
 ) {
     val resources = LocalContext.current.resources
 
+    val oAuthLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+    ) {
+        oAuthViewModel.event(AccountOAuthContract.Event.OnOAuthResult(it.resultCode, it.data))
+    }
+
+    oAuthViewModel.observe { effect ->
+        when (effect) {
+            is Effect.NavigateNext -> onEvent(Event.OnOAuthResult(OAuthResult.Success(effect.state)))
+            is Effect.NavigateBack -> onEvent(Event.OnOAuthResult(OAuthResult.Failure))
+            is Effect.LaunchOAuth -> oAuthLauncher.launch(effect.intent)
+        }
+    }
+
     ContentLoadingErrorView(
         state = rememberContentLoadingErrorViewState(state),
         loading = {
@@ -158,61 +178,6 @@ internal fun ContentView(
             .then(modifier),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
-        AnimatedVisibility(
-            modifier = Modifier.wrapContentHeight(),
-            visible = state.configStep in listOf(
-                AccountAutoDiscoveryContract.ConfigStep.GMAIL,
-                AccountAutoDiscoveryContract.ConfigStep.OUTLOOK,
-                AccountAutoDiscoveryContract.ConfigStep.YANDEX,
-            ),
-            exit = ExitTransition.None,
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Spacer(modifier = Modifier.height(MainTheme.spacings.double))
-                state.configStep.getDrawable()?.let { drawableID ->
-                    Image(
-                        painter = painterResource(id = drawableID),
-                        null,
-                        modifier = Modifier
-                            .height(80.dp)
-                            .fillMaxWidth(),
-                        contentScale = ContentScale.Fit,
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(MainTheme.spacings.double))
-                TextBodyLarge(
-                    text = stringResource(id = R.string.account_setup_sign_in_to_your_account),
-                    color = MainTheme.colors.primary,
-                )
-
-                Spacer(modifier = Modifier.height(MainTheme.spacings.double))
-                if (state.configStep in listOf(
-                        AccountAutoDiscoveryContract.ConfigStep.GMAIL,
-                        AccountAutoDiscoveryContract.ConfigStep.OUTLOOK,
-                    )
-                ) {
-                    AccountOAuthView(
-                        onOAuthResult = { result -> onEvent(Event.OnOAuthResult(result)) },
-                        viewModel = oAuthViewModel,
-                    )
-                }
-            }
-        }
-
-        if (state.configStep == AccountAutoDiscoveryContract.ConfigStep.LIST_MAIL_SERVER) {
-            ListMailLoginView(
-                modifier = Modifier.padding(0.dp, MainTheme.spacings.double, 0.dp, 0.dp),
-                listMail = state.listMailState,
-                onItemClick = {
-                    onEvent(Event.OnSelectServer(it))
-                },
-            )
-        }
-
         if (state.configStep in listOf(
                 AccountAutoDiscoveryContract.ConfigStep.YANDEX,
                 AccountAutoDiscoveryContract.ConfigStep.OTHER,
@@ -228,7 +193,7 @@ internal fun ContentView(
                 TextBodyLarge(
                     text = stringResource(id = R.string.account_setup_sign_in_to_your_account),
                     color = MainTheme.colors.primary,
-                    configTextStyle = {it.copy(fontWeight = FontWeight.Medium)}
+                    configTextStyle = { it.copy(fontWeight = FontWeight.Medium) },
                 )
 
                 if (state.autoDiscoverySettings != null) {
@@ -239,6 +204,48 @@ internal fun ContentView(
 //                    )
                 }
                 Spacer(modifier = Modifier.height(MainTheme.spacings.double))
+            } else {
+                AnimatedVisibility(
+                    modifier = Modifier.wrapContentHeight(),
+                    visible = state.configStep in listOf(
+                        AccountAutoDiscoveryContract.ConfigStep.YANDEX,
+                    ),
+                    exit = ExitTransition.None,
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Spacer(modifier = Modifier.height(MainTheme.spacings.double))
+                        state.configStep.getDrawable()?.let { drawableID ->
+                            Image(
+                                painter = painterResource(id = drawableID),
+                                null,
+                                modifier = Modifier
+                                    .height(80.dp)
+                                    .fillMaxWidth(),
+                                contentScale = ContentScale.Fit,
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(MainTheme.spacings.double))
+                        TextBodyLarge(
+                            text = stringResource(id = R.string.account_setup_sign_in_to_your_account),
+                            color = MainTheme.colors.primary,
+                        )
+
+                        Spacer(modifier = Modifier.height(MainTheme.spacings.double))
+//                if (state.configStep in listOf(
+//                        AccountAutoDiscoveryContract.ConfigStep.GMAIL,
+//                        AccountAutoDiscoveryContract.ConfigStep.OUTLOOK,
+//                    )
+//                ) {
+//                    AccountOAuthView(
+//                        onOAuthResult = { result -> onEvent(Event.OnOAuthResult(result)) },
+//                        viewModel = oAuthViewModel,
+//                    )
+//                }
+                    }
+                }
             }
 
             EmailAddressInput(
@@ -273,7 +280,15 @@ internal fun ContentView(
                 color = MainTheme.colors.primary,
                 onClick = {
                     onEvent(Event.OnManualConfigurationClicked)
-                }
+                },
+            )
+        }else{
+            ListMailLoginView(
+                modifier = Modifier.padding(0.dp, MainTheme.spacings.double, 0.dp, 0.dp),
+                listMail = state.listMailState,
+                onItemClick = {
+                    onEvent(Event.OnSelectServer(it))
+                },
             )
         }
     }
