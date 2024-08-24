@@ -66,9 +66,3 @@ internal fun AccountAutoDiscoveryContract.State.toOutgoingConfigState(): Outgoin
         )
     }
 }
-
-internal fun AccountAutoDiscoveryContract.State.toOptionsState(): DisplayOptionsContract.State {
-    return DisplayOptionsContract.State(
-        accountName = StringInputField(value = emailAddress.value),
-    )
-}

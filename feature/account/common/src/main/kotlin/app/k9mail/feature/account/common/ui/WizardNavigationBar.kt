@@ -38,13 +38,13 @@ fun WizardNavigationBar(
                 .fillMaxWidth(),
             horizontalArrangement = getHorizontalArrangement(state),
         ) {
-//            if (state.showBack) {
-//                ButtonOutlined(
-//                    text = backButtonText,
-//                    onClick = onBackClick,
-//                    enabled = state.isBackEnabled,
-//                )
-//            }
+            if (state.showBack) {
+                ButtonOutlined(
+                    text = backButtonText,
+                    onClick = onBackClick,
+                    enabled = state.isBackEnabled,
+                )
+            }
             if (state.showNext) {
                 ButtonFilled(
                     text = nextButtonText,

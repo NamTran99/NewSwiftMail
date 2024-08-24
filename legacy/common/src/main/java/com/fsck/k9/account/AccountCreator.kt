@@ -58,7 +58,7 @@ class AccountCreator(
 
         newAccount.oAuthState = account.authorizationState
 
-        newAccount.name = account.options.accountName
+        newAccount.name = account.options.displayName
         newAccount.senderName = account.options.displayName
         if (account.options.emailSignature != null) {
             newAccount.signatureUse = true

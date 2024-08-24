@@ -7,15 +7,22 @@ import app.k9mail.feature.account.setup.ui.options.display.DisplayOptionsContrac
 
 internal fun AccountState.toDisplayOptionsState(): State {
     val options = displayOptions
+
+    val displayNameFormat = emailAddress?.substringBefore("@")?.split("[._]".toRegex())?.flatMap {
+        val regex = Regex("[a-zA-Z]+|[0-9]+")
+        regex.findAll(it).map {
+            it.value.replaceFirstChar {
+                it.uppercase()
+            }
+        }
+    }?.joinToString(" ")
     return if (options == null) {
         State(
-            accountName = StringInputField(emailAddress ?: ""),
-            // displayName = StringInputField(""),
+            displayName = StringInputField(displayNameFormat?:""),
             // TODO: get display name from: preferences.defaultAccount?.senderName ?: ""
         )
     } else {
         State(
-            accountName = StringInputField(options.accountName),
             displayName = StringInputField(options.displayName),
             emailSignature = StringInputField(options.emailSignature ?: ""),
         )
@@ -24,7 +31,6 @@ internal fun AccountState.toDisplayOptionsState(): State {
 
 internal fun State.toAccountDisplayOptions(): AccountDisplayOptions {
     return AccountDisplayOptions(
-        accountName = accountName.value,
         displayName = displayName.value,
         emailSignature = emailSignature.value.takeIf { it.isNotEmpty() },
     )

@@ -9,13 +9,11 @@ interface DisplayOptionsContract {
     interface ViewModel : UnidirectionalViewModel<State, Event, Effect>
 
     data class State(
-        val accountName: StringInputField = StringInputField(),
         val displayName: StringInputField = StringInputField(),
         val emailSignature: StringInputField = StringInputField(),
     )
 
     sealed interface Event {
-        data class OnAccountNameChanged(val accountName: String) : Event
         data class OnDisplayNameChanged(val displayName: String) : Event
         data class OnEmailSignatureChanged(val emailSignature: String) : Event
 

@@ -33,7 +33,6 @@ class CreateAccount(
         syncOptions: AccountSyncOptions,
     ): AccountOptions {
         return AccountOptions(
-            accountName = displayOptions.accountName,
             displayName = displayOptions.displayName,
             emailSignature = displayOptions.emailSignature,
             checkFrequencyInMinutes = syncOptions.checkFrequencyInMinutes,

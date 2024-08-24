@@ -27,12 +27,6 @@ internal class DisplayOptionsViewModel(
         when (event) {
             Event.LoadAccountState -> handleOneTimeEvent(event, ::loadAccountState)
 
-            is Event.OnAccountNameChanged -> updateState { state ->
-                state.copy(
-                    accountName = state.accountName.updateValue(event.accountName),
-                )
-            }
-
             is Event.OnDisplayNameChanged -> updateState {
                 it.copy(
                     displayName = it.displayName.updateValue(event.displayName),
@@ -68,19 +62,16 @@ internal class DisplayOptionsViewModel(
     }
 
     private fun submit() = with(state.value) {
-        val accountNameResult = validator.validateAccountName(accountName.value)
         val displayNameResult = validator.validateDisplayName(displayName.value)
         val emailSignatureResult = validator.validateEmailSignature(emailSignature.value)
 
         val hasError = listOf(
-            accountNameResult,
             displayNameResult,
             emailSignatureResult,
         ).any { it is ValidationResult.Failure }
 
         updateState {
             it.copy(
-                accountName = it.accountName.updateFromValidationResult(accountNameResult),
                 displayName = it.displayName.updateFromValidationResult(displayNameResult),
                 emailSignature = it.emailSignature.updateFromValidationResult(emailSignatureResult),
             )
