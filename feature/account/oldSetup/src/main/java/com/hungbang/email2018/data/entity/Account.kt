@@ -1,54 +1,36 @@
-package app.k9mail.feature.account.setup.domain.entity.oldmail
+package com.hungbang.email2018.data.entity
 
 /**
  * Created by Hungnd on 4/20/2017.
  */
-class OldAccount {
-    var accountEmail: String = ""
+enum class OldMailAccountType{
+    GOOGLE, OUTLOOK, YANDEX
+}
 
-    var accountType: Int = 0
-    var signedInTime: Long = 0
-    var fullName: String? = ""
-    var firstName: String? = ""
-    var lastName: String? = ""
-    var thumbnailUrl: String? = ""
-    var password: String? = ""
-    private var signature = "a"
-    var folderNameInbox: String = "INBOX"
-    var folderNameSent: String? = ""
-    var folderNameDraft: String? = ""
-    var folderNameSpam: String? = ""
-    var folderNameTrash: String? = ""
-        private set
-    var isStartTls: Int = 1
+data class Account(
+    var accountEmail: String = "",
+    var accountType: Int = 0,
+    var signedInTime: Long = 0,
+    var fullName: String? = null,
+    var firstName: String? = null,
+    var lastName: String? = null,
+    var thumbnailUrl: String? = null,
+    var password: String? = null,
+    private var signature: String = "a",
+    var folderNameInbox: String = "INBOX",
+    var folderNameSent: String? = null,
+    var folderNameDraft: String? = null,
+    var folderNameSpam: String? = null,
+    var folderNameTrash: String? = null,
+    var isStartTls: Int = 1,
 
-    var listAnotherFolder: ArrayList<EmailFolder>? = null
+    var listAnotherFolder: ArrayList<EmailFolder>? = null,
 
     private val childFoldersInInbox: ArrayList<String>? = null
 
-    constructor()
+) {
 
-    constructor(
-        accountEmail: String, fullName: String?, firstName: String?,
-        lastName: String?, accountType: Int, thumbnailUrl: String?, password: String?,
-        signature: String, folderNameInbox: String, folderNameSent: String?,
-        folderNameDraft: String?, folderNameSpam: String?, folderNameTrash: String?
-    ) {
-        this.accountEmail = accountEmail
-        this.fullName = fullName
-        this.firstName = firstName
-        this.lastName = lastName
-        this.accountType = accountType
-        this.thumbnailUrl = thumbnailUrl
-        this.password = password
-        this.signature = signature
-        this.folderNameInbox = folderNameInbox
-        this.folderNameSent = folderNameSent
-        this.folderNameDraft = folderNameDraft
-        this.folderNameSpam = folderNameSpam
-        this.folderNameTrash = folderNameTrash
-    }
-
+    fun
 
     /**
      * Get the real folder name of an account corresponding to a label

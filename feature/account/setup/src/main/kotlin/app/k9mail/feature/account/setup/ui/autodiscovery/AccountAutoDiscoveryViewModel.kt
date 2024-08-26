@@ -34,6 +34,7 @@ internal class AccountAutoDiscoveryViewModel(
     initialState: State = State(),
     private val validator: Validator,
     private val getAutoDiscovery: UseCase.GetAutoDiscovery,
+    private val getManualDiscovery: UseCase.GetManualDiscoveryResult,
     private val accountStateRepository: AccountDomainContract.AccountStateRepository,
     override val oAuthViewModel: AccountOAuthContract.ViewModel,
 ) : BaseViewModel<State, Event, Effect>(initialState), AccountAutoDiscoveryContract.ViewModel {
@@ -128,65 +129,7 @@ internal class AccountAutoDiscoveryViewModel(
     }
 
     private fun setUpMailServerConfig(mailState: ConfigStep) {
-        val result = when (mailState) {
-            ConfigStep.GMAIL -> {
-                AutoDiscoveryResult.Settings(
-                    incomingServerSettings = ImapServerSettings(
-                        hostname = Hostname("imap.gmail.com"),
-                        port = Port(993),
-                        connectionSecurity = ConnectionSecurity.TLS,
-                        authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
-                        username = "",
-                    ),
-                    outgoingServerSettings = SmtpServerSettings(
-                        hostname = Hostname("smtp.gmail.com"),
-                        port = Port(465),
-                        connectionSecurity = ConnectionSecurity.TLS,
-                        authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
-                        username = "",
-                    ),
-                    source = "",
-                )
-            }
-
-            ConfigStep.OUTLOOK -> AutoDiscoveryResult.Settings(
-                incomingServerSettings = ImapServerSettings(
-                    hostname = Hostname("outlook.office365.com"),
-                    port = Port(993),
-                    connectionSecurity = ConnectionSecurity.TLS,
-                    authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
-                    username = "",
-                ),
-                outgoingServerSettings = SmtpServerSettings(
-                    hostname = Hostname("smtp.office365.com"),
-                    port = Port(587),
-                    connectionSecurity = ConnectionSecurity.StartTLS,
-                    authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
-                    username = "",
-                ),
-                source = "",
-            )
-
-            ConfigStep.YANDEX -> AutoDiscoveryResult.Settings(
-                incomingServerSettings = ImapServerSettings(
-                    hostname = Hostname("imap.yandex.com"),
-                    port = Port(993),
-                    connectionSecurity = ConnectionSecurity.TLS,
-                    authenticationTypes = listOf(AuthenticationType.PasswordCleartext),
-                    username = "",
-                ),
-                outgoingServerSettings = SmtpServerSettings(
-                    hostname = Hostname("smtp.yandex.com"),
-                    port = Port(465),
-                    connectionSecurity = ConnectionSecurity.TLS,
-                    authenticationTypes = listOf(AuthenticationType.PasswordCleartext),
-                    username = "",
-                ),
-                source = "",
-            )
-
-            else -> null
-        }
+        val result =getManualDiscovery.execute(mailState)
         updateAutoDiscoverySettings(result ?: return)
 
     }

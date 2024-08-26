@@ -43,8 +43,8 @@ android {
     }
 
     defaultConfig {
-//        applicationId = "com.mail.emailapp.easymail2024"
-        applicationId = "email.swift.ai.smart.allmail"
+        applicationId = "com.mail.emailapp.easymail2018"
+//        applicationId = "com.hungbang.email2018"
         testApplicationId = "email.swift.ai.smart.allmail"
 
         versionCode = 109
@@ -111,6 +111,12 @@ android {
     }
 
     signingConfigs {
+        getByName("debug") {
+            storeFile = file("D:\\debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
         createSigningConfig(project, SigningType.K9_RELEASE, isUpload = false)
     }
 
@@ -126,7 +132,6 @@ android {
         }
 
         debug {
-            applicationIdSuffix = ".debug"
             enableUnitTestCoverage = testCoverageEnabled
             enableAndroidTestCoverage = testCoverageEnabled
 

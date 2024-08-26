@@ -12,6 +12,7 @@ import app.k9mail.feature.account.server.validation.featureAccountServerValidati
 import app.k9mail.feature.account.setup.domain.DomainContract
 import app.k9mail.feature.account.setup.domain.usecase.CreateAccount
 import app.k9mail.feature.account.setup.domain.usecase.GetAutoDiscovery
+import app.k9mail.feature.account.setup.domain.usecase.GetManualDiscoveryResult
 import app.k9mail.feature.account.setup.domain.usecase.GetSpecialFolderOptions
 import app.k9mail.feature.account.setup.domain.usecase.ValidateSpecialFolderOptions
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract
@@ -66,6 +67,12 @@ val featureAccountSetupModule: Module = module {
             oauthProvider = get(),
         )
     }
+
+    single<DomainContract.UseCase.GetManualDiscoveryResult> {
+        GetManualDiscoveryResult(
+        )
+    }
+
 
     factory<DomainContract.UseCase.CreateAccount> {
         CreateAccount(
