@@ -4,18 +4,19 @@ import android.util.Log
 import com.fsck.k9.helper.EmailHelper
 import app.k9mail.feature.account.setup.domain.entity.oldmail.OldAccount
 import app.k9mail.feature.account.setup.domain.entity.oldmail.SignInConfigs
+import io.paperdb.Paper
 
 object EasyMailUtil {
     /**
      * used to get account email & password
      */
     fun getSavedAccountFromEasyMail(): OldAccount? {
-        val fakeAcc = OldAccount().apply {
-            accountEmail = "easyai.group@mailo.com"
-            password = "Matkhausieumanh1"
-        }
-//        return Paper.book().read<Account>("CURRENT_ACCOUNT", null)
-        return fakeAcc
+//        val fakeAcc = OldAccount().apply {
+//            accountEmail = "easyai.group@mailo.com"
+//            password = "Matkhausieumanh1"
+//        }
+        return Paper.book().read<OldAccount>("CURRENT_ACCOUNT", null)
+//        return fakeAcc
     }
 
     /**
@@ -31,8 +32,8 @@ object EasyMailUtil {
             "465",
             "0"
         )
-        return fakeConfigs
-//        return Paper.book().read<SignInConfigs>("KEY_CONFIG_SIGNIN$mailDomain", null)
+//        return fakeConfigs
+        return Paper.book().read<SignInConfigs>("KEY_CONFIG_SIGNIN$mailDomain", null)
     }
 
     fun testGetSavedDataFromEasyMail(){

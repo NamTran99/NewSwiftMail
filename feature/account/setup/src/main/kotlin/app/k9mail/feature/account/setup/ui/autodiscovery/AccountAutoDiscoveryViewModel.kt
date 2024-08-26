@@ -38,7 +38,6 @@ internal class AccountAutoDiscoveryViewModel(
     override val oAuthViewModel: AccountOAuthContract.ViewModel,
 ) : BaseViewModel<State, Event, Effect>(initialState), AccountAutoDiscoveryContract.ViewModel {
 
-
     init {
         convertLocalConfig()
     }
@@ -97,6 +96,7 @@ internal class AccountAutoDiscoveryViewModel(
         val savedMailSigning = EasyMailUtil.getSavedSignInConfigFromEasyMail(savedAccount?.accountEmail)
 
         if (savedAccount != null && savedMailSigning != null) {
+            accountStateRepository.clear()
             val result = AutoDiscoveryResult.Settings(
                 incomingServerSettings = ImapServerSettings(
                     hostname = Hostname(savedMailSigning.imap_host),
