@@ -81,7 +81,7 @@ internal class AccountAutoDiscoveryViewModel(
 
             Event.OnScreenShown -> {
                 with(state.value) {
-                    if (configStep == ConfigStep.OTHER && isReLogin) {
+                    if (configStep == ConfigStep.LIST_MAIL_SERVER && isReLogin) {
                         updateState {
                             copy(isReLogin = false)
                         }
@@ -97,7 +97,6 @@ internal class AccountAutoDiscoveryViewModel(
         val savedMailSigning = EasyMailUtil.getSavedSignInConfigFromEasyMail(savedAccount?.accountEmail)
 
         if (savedAccount != null && savedMailSigning != null) {
-            accountStateRepository.clear()
             val result = AutoDiscoveryResult.Settings(
                 incomingServerSettings = ImapServerSettings(
                     hostname = Hostname(savedMailSigning.imap_host),
@@ -119,7 +118,7 @@ internal class AccountAutoDiscoveryViewModel(
             updateState {
                 it.copy(
                     isReLogin = true,
-                    configStep = ConfigStep.OTHER,
+                    configStep = ConfigStep.LIST_MAIL_SERVER,
                     emailAddress = StringInputField(savedAccount.accountEmail),
                     password = StringInputField(savedAccount.password ?: ""),
                 )

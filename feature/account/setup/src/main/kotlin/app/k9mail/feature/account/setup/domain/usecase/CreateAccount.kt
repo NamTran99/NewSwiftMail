@@ -8,6 +8,7 @@ import app.k9mail.feature.account.common.domain.entity.AccountSyncOptions
 import app.k9mail.feature.account.setup.AccountSetupExternalContract.AccountCreator
 import app.k9mail.feature.account.setup.AccountSetupExternalContract.AccountCreator.AccountCreatorResult
 import app.k9mail.feature.account.setup.domain.DomainContract.UseCase
+import app.k9mail.feature.account.setup.domain.entity.EmailDisplayCount
 import java.util.UUID
 
 class CreateAccount(
@@ -15,6 +16,10 @@ class CreateAccount(
     private val uuidGenerator: () -> String = { UUID.randomUUID().toString() },
 ) : UseCase.CreateAccount {
     override suspend fun execute(accountState: AccountState): AccountCreatorResult {
+        val defaultSynOptions = AccountSyncOptions(
+            showNotification = true,
+            messageDisplayCount = EmailDisplayCount.DEFAULT.count
+        )
         val account = Account(
             uuid = uuidGenerator(),
             emailAddress = accountState.emailAddress!!,
@@ -22,7 +27,7 @@ class CreateAccount(
             outgoingServerSettings = accountState.outgoingServerSettings!!.copy(),
             authorizationState = accountState.authorizationState?.value,
             specialFolderSettings = accountState.specialFolderSettings,
-            options = mapOptions(accountState.displayOptions!!, accountState.syncOptions!!),
+            options = mapOptions(accountState.displayOptions!!,defaultSynOptions),
         )
 
         return accountCreator.createAccount(account)
@@ -35,7 +40,6 @@ class CreateAccount(
         return AccountOptions(
             displayName = displayOptions.displayName,
             emailSignature = displayOptions.emailSignature,
-            checkFrequencyInMinutes = syncOptions.checkFrequencyInMinutes,
             messageDisplayCount = syncOptions.messageDisplayCount,
             showNotification = syncOptions.showNotification,
         )

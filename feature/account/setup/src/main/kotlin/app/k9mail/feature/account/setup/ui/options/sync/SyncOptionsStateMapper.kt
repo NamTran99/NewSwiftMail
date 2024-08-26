@@ -12,7 +12,6 @@ internal fun AccountState.toSyncOptionsState(): State {
         State()
     } else {
         State(
-            checkFrequency = EmailCheckFrequency.fromMinutes(options.checkFrequencyInMinutes),
             messageDisplayCount = EmailDisplayCount.fromCount(options.messageDisplayCount),
             showNotification = options.showNotification,
         )
@@ -21,7 +20,6 @@ internal fun AccountState.toSyncOptionsState(): State {
 
 internal fun State.toAccountSyncOptions(): AccountSyncOptions {
     return AccountSyncOptions(
-        checkFrequencyInMinutes = checkFrequency.minutes,
         messageDisplayCount = messageDisplayCount.count,
         showNotification = showNotification,
     )

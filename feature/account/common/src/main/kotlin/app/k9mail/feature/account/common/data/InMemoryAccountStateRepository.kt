@@ -1,5 +1,6 @@
 package app.k9mail.feature.account.common.data
 
+import android.util.Log
 import app.k9mail.feature.account.common.domain.AccountDomainContract
 import app.k9mail.feature.account.common.domain.entity.AccountDisplayOptions
 import app.k9mail.feature.account.common.domain.entity.AccountState
@@ -51,6 +52,7 @@ class InMemoryAccountStateRepository(
     }
 
     override fun clear() {
+        Log.d("TAG", "clear: NamTD8 ${Throwable().stackTraceToString()}")
         state = AccountState()
     }
 

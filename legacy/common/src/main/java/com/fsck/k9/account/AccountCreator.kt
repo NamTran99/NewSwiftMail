@@ -65,7 +65,6 @@ class AccountCreator(
             newAccount.signature = account.options.emailSignature
         }
         newAccount.isNotifyNewMail = account.options.showNotification
-        newAccount.automaticCheckIntervalMinutes = account.options.checkFrequencyInMinutes
         newAccount.displayCount = account.options.messageDisplayCount
 
         newAccount.folderPushMode = FolderMode.NONE
