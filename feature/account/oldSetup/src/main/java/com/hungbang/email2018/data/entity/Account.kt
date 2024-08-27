@@ -3,8 +3,12 @@ package com.hungbang.email2018.data.entity
 /**
  * Created by Hungnd on 4/20/2017.
  */
-enum class OldMailAccountType{
-    GOOGLE, OUTLOOK, YANDEX
+enum class OldMailAccountType(val value: Int) {
+    GOOGLE(1), OUTLOOK(2), YANDEX(3);
+
+    companion object {
+        fun fromInt(value: Int) = entries.first { it.value == value }
+    }
 }
 
 data class Account(
@@ -26,11 +30,11 @@ data class Account(
 
     var listAnotherFolder: ArrayList<EmailFolder>? = null,
 
-    private val childFoldersInInbox: ArrayList<String>? = null
+    private val childFoldersInInbox: ArrayList<String>? = null,
 
-) {
+    ) {
 
-    fun
+    fun getAccountTypeFromInt() = OldMailAccountType.fromInt(accountType)
 
     /**
      * Get the real folder name of an account corresponding to a label

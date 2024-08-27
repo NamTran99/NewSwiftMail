@@ -12,7 +12,7 @@ interface DomainContract {
 
     interface UseCase {
         fun interface GetManualDiscoveryResult{
-            fun execute(configStep: ConfigStep):  AutoDiscoveryResult.Settings?
+            fun execute(configStep: ConfigStep, forcePasswordType: Boolean):  AutoDiscoveryResult.Settings?
         }
         fun interface GetAutoDiscovery {
             suspend fun execute(emailAddress: String): AutoDiscoveryResult

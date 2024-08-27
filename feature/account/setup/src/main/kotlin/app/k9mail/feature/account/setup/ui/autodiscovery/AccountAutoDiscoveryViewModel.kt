@@ -22,11 +22,13 @@ import app.k9mail.feature.account.setup.domain.entity.AutoDiscoveryAuthenticatio
 import app.k9mail.feature.account.setup.domain.oldMail.EasyMailUtil
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.AutoDiscoveryUiResult
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.ConfigStep
+import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.ConfigStep.GMAIL
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Effect
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Error
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Validator
+import com.hungbang.email2018.data.entity.OldMailAccountType
 import kotlinx.coroutines.launch
 
 @Suppress("TooManyFunctions")
@@ -49,7 +51,7 @@ internal class AccountAutoDiscoveryViewModel(
             is Event.PasswordChanged -> changePassword(event.password)
             is Event.OnOAuthResult -> onOAuthResult(event.result)
             is Event.OnSelectServer -> {
-                if(event.state in listOf(ConfigStep.OTHER, ConfigStep.YANDEX)){
+                if (event.state in listOf(ConfigStep.OTHER, ConfigStep.YANDEX)) {
                     accountStateRepository.clear()
                 }
                 updateState {
@@ -62,7 +64,7 @@ internal class AccountAutoDiscoveryViewModel(
                         isNextButtonVisible = event.state == ConfigStep.OTHER,
                     )
                 }
-                if(event.state in listOf(ConfigStep.GMAIL, ConfigStep.OUTLOOK)){
+                if (event.state in listOf(GMAIL, ConfigStep.OUTLOOK)) {
                     oAuthViewModel.event(AccountOAuthContract.Event.SignInClicked)
                 }
                 setUpMailServerConfig(event.state)
@@ -92,29 +94,44 @@ internal class AccountAutoDiscoveryViewModel(
         }
     }
 
+    private fun OldMailAccountType.conVertAccountTypeToConfigStep(): ConfigStep {
+        return when (this) {
+            OldMailAccountType.GOOGLE -> GMAIL
+            OldMailAccountType.OUTLOOK -> ConfigStep.OUTLOOK
+            OldMailAccountType.YANDEX -> ConfigStep.YANDEX
+        }
+    }
+
     private fun convertLocalConfig() {
         val savedAccount = EasyMailUtil.getSavedAccountFromEasyMail()
         val savedMailSigning = EasyMailUtil.getSavedSignInConfigFromEasyMail(savedAccount?.accountEmail)
 
-        if (savedAccount != null && savedMailSigning != null) {
-            accountStateRepository.clear()
-            val result = AutoDiscoveryResult.Settings(
-                incomingServerSettings = ImapServerSettings(
-                    hostname = Hostname(savedMailSigning.imap_host),
-                    port = Port(savedMailSigning.imap_port.toInt()),
-                    connectionSecurity = ConnectionSecurity.TLS,
-                    authenticationTypes = listOf(AuthenticationType.PasswordCleartext),
-                    username = savedAccount.accountEmail,
-                ),
-                outgoingServerSettings = SmtpServerSettings(
-                    hostname = Hostname(savedMailSigning.smtp_host),
-                    port = Port(savedMailSigning.smtp_port.toInt()),
-                    connectionSecurity = if (savedMailSigning.isSmtpStartTLS()) ConnectionSecurity.StartTLS else ConnectionSecurity.TLS,
-                    authenticationTypes = listOf(AuthenticationType.PasswordCleartext),
-                    username = savedAccount.accountEmail,
-                ),
-                source = "",
-            )
+        if (savedAccount != null) {
+            if (savedMailSigning != null) {
+                accountStateRepository.clear()
+                val result = AutoDiscoveryResult.Settings(
+                    incomingServerSettings = ImapServerSettings(
+                        hostname = Hostname(savedMailSigning.imap_host),
+                        port = Port(savedMailSigning.imap_port.toInt()),
+                        connectionSecurity = ConnectionSecurity.TLS,
+                        authenticationTypes = listOf(AuthenticationType.PasswordCleartext),
+                        username = savedAccount.accountEmail,
+                    ),
+                    outgoingServerSettings = SmtpServerSettings(
+                        hostname = Hostname(savedMailSigning.smtp_host),
+                        port = Port(savedMailSigning.smtp_port.toInt()),
+                        connectionSecurity = if (savedMailSigning.isSmtpStartTLS()) ConnectionSecurity.StartTLS else ConnectionSecurity.TLS,
+                        authenticationTypes = listOf(AuthenticationType.PasswordCleartext),
+                        username = savedAccount.accountEmail,
+                    ),
+                    source = "",
+                )
+
+
+                updateAutoDiscoverySettings(result)
+            }else{
+                setUpMailServerConfig(savedAccount.getAccountTypeFromInt().conVertAccountTypeToConfigStep())
+            }
 
             updateState {
                 it.copy(
@@ -124,14 +141,13 @@ internal class AccountAutoDiscoveryViewModel(
                     password = StringInputField(savedAccount.password ?: ""),
                 )
             }
-            updateAutoDiscoverySettings(result)
         }
+
     }
 
     private fun setUpMailServerConfig(mailState: ConfigStep) {
-        val result =getManualDiscovery.execute(mailState)
+        val result = getManualDiscovery.execute(mailState, false)
         updateAutoDiscoverySettings(result ?: return)
-
     }
 
     private fun changeEmailAddress(emailAddress: String) {
@@ -318,7 +334,7 @@ internal class AccountAutoDiscoveryViewModel(
                 )
             }
 
-            ConfigStep.YANDEX, ConfigStep.GMAIL, ConfigStep.OUTLOOK, ConfigStep.OTHER -> {
+            ConfigStep.YANDEX, GMAIL, ConfigStep.OUTLOOK, ConfigStep.OTHER -> {
                 updateState {
                     it.copy(
                         configStep = ConfigStep.LIST_MAIL_SERVER,

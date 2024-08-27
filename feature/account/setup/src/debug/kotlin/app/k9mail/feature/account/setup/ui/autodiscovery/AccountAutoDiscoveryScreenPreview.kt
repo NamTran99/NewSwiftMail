@@ -19,6 +19,7 @@ internal fun AccountAutoDiscoveryScreenPreview() {
                 validator = AccountAutoDiscoveryValidator(),
                 getAutoDiscovery = { AutoDiscoveryResult.NoUsableSettingsFound },
                 accountStateRepository = FakeAccountStateRepository(),
+                getManualDiscovery = {_,_ -> null},
                 oAuthViewModel = FakeAccountOAuthViewModel(),
             ),
             appNameProvider = FakeAppNameProvider,

@@ -12,7 +12,7 @@ import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryCon
 
 internal class GetManualDiscoveryResult(
 ) : DomainContract.UseCase.GetManualDiscoveryResult {
-    override fun execute(configStep: ConfigStep): AutoDiscoveryResult.Settings? {
+    override fun execute(configStep: ConfigStep, forcePasswordType: Boolean): AutoDiscoveryResult.Settings? {
         return when (configStep) {
             ConfigStep.GMAIL -> {
                 AutoDiscoveryResult.Settings(
@@ -20,14 +20,20 @@ internal class GetManualDiscoveryResult(
                         hostname = Hostname("imap.gmail.com"),
                         port = Port(993),
                         connectionSecurity = ConnectionSecurity.TLS,
-                        authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                        authenticationTypes = if (forcePasswordType) listOf(AuthenticationType.PasswordCleartext) else listOf(
+                            AuthenticationType.OAuth2,
+                            AuthenticationType.PasswordCleartext,
+                        ),
                         username = "",
                     ),
                     outgoingServerSettings = SmtpServerSettings(
                         hostname = Hostname("smtp.gmail.com"),
                         port = Port(465),
                         connectionSecurity = ConnectionSecurity.TLS,
-                        authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                        authenticationTypes =if (forcePasswordType) listOf(AuthenticationType.PasswordCleartext) else listOf(
+                            AuthenticationType.OAuth2,
+                            AuthenticationType.PasswordCleartext,
+                        ),
                         username = "",
                     ),
                     source = "",
@@ -39,14 +45,20 @@ internal class GetManualDiscoveryResult(
                     hostname = Hostname("outlook.office365.com"),
                     port = Port(993),
                     connectionSecurity = ConnectionSecurity.TLS,
-                    authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                    authenticationTypes =if (forcePasswordType) listOf(AuthenticationType.PasswordCleartext) else listOf(
+                        AuthenticationType.OAuth2,
+                        AuthenticationType.PasswordCleartext,
+                    ),
                     username = "",
                 ),
                 outgoingServerSettings = SmtpServerSettings(
                     hostname = Hostname("smtp.office365.com"),
                     port = Port(587),
                     connectionSecurity = ConnectionSecurity.StartTLS,
-                    authenticationTypes = listOf(AuthenticationType.OAuth2, AuthenticationType.PasswordCleartext),
+                    authenticationTypes = if (forcePasswordType) listOf(AuthenticationType.PasswordCleartext) else listOf(
+                        AuthenticationType.OAuth2,
+                        AuthenticationType.PasswordCleartext,
+                    ),
                     username = "",
                 ),
                 source = "",
