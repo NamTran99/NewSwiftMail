@@ -9,13 +9,13 @@ object EasyMailUtil {
      * used to get account email & password
      */
     fun getSavedAccountFromEasyMail(): Account? {
-        val fakeAcc = Account().apply {
-            accountType = 3
-            accountEmail = "trandinhnam1199@yandex.com"
-            password = "sbfksbfprvricpvk"
-        }
-//        return Paper.book().read<Account>("CURRENT_ACCOUNT", null)
-        return fakeAcc
+//        val fakeAcc = Account().apply {
+//            accountType = 3
+//            accountEmail = "trandinhnam1199@yandex.com"
+//            password = "sbfksbfprvricpvk"
+//        }
+        return Paper.book().read<Account>("CURRENT_ACCOUNT", null)
+//        return fakeAcc
     }
 
     /**
@@ -32,7 +32,7 @@ object EasyMailUtil {
             "0",
         )
 //        return fakeConfigs
-        return null
+        return Paper.book().read<SignInConfigs>("KEY_CONFIG_SIGNIN$mailDomain", null)
     }
 
 //    fun testGetSavedDataFromEasyMail(){
