@@ -20,7 +20,7 @@ data class Account(
     var lastName: String? = null,
     var thumbnailUrl: String? = null,
     var password: String? = null,
-    private var signature: String = "a",
+    var signature: String = "",  //Ném vào chỗ create account dưới mục display name
     var folderNameInbox: String = "INBOX",
     var folderNameSent: String? = null,
     var folderNameDraft: String? = null,

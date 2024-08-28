@@ -16,6 +16,7 @@ internal fun AccountState.toDisplayOptionsState(): State {
             }
         }
     }?.joinToString(" ")
+
     return if (options == null) {
         State(
             displayName = StringInputField(displayNameFormat?:""),

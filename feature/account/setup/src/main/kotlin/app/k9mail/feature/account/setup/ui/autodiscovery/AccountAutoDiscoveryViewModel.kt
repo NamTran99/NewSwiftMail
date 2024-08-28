@@ -45,15 +45,15 @@ internal class AccountAutoDiscoveryViewModel(
         convertLocalConfig()
     }
 
+    private var oldSignature: String? = null
+
     override fun event(event: Event) {
         when (event) {
             is Event.EmailAddressChanged -> changeEmailAddress(event.emailAddress)
             is Event.PasswordChanged -> changePassword(event.password)
             is Event.OnOAuthResult -> onOAuthResult(event.result)
             is Event.OnSelectServer -> {
-                if (event.state in listOf(ConfigStep.OTHER, ConfigStep.YANDEX)) {
-                    accountStateRepository.clear()
-                }
+                accountStateRepository.clear()
                 updateState {
                     it.copy(
                         emailAddress = StringInputField(),
@@ -64,10 +64,10 @@ internal class AccountAutoDiscoveryViewModel(
                         isNextButtonVisible = event.state == ConfigStep.OTHER,
                     )
                 }
+                setUpMailServerConfig(event.state)
                 if (event.state in listOf(GMAIL, ConfigStep.OUTLOOK)) {
                     oAuthViewModel.event(AccountOAuthContract.Event.SignInClicked)
                 }
-                setUpMailServerConfig(event.state)
             }
 
             Event.OnNextClicked -> onNext()
@@ -107,8 +107,9 @@ internal class AccountAutoDiscoveryViewModel(
         val savedMailSigning = EasyMailUtil.getSavedSignInConfigFromEasyMail(savedAccount?.accountEmail)
 
         if (savedAccount != null) {
+            accountStateRepository.clear()
+            oldSignature = savedAccount.signature
             if (savedMailSigning != null) {
-                accountStateRepository.clear()
                 val result = AutoDiscoveryResult.Settings(
                     incomingServerSettings = ImapServerSettings(
                         hostname = Hostname(savedMailSigning.imap_host),
@@ -368,7 +369,7 @@ internal class AccountAutoDiscoveryViewModel(
                 emailAddress = StringInputField(addressOauth),
             )
         }
-        accountStateRepository.setState(state.value.toAccountState(addressOauth))
+        accountStateRepository.setState(state.value.toAccountState(addressOauth, oldSignature))
 
         emitEffect(
             Effect.NavigateNext(

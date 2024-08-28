@@ -63,7 +63,7 @@ internal fun ListMailLoginView(
                     }
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                DividerHorizontal(modifier = Modifier.padding(MainTheme.spacings.double, 0.dp))
+                DividerHorizontal(modifier = Modifier.padding(MainTheme.spacings.double, 0.dp), color = MainTheme.colors.primary)
             }
 
         }
