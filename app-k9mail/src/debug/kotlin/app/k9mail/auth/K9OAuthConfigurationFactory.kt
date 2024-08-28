@@ -48,7 +48,7 @@ class K9OAuthConfigurationFactory : OAuthConfigurationFactory {
             "outlook.office365.com",
             "smtp.office365.com",
         ) to OAuthConfiguration(
-            clientId = "c9363971-7ecd-45d0-a33d-a111b0524c4b",
+            clientId = "394184db-9ac2-4648-822e-1bb6474432ec",
             scopes = listOf(
                 "https://outlook.office.com/IMAP.AccessAsUser.All",
                 "https://outlook.office.com/SMTP.Send",
@@ -58,7 +58,7 @@ class K9OAuthConfigurationFactory : OAuthConfigurationFactory {
             ),
             authorizationEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
             tokenEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-            redirectUri = "msauth://email.swift.ai.smart.allmail.debug/fjyCkiR1q5vNsweleYpAD4%2FgFUs%3D",
+            redirectUri = "msauth://com.mail.emailapp.easymail2018/%2BgWbvv6P8JNcgqpnrqIF6pRUw%2Fk%3D",
         )
     }
 
