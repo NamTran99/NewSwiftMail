@@ -173,7 +173,7 @@ internal fun ContentView(
     Log.d("TAG", "NamTD8 ContentView: check state${state.configStep}")
     Column(
         modifier = Modifier
-            .padding(MainTheme.spacings.double)
+            .padding(vertical = MainTheme.spacings.double)
             .fillMaxSize()
             .then(modifier),
         horizontalAlignment = Alignment.CenterHorizontally,

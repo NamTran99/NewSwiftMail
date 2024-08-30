@@ -35,7 +35,6 @@ internal fun ListMailLoginView(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .imePadding()
             .background(MainTheme.colors.surfaceBright),
     ) {
         listMail.forEach {

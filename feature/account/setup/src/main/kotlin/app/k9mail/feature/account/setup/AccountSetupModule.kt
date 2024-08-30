@@ -69,8 +69,7 @@ val featureAccountSetupModule: Module = module {
     }
 
     single<DomainContract.UseCase.GetManualDiscoveryResult> {
-        GetManualDiscoveryResult(
-        )
+        GetManualDiscoveryResult()
     }
 
 
