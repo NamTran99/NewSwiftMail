@@ -2331,23 +2331,6 @@ public class MessagingController {
                                                boolean notify, MessagingListener listener, NotificationState notificationState) {
         Timber.v("Folder %s was last synced @ %tc", folder.getServerId(), folder.getLastChecked());
 
-        if (!ignoreLastCheckedTime) {
-            long lastCheckedTime = folder.getLastChecked();
-            long now = System.currentTimeMillis();
-
-            if (lastCheckedTime > now) {
-                // The time this folder was last checked lies in the future. We better ignore this and sync now.
-            } else {
-                long syncInterval = account.getAutomaticCheckIntervalMinutes() * 60L * 1000L;
-                long nextSyncTime = lastCheckedTime + syncInterval;
-                if (nextSyncTime > now) {
-                    Timber.v("Not syncing folder %s, previously synced @ %tc which would be too recent for the " +
-                        "account sync interval", folder.getServerId(), lastCheckedTime);
-                    return;
-                }
-            }
-        }
-
         try {
             showFetchingMailNotificationIfNecessary(account, folder);
             try {

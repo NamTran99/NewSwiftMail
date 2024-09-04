@@ -256,6 +256,16 @@ class MessageListFragment :
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val pm = requireContext().getSystemService<PowerManager>()
+
+        pm?.apply {
+            val intent = Intent()
+            if (!isIgnoringBatteryOptimizations(context?.packageName)) {
+                intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+                intent.data = Uri.parse("package:${context?.packageName}")
+                context?.startActivity(intent)
+            }
+        }
         return if (error == null) {
             inflater.inflate(R.layout.message_list_fragment, container, false)
         } else {
@@ -596,16 +606,7 @@ class MessageListFragment :
             hasConnectivity = Utility.hasConnectivity(requireActivity().application)
         }
 
-        val pm = requireContext().getSystemService<PowerManager>()
 
-        pm?.apply {
-            val intent = Intent()
-            if (!isIgnoringBatteryOptimizations(context?.packageName)) {
-                intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
-                intent.data = Uri.parse("package:${context?.packageName}")
-                context?.startActivity(intent)
-            }
-        }
 
         messagingController.addListener(activityListener)
 
