@@ -4,8 +4,11 @@ import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.PowerManager
 import android.os.SystemClock
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -14,6 +17,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.view.ActionMode
+import androidx.core.content.getSystemService
 import androidx.core.os.BundleCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
@@ -590,6 +594,17 @@ class MessageListFragment :
 
         if (hasConnectivity == null) {
             hasConnectivity = Utility.hasConnectivity(requireActivity().application)
+        }
+
+        val pm = requireContext().getSystemService<PowerManager>()
+
+        pm?.apply {
+            val intent = Intent()
+            if (!isIgnoringBatteryOptimizations(context?.packageName)) {
+                intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+                intent.data = Uri.parse("package:${context?.packageName}")
+                context?.startActivity(intent)
+            }
         }
 
         messagingController.addListener(activityListener)
