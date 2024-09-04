@@ -99,6 +99,7 @@ junitVersion = "1.1.5"
 preferenceKtx = "1.2.1"
 datastoreCoreAndroid = "1.1.1"
 accompanistPermission = "0.35.1-alpha"
+lifecycleCommonJvm = "2.8.4"
 
 
 [plugins]
@@ -240,6 +241,7 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preferenceKtx" }
 androidx-datastore-core-android = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastoreCoreAndroid" }
 accompanist-permission = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermission" }
+androidx-lifecycle-common-jvm = { group = "androidx.lifecycle", name = "lifecycle-common-jvm", version.ref = "lifecycleCommonJvm" }
 
 [bundles]
 shared-jvm-main = [

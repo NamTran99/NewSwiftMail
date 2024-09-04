@@ -13,7 +13,7 @@ private const val PERMISSION_PREF_NAME = "permission_pref"
 private val Context.dataStore by preferencesDataStore(PERMISSION_PREF_NAME)
 
 class AppPermissionDataStore(
-    private val context: Context,
+     context: Context,
 ) {
     private val perStore = context.dataStore
 
@@ -32,7 +32,7 @@ class AppPermissionDataStore(
     }
 
     suspend fun isPermissionBlock(permission: String): Boolean {
-        return getDeclineTime(permission) == 2
+        return getDeclineTime(permission) >= 2
     }
 
     companion object {

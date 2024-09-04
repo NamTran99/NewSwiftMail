@@ -30,7 +30,7 @@ class AndroidPermissionChecker(
     }
 
     private suspend fun checkSelfPermission(permission: String): PermissionState {
-        return if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) {
+           return if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) {
             PermissionState.Granted
         } else {
             if (dataStore.isPermissionBlock(permission)) PermissionState.DeniedForever else

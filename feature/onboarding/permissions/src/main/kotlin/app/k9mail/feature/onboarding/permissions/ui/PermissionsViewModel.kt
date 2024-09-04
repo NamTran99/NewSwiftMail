@@ -1,5 +1,6 @@
 package app.k9mail.feature.onboarding.permissions.ui
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import app.k9mail.core.android.permissions.Permission
 import app.k9mail.core.android.permissions.PermissionState
@@ -21,13 +22,10 @@ class PermissionsViewModel(
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : BaseViewModel<State, Event, Effect>(initialState = State(isLoading = true)), ViewModel {
 
-    init {
-        loadPermissionState()
-    }
 
     override fun event(event: Event) {
         when (event) {
-            Event.LoadPermissionState -> handleOneTimeEvent(event, ::loadPermissionState)
+            Event.LoadPermissionState ->loadPermissionState()
             Event.AllowContactsPermissionClicked -> handleAllowContactsPermissionClicked()
             Event.AllowNotificationsPermissionClicked -> handleAllowNotificationsPermissionClicked()
             Event.BlockNotificationPermission -> {
@@ -43,6 +41,7 @@ class PermissionsViewModel(
 
     private fun loadPermissionState() {
         viewModelScope.launch {
+            Log.d("TAG", "loadPermissionState: qua day NamTD8")
             val (contactsPermissionState, notificationsPermissionState) = withContext(backgroundDispatcher) {
                 arrayOf(
                     checkPermission(Permission.Contacts),
@@ -64,7 +63,6 @@ class PermissionsViewModel(
             }
             val isNotificationsPermissionVisible = notificationsPermissionState != PermissionState.GrantedImplicitly
 
-
             updateState { state ->
                 state.copy(
                     isLoading = false,
@@ -73,15 +71,6 @@ class PermissionsViewModel(
                     isNotificationsPermissionVisible = isNotificationsPermissionVisible,
                 )
             }
-
-            if(notificationsUiPermissionState !=  UiPermissionState.Granted){
-                handleAllowNotificationsPermissionClicked()
-            }
-
-            if(contactsUiPermissionState !=  UiPermissionState.Granted){
-                handleAllowContactsPermissionClicked()
-            }
-
             updateNextButtonState()
         }
     }

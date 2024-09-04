@@ -118,6 +118,7 @@ private fun PermissionBoxes(
         Spacer(modifier = Modifier.height(MainTheme.spacings.quadruple))
 
         PermissionBox(
+            isAutoClick = true,
             icon = IconsWithBottomRightOverlay.notification,
             permissionState = state.notificationsPermissionState,
             title = stringResource(R.string.onboarding_permissions_notifications_title),
@@ -127,6 +128,7 @@ private fun PermissionBoxes(
     }
 
     PermissionBox(
+        isAutoClick = !state.isNotificationsPermissionVisible,
         icon = IconsWithBottomRightOverlay.person,
         permissionState = state.contactsPermissionState,
         title = stringResource(R.string.onboarding_permissions_contacts_title),

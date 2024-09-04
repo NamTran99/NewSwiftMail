@@ -5,13 +5,20 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import app.k9mail.core.common.provider.AppNameProvider
 import app.k9mail.core.ui.compose.common.mvi.observe
 import app.k9mail.feature.onboarding.permissions.ui.PermissionsContract.Effect
@@ -39,16 +46,17 @@ fun PermissionsScreen(
     val context = LocalContext.current
 
     val uiState = viewModel.state
-
-    val notificationsPermissionLauncher = rememberLauncherForActivityResult(RequestPermission()) { success ->
-        viewModel.event(Event.NotificationsPermissionResult(success))
-    }
     val contactsPermissionLauncher = rememberLauncherForActivityResult(RequestPermission()) { success ->
-//        if (uiState.value.notificationsPermissionState == PermissionsContract.UiPermissionState.Unknown) {
-//            notificationsPermissionLauncher.requestNotificationsPermission()
-//        }
         viewModel.event(Event.ContactsPermissionResult(success))
     }
+    val notificationsPermissionLauncher = rememberLauncherForActivityResult(RequestPermission()) { success ->
+        if(uiState.value.contactsPermissionState == PermissionsContract.UiPermissionState.Unknown){
+            contactsPermissionLauncher.requestContactsPermission()
+        }
+        viewModel.event(Event.NotificationsPermissionResult(success))
+    }
+
+
 
     val (state, dispatch) = viewModel.observe { effect ->
         when (effect) {
@@ -69,8 +77,14 @@ fun PermissionsScreen(
         // no back navigation
     }
 
-    LaunchedEffect(key1 = Unit) {
-        dispatch(Event.LoadPermissionState)
+    OnLifecycleEvent{
+            owner, event ->
+        Log.d("TAG", "PermissionsScreen: NAmTD8 ${event.name}")
+        // do stuff on event
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> { dispatch(Event.LoadPermissionState) }
+            else                      -> { /* other stuff */ }
+        }
     }
 
     PermissionsContent(
@@ -78,6 +92,25 @@ fun PermissionsScreen(
         onEvent = dispatch,
         appName = appNameProvider.appName,
     )
+}
+@Composable
+fun OnLifecycleEvent(onEvent: (owner: LifecycleOwner, event: Lifecycle.Event) -> Unit) {
+    val eventHandler = rememberUpdatedState(onEvent)
+    val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)
+
+    DisposableEffect(lifecycleOwner.value) {
+        val lifecycle = lifecycleOwner.value.lifecycle
+        val observer = LifecycleEventObserver { owner, event ->
+            Log.d("TAG", "OnLifecycleEvent: NamTD8 ${owner} ${event.name}")
+
+            eventHandler.value(owner, event)
+        }
+
+        lifecycle.addObserver(observer)
+        onDispose {
+            lifecycle.removeObserver(observer)
+        }
+    }
 }
 
 private fun ManagedActivityResultLauncher<String, Boolean>.requestContactsPermission() {

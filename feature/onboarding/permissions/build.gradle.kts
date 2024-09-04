@@ -12,4 +12,5 @@ dependencies {
     implementation(projects.core.android.permissions)
     implementation(projects.core.ui.compose.designsystem)
     implementation(projects.feature.account.common)
+    implementation(libs.androidx.lifecycle.common.jvm)
 }

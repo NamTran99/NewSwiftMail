@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -87,6 +88,7 @@ private fun IconWithPermissionStateOverlay(
     permissionState: UiPermissionState,
     onAllowClick: () -> Unit,
 ) {
+
     Box {
         val iconSize = MainTheme.sizes.largeIcon
         val overlayIconSize = iconSize / 2
@@ -102,7 +104,9 @@ private fun IconWithPermissionStateOverlay(
 
         when (permissionState) {
             UiPermissionState.Unknown -> {
-                if (isAutoClick) onAllowClick.invoke()
+                LaunchedEffect(key1 = Unit) {
+                    if (isAutoClick) onAllowClick.invoke()
+                }
             }
 
             UiPermissionState.Granted -> {
