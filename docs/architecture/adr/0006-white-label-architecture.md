@@ -9,7 +9,7 @@
 
 ## Context
 
-Our project hosts two separate applications, K-9 Mail and Thunderbird for Android, which share a significant amount of functionality. Despite their common features, each app requires distinct branding elements such as app names, themes, and specific strings.
+Our project hosts two separate applications, Easy Mail and Thunderbird for Android, which share a significant amount of functionality. Despite their common features, each app requires distinct branding elements such as app names, themes, and specific strings.
 
 ## Decision
 
@@ -17,7 +17,7 @@ We have decided to adopt a modular white-label architecture, where each applicat
 
 ### Application Modules
 
-There will be 2 separate modules for each of the two applications: **Thunderbird for Android** will be located in `app-thunderbird` and **K-9 Mail** in `app-k9mail`. These modules will contain app-specific implementations, configurations, resources, and startup logic. They should solely depend on the `app-common` module for shared functionalities and may selectively integrate other modules when needed to configure app-specific functionality.
+There will be 2 separate modules for each of the two applications: **Thunderbird for Android** will be located in `app-thunderbird` and **Easy Mail** in `app-k9mail`. These modules will contain app-specific implementations, configurations, resources, and startup logic. They should solely depend on the `app-common` module for shared functionalities and may selectively integrate other modules when needed to configure app-specific functionality.
 
 ### App Common Module
 

@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">The K-9 Dog Walkers</string>
+    <string name="about_app_authors_k9">The Easy Dog Walkers</string>
     <string name="source_code">Πηγαίος κώδικας</string>
     <string name="app_license">Άδεια χρήσης Apache, έκδοση 2.0</string>
     <string name="about_project_title">Έργο ανοικτού κώδικα</string>
@@ -243,7 +243,7 @@
     <string name="general_settings_ui_density_default">Εξ ορισμού</string>
     <string name="general_settings_ui_density_relaxed">Χαλαρό</string>
     <string name="global_settings_privacy_hide_useragent">Απόκρυψη προγράμματος-πελάτη αλληλογραφίας</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Αφαίρεση του Πράκτορα-χρήστη K-9 από την επικεφαλίδα του μηνύματος</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Αφαίρεση του Πράκτορα-χρήστη Easy από την επικεφαλίδα του μηνύματος</string>
     <string name="global_settings_privacy_hide_timezone">Απόκρυψη ζώνης ώρας</string>
     <string name="global_settings_privacy_hide_timezone_detail">Χρήση της Συντονισμένης Παγκόσμιας Ώρας έναντι της τοπικής ζώνης ώρας, στις επικεφαλίδες αλληλογραφίας και απάντησης</string>
     <string name="global_settings_notification_quick_delete_title">Εμφάνιση κουμπιού «Διαγραφή»</string>

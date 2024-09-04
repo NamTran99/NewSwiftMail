@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">K-9 Txakur-paseatzaileak</string>
+    <string name="about_app_authors_k9">Easy Txakur-paseatzaileak</string>
     <string name="source_code">Iturburu-kodea</string>
     <string name="app_license">Apache lizentzia, 2.0 bertsioa</string>
     <string name="about_project_title">Kode Irekiko Proiektua</string>
@@ -242,7 +242,7 @@
     <string name="general_settings_ui_density_default">Lehenetsia</string>
     <string name="general_settings_ui_density_relaxed">Erlaxatua</string>
     <string name="global_settings_privacy_hide_useragent">Ezkutatu posta bezeroa</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Kendu K-9 erabiltzaile-agentea posta goiburuetatik</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Kendu Easy erabiltzaile-agentea posta goiburuetatik</string>
     <string name="global_settings_privacy_hide_timezone">Ezkutatu ordu-zona</string>
     <string name="global_settings_privacy_hide_timezone_detail">Erabili UTC tokiko ordu-zonaren ordez posta goiburuetan eta erantzunen goiburuan</string>
     <string name="global_settings_notification_quick_delete_title">Erakutsi \'Ezabatu\' botoia</string>

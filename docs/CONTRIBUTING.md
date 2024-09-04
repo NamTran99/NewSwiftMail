@@ -20,7 +20,7 @@ If you encounter a bug or have a feature request, please follow these steps:
 
 ## Translations
 
-If you'd like to help to translate K-9 Mail / Thunderbird for Android, please visit the [Weblate - K-9 Mail/Thunderbird project](https://hosted.weblate.org/projects/tb-android/).
+If you'd like to help to translate Easy Mail / Thunderbird for Android, please visit the [Weblate - Easy Mail/Thunderbird project](https://hosted.weblate.org/projects/tb-android/).
 
 ## Contributing Code
 

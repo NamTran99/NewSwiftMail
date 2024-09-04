@@ -148,7 +148,7 @@ class Pop3Connection {
     }
 
     /*
-     * If STARTTLS is not available throws a CertificateValidationException which in K-9
+     * If STARTTLS is not available throws a CertificateValidationException which in Easy
      * triggers a "Certificate error" notification that takes the user to the incoming
      * server settings for review. This might be needed if the account was configured with an obsolete
      * "STARTTLS (if available)" setting.

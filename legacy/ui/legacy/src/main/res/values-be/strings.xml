@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">The K-9 Dog Walkers</string>
+    <string name="about_app_authors_k9">The Easy Dog Walkers</string>
     <string name="source_code">Зыходны код</string>
     <string name="app_license">Ліцэнзія Apache, версія 2.0</string>
     <string name="about_project_title">Праект з адкрытым зыходным кодам</string>
@@ -247,7 +247,7 @@
     <string name="general_settings_ui_density_default">Прадвызначаная</string>
     <string name="general_settings_ui_density_relaxed">Павольны</string>
     <string name="global_settings_privacy_hide_useragent">Схаваць паштовы кліент</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Прыбраць \"K-9 User-Agent\" з загалоўкаў лістоў</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Прыбраць \"Easy User-Agent\" з загалоўкаў лістоў</string>
     <string name="global_settings_privacy_hide_timezone">Схаваць часавы пояс</string>
     <string name="global_settings_privacy_hide_timezone_detail">Выкарыстоўваць у загалоўках лістоў UTC замест мясцовага часу</string>
     <string name="global_settings_notification_quick_delete_title">Паказваць кнопку выдалення</string>

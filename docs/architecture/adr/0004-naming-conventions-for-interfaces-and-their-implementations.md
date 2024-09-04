@@ -28,7 +28,7 @@ We'll be using the following guidelines for naming interfaces and their implemen
    purpose and functionality.
 4. **Platform-specific Implementations:** Use the platform name as a prefix for interface implementations specific to
    that platform, e.g. `AndroidPowerManager`.
-5. **App-specific Implementations:** Use the prefix `K9` for K-9 Mail and `Tb` for Thunderbird when app-specific
+5. **App-specific Implementations:** Use the prefix `K9` for Easy Mail and `Tb` for Thunderbird when app-specific
    implementations are needed, e.g. `K9AppNameProvider` and `TbAppNameProvider`.
 6. **Flexibility:** If no brief descriptive name fits and there is only one production implementation, use the prefix
    `Default`, like `DefaultImapFolder`.

@@ -2,7 +2,7 @@
 Usage: html-cleaner [OPTIONS] INPUT [OUTPUT]
 
   A tool that modifies HTML to only keep allowed elements and attributes the
-  same way that K-9 Mail does.
+  same way that Easy Mail does.
 
 Options:
   -h, --help  Show this message and exit

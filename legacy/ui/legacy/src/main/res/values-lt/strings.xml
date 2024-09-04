@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">K-9 šunų vedžiotojai</string>
+    <string name="about_app_authors_k9">Easy šunų vedžiotojai</string>
     <string name="source_code">Šaltinio kodas</string>
     <string name="app_license">Apache licencija, versija 2.0</string>
     <string name="about_project_title">Atvirojo kodo projektas</string>
@@ -238,7 +238,7 @@
     <!--Title of the setting to specify the density of the message list-->
     <string name="general_settings_ui_density_default">Numatytas</string>
     <string name="global_settings_privacy_hide_useragent">Slėpti pašto klientą</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Pašalinti K-9 User-Agent iš pašto antraščių</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Pašalinti Easy User-Agent iš pašto antraščių</string>
     <string name="global_settings_privacy_hide_timezone">Slėpti laiko juostą</string>
     <string name="global_settings_privacy_hide_timezone_detail">Naudoti UTC laiko juostą laiško antraštėse ir atsakymo antraštėje vietoj vietinės laiko juostos</string>
     <string name="global_settings_notification_quick_delete_title">Rodyti mygtuką „Šalinti“</string>

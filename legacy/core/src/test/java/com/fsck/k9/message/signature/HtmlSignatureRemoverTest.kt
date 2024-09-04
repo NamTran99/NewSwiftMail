@@ -9,9 +9,9 @@ import org.junit.Test
 
 class HtmlSignatureRemoverTest {
     @Test
-    fun `old K-9 Mail signature format`() {
+    fun `old Easy Mail signature format`() {
         val html =
-            """This is the body text<br>-- <br>Sent from my Android device with K-9 Mail. Please excuse my brevity."""
+            """This is the body text<br>-- <br>Sent from my Android device with Easy Mail. Please excuse my brevity."""
 
         val withoutSignature = stripSignature(html)
 
@@ -30,7 +30,7 @@ class HtmlSignatureRemoverTest {
                 <p>This is the body text<br>
                 </p>
                 -- <br>
-                <div class="moz-signature">Sent from my Android device with K-9 Mail. Please excuse my brevity.</div>
+                <div class="moz-signature">Sent from my Android device with Easy Mail. Please excuse my brevity.</div>
               </body>
             </html>
             """.trimIndent()
@@ -50,7 +50,7 @@ class HtmlSignatureRemoverTest {
             <div>
             This is the body text<br>
             -- <br>
-            <blockquote>Sent from my Android device with K-9 Mail. Please excuse my brevity.</blockquote>
+            <blockquote>Sent from my Android device with Easy Mail. Please excuse my brevity.</blockquote>
             </div>
             </body>
             </html>
@@ -97,7 +97,7 @@ class HtmlSignatureRemoverTest {
             <blockquote>Some quote</blockquote>
             <div>This is the body text<br>
             -- <br>
-            <blockquote>Sent from my Android device with K-9 Mail. Please excuse my brevity.</blockquote>
+            <blockquote>Sent from my Android device with Easy Mail. Please excuse my brevity.</blockquote>
             <br>-- <br>Signature inside signature
             </div>
             </body>
@@ -130,7 +130,7 @@ class HtmlSignatureRemoverTest {
             <blockquote>Some quote</blockquote>
             <br>
             -- <br>
-            Sent from my Android device with K-9 Mail. Please excuse my brevity.
+            Sent from my Android device with Easy Mail. Please excuse my brevity.
             </body>
             </html>
             """.trimIndent().removeNewlines()
@@ -151,7 +151,7 @@ class HtmlSignatureRemoverTest {
     }
 
     @Test
-    fun `K-9 Mail signature format`() {
+    fun `Easy Mail signature format`() {
         val html =
             """
             <!DOCTYPE html>

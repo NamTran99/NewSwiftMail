@@ -272,7 +272,7 @@ public class QuotedMessagePresenter {
                             bodyOffset, bodyLength, text.length());
 
                     if (bodyOffset + bodyLength > text.length()) {
-                        // The draft was edited outside of K-9 Mail?
+                        // The draft was edited outside of Easy Mail?
                         Timber.d("The identity field from the draft contains an invalid LENGTH/OFFSET");
                         bodyOffset = 0;
                         bodyLength = 0;
@@ -363,7 +363,7 @@ public class QuotedMessagePresenter {
 
                 messageText = messageText.substring(bodyOffset, bodyOffset + bodyLength);
             } catch (IndexOutOfBoundsException e) {
-                // Invalid bodyOffset or bodyLength.  The draft was edited outside of K-9 Mail?
+                // Invalid bodyOffset or bodyLength.  The draft was edited outside of Easy Mail?
                 Timber.d("The identity field from the draft contains an invalid bodyOffset/bodyLength");
             }
         }

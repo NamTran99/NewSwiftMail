@@ -1,4 +1,4 @@
-K-9 - Póstur (K-9 Mail) er tölvupóstforrit með opnum grunnkóða sem virkar með næstum því öllum póstþjónustum.
+Easy - Póstur (Easy Mail) er tölvupóstforrit með opnum grunnkóða sem virkar með næstum því öllum póstþjónustum.
 
 <b>Eiginleikar</b>
 
@@ -14,11 +14,11 @@ Settu upp forritið <a href="https://f-droid.org/packages/org.sufficientlysecure
 
 <b>Aðstoð</b>
 
-Ef þú átt í vandræðum með K-9 póstforritið, geturðu beðið um hjálp á <a href="https://forum.k9mail.app">aðstoðarspjallinu okkar</a>.
+Ef þú átt í vandræðum með Easy póstforritið, geturðu beðið um hjálp á <a href="https://forum.k9mail.app">aðstoðarspjallinu okkar</a>.
 
 
 <b>Viltu hjálpa?</b>
 
-K-9 - Póstur er samvinnuverkefni. Ef þú hefur áhuga á að vera með í að bæta hugbúnaðińn, komdu til liðs við okkur!
+Easy - Póstur er samvinnuverkefni. Ef þú hefur áhuga á að vera með í að bæta hugbúnaðińn, komdu til liðs við okkur!
 Þú finnur villuskráningar, grunnkóða og wiki-síður á <a href="https://github.com/thunderbird/thunderbird-android">https://github.com/thunderbird/thunderbird-android</a>.
 Við tökum vel á móti nýjum forriturum, hönnuðum, skrifurum, þýðendum, villuflokkurum og vinum.

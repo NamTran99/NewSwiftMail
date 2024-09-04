@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">The K-9 Dog Walkers</string>
+    <string name="about_app_authors_k9">The Easy Dog Walkers</string>
     <string name="source_code">Kildekode</string>
     <string name="app_license">Apache licens, version 2.0</string>
     <string name="about_project_title">Opensource Projekt</string>
@@ -241,7 +241,7 @@
     <string name="general_settings_ui_density_default">Standard</string>
     <string name="general_settings_ui_density_relaxed">Afslappet</string>
     <string name="global_settings_privacy_hide_useragent">Skjul mail klient</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Fjern K-9 Bruger-Agent fra mail headers</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Fjern Easy Bruger-Agent fra mail headers</string>
     <string name="global_settings_privacy_hide_timezone">Skjul tidszone</string>
     <string name="global_settings_privacy_hide_timezone_detail">Brug UTC som tidszone i mail headers og svar header</string>
     <string name="global_settings_notification_quick_delete_title">Vis \'Slet\' knap</string>

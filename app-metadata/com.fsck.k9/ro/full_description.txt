@@ -1,4 +1,4 @@
-K-9 Mail este un client de e-mail open source care funcționează practic cu fiecare furnizor de e-mail.
+Easy Mail este un client de e-mail open source care funcționează practic cu fiecare furnizor de e-mail.
 
 <b>Caracteristici</b>
 
@@ -14,11 +14,11 @@ Instalează aplicația <a href="https://f-droid.org/packages/org.sufficientlysec
 
 <b>Asistență</b>
 
-Dacă întâmpini probleme cu K-9 Mail, cere ajutor pe <a href="https://forum.k9mail.app">forumul nostru de asistență</a>.
+Dacă întâmpini probleme cu Easy Mail, cere ajutor pe <a href="https://forum.k9mail.app">forumul nostru de asistență</a>.
 
 
 <b>Vrei să ajuți?</b>
 
-K-9 Mail este un proiect dezvoltat de comunitate. Dacă ești interesat să ajuți la îmbunătățirea aplicației, alătură-te!
+Easy Mail este un proiect dezvoltat de comunitate. Dacă ești interesat să ajuți la îmbunătățirea aplicației, alătură-te!
 Poți găsi instrumentul nostru de urmărire a erorilor, codul sursă și wiki la <a href="https://github.com/thunderbird/thunderbird-android">https://github.com/thunderbird/thunderbird-android</a> .
 Suntem întotdeauna bucuroși să primim noi dezvoltatori, designeri, documentatori, traducători, trieri de erori și prieteni.

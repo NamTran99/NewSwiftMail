@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">The K-9 Dog Walkers</string>
+    <string name="about_app_authors_k9">The Easy Dog Walkers</string>
     <string name="source_code">Изходен код</string>
     <string name="app_license">Apache License, Version 2.0</string>
     <string name="about_project_title">Проект с отворен код</string>
@@ -219,7 +219,7 @@
     <!--Title of the setting to specify the density of the message list-->
     <string name="general_settings_ui_density_default">По подразбиране</string>
     <string name="global_settings_privacy_hide_useragent">Скриване на имейл програмата</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Премахване на K-9 хедъра за потребителски агент</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Премахване на Easy хедъра за потребителски агент</string>
     <string name="global_settings_privacy_hide_timezone">Скриване на времевата зона</string>
     <string name="global_settings_privacy_hide_timezone_detail">Използване на UTC вместо локално време в header-a и reply header-a</string>
     <string name="global_settings_notification_quick_delete_title">Показвай бутон `Изтрий`</string>

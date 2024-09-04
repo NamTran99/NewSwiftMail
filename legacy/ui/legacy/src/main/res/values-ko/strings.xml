@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">K-9 개발자들</string>
+    <string name="about_app_authors_k9">Easy 개발자들</string>
     <string name="source_code">소스 코드</string>
     <string name="app_license">아파치 라이선스, 버전 2.0</string>
     <string name="about_project_title">오픈 소스 프로젝트</string>
@@ -219,7 +219,7 @@
     <!--Title of the setting to specify the density of the message list-->
     <string name="general_settings_ui_density_default">기본</string>
     <string name="global_settings_privacy_hide_useragent">메일 클라이언트 숨기기</string>
-    <string name="global_settings_privacy_hide_useragent_detail">메일 헤더에서 K-9 User-Agent를 제거합니다</string>
+    <string name="global_settings_privacy_hide_useragent_detail">메일 헤더에서 Easy User-Agent를 제거합니다</string>
     <string name="global_settings_privacy_hide_timezone">시간대 숨기기</string>
     <string name="global_settings_notification_quick_delete_title">\'삭제\' 버튼 보이기</string>
     <string name="global_settings_notification_quick_delete_never">하지 않음</string>

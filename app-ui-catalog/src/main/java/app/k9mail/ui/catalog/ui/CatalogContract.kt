@@ -7,7 +7,7 @@ interface CatalogContract {
     enum class Theme(
         val displayName: String,
     ) {
-        THEME_2_K9("K-9 Theme2"),
+        THEME_2_K9("Easy Theme2"),
         THEME_2_THUNDERBIRD("Thunderbird Theme2"),
     }
 

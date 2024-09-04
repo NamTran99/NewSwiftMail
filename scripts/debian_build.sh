@@ -4,7 +4,7 @@
 # the project. It has been tested with Debian 8
 
 USERNAME=$USER
-SIGNING_NAME='k-9'
+SIGNING_NAME='Easy'
 SDK_VERSION='r24.3.3'
 SDK_DIR=$HOME/android-sdk
 

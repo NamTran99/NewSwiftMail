@@ -18,7 +18,7 @@ dependencyResolutionManagement {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "k-9"
+rootProject.name = "Easy"
 
 include(
     ":app-k9mail",

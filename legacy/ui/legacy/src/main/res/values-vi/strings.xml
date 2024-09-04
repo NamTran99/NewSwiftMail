@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">Người dắt chó K-9</string>
+    <string name="about_app_authors_k9">Người dắt chó Easy</string>
     <string name="source_code">Mã nguồn</string>
     <string name="app_license">Giấy phép Apache, phiên bản 2.0</string>
     <string name="about_project_title">Dự án mã nguồn mở</string>
@@ -240,7 +240,7 @@
     <string name="general_settings_ui_density_compact">Gọn nhẹ</string>
     <string name="general_settings_ui_density_default">Mặc định</string>
     <string name="global_settings_privacy_hide_useragent">Ẩn hiển thị</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Xóa Tác nhân người dùng K-9 khỏi tiêu đề thư</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Xóa Tác nhân người dùng Easy khỏi tiêu đề thư</string>
     <string name="global_settings_privacy_hide_timezone">Ẩn múi giờ</string>
     <string name="global_settings_privacy_hide_timezone_detail">Dùng UTC thay múi giờ địa phương trong tiêu đề thư và tiêu đề thư trả lời</string>
     <string name="global_settings_notification_quick_delete_title">Hiển thị nút \'Xóa\'</string>

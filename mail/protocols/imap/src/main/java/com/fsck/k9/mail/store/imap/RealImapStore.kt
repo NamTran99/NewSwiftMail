@@ -194,7 +194,7 @@ internal open class RealImapStore(
         val decodedFolderName = try {
             folderNameCodec.decode(serverId)
         } catch (e: CharacterCodingException) {
-            // Previous versions of K-9 Mail ignored folders with invalid UTF-7 encoding
+            // Previous versions of Easy Mail ignored folders with invalid UTF-7 encoding
             return null
         }
 

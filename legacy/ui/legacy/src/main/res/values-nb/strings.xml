@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">The K-9 Dog Walkers</string>
+    <string name="about_app_authors_k9">The Easy Dog Walkers</string>
     <string name="source_code">kildekode</string>
     <string name="app_license">Apache License, Version 2.0</string>
     <string name="about_project_title">Åpen kildekode prosjekt</string>
@@ -208,7 +208,7 @@ til <xliff:g id="messages_to_load">%d</xliff:g> flere</string>
     <!--Title of the setting to specify the density of the message list-->
     <string name="general_settings_ui_density_default">Forvalg</string>
     <string name="global_settings_privacy_hide_useragent">Skjul e-postklient</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Fjern K-9 -brukeragent fra meldingshoder</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Fjern Easy -brukeragent fra meldingshoder</string>
     <string name="global_settings_privacy_hide_timezone">Skjul tidssone</string>
     <string name="global_settings_privacy_hide_timezone_detail">Bruk UTC istedenfor lokal tidssone i meldings- og svar-hoder</string>
     <string name="global_settings_notification_quick_delete_title">Vis «Slett»-knappen</string>

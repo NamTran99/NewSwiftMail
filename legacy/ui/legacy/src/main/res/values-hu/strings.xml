@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">A K-9 Kutyasétáltatók</string>
+    <string name="about_app_authors_k9">A Easy Kutyasétáltatók</string>
     <string name="source_code">Forráskód</string>
     <string name="app_license">Apache licenc, 2.0-s verzió</string>
     <string name="about_project_title">Nyílt forráskódú projekt</string>
@@ -242,7 +242,7 @@
     <string name="general_settings_ui_density_default">Alapértelmezett</string>
     <string name="general_settings_ui_density_relaxed">Tágas</string>
     <string name="global_settings_privacy_hide_useragent">Levelező alkalmazás elrejtése</string>
-    <string name="global_settings_privacy_hide_useragent_detail">A K-9 azonosító eltávolítása a levél fejlécéből</string>
+    <string name="global_settings_privacy_hide_useragent_detail">A Easy azonosító eltávolítása a levél fejlécéből</string>
     <string name="global_settings_privacy_hide_timezone">Időzóna elrejtése</string>
     <string name="global_settings_privacy_hide_timezone_detail">UTC használata a helyi időzóna helyett a levelek fejlécében és a válasz fejlécében</string>
     <string name="global_settings_notification_quick_delete_title">„Törlés” gomb megjelenítése</string>

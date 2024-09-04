@@ -29,7 +29,7 @@
     <string name="settings_import_outgoing_server_password_hint">Passord for utgående tjener</string>
     <string name="settings_import_use_same_password_for_outgoing_server">Bruk samme passord for utgående tjener</string>
     <string name="settings_import_server_name_format">Tjenernavn: <xliff:g id="hostname">%s</xliff:g></string>
-    <string name="settings_import_oauth_description">Logg inn og innvilg programmet tilgang til e-postene dine for å bruke denne e-postkontoen med K-9 Mail.</string>
+    <string name="settings_import_oauth_description">Logg inn og innvilg programmet tilgang til e-postene dine for å bruke denne e-postkontoen med Easy Mail.</string>
     <string name="settings_import_oauth_sign_in">Logg inn</string>
     <string name="settings_import_oauth_sign_in_with_google">Logg inn med Google</string>
     <string name="settings_import_oauth_error_oauth_flow_canceled">Identitetsbekreftelse avbrutt</string>

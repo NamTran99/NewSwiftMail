@@ -1535,7 +1535,7 @@ public class MessagingController {
                     try {
                         if (message.getHeader(K9.IDENTITY_HEADER).length > 0 || message.isSet(Flag.DRAFT)) {
                             Timber.v("The user has set the Outbox and Drafts folder to the same thing. " +
-                                "This message appears to be a draft, so K-9 will not send it");
+                                "This message appears to be a draft, so Easy will not send it");
                             continue;
                         }
 

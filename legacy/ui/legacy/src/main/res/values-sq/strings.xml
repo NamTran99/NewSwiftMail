@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">The K-9 Dog Walkers</string>
+    <string name="about_app_authors_k9">The Easy Dog Walkers</string>
     <string name="source_code">Kod burim</string>
     <string name="app_license">Apache License, Version 2.0</string>
     <string name="about_project_title">Projekt Me Burim të Hapët</string>
@@ -943,7 +943,7 @@
     <string name="push_notification_grant_alarm_permission">Për të akorduar leje, prekeni.</string>
     <string name="push_notification_state_alarm_permission_missing">Mungojnë leje për të planifikuar alarme</string>
     <string name="dialog_openkeychain_info_text">Aplikacioni OpenKeychain është i domosdoshëm për të aktivizuar mbulim fshehtëzimi skaj-më-skaj.</string>
-    <string name="default_signature">-- 
+    <string name="default_signature">--
 \nDërguar nga pajisja ime Android, me <xliff:g id="app_name">%s</xliff:g>. Më ndjeni që i rashë shkurt.</string>
     <string name="about_title">Mbi <xliff:g id="app_name">%s</xliff:g></string>
     <string name="account_delete_dlg_instructions_fmt">Llogaria \"<xliff:g id="account">%s</xliff:g>\" do të hiqet nga <xliff:g id="app_name">%s</xliff:g>.</string>

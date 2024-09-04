@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">K-9 Autorid</string>
+    <string name="about_app_authors_k9">Easy Autorid</string>
     <string name="source_code">Lähtekood</string>
     <string name="app_license">Apache litsents, versioon 2.0</string>
     <string name="about_project_title">Avatud lähtekoodiga projekt</string>
@@ -873,7 +873,7 @@ Palun jäta see kiri alles ning kasuta seda muu hulgas oma krüptovõtme varunda
     <string name="push_info_configure_notification_text">Siiski, Androidis saad sa ka teavituse peita.</string>
     <string name="push_info_learn_more_text">Lisateave</string>
     <string name="push_info_configure_notification_action">Seadista teavitusi</string>
-    <string name="push_info_disable_push_text">Kui sul pole vaja ülikiiret infot saabunud kirjade kohta, siis lülita tõuketeenused välja ning lase K-9 Mail\'il kasutada tavapärast uute kirjade kontrollimist. Sellisel juhul vaatab K-9 Mail seadistatud ajavahemiku järel serverist uusi kirju ja mainitud püsiteavitust pole vaja.</string>
+    <string name="push_info_disable_push_text">Kui sul pole vaja ülikiiret infot saabunud kirjade kohta, siis lülita tõuketeenused välja ning lase Easy Mail\'il kasutada tavapärast uute kirjade kontrollimist. Sellisel juhul vaatab Easy Mail seadistatud ajavahemiku järel serverist uusi kirju ja mainitud püsiteavitust pole vaja.</string>
     <string name="push_info_disable_push_action">Ära kasuta tõuketeenuseid</string>
     <!--Name of the swipe action to select a message. Try to keep it short.-->
     <string name="swipe_action_select">Vali</string>
@@ -948,7 +948,7 @@ Palun jäta see kiri alles ning kasuta seda muu hulgas oma krüptovõtme varunda
     <string name="push_info_notification_explanation_text">Tõuketeenuste kasutamisel xliff:g id=\"app_name\"&gt;%1$s&lt;/xliff:g&gt; hoiab töös ühendust e-posti serveriga. Kui rakendus on taustal pidevalt aktiivne, siis Android eeldab, et selle kohta kuvatakse pidevat teavitust. Lisateave: &lt;xliff:g id=\"optional_extended_explanation\"&gt;%2$s&lt;/xliff:g&gt;</string>
     <string name="about_title">Teave <xliff:g id="app_name">%s</xliff:g>i kohta</string>
     <string name="dialog_openkeychain_info_text">Läbiva krüptimise kasutamiseks on vajalik OpenKeychaini rakendus.</string>
-    <string name="default_signature">-- 
+    <string name="default_signature">--
 \nSaadetud minu Androidist <xliff:g id="app_name">%s</xliff:g>iga. Vabandust, et kirjutan nii napilt.</string>
     <string name="about_app_authors_thunderbird">Thunderbirdi mobiilirakenduse arendustiim</string>
 </resources>

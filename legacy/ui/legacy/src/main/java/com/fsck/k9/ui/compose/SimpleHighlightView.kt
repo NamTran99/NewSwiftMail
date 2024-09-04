@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The K-9 Dog Walkers
+ * Copyright 2020 The Easy Dog Walkers
  *
  * Based on ShowcaseView (https://github.com/amlcurran/ShowcaseView)
  * Copyright 2014 Alex Curran

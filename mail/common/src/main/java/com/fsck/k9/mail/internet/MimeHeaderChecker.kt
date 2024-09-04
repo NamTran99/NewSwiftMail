@@ -3,7 +3,7 @@ package com.fsck.k9.mail.internet
 /**
  * Check unstructured header field syntax.
  *
- * This does not allow the obsolete syntax. Only use this for messages constructed by K-9 Mail, not incoming messages.
+ * This does not allow the obsolete syntax. Only use this for messages constructed by Easy Mail, not incoming messages.
  *
  * See RFC 5322
  * ```

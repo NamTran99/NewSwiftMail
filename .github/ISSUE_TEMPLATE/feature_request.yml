@@ -1,5 +1,5 @@
 name: Feature request
-description: Suggest an idea for K-9 Mail
+description: Suggest an idea for Easy Mail
 labels: [ "type: enhancement", "unconfirmed" ]
 body:
   - type: checkboxes

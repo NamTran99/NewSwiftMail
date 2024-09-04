@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">Sprehajalci psov v skupini The K-9 Dog Walkers</string>
+    <string name="about_app_authors_k9">Sprehajalci psov v skupini The Easy Dog Walkers</string>
     <string name="source_code">Izvorna koda</string>
     <string name="app_license">Dovoljenje Apache, različica 2.0</string>
     <string name="about_project_title">Odprtokodni projekt</string>
@@ -243,7 +243,7 @@ dodatnih <xliff:g id="messages_to_load">%d</xliff:g> sporočil</string>
     <!--Title of the setting to specify the density of the message list-->
     <string name="general_settings_ui_density_default">Privzeto</string>
     <string name="global_settings_privacy_hide_useragent">Skrij program</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Odstrani podatke programa K-9 iz glave pošte</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Odstrani podatke programa Easy iz glave pošte</string>
     <string name="global_settings_privacy_hide_timezone">Skrij časovni pas</string>
     <string name="global_settings_privacy_hide_timezone_detail">V glavah poštnih sporočil se uporabi čas UTC in ne krajevni čas</string>
     <string name="global_settings_notification_quick_delete_title">Prikaz gumba za brisanje sporočil</string>

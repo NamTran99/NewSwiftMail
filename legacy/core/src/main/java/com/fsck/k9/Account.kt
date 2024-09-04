@@ -355,7 +355,7 @@ class Account(override val uuid: String) : BaseAccount {
     /**
      * Database ID of the folder that was last selected for a copy or move operation.
      *
-     * Note: For now this value isn't persisted. So it will be reset when K-9 Mail is restarted.
+     * Note: For now this value isn't persisted. So it will be reset when Easy Mail is restarted.
      */
     @get:Synchronized
     var lastSelectedFolderId: Long? = null

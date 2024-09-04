@@ -17,7 +17,7 @@ To achieve the goals outlined in the context, we have decided to adopt the follo
 
 1. **App Modules**:
 
-   - `app-thunderbird` and `app-k9mail` are the modules for the two applications, Thunderbird for Android and K-9 Mail respectively. These modules will contain app-specific implementations, configurations, resources, and startup logic. They should solely depend on the `app-common` module for shared functionalities and may selectively integrate `feature` and `core` to setup app-specific needs.
+   - `app-thunderbird` and `app-k9mail` are the modules for the two applications, Thunderbird for Android and Easy Mail respectively. These modules will contain app-specific implementations, configurations, resources, and startup logic. They should solely depend on the `app-common` module for shared functionalities and may selectively integrate `feature` and `core` to setup app-specific needs.
 
 2. **App Common Module**:
 
@@ -40,7 +40,7 @@ graph TD
     subgraph APP[App]
         APP_K9["`
             **:app-k9mail**
-            K-9 Mail
+            Easy Mail
         `"]
         APP_TB["`
             **:app-thunderbird**
@@ -96,7 +96,7 @@ graph TD
     subgraph APP[App]
         APP_K9["`
             **:app-k9mail**
-            K-9 Mail
+            Easy Mail
         `"]
         APP_TB["`
             **:app-thunderbird**

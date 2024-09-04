@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">K-9 Šetač Pasa</string>
+    <string name="about_app_authors_k9">Easy Šetač Pasa</string>
     <string name="app_license">Apache Licenca, Verzija 2.0</string>
     <string name="about_libraries">Knjižnice</string>
     <string name="license">Licenca</string>
@@ -203,7 +203,7 @@
     <!--Title of the setting to specify the density of the message list-->
     <string name="general_settings_ui_density_default">Zadano</string>
     <string name="global_settings_privacy_hide_useragent">Sakrij klijent e-pošte</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Makni K-9 Korisničkog agenta iz zaglavlja pošte</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Makni Easy Korisničkog agenta iz zaglavlja pošte</string>
     <string name="global_settings_privacy_hide_timezone">Sakrij vremensku zonu</string>
     <string name="global_settings_privacy_hide_timezone_detail">Koristi UTC umjesto lokalne vremenske zone u zaglavlju mail-a i zaglavlju odgovora</string>
     <string name="global_settings_notification_quick_delete_title">Prikaži gumb \'Obriši\'</string>

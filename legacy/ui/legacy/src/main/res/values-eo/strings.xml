@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">Programistoj de K-9</string>
+    <string name="about_app_authors_k9">Programistoj de Easy</string>
     <string name="source_code">Fontkodo</string>
     <string name="app_license">Apache License, versio 2.0</string>
     <string name="about_project_title">Malfermkoda projekto</string>
@@ -217,7 +217,7 @@
     <!--Title of the setting to specify the density of the message list-->
     <string name="general_settings_ui_density_default">Norma</string>
     <string name="global_settings_privacy_hide_useragent">Kaŝi retpoŝtilan nomon</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Forviŝi nomon de klienta aplikaĵo K-9 el mesaĝokapo</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Forviŝi nomon de klienta aplikaĵo Easy el mesaĝokapo</string>
     <string name="global_settings_privacy_hide_timezone">Kaŝi horzonon</string>
     <string name="global_settings_privacy_hide_timezone_detail">Uzi UTC anstataŭ lokan horzonon en mesaĝokapo kaj respond-kampo</string>
     <string name="global_settings_notification_quick_delete_title">Montri butonon \'Forigi\'</string>

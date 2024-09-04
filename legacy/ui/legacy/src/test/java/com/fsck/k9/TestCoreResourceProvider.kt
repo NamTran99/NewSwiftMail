@@ -20,7 +20,7 @@ class TestCoreResourceProvider : CoreResourceProvider {
 
     override fun noSubject() = throw UnsupportedOperationException("not implemented")
 
-    override fun userAgent(): String = "K-9 Mail for Android"
+    override fun userAgent(): String = "Easy Mail for Android"
 
     override fun replyHeader(sender: String) = throw UnsupportedOperationException("not implemented")
     override fun replyHeader(sender: String, sentDate: String) = throw UnsupportedOperationException("not implemented")

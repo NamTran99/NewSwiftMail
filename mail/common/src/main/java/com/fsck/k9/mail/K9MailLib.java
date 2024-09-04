@@ -12,19 +12,19 @@ public class K9MailLib {
     public static final String CHAT_HEADER = "Chat-Version";
 
     /**
-     * Should K-9 log the conversation it has over the wire with
+     * Should Easy log the conversation it has over the wire with
      * SMTP servers?
      */
     public static boolean DEBUG_PROTOCOL_SMTP = true;
 
     /**
-     * Should K-9 log the conversation it has over the wire with
+     * Should Easy log the conversation it has over the wire with
      * IMAP servers?
      */
     public static boolean DEBUG_PROTOCOL_IMAP = true;
 
     /**
-     * Should K-9 log the conversation it has over the wire with
+     * Should Easy log the conversation it has over the wire with
      * POP3 servers?
      */
     public static boolean DEBUG_PROTOCOL_POP3 = true;

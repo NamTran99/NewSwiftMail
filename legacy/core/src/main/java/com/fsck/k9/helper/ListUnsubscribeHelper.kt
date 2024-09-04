@@ -9,7 +9,7 @@ object ListUnsubscribeHelper {
     private val MAILTO_CONTAINER_PATTERN = Pattern.compile("<(mailto:.+?)>")
     private val HTTPS_CONTAINER_PATTERN = Pattern.compile("<(https:.+?)>")
 
-    // As K-9 Mail is an email client, we prefer a mailto: unsubscribe method
+    // As Easy Mail is an email client, we prefer a mailto: unsubscribe method
     // but if none is found, a https URL is acceptable too
     fun getPreferredListUnsubscribeUri(message: Message): UnsubscribeUri? {
         val headerValues = message.getHeader(LIST_UNSUBSCRIBE_HEADER)

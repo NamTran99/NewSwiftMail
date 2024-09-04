@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">The K-9 Dog Walkers</string>
+    <string name="about_app_authors_k9">The Easy Dog Walkers</string>
     <string name="source_code">Källkod</string>
     <string name="app_license">Apachelicens, version 2.0</string>
     <string name="about_project_title">Projekt med öppen källkod</string>
@@ -243,7 +243,7 @@
     <string name="general_settings_ui_density_default">Standard</string>
     <string name="general_settings_ui_density_relaxed">Avslappnad</string>
     <string name="global_settings_privacy_hide_useragent">Dölj e-postklient</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Ta bort K-9-användaragent från meddelanderubriker</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Ta bort Easy-användaragent från meddelanderubriker</string>
     <string name="global_settings_privacy_hide_timezone">Dölj tidszon</string>
     <string name="global_settings_privacy_hide_timezone_detail">Använd UTC istället för lokal tidszon i postrubriker och svarsrubrik</string>
     <string name="global_settings_notification_quick_delete_title">Visa knappen \"Ta bort\"</string>

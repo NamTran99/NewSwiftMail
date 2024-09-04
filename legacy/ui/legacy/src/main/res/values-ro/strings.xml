@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">K-9 Dog Walkers</string>
+    <string name="about_app_authors_k9">Easy Dog Walkers</string>
     <string name="source_code">Codul sursă</string>
     <string name="app_license">Licență Apache, Versiunea 2.0</string>
     <string name="about_project_title">Proiect Open Source</string>
@@ -245,7 +245,7 @@ cel mult încă <xliff:g id="messages_to_load">%d</xliff:g></string>
     <string name="general_settings_ui_density_default">Implicit</string>
     <string name="general_settings_ui_density_relaxed">Relaxat</string>
     <string name="global_settings_privacy_hide_useragent">Ascunde clientul de mail</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Elimină K-9 User-Agent din anteturile mesajelor</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Elimină Easy User-Agent din anteturile mesajelor</string>
     <string name="global_settings_privacy_hide_timezone">Ascunde fusul orar</string>
     <string name="global_settings_privacy_hide_timezone_detail">Folosește UTC în locul fusului orar local în antetul mesajelor și al răspunsurilor</string>
     <string name="global_settings_notification_quick_delete_title">Arată butonul \'Ştergere\'</string>

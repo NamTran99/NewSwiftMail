@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 K-9 Mail contributors
+ * Copyright (C) 2023 Easy Mail contributors
  * Copyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

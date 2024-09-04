@@ -1,4 +1,4 @@
-# Create K-9 Mail releases
+# Create Easy Mail releases
 
 ## One-time setup
 
@@ -51,7 +51,7 @@ Example `<app>.<realeaseType>.signing.properties` file:
    - `app/ui/legacy/src/main/res/raw/changelog_master.xml`
    - `app-metadata/com.fsck.k9/en-US/changelogs/${versionCode}.txt`
      Use past tense. Try to keep them high level. Focus on the user (experience).
-3. Update the metadata link to point to K-9 Mail's data:
+3. Update the metadata link to point to Easy Mail's data:
    `ln --symbolic --no-dereference --force app-metadata/com.fsck.k9 metadata`
 4. Commit the changes. Message: "Version $versionName"
 5. Run `./gradlew clean :app-k9mail:assembleRelease --no-build-cache --no-configuration-cache`
@@ -105,7 +105,7 @@ Example `<app>.<realeaseType>.signing.properties` file:
        - build-plugin/build
    ```
 
-4. Commit the changes. Message: "Update K-9 Mail to $newVersionName (beta)"
+4. Commit the changes. Message: "Update Easy Mail to $newVersionName (beta)"
 5. Run `fdroid build --latest com.fsck.k9` to build the project using F-Droid's toolchain.
 6. Push the changes to your fork of the _fdroiddata_ repository.
 7. Open a merge request on Gitlab. (The message from the server after the push in the previous step should contain a
@@ -116,7 +116,7 @@ Example `<app>.<realeaseType>.signing.properties` file:
 ### Create release on Google Play
 
 1. Go to the [Google Play Console](https://play.google.com/console/)
-2. Select the _K-9 Mail_ app
+2. Select the _Easy Mail_ app
 3. Click on _Open testing_ in the left sidebar
 4. Click on _Create new release_
 5. Upload the APK to _App bundles_
@@ -133,7 +133,7 @@ Example `<app>.<realeaseType>.signing.properties` file:
 
 When the team decides the `main` branch is stable enough and it's time to release a new stable version, create a new
 maintenance branch (off `main`) using the desired version number with the last two digits dropped followed by `-MAINT`.
-Example: `6.8-MAINT` when the first stable release is K-9 Mail 6.800.
+Example: `6.8-MAINT` when the first stable release is Easy Mail 6.800.
 
 Ideally the first stable release contains no code changes when compared to the last beta version built from `main`.
 That way the new release won't contain any changes that weren't exposed to user testing in a beta version before.
@@ -145,7 +145,7 @@ That way the new release won't contain any changes that weren't exposed to user 
    - `app/ui/legacy/src/main/res/raw/changelog_master.xml`
    - `app-k9mail/fastlane/metadata/android/en-US/changelogs/${versionCode}.txt`
      Use past tense. Try to keep them high level. Focus on the user (experience).
-4. Update the metadata link to point to K-9 Mail's data:
+4. Update the metadata link to point to Easy Mail's data:
    `ln --symbolic --no-dereference --force app-metadata/com.fsck.k9 metadata`
 5. Commit the changes. Message: "Version $versionName"
 6. Run `./gradlew clean :app-k9mail:assembleRelease --no-build-cache --no-configuration-cache`
@@ -196,7 +196,7 @@ That way the new release won't contain any changes that weren't exposed to user 
        - build-plugin/build
    ```
 
-4. Commit the changes. Message: "Update K-9 Mail to $newVersionName"
+4. Commit the changes. Message: "Update Easy Mail to $newVersionName"
 5. Run `fdroid build --latest com.fsck.k9` to build the project using F-Droid's toolchain.
 6. Push the changes to your fork of the _fdroiddata_ repository.
 7. Open a merge request on Gitlab. (The message from the server after the push in the previous step should contain a
@@ -207,7 +207,7 @@ That way the new release won't contain any changes that weren't exposed to user 
 ### Create release on Google Play
 
 1. Go to the [Google Play Console](https://play.google.com/console/)
-2. Select the _K-9 Mail_ app
+2. Select the _Easy Mail_ app
 3. Click on _Production_ in the left sidebar
 4. Click on _Create new release_
 5. Upload the APK to _App bundles_

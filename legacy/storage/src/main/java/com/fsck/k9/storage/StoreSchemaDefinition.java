@@ -53,7 +53,7 @@ class StoreSchemaDefinition implements SchemaDefinition {
                         "clear app data.");
             }
 
-            // We only support upgrades from K-9 Mail 5.301. For upgrades from earlier versions we start from scratch.
+            // We only support upgrades from Easy Mail 5.301. For upgrades from earlier versions we start from scratch.
             if (db.getVersion() < 61) {
                 dbCreateDatabaseFromScratch(db);
             } else {

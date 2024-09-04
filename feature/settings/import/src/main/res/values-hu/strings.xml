@@ -29,7 +29,7 @@
     <string name="settings_import_outgoing_server_password_hint">Kimenő kiszolgáló jelszava</string>
     <string name="settings_import_use_same_password_for_outgoing_server">Ugyanazon jelszó használata a kimenő kiszolgálónál</string>
     <string name="settings_import_server_name_format">Kiszolgáló neve: <xliff:g id="hostname">%s</xliff:g></string>
-    <string name="settings_import_oauth_description">Ezen e-mail-fiók K-9 Maillel történő használatához be kell jelentkeznie, és hozzáférést kell adnia az alkalmazásnak az e-mailjeihez.</string>
+    <string name="settings_import_oauth_description">Ezen e-mail-fiók Easy Maillel történő használatához be kell jelentkeznie, és hozzáférést kell adnia az alkalmazásnak az e-mailjeihez.</string>
     <string name="settings_import_oauth_sign_in">Bejelentkezés</string>
     <string name="settings_import_oauth_sign_in_with_google">Bejelentkezés Google használatával</string>
     <string name="settings_import_oauth_error_oauth_flow_canceled">A felhatalmazás megszakítva</string>

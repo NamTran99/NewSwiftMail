@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">Les auteurs de Courriel K-9 Mail</string>
+    <string name="about_app_authors_k9">Les auteurs de Courriel Easy Mail</string>
     <string name="source_code">Code source</string>
     <string name="app_license">Licence Apache, Version 2.0</string>
     <string name="about_project_title">Projet à code source ouvert</string>
@@ -91,7 +91,7 @@
     <string name="add_attachment_action">Ajouter un fichier joint</string>
     <string name="empty_trash_action">Vider la corbeille</string>
     <string name="expunge_action">Supprimer</string>
-    <string name="about_action">À propos de Courriel K-9 Mail</string>
+    <string name="about_action">À propos de Courriel Easy Mail</string>
     <string name="prefs_title">Paramètres</string>
     <!--Shown in place of the subject when a message has no subject. Showing this in parentheses is customary.-->
     <string name="general_no_subject">(Aucun objet)</string>

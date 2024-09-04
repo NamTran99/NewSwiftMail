@@ -43,6 +43,6 @@ class ServerValidationScreenKtTest : ComposeTest() {
     }
 
     private object FakeAppNameProvider : AppNameProvider {
-        override val appName: String = "K-9 Mail"
+        override val appName: String = "Easy Mail"
     }
 }

@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">Páníčci robopsů K-9</string>
+    <string name="about_app_authors_k9">Páníčci robopsů Easy</string>
     <string name="source_code">Zdrojový kód</string>
     <string name="app_license">Apache License, verze 2.0</string>
     <string name="about_project_title">Projekt s otevřeným zdrojovým kódem</string>
@@ -247,7 +247,7 @@
     <string name="general_settings_ui_density_default">Standardní</string>
     <string name="general_settings_ui_density_relaxed">Volné</string>
     <string name="global_settings_privacy_hide_useragent">Skrýt e-mailového klienta</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Odstraňovat z hlaviček e-mailů informaci o K-9 (user agent)</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Odstraňovat z hlaviček e-mailů informaci o Easy (user agent)</string>
     <string name="global_settings_privacy_hide_timezone">Skrýt časovou zónu</string>
     <string name="global_settings_privacy_hide_timezone_detail">Používat v hlavičkách e-mailů a odpovědí univerzální čas (UTC) namísto toho místního</string>
     <string name="global_settings_notification_quick_delete_title">Zobrazit tlačítko \'Smazat\'</string>

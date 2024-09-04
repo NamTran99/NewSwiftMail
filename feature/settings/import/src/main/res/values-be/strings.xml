@@ -31,7 +31,7 @@
     <string name="settings_import_outgoing_server_password_hint">Пароль для сервера выходнай пошты</string>
     <string name="settings_import_use_same_password_for_outgoing_server">Выкарыстоўваць той жа пароль для сервера выходнай пошты</string>
     <string name="settings_import_server_name_format">Назва сервера: <xliff:g id="hostname">%s</xliff:g></string>
-    <string name="settings_import_oauth_description">Каб выкарыстоўваць гэты акаўнт электроннай пошты ў K-9 Mail, вам трэба ўвайсці і даць праграме доступ да вашай электроннай пошты.</string>
+    <string name="settings_import_oauth_description">Каб выкарыстоўваць гэты акаўнт электроннай пошты ў Easy Mail, вам трэба ўвайсці і даць праграме доступ да вашай электроннай пошты.</string>
     <string name="settings_import_oauth_sign_in">Увайсці</string>
     <string name="settings_import_oauth_sign_in_with_google">Увайсці з дапамогай Google</string>
     <string name="settings_import_oauth_error_oauth_flow_canceled">Аўтарызацыя скасаваная</string>

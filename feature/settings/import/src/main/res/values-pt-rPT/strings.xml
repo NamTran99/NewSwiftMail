@@ -30,7 +30,7 @@
     <string name="settings_import_outgoing_server_password_hint">Palavra-passe do servidor de saída</string>
     <string name="settings_import_use_same_password_for_outgoing_server">Utilizar a mesma palavra-passe para o servidor de saída</string>
     <string name="settings_import_server_name_format">Nome do servidor <xliff:g id="hostname">%s</xliff:g></string>
-    <string name="settings_import_oauth_description">Para usar esta conta com o K-9 Mail, é necessário iniciar sessão e conceder permissão para aceder o seus emails.</string>
+    <string name="settings_import_oauth_description">Para usar esta conta com o Easy Mail, é necessário iniciar sessão e conceder permissão para aceder o seus emails.</string>
     <string name="settings_import_oauth_sign_in">Iniciar sessão</string>
     <string name="settings_import_oauth_sign_in_with_google">Iniciar sessão com o Google</string>
     <string name="settings_import_oauth_error_oauth_flow_canceled">Autorização cancelada</string>

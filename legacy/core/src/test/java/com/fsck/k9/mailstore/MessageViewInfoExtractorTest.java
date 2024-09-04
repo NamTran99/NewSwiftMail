@@ -59,9 +59,9 @@ import static org.mockito.Mockito.when;
 
 @SuppressWarnings("WeakerAccess")
 public class MessageViewInfoExtractorTest extends K9RobolectricTest {
-    public static final String BODY_TEXT = "K-9 Mail rocks :>";
-    public static final String BODY_TEXT_HTML = "<div dir=\"auto\">K-9 Mail rocks :&gt;</div>";
-    public static final String BODY_TEXT_FLOWED = "K-9 Mail rocks :> \r\nflowed line\r\nnot flowed line";
+    public static final String BODY_TEXT = "Easy Mail rocks :>";
+    public static final String BODY_TEXT_HTML = "<div dir=\"auto\">Easy Mail rocks :&gt;</div>";
+    public static final String BODY_TEXT_FLOWED = "Easy Mail rocks :> \r\nflowed line\r\nnot flowed line";
     public static final String SUBJECT = "sabject";
     public static final String PROTECTED_SUBJECT = "protected subject";
 
@@ -150,12 +150,12 @@ public class MessageViewInfoExtractorTest extends K9RobolectricTest {
         MessageExtractor.findViewablesAndAttachments(message, outputViewableParts, outputNonViewableParts);
         ViewableExtractedText container = messageViewInfoExtractor.extractTextFromViewables(outputViewableParts);
 
-        String expectedText = "K-9 Mail rocks :> flowed line\r\n" +
+        String expectedText = "Easy Mail rocks :> flowed line\r\n" +
                 "not flowed line";
         String expectedHtml =
                 "<pre class=\"k9mail\">" +
                         "<div dir=\"auto\">" +
-                        "K-9 Mail rocks :&gt; flowed line<br>not flowed line" +
+                        "Easy Mail rocks :&gt; flowed line<br>not flowed line" +
                         "</div>" +
                         "</pre>";
 
@@ -165,7 +165,7 @@ public class MessageViewInfoExtractorTest extends K9RobolectricTest {
 
     @Test
     public void testSimpleHtmlMessage() throws MessagingException {
-        String bodyText = "<strong>K-9 Mail</strong> rocks :&gt;";
+        String bodyText = "<strong>Easy Mail</strong> rocks :&gt;";
 
         // Create text/plain body
         TextBody body = new TextBody(bodyText);

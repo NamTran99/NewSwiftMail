@@ -14,7 +14,7 @@ import org.xmlpull.v1.XmlPullParserFactory
 import timber.log.Timber
 
 /**
- * Parser for K-9 Mail's settings file format.
+ * Parser for Easy Mail's settings file format.
  */
 internal class SettingsFileParser {
     @Throws(SettingsImportExportException::class)

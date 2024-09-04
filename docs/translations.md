@@ -31,7 +31,7 @@ When adding a new code module that is including translatable strings, a new comp
 1. Go the the Weblate page to [add a component](https://hosted.weblate.org/create/component/?project=3696).
 2. Switch to the "From existing component" tab.
 3. Enter a name for the component.
-4. For "Component", select "K-9 Mail/Thunderbird/ui-legacy".
+4. For "Component", select "Easy Mail/Thunderbird/ui-legacy".
 5. Press the "Continue" button.
 6. Under "Choose translation files to import", select "Specify configuration manually".
 7. Press the "Continue" button.

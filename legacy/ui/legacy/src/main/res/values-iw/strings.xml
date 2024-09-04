@@ -567,7 +567,7 @@
     <!--A user visible label for the name and email address copied to the clipboard-->
     <!--Might be displayed in a notification when deleting an account (in the background)-->
     <!--For unread messages the first line of a message list item is modified by this to improve the experience for people with screen readers.-->
-<string name="about_app_authors_k9">מוליכי הכלבים של K-9</string>
+<string name="about_app_authors_k9">מוליכי הכלבים של Easy</string>
     <string name="about_website_title">אתר אינטרנט</string>
     <string name="user_manual_title">מדריך משתמש</string>
     <string name="get_help_title">קבל עזרה</string>
@@ -602,7 +602,7 @@
     <string name="general_settings_swipe_action_toggle_star">הוספת/הסרת כוכב</string>
     <string name="general_settings_ui_density_compact">קומפקטי</string>
     <string name="general_settings_ui_density_relaxed">מרווח</string>
-    <string name="global_settings_privacy_hide_useragent_detail">הסר סוכן־משתמש של K-9 מכותרות הדואר</string>
+    <string name="global_settings_privacy_hide_useragent_detail">הסר סוכן־משתמש של Easy מכותרות הדואר</string>
     <string name="quiet_time_notification_description">לנטרל התראות לגמרי בזמן \"זמן־שקט\"</string>
     <string name="account_settings_ignore_chat_messages_summary">הסתר התראות של הודעות השייכות לצ\'אט דוא\"ל</string>
     <string name="account_settings_mark_message_as_read_on_view_label">כשנפתחת הודעה סמן שנקראה</string>

@@ -20,7 +20,7 @@ class TestCoreResourceProvider : CoreResourceProvider {
 
     override fun noSubject() = "(No subject)"
 
-    override fun userAgent(): String = "K-9 Mail for Android"
+    override fun userAgent(): String = "Easy Mail for Android"
 
     override fun replyHeader(sender: String) = "$sender wrote:"
     override fun replyHeader(sender: String, sentDate: String) = "On $sentDate, $sender wrote:"

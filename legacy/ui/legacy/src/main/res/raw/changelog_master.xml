@@ -62,7 +62,7 @@
         <change>Fixed order of autoconfig discovery steps</change>
         <change>Changed default display count to 100</change>
         <change>Enabled notifications for new accounts by default</change>
-        <change>Reverted the change to handling mailto: URIs introduced in K-9 Mail 6.716 because of unintended side effects</change>
+        <change>Reverted the change to handling mailto: URIs introduced in Easy Mail 6.716 because of unintended side effects</change>
         <change>Fixed bug to make "colorize contacts" work again in message view</change>
     </release>
     <release version="6.716" versioncode="37016" date="2024-02-13">
@@ -122,7 +122,7 @@
         <change>Updated translations</change>
     </release>
     <release version="6.710" versioncode="37010" date="2023-08-18">
-        <change>Fixed bug where accounts using OAuth weren't set up properly in K-9 Mail 6.709</change>
+        <change>Fixed bug where accounts using OAuth weren't set up properly in Easy Mail 6.709</change>
         <change>Moved "Show only subscribed folders" setting to "Folders" section</change>
     </release>
     <release version="6.709" versioncode="37009" date="2023-08-14">
@@ -279,7 +279,7 @@
         <change>Added swipe actions to the message list screen</change>
         <change>Added support for swiping between messages</change>
         <change>Added a monochromatic app icon for Android 13</change>
-        <change>Fixed "K-9 Accounts" shortcuts (please remove existing shortcuts and add them again)</change>
+        <change>Fixed "Easy Accounts" shortcuts (please remove existing shortcuts and add them again)</change>
         <change>Fixed error reporting for (old) send failures</change>
         <change>A lot of other bug fixes; see changes for versions 6.3xx</change>
         <change>Added Western Frisian translation and updated others</change>
@@ -299,7 +299,7 @@
         <change>Fixed a couple of rare crashes</change>
     </release>
     <release version="6.310" versioncode="33010" date="2022-10-24">
-        <change>Fixed "K-9 Accounts" shortcuts (you probably have to remove existing shortcuts and add them again)</change>
+        <change>Fixed "Easy Accounts" shortcuts (you probably have to remove existing shortcuts and add them again)</change>
         <change>Fixed a couple of bugs and display issues in the message list widget</change>
         <change>Fixed bug that could lead to a crypto provider popup showing before swiping to the next/previous message was completed</change>
         <change>Some other minor bug fixes</change>
@@ -351,7 +351,7 @@
     </release>
     <release version="6.302" versioncode="33002" date="2022-09-05">
         <change>Fixed moving to next/previous message when sorting the message list by read/unread or starred/unstarred</change>
-        <change>Fixed a crash when a third-party app shared a file to K-9 Mail without granting access to it</change>
+        <change>Fixed a crash when a third-party app shared a file to Easy Mail without granting access to it</change>
         <change>Keep some more attributes when sanitizing HTML</change>
         <change>A lot of internal changes and improvements</change>
         <change>Updated translations</change>
@@ -557,7 +557,7 @@
         <change>Fixed the check for missing outgoing server credentials, again… hopefully 🤞</change>
     </release>
     <release version="5.805" versioncode="28005" date="2021-08-21">
-        <change>Fixed the check for missing incoming/outgoing server credentials (introduced in K-9 Mail 5.804)</change>
+        <change>Fixed the check for missing incoming/outgoing server credentials (introduced in Easy Mail 5.804)</change>
         <change>Changed the 'save attachment' icon (apparently floppy disks are no longer a thing)</change>
     </release>
     <release version="5.804" versioncode="28004" date="2021-08-18">
@@ -597,14 +597,14 @@
         <change>Major redesign of the user interface</change>
         <change>Changed periodic background sync and push implementations to work much more reliably</change>
         <change>Deprecated support for the WebDAV protocol; new accounts can no longer be added</change>
-        <change>K-9 Mail now requires Android 5.0 and newer</change>
+        <change>Easy Mail now requires Android 5.0 and newer</change>
         <change>Added support for Autocrypt setup message</change>
         <change>Added support for encrypted subjects</change>
         <change>Don't use default signature when setting up a new account</change>
         <change>Allow installation on external media (Android 6+ with adopted storage)</change>
         <change>Removed keyboard shortcuts for menu items; on some devices they conflicted with system shortcuts</change>
         <change>Removed the broken option to store the message database on external storage</change>
-        <change>Removed the 'remote control' interface third-party apps could use to change some settings in K-9 Mail</change>
+        <change>Removed the 'remote control' interface third-party apps could use to change some settings in Easy Mail</change>
         <change>A lot of other bug fixes, internal changes, and improvements</change>
         <change>Check out the changelog entries for 5.7xx versions for a lot more details</change>
     </release>
@@ -901,12 +901,12 @@
         <change>Major redesign of the user interface</change>
         <change>Temporarily disabled Push (IMAP IDLE) until we can make it work reliable; your accounts will be polled every 15 minutes instead</change>
         <change>Deprecated support for the WebDAV protocol; new accounts can no longer be added</change>
-        <change>K-9 Mail now requires Android 5.0 and newer</change>
+        <change>Easy Mail now requires Android 5.0 and newer</change>
         <change>Added support for Autocrypt setup message</change>
         <change>Added support for encrypted subjects</change>
         <change>Allow installation on external media (Android 6+ with adopted storage)</change>
         <change>Removed the broken option to store the message database on external storage</change>
-        <change>Removed the 'remote control' interface third-party apps could use to change some settings in K-9 Mail</change>
+        <change>Removed the 'remote control' interface third-party apps could use to change some settings in Easy Mail</change>
         <change>Fixed a lot of bugs and probably introduced some new ones. Please report bugs.</change>
     </release>
     <release version="5.600" versioncode="26000" date="2018-09-02">
@@ -1055,7 +1055,7 @@
         <change>User interface tweaks for encryption-related functionality</change>
         <change>Fixed crash caused by new message notifications</change>
         <change>Fixed bug with downloading attachments</change>
-        <change>Fixed structure of emails created with K-9 Mail</change>
+        <change>Fixed structure of emails created with Easy Mail</change>
         <change>Fixed bug where message list was displayed twice</change>
         <change>Updated translations</change>
     </release>
@@ -1107,7 +1107,7 @@
         <change>Added option to copy sender/recipient addresses to clipboard</change>
         <change>Show warning when user tries to send an email without a subject</change>
         <change>New database structure; temporarily disables fulltext search</change>
-        <change>Allow importing of settings created with newer versions of K-9 Mail</change>
+        <change>Allow importing of settings created with newer versions of Easy Mail</change>
         <change>Added support for Server Name Indication</change>
         <change>Disabled support for SSLv3 protocol/ciphers and all RC4 ciphers</change>
         <change>Fixed bug where third-party apps couldn't delete messages from certain folders</change>
@@ -1208,7 +1208,7 @@
         <change>Add support for bitcoin URIs</change>
         <change>Change the way we harden SSL/TLS sockets. Disallow a couple of weak ciphers, bring known ones in a defined order and sort unknown ciphers at the end. Also re-enable SSLv3 because it's still used a lot.</change>
         <change>Implement pruning of old certificates from LocalKeyStore. Certificates are deleted whenever server settings are changed or an account is deleted.</change>
-        <change>Fix inadequate certificate validation. Proper host name validation was not being performed for certificates kept in the local keystore.  If an attacker could convince a user to accept and store an attacker's certificate, then that certificate could be used for MITM attacks, giving the attacker access to all connections to all servers in all accounts in K-9.</change>
+        <change>Fix inadequate certificate validation. Proper host name validation was not being performed for certificates kept in the local keystore.  If an attacker could convince a user to accept and store an attacker's certificate, then that certificate could be used for MITM attacks, giving the attacker access to all connections to all servers in all accounts in Easy.</change>
         <change>Users can now use different certificates for different servers on the same host (listening to different ports).</change>
         <change>The above changes mean that users might have to re-accept certificates that they had previously accepted and are still using (but only if the certificate's Subject doesn't match the host that they are connecting to).</change>
         <change>Make sure to return different colors for senders with different name, but the same mail address (e.g. mails sent by certain issue tracking systems).</change>
@@ -1218,7 +1218,7 @@
     <release version="4.701" versioncode="19002" date="2013-11-06">
         <change>Overhauled how we do message view scrolling to fix a KitKat issue. Thanks to Joe Steele!</change>
         <change>Hardened TLS cipher suites and versions</change>
-        <change>K-9 no longer adds blank lines to composed messages if there is no quoted text</change>
+        <change>Easy no longer adds blank lines to composed messages if there is no quoted text</change>
         <change>Fixed serveral issues related to message drafts</change>
         <change>Better cleanup of old data when deleting an account</change>
         <change>Worked around a bug in KitKat that stopped settings import from working</change>
@@ -1356,8 +1356,8 @@
     <release version="4.327" versioncode="17028" date="2013-02-20">
         <change>Fix dialog message when deleting multiple messages from a notification</change>
         <change>Message view / list: fix NPE when list is empty</change>
-        <change>If there is no message when resuming, K-9 should return to a MessageList.</change>
-        <change>Add a caching layer to EmailProvider.  Database updates can be surprisingly slow. This lead to slow updates of the user interface which in turn made working with K-9 Mail not as fun as it should be. This commit hopefully changes that.</change>
+        <change>If there is no message when resuming, Easy should return to a MessageList.</change>
+        <change>Add a caching layer to EmailProvider.  Database updates can be surprisingly slow. This lead to slow updates of the user interface which in turn made working with Easy Mail not as fun as it should be. This commit hopefully changes that.</change>
         <change>Updated Japanese translation</change>
         <change>Updated French translation</change>
         <change>Updated Czech localization</change>

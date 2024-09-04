@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="settings_import_oauth_description">Để sử dụng tài khoản email này với Thư K-9, bạn cần đăng nhập và cấp cho ứng dụng quyền truy cập vào email của mình.</string>
+    <string name="settings_import_oauth_description">Để sử dụng tài khoản email này với Thư Easy, bạn cần đăng nhập và cấp cho ứng dụng quyền truy cập vào email của mình.</string>
     <string name="settings_import_oauth_sign_in">Đăng nhập</string>
     <string name="settings_import_oauth_sign_in_with_google">Đăng nhập với Google</string>
     <string name="settings_import_oauth_error_oauth_flow_canceled">Đã hủy ủy quyền</string>

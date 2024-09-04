@@ -105,7 +105,7 @@ public class StorageManager {
      * </p>
      *
      * <p>
-     * The underlying storage has always been used by K-9.
+     * The underlying storage has always been used by Easy.
      * </p>
      */
     public static class InternalStorageProvider implements StorageProvider {

@@ -272,9 +272,9 @@ public class LocalSearch implements SearchSpecification {
     }
 
     /**
-     * Checks if this search was hard coded and shipped with K-9
+     * Checks if this search was hard coded and shipped with Easy
      *
-     * @return True is search was shipped with K-9
+     * @return True is search was shipped with Easy
      */
     public boolean isPredefined() {
         return mPredefined;

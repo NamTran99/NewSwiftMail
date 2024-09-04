@@ -1,4 +1,4 @@
-K-9 Mail adalah klien surel sumber terbuka yang pada dasarnya bekerja dengan semua penyedia surel.
+Easy Mail adalah klien surel sumber terbuka yang pada dasarnya bekerja dengan semua penyedia surel.
 
 <b>Fitur </b>
 
@@ -14,11 +14,11 @@ Instal aplikasi <a href="https://f-droid.org/packages/org.sufficientlysecure.key
 
 <b>Dukungan</b>
 
-Jika Anda mengalami kendala dengan K-9 Mail, mintalah bantuan di forum dukungan <a href="https://forum.k9mail.app"> kami </a>.
+Jika Anda mengalami kendala dengan Easy Mail, mintalah bantuan di forum dukungan <a href="https://forum.k9mail.app"> kami </a>.
 
 
 <b> Ingin membantu?</b>
 
-K-9 Mail adalah proyek yang dikembangkan oleh komunitas. Jika Anda tertarik untuk membantu meningkatkan aplikasi, silakan bergabung dengan kami!
+Easy Mail adalah proyek yang dikembangkan oleh komunitas. Jika Anda tertarik untuk membantu meningkatkan aplikasi, silakan bergabung dengan kami!
 Anda dapat menemukan pelacakan masalah, kode sumber, dan wiki kami di <a href="https://github.com/thunderbird/thunderbird-android">https://github.com/thunderbird/thunderbird-android</a>.
 Kami selalu senang menyambut pengembang, desainer, dokumenter, penerjemah, pengidentifikasi masalah, dan teman-teman baru.

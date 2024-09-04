@@ -31,7 +31,7 @@
     <string name="settings_import_outgoing_server_password_hint">Cyfrinair gweinydd anfon</string>
     <string name="settings_import_use_same_password_for_outgoing_server">Defnyddio\'r un cyfrinair i\'r gweinydd anfon</string>
     <string name="settings_import_server_name_format">Enw gweinydd: <xliff:g id="hostname">%s</xliff:g></string>
-    <string name="settings_import_oauth_description">I ddefnyddio\'r cyfrif e-bost hwn â K-9 Mail, rhaid mewngofnodi a rhoi caniatâd i\'r ap gael mynediad at dy negeseuon e-bost.</string>
+    <string name="settings_import_oauth_description">I ddefnyddio\'r cyfrif e-bost hwn â Easy Mail, rhaid mewngofnodi a rhoi caniatâd i\'r ap gael mynediad at dy negeseuon e-bost.</string>
     <string name="settings_import_oauth_sign_in">Mewngofnodi</string>
     <string name="settings_import_oauth_sign_in_with_google">Mewngofnodi gyda Google</string>
     <string name="settings_import_oauth_error_oauth_flow_canceled">Diddymwyd awdurdodi</string>

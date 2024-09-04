@@ -4,7 +4,7 @@
     <!--This should make it easier for forks to change the branding-->
     <!--Used in AndroidManifest.xml-->
     <!--Used in the about dialog-->
-    <string name="about_app_authors_k9">Els passejadors de gossos K-9</string>
+    <string name="about_app_authors_k9">Els passejadors de gossos Easy</string>
     <string name="source_code">Codi font</string>
     <string name="app_license">Llicència d\'Apache, versió 2.0</string>
     <string name="about_project_title">Projecte de codi obert</string>
@@ -246,7 +246,7 @@
     <string name="general_settings_ui_density_default">Per defecte</string>
     <string name="general_settings_ui_density_relaxed">Relaxada</string>
     <string name="global_settings_privacy_hide_useragent">Amaga el client de correu</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Suprimeix el nom K-9 User-Agent de les capçaleres del missatge</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Suprimeix el nom Easy User-Agent de les capçaleres del missatge</string>
     <string name="global_settings_privacy_hide_timezone">Amaga el fus horari</string>
     <string name="global_settings_privacy_hide_timezone_detail">Fes servir UTC en comptes del fus horari local a les capçaleres dels missatges i a la capçalera de resposta</string>
     <string name="global_settings_notification_quick_delete_title">Mostra el botó de \'Suprimir\'</string>

@@ -30,7 +30,7 @@
     <string name="settings_import_outgoing_server_password_hint">Contrasenya del servidor de sortida</string>
     <string name="settings_import_use_same_password_for_outgoing_server">Feu servir la mateixa contrasenya per al servidor de sortida</string>
     <string name="settings_import_server_name_format">Nom del servidor: <xliff:g id="hostname">%s</xliff:g></string>
-    <string name="settings_import_oauth_description">Per fer servir aquest compte de correu electrònic amb el K-9 Mail, heu d\'iniciar-hi la sessió i concedir a l\'aplicació accés als vostres correus electrònics.</string>
+    <string name="settings_import_oauth_description">Per fer servir aquest compte de correu electrònic amb el Easy Mail, heu d\'iniciar-hi la sessió i concedir a l\'aplicació accés als vostres correus electrònics.</string>
     <string name="settings_import_oauth_sign_in">Inicia la sessió</string>
     <string name="settings_import_oauth_sign_in_with_google">Inicia la sessió amb Google</string>
     <string name="settings_import_oauth_error_oauth_flow_canceled">Autorització cancel·lada</string>

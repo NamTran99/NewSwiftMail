@@ -141,7 +141,7 @@
     <string name="copy_action">Copy</string>
     <string name="choose_folder_copy_title">Copy to…</string>
     <string name="remove_account_action">Remove account</string>
-    <string name="about_app_authors_k9">The K-9 Dog Walkers</string>
+    <string name="about_app_authors_k9">The Easy Dog Walkers</string>
     <string name="reply_action">Reply</string>
     <string name="show_headers_action">Show headers</string>
     <string name="user_forum_title">User forum</string>
@@ -653,7 +653,7 @@
     <string name="special_mailbox_name_drafts">Drafts</string>
     <string name="folder_settings_folder_notify_mode_inherited">Same as push class</string>
     <string name="sort_unread_last">Read messages first</string>
-    <string name="global_settings_privacy_hide_useragent_detail">Remove K-9 User-Agent from mail headers</string>
+    <string name="global_settings_privacy_hide_useragent_detail">Remove Easy User-Agent from mail headers</string>
     <string name="edit_identity_title">Edit identity</string>
     <string name="message_compose_show_quoted_text_action">Include quoted message</string>
     <string name="sort_sender_alpha">Sender alphabetical</string>
