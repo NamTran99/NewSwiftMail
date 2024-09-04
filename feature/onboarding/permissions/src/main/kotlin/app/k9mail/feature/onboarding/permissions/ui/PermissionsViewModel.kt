@@ -23,6 +23,8 @@ class PermissionsViewModel(
 ) : BaseViewModel<State, Event, Effect>(initialState = State(isLoading = true)), ViewModel {
 
 
+    private var isAutoLoad = true
+
     override fun event(event: Event) {
         when (event) {
             Event.LoadPermissionState ->loadPermissionState()
@@ -41,7 +43,8 @@ class PermissionsViewModel(
 
     private fun loadPermissionState() {
         viewModelScope.launch {
-            Log.d("TAG", "loadPermissionState: qua day NamTD8")
+            if(!isAutoLoad) return@launch
+            isAutoLoad = false
             val (contactsPermissionState, notificationsPermissionState) = withContext(backgroundDispatcher) {
                 arrayOf(
                     checkPermission(Permission.Contacts),
@@ -81,13 +84,17 @@ class PermissionsViewModel(
 
     private fun handleAllowNotificationsPermissionClicked() {
         if(state.value.notificationsPermissionState == UiPermissionState.Block){
+            isAutoLoad = true
             emitEffect(Effect.NavigateToNotificationSetting)
         }else{
             emitEffect(Effect.RequestNotificationsPermission)
         }
     }
 
-    private fun handleContactsPermissionResult(success: Boolean) {
+    private fun handleContactsPermissionResult(success: Boolean)= viewModelScope.launch {
+        if (!success) {
+            increaseDenyAndCheckIfBlock.invoke(Permission.Contacts)
+        }
         updateState { state ->
             state.copy(
                 contactsPermissionState = if (success) UiPermissionState.Granted else UiPermissionState.Denied,

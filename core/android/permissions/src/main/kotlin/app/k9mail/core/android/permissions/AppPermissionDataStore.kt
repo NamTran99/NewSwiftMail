@@ -1,6 +1,7 @@
 package app.k9mail.core.android.permissions
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
@@ -19,6 +20,7 @@ class AppPermissionDataStore(
 
     suspend fun increaseDeclineTime(permission: String) {
         val key = intPreferencesKey(permission)
+        Log.d("TAG", "NamTD8 increaseDeclineTime: ${getDeclineTime(permission) + 1} ${permission}")
         perStore.edit {
             it[key] = getDeclineTime(permission) + 1
         }
