@@ -7,6 +7,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.preference.ktx)
+    implementation(libs.androidx.datastore.core.android)
+    implementation(libs.accompanist.permission)
     testImplementation(libs.androidx.test.core)
     testImplementation(libs.robolectric)
     testImplementation(libs.assertk)

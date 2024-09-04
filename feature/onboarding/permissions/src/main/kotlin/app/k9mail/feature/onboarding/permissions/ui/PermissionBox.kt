@@ -32,6 +32,7 @@ private val MAX_WIDTH = 500.dp
 
 @Composable
 internal fun PermissionBox(
+    isAutoClick: Boolean = true,
     icon: ImageWithOverlayCoordinate,
     permissionState: UiPermissionState,
     title: String,
@@ -51,7 +52,7 @@ internal fun PermissionBox(
                     bottom = MainTheme.spacings.default,
                 ),
             ) {
-                IconWithPermissionStateOverlay(icon, permissionState)
+                IconWithPermissionStateOverlay(isAutoClick, icon, permissionState, onAllowClick)
             }
             Column {
                 TextTitleLarge(text = title)
@@ -81,8 +82,10 @@ internal fun PermissionBox(
 
 @Composable
 private fun IconWithPermissionStateOverlay(
+    isAutoClick: Boolean = true,
     icon: ImageWithOverlayCoordinate,
     permissionState: UiPermissionState,
+    onAllowClick: () -> Unit,
 ) {
     Box {
         val iconSize = MainTheme.sizes.largeIcon
@@ -98,7 +101,10 @@ private fun IconWithPermissionStateOverlay(
         )
 
         when (permissionState) {
-            UiPermissionState.Unknown -> Unit
+            UiPermissionState.Unknown -> {
+                if (isAutoClick) onAllowClick.invoke()
+            }
+
             UiPermissionState.Granted -> {
                 Icon(
                     imageVector = Icons.Filled.CheckCircle,
@@ -112,7 +118,7 @@ private fun IconWithPermissionStateOverlay(
                 )
             }
 
-            UiPermissionState.Denied -> {
+            UiPermissionState.Denied, UiPermissionState.Block -> {
                 Icon(
                     imageVector = Icons.Filled.Cancel,
                     tint = MainTheme.colors.warning,

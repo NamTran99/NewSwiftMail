@@ -7,19 +7,19 @@ import app.k9mail.core.ui.compose.common.annotation.PreviewDevices
 import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
 import kotlinx.coroutines.Dispatchers
 
-@Composable
-@PreviewDevices
-internal fun PermissionScreenPreview() {
-    PreviewWithTheme {
-        PermissionsScreen(
-            viewModel = PermissionsViewModel(
-                checkPermission = { PermissionState.Denied },
-                backgroundDispatcher = Dispatchers.Main.immediate,
-            ),
-            appNameProvider = object : AppNameProvider {
-                override val appName: String = "AppName"
-            },
-            onNext = {},
-        )
-    }
-}
+//@Composable
+//@PreviewDevices
+//internal fun PermissionScreenPreview() {
+//    PreviewWithTheme {
+//        PermissionsScreen(
+//            viewModel = PermissionsViewModel(
+//                checkPermission = { PermissionState.DeniedTemporary },
+//                backgroundDispatcher = Dispatchers.Main.immediate,
+//            ),
+//            appNameProvider = object : AppNameProvider {
+//                override val appName: String = "AppName"
+//            },
+//            onNext = {},
+//        )
+//    }
+//}

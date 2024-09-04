@@ -54,7 +54,7 @@ internal fun PermissionsContent(
                 .padding(innerPadding),
         ) {
             Column(
-                verticalArrangement = Arrangement.SpaceBetween,
+                verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxHeight()
@@ -113,13 +113,6 @@ private fun PermissionBoxes(
     state: State,
     onEvent: (Event) -> Unit,
 ) {
-    PermissionBox(
-        icon = IconsWithBottomRightOverlay.person,
-        permissionState = state.contactsPermissionState,
-        title = stringResource(R.string.onboarding_permissions_contacts_title),
-        description = stringResource(R.string.onboarding_permissions_contacts_description),
-        onAllowClick = { onEvent(Event.AllowContactsPermissionClicked) },
-    )
 
     if (state.isNotificationsPermissionVisible) {
         Spacer(modifier = Modifier.height(MainTheme.spacings.quadruple))
@@ -132,6 +125,14 @@ private fun PermissionBoxes(
             onAllowClick = { onEvent(Event.AllowNotificationsPermissionClicked) },
         )
     }
+
+    PermissionBox(
+        icon = IconsWithBottomRightOverlay.person,
+        permissionState = state.contactsPermissionState,
+        title = stringResource(R.string.onboarding_permissions_contacts_title),
+        description = stringResource(R.string.onboarding_permissions_contacts_description),
+        onAllowClick = { onEvent(Event.AllowContactsPermissionClicked) },
+    )
 }
 
 @Composable

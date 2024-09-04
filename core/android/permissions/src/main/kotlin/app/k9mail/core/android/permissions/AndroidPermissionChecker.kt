@@ -11,9 +11,10 @@ import androidx.core.content.ContextCompat
  */
 class AndroidPermissionChecker(
     private val context: Context,
+    private val dataStore: AppPermissionDataStore,
 ) : PermissionChecker {
 
-    override fun checkPermission(permission: Permission): PermissionState {
+    override suspend fun checkPermission(permission: Permission): PermissionState {
         return when (permission) {
             Permission.Contacts -> {
                 checkSelfPermission(Manifest.permission.READ_CONTACTS)
@@ -32,7 +33,29 @@ class AndroidPermissionChecker(
         return if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) {
             PermissionState.Granted
         } else {
-            PermissionState.Denied
+            PermissionState.DeniedTemporary
         }
+    }
+
+    override suspend fun increaseDenyAndCheckIfBlock(permission: Permission): Boolean {
+        val permissionString = when (
+            permission
+        ) {
+            Permission.Notifications -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    Manifest.permission.POST_NOTIFICATIONS
+                } else {
+                    null
+                }
+            }
+
+            else -> null
+        }
+
+        if (permissionString != null) {
+            dataStore.increaseDeclineTime(permissionString)
+            return dataStore.isPermissionBlock(permissionString)
+        }
+        return false
     }
 }

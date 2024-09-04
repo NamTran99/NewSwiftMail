@@ -6,5 +6,6 @@ enum class PermissionState {
      */
     GrantedImplicitly,
     Granted,
-    Denied,
+    DeniedTemporary,
+    DeniedForever
 }

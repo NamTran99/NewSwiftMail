@@ -12,7 +12,7 @@ class CheckPermission(
     private val permissionChecker: PermissionChecker,
 ) : UseCase.CheckPermission {
 
-    override fun invoke(permission: Permission): PermissionState {
+    override suspend fun invoke(permission: Permission): PermissionState {
         return permissionChecker.checkPermission(permission)
     }
 }

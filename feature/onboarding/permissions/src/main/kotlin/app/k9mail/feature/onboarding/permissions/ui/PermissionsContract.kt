@@ -18,6 +18,7 @@ interface PermissionsContract {
 
         data object AllowContactsPermissionClicked : Event
         data object AllowNotificationsPermissionClicked : Event
+        data object BlockNotificationPermission : Event
 
         data class ContactsPermissionResult(val success: Boolean) : Event
         data class NotificationsPermissionResult(val success: Boolean) : Event
@@ -28,6 +29,7 @@ interface PermissionsContract {
     sealed interface Effect {
         data object RequestContactsPermission : Effect
         data object RequestNotificationsPermission : Effect
+        data object NavigateToNotificationSetting : Effect
 
         data object NavigateNext : Effect
     }
@@ -36,5 +38,6 @@ interface PermissionsContract {
         Unknown,
         Granted,
         Denied,
+        Block,
     }
 }

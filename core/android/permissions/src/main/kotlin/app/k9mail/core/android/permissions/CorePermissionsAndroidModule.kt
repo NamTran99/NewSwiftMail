@@ -4,6 +4,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val corePermissionsAndroidModule: Module = module {
-    factory<PermissionChecker> { AndroidPermissionChecker(context = get()) }
+    factory<PermissionChecker> { AndroidPermissionChecker(context = get(), dataStore = get()) }
     factory<PermissionsModelChecker> { AndroidPermissionsModelChecker() }
+    factory<AppPermissionDataStore> { AppPermissionDataStore(context = get()) }
 }

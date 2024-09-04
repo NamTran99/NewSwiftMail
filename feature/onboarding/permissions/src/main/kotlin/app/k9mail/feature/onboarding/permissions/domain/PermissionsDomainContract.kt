@@ -8,11 +8,14 @@ interface PermissionsDomainContract {
     interface UseCase {
 
         fun interface CheckPermission {
-            operator fun invoke(permission: Permission): PermissionState
+           suspend  operator fun invoke(permission: Permission): PermissionState
         }
 
         fun interface HasRuntimePermissions {
             operator fun invoke(): Boolean
+        }
+        fun interface IncreaseDenyAndCheckIfBlock{
+            suspend operator fun invoke(permission: Permission):  Boolean
         }
     }
 }

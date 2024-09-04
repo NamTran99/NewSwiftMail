@@ -17,14 +17,24 @@ import kotlinx.coroutines.withContext
 
 class PermissionsViewModel(
     private val checkPermission: UseCase.CheckPermission,
+    private val increaseDenyAndCheckIfBlock: UseCase.IncreaseDenyAndCheckIfBlock,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : BaseViewModel<State, Event, Effect>(initialState = State(isLoading = true)), ViewModel {
+
+    init {
+        loadPermissionState()
+    }
 
     override fun event(event: Event) {
         when (event) {
             Event.LoadPermissionState -> handleOneTimeEvent(event, ::loadPermissionState)
             Event.AllowContactsPermissionClicked -> handleAllowContactsPermissionClicked()
             Event.AllowNotificationsPermissionClicked -> handleAllowNotificationsPermissionClicked()
+            Event.BlockNotificationPermission -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    increaseDenyAndCheckIfBlock.invoke(Permission.Notifications)
+                }
+            }
             is Event.ContactsPermissionResult -> handleContactsPermissionResult(event.success)
             is Event.NotificationsPermissionResult -> handleNotificationsPermissionResult(event.success)
             Event.NextClicked -> handleNextClicked()
@@ -43,12 +53,14 @@ class PermissionsViewModel(
             val contactsUiPermissionState = when (contactsPermissionState) {
                 PermissionState.GrantedImplicitly -> error("Unexpected case")
                 PermissionState.Granted -> UiPermissionState.Granted
-                PermissionState.Denied -> UiPermissionState.Unknown
+                PermissionState.DeniedTemporary -> UiPermissionState.Unknown
+                PermissionState.DeniedForever -> UiPermissionState.Block
             }
             val notificationsUiPermissionState = when (notificationsPermissionState) {
                 PermissionState.GrantedImplicitly -> UiPermissionState.Unknown
                 PermissionState.Granted -> UiPermissionState.Granted
-                PermissionState.Denied -> UiPermissionState.Unknown
+                PermissionState.DeniedTemporary -> UiPermissionState.Unknown
+                PermissionState.DeniedForever -> UiPermissionState.Block
             }
             val isNotificationsPermissionVisible = notificationsPermissionState != PermissionState.GrantedImplicitly
 
@@ -69,7 +81,11 @@ class PermissionsViewModel(
     }
 
     private fun handleAllowNotificationsPermissionClicked() {
-        emitEffect(Effect.RequestNotificationsPermission)
+        if(state.value.notificationsPermissionState == UiPermissionState.Block){
+            emitEffect(Effect.NavigateToNotificationSetting)
+        }else{
+            emitEffect(Effect.RequestNotificationsPermission)
+        }
     }
 
     private fun handleContactsPermissionResult(success: Boolean) {
@@ -81,10 +97,14 @@ class PermissionsViewModel(
         updateNextButtonState()
     }
 
-    private fun handleNotificationsPermissionResult(success: Boolean) {
+    private fun handleNotificationsPermissionResult(success: Boolean)= viewModelScope.launch {
+        var statusDenied = UiPermissionState.Denied
+        if (!success && increaseDenyAndCheckIfBlock.invoke(Permission.Notifications)) {
+            statusDenied = UiPermissionState.Block
+        }
         updateState { state ->
             state.copy(
-                notificationsPermissionState = if (success) UiPermissionState.Granted else UiPermissionState.Denied,
+                notificationsPermissionState = if (success) UiPermissionState.Granted else statusDenied,
             )
         }
         updateNextButtonState()

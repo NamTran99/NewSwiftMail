@@ -35,7 +35,7 @@ class AndroidPermissionCheckerTest {
 
         val result = permissionChecker.checkPermission(Permission.Contacts)
 
-        assertThat(result).isEqualTo(PermissionState.Denied)
+        assertThat(result).isEqualTo(PermissionState.DeniedTemporary)
     }
 
     @Test
@@ -53,7 +53,7 @@ class AndroidPermissionCheckerTest {
 
         val result = permissionChecker.checkPermission(Permission.Notifications)
 
-        assertThat(result).isEqualTo(PermissionState.Denied)
+        assertThat(result).isEqualTo(PermissionState.DeniedTemporary)
     }
 
     @Test
