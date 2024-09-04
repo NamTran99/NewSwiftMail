@@ -49,7 +49,7 @@ fun OnboardingNavHost(
 
     NavHost(
         navController = navController,
-        startDestination = NESTED_NAVIGATION_ROUTE_ACCOUNT_SETUP,
+        startDestination = NESTED_NAVIGATION_ROUTE_PERMISSIONS,
     ) {
 
         composable(route = NESTED_NAVIGATION_ROUTE_ACCOUNT_SETUP) {

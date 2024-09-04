@@ -64,6 +64,7 @@ class PermissionsViewModel(
             }
             val isNotificationsPermissionVisible = notificationsPermissionState != PermissionState.GrantedImplicitly
 
+
             updateState { state ->
                 state.copy(
                     isLoading = false,
@@ -72,6 +73,15 @@ class PermissionsViewModel(
                     isNotificationsPermissionVisible = isNotificationsPermissionVisible,
                 )
             }
+
+            if(notificationsUiPermissionState !=  UiPermissionState.Granted){
+                handleAllowNotificationsPermissionClicked()
+            }
+
+            if(contactsUiPermissionState !=  UiPermissionState.Granted){
+                handleAllowContactsPermissionClicked()
+            }
+
             updateNextButtonState()
         }
     }

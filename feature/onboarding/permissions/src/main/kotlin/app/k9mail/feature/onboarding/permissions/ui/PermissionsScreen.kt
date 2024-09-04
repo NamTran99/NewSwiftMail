@@ -40,14 +40,13 @@ fun PermissionsScreen(
 
     val uiState = viewModel.state
 
-
     val notificationsPermissionLauncher = rememberLauncherForActivityResult(RequestPermission()) { success ->
         viewModel.event(Event.NotificationsPermissionResult(success))
     }
     val contactsPermissionLauncher = rememberLauncherForActivityResult(RequestPermission()) { success ->
-        if (uiState.value.notificationsPermissionState == PermissionsContract.UiPermissionState.Unknown) {
-            notificationsPermissionLauncher.requestNotificationsPermission()
-        }
+//        if (uiState.value.notificationsPermissionState == PermissionsContract.UiPermissionState.Unknown) {
+//            notificationsPermissionLauncher.requestNotificationsPermission()
+//        }
         viewModel.event(Event.ContactsPermissionResult(success))
     }
 
