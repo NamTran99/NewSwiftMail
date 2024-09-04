@@ -17,17 +17,10 @@ internal fun AccountState.toDisplayOptionsState(): State {
         }
     }?.joinToString(" ")
 
-    return if (options == null) {
-        State(
-            displayName = StringInputField(displayNameFormat?:""),
-            // TODO: get display name from: preferences.defaultAccount?.senderName ?: ""
+    return State(
+            displayName = StringInputField(displayNameFormat?: ""),
+            emailSignature = StringInputField(options?.emailSignature ?: ""),
         )
-    } else {
-        State(
-            displayName = StringInputField(options.displayName),
-            emailSignature = StringInputField(options.emailSignature ?: ""),
-        )
-    }
 }
 
 internal fun State.toAccountDisplayOptions(): AccountDisplayOptions {
