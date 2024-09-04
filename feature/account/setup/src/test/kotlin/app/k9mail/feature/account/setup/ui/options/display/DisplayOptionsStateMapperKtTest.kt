@@ -12,7 +12,6 @@ class DisplayOptionsStateMapperKtTest {
     @Test
     fun `should map state to account options`() {
         val state = DisplayOptionsContract.State(
-            accountName = StringInputField("accountName"),
             displayName = StringInputField("displayName"),
             emailSignature = StringInputField("emailSignature"),
         )
@@ -21,7 +20,6 @@ class DisplayOptionsStateMapperKtTest {
 
         assertThat(result).isEqualTo(
             AccountDisplayOptions(
-                accountName = "accountName",
                 displayName = "displayName",
                 emailSignature = "emailSignature",
             ),

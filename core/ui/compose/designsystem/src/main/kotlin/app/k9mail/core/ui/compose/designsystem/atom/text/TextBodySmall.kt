@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import app.k9mail.core.ui.compose.theme2.MainTheme
 import androidx.compose.material3.Text as Material3Text
@@ -14,13 +15,14 @@ fun TextBodySmall(
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
     textAlign: TextAlign? = null,
+    textStyle: (TextStyle)-> TextStyle = { it },
 ) {
     Material3Text(
         text = text,
         modifier = modifier,
         color = color,
         textAlign = textAlign,
-        style = MainTheme.typography.bodySmall,
+        style = textStyle.invoke(MainTheme.typography.bodySmall),
     )
 }
 

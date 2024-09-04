@@ -71,4 +71,6 @@
     <string name="account_setup_sign_in_to_your_account">Sign in to your account</string>
     <string name="account_setup_login">Login</string>
     <string name="account_setup_manual_configuration">Manual configuration</string>
+    <string name="account_setup_application_homepage">Application\'s homepage</string>
+    <string name="account_setup_privacy_policy">Privacy policy</string>
 </resources>
