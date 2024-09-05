@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.lifecycleScope
 import app.k9mail.core.ui.legacy.designsystem.atom.icon.Icons
 import com.fsck.k9.Account
 import com.fsck.k9.K9
@@ -110,9 +111,9 @@ class MessageViewFragment :
         }
     }
 
+    var isMessageLoad = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("TAG", "onCreate: NamTD8 here")
         super.onCreate(savedInstanceState)
 
         // Hide the toolbar menu when first creating this fragment. The menu will be set to visible once this fragment
@@ -232,7 +233,6 @@ class MessageViewFragment :
 
     override fun onResume() {
         super.onResume()
-        Log.d("TAG", "onResume: NamTD8 here ${this}")
         markMessageAsOpened()
         messageCryptoPresenter.onResume()
     }
@@ -248,7 +248,7 @@ class MessageViewFragment :
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
-        if (!isActive) return
+        if (!isActive || message == null) return
 
         menu.findItem(R.id.delete).apply {
             isVisible = K9.isMessageViewDeleteActionVisible
@@ -277,7 +277,7 @@ class MessageViewFragment :
                 Icons.Outlined.MarkEmailRead
             }
 
-            Log.d("TAG", "onPrepareOptionsMenu: NamTD8 ${isMessageRead}")
+            Log.d("TAG", "onPrepareOptionsMenu: NamTD8 ${isMessageRead} ${lifecycle.currentState.name}")
 
             val drawable = ContextCompat.getDrawable(requireContext(), drawableId)
             menu.findItem(R.id.toggle_unread).icon = drawable
@@ -865,7 +865,6 @@ class MessageViewFragment :
     private val messageLoaderCallbacks: MessageLoaderCallbacks = object : MessageLoaderCallbacks {
         override fun onMessageDataLoadFinished(message: LocalMessage) {
             this@MessageViewFragment.message = message
-
             displayHeaderForLoadingMessage(message)
             messageTopView.setToLoadingState()
             showProgressThreshold = null

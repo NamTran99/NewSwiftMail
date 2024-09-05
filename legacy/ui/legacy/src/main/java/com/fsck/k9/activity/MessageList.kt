@@ -883,6 +883,7 @@ open class MessageList :
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        Log.d("TAG", "onCreateOptionsMenu: NamTD8 ${this} ${this::class.java.name}")
         menuInflater.inflate(R.menu.message_list_option_menu, menu)
 
         val searchItem = menu.findItem(R.id.search)

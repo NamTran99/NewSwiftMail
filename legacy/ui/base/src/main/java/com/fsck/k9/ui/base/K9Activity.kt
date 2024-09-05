@@ -33,7 +33,6 @@ abstract class K9Activity(private val themeType: ThemeType) : AppCompatActivity(
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("TAG", "onCreate: NamTD8 ${this::class.java.name}")
         initializeTheme()
         initializePushController()
         super.onCreate(savedInstanceState)
