@@ -23,7 +23,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
-import androidx.lifecycle.lifecycleScope
 import app.k9mail.core.ui.legacy.designsystem.atom.icon.Icons
 import com.fsck.k9.Account
 import com.fsck.k9.K9
@@ -51,11 +50,12 @@ import com.fsck.k9.ui.base.ThemeManager
 import com.fsck.k9.ui.base.extensions.withArguments
 import com.fsck.k9.ui.choosefolder.ChooseFolderActivity
 import com.fsck.k9.ui.messagedetails.MessageDetailsFragment
-import com.fsck.k9.ui.messagesource.MessageSourceActivity
 import com.fsck.k9.ui.messageview.MessageCryptoPresenter.MessageCryptoMvpView
 import com.fsck.k9.ui.settings.account.AccountSettingsActivity
 import com.fsck.k9.ui.share.ShareIntentBuilder
+import com.fsck.k9.view.OutsideClickRelativeLayout
 import com.github.clans.fab.FloatingActionButton
+import com.github.clans.fab.FloatingActionMenu
 import java.util.Locale
 import org.koin.android.ext.android.inject
 import org.openintents.openpgp.util.OpenPgpIntentStarter
@@ -77,6 +77,7 @@ class MessageViewFragment :
     private lateinit var fabReplyAll: FloatingActionButton
     private lateinit var fabReply: FloatingActionButton
     private lateinit var fabForward: FloatingActionButton
+    private lateinit var fabButtonMenu: FloatingActionMenu
 
     private var message: LocalMessage? = null
     private lateinit var messageLoaderHelper: MessageLoaderHelper
@@ -110,8 +111,6 @@ class MessageViewFragment :
             throw ClassCastException("This fragment must be attached to a MessageViewFragmentListener")
         }
     }
-
-    var isMessageLoad = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -152,10 +151,16 @@ class MessageViewFragment :
         val layoutInflater = LayoutInflater.from(themedContext)
 
         val view = layoutInflater.inflate(R.layout.message, container, false)
+
+        fabButtonMenu = view.findViewById(R.id.fab_bottom_menu)
         messageTopView = view.findViewById(R.id.message_view)
         fabReplyAll  = view.findViewById(R.id.fab_reply_all)
         fabReply  = view.findViewById(R.id.fab_reply)
         fabForward  = view.findViewById(R.id.fab_forward)
+
+        (view  as? OutsideClickRelativeLayout)?.setOnOutsideClickListenerForView(fabButtonMenu) {
+            fabButtonMenu.close(true)
+        }
 
         initializeMessageTopView(messageTopView)
         initListener()
@@ -300,6 +305,11 @@ class MessageViewFragment :
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        fabButtonMenu.close(true)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (message == null) return false
 
@@ -318,10 +328,10 @@ class MessageViewFragment :
             R.id.edit_as_new_message -> onEditAsNewMessage()
             R.id.share -> onSendAlternate()
             R.id.toggle_unread -> onToggleRead()
-            R.id.archive,-> onArchive()
-            R.id.spam, -> onSpam()
-            R.id.move, -> onMove()
-            R.id.copy, -> onCopy()
+            R.id.archive -> onArchive()
+            R.id.spam -> onSpam()
+            R.id.move -> onMove()
+            R.id.copy -> onCopy()
             R.id.move_to_drafts -> onMoveToDrafts()
             R.id.unsubscribe -> onUnsubscribe()
             else -> return false
