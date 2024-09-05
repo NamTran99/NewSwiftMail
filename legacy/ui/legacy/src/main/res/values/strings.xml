@@ -53,6 +53,7 @@
     <string name="actionbar_selected"><xliff:g id="selection_count">%d</xliff:g> selected</string>
     <string name="send_action">Send</string>
     <string name="empty_subject">Subject is empty, click again to send anyway</string>
+    <string name="sending_mail">Your email is being sent</string>
     <string name="reply_action">Reply</string>
     <string name="reply_all_action">Reply all</string>
     <string name="delete_action">Delete</string>

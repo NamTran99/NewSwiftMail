@@ -178,7 +178,7 @@
         app:layout_constraintEnd_toStartOf="@+id/date"
         app:layout_constraintTop_toTopOf="@+id/lvSubjectArea"
         app:srcCompat="@drawable/ic_attachment"
-        />
+        app:tint="?colorPrimary" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/date"

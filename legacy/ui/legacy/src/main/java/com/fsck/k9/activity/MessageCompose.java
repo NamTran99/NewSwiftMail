@@ -796,6 +796,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
             sendMessageHasBeenTriggered = true;
             changesMadeSinceLastSave = false;
             setProgressBarIndeterminateVisibility(true);
+            Toast.makeText(this, R.string.sending_mail, Toast.LENGTH_LONG).show();
             currentMessageBuilder.buildAsync(this);
         }
     }
