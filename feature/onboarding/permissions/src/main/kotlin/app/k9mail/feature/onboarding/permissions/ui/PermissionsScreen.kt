@@ -56,8 +56,6 @@ fun PermissionsScreen(
         viewModel.event(Event.NotificationsPermissionResult(success))
     }
 
-
-
     val (state, dispatch) = viewModel.observe { effect ->
         when (effect) {
             Effect.RequestContactsPermission -> contactsPermissionLauncher.requestContactsPermission()
@@ -78,7 +76,7 @@ fun PermissionsScreen(
     }
 
     OnLifecycleEvent{
-            owner, event ->
+            _, event ->
         // do stuff on event
         when (event) {
             Lifecycle.Event.ON_RESUME -> { dispatch(Event.LoadPermissionState) }

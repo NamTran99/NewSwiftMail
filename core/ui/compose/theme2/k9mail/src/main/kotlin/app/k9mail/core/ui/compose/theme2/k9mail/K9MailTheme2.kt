@@ -20,7 +20,7 @@ fun K9MailTheme2(
     content: @Composable () -> Unit,
 ) {
     val images = ThemeImages(
-        logo = R.drawable.core_ui_theme2_k9mail_logo,
+        logo = R.drawable.ic_app_logo,
     )
 
     val themeConfig = ThemeConfig(

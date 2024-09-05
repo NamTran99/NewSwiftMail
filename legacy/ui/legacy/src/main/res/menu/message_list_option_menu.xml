@@ -125,7 +125,7 @@
     <!-- always -->
     <item
         android:id="@+id/compose"
-        android:icon="@drawable/ic_edit"
+        android:icon="@drawable/ic_edit_white"
         android:title="@string/compose_action"
         app:showAsAction="ifRoom"
         />
