@@ -169,7 +169,6 @@ internal class AccountAutoDiscoveryViewModel(
     }
 
     private fun onNext() {
-        Log.d("TAG", "onNext: NamTD8 func này có gọi")
         when (state.value.configStep) {
             ConfigStep.LIST_MAIL_SERVER ->
                 if (state.value.error != null) {

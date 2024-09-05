@@ -75,7 +75,6 @@ internal fun AccountAutoDiscoveryContent(
     appName: String,
     modifier: Modifier = Modifier,
 ) {
-    Log.d("TAG", "AccountAutoDiscoveryContent: NamTD8 configStep ${state.configStep}")
     val scrollState = rememberScrollState()
 
     ResponsiveWidthContainer(
@@ -181,7 +180,6 @@ internal fun ContentView(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    Log.d("TAG", "NamTD8 ContentView: check state${state.configStep}")
     Column(
         modifier = Modifier
             .padding(vertical = MainTheme.spacings.double)

@@ -79,7 +79,6 @@ fun PermissionsScreen(
 
     OnLifecycleEvent{
             owner, event ->
-        Log.d("TAG", "PermissionsScreen: NAmTD8 ${event.name}")
         // do stuff on event
         when (event) {
             Lifecycle.Event.ON_RESUME -> { dispatch(Event.LoadPermissionState) }
@@ -101,8 +100,6 @@ fun OnLifecycleEvent(onEvent: (owner: LifecycleOwner, event: Lifecycle.Event) ->
     DisposableEffect(lifecycleOwner.value) {
         val lifecycle = lifecycleOwner.value.lifecycle
         val observer = LifecycleEventObserver { owner, event ->
-            Log.d("TAG", "OnLifecycleEvent: NamTD8 ${owner} ${event.name}")
-
             eventHandler.value(owner, event)
         }
 

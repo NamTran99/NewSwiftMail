@@ -52,7 +52,6 @@ class InMemoryAccountStateRepository(
     }
 
     override fun clear() {
-        Log.d("TAG", "clear: NamTD8 ${Throwable().stackTraceToString()}")
         state = AccountState()
     }
 

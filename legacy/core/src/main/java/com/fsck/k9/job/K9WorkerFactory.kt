@@ -18,7 +18,6 @@ class K9WorkerFactory : WorkerFactory() {
             "com.hungbang.email2018.service.NewMailCheckWorker",
             "com.fsck.k9.job.MailSyncWorker"
         )
-        Log.d("TAG", "createWorker: NamTD8 ${workerClassName}")
             val className = when (workerClassName) {
                 exampleWorkerClassName.first -> exampleWorkerClassName.second
                 else -> workerClassName

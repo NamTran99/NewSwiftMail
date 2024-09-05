@@ -62,7 +62,6 @@ class AuthorizationRepository(
                 AuthorizationResult.Failure(authorizationException)
             } else if (tokenResponse != null) {
                 val authState = AuthState(response, tokenResponse, null)
-                Log.d("TAG", "getExchangeToken: NamTD8-1 ${authState.idToken} ")
                 authState.idToken?.let{
                     JWT(it).claims["email"]?.asString()?.let{
                         accountStateRepository.setEmailAddress(it)

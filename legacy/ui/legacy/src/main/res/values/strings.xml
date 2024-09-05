@@ -650,6 +650,7 @@
     <string name="sort_by_flag">Star</string>
     <string name="sort_by_unread">Read/unread</string>
     <string name="sort_by_attach">Attachments</string>
+    <string name="action_flag">Flag</string>
 
     <string name="account_delete_dlg_title">Remove Account</string>
 

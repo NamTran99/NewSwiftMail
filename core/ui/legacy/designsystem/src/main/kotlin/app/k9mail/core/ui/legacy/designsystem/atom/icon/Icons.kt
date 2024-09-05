@@ -62,7 +62,7 @@ object Icons {
         val Lock = R.drawable.ic_lock
         val Login = R.drawable.ic_login
         val Mail = R.drawable.ic_mail_1
-        val MarkEmailRead = R.drawable.ic_mark_email_read
+        val MarkEmailRead = R.drawable.ic_mark_email_read_white
         val MarkEmailUnread = R.drawable.ic_mark_email_unread
         val Menu = R.drawable.ic_menu
         val MenuBook = R.drawable.ic_menu_book

@@ -13,7 +13,7 @@
         android:id="@+id/mark_as_read"
         android:title="@string/mark_as_read_action"
         app:showAsAction="always"
-        android:icon="@drawable/ic_mark_email_read"
+        android:icon="@drawable/ic_mark_email_read_white"
         />
     <item
         android:id="@+id/mark_as_unread"

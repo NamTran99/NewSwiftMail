@@ -110,7 +110,9 @@ class MessageViewFragment :
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("TAG", "onCreate: NamTD8 here")
         super.onCreate(savedInstanceState)
 
         // Hide the toolbar menu when first creating this fragment. The menu will be set to visible once this fragment
@@ -230,6 +232,7 @@ class MessageViewFragment :
 
     override fun onResume() {
         super.onResume()
+        Log.d("TAG", "onResume: NamTD8 here ${this}")
         markMessageAsOpened()
         messageCryptoPresenter.onResume()
     }
@@ -258,7 +261,6 @@ class MessageViewFragment :
         }
 
         val showToggleUnread = !isOutbox
-        menu.findItem(R.id.toggle_unread).isVisible = showToggleUnread
         menu.findItem(R.id.move).isVisible = true
 
         if (showToggleUnread) {
@@ -275,10 +277,12 @@ class MessageViewFragment :
                 Icons.Outlined.MarkEmailRead
             }
 
+            Log.d("TAG", "onPrepareOptionsMenu: NamTD8 ${isMessageRead}")
+
             val drawable = ContextCompat.getDrawable(requireContext(), drawableId)
             menu.findItem(R.id.toggle_unread).icon = drawable
         }
-
+        menu.findItem(R.id.toggle_unread).isVisible = showToggleUnread
         menu.findItem(R.id.move_to_drafts).isVisible = isOutbox
         menu.findItem(R.id.unsubscribe).isVisible = canMessageBeUnsubscribed()
 
@@ -324,11 +328,6 @@ class MessageViewFragment :
         }
 
         return true
-    }
-
-    private fun onShowHeaders() {
-        val launchIntent = MessageSourceActivity.createLaunchIntent(requireActivity(), messageReference)
-        startActivity(launchIntent)
     }
 
     private fun onToggleTheme() {

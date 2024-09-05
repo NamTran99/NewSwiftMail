@@ -20,7 +20,6 @@ class AppPermissionDataStore(
 
     suspend fun increaseDeclineTime(permission: String) {
         val key = intPreferencesKey(permission)
-        Log.d("TAG", "NamTD8 increaseDeclineTime: ${getDeclineTime(permission) + 1} ${permission}")
         perStore.edit {
             it[key] = getDeclineTime(permission) + 1
         }
