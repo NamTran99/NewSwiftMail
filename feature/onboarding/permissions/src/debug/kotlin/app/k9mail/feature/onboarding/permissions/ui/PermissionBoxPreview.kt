@@ -2,13 +2,13 @@ package app.k9mail.feature.onboarding.permissions.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
+import app.k9mail.core.ui.compose.designsystem.PreviewWithThemes
 import app.k9mail.core.ui.compose.designsystem.atom.icon.IconsWithBottomRightOverlay
 
 @Composable
 @Preview(showBackground = true)
 internal fun PermissionBoxUnknownStatePreview() {
-    PreviewWithTheme {
+    PreviewWithThemes {
         PermissionBox(
             icon = IconsWithBottomRightOverlay.person,
             permissionState = PermissionsContract.UiPermissionState.Unknown,
@@ -22,7 +22,7 @@ internal fun PermissionBoxUnknownStatePreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun PermissionBoxGrantedStatePreview() {
-    PreviewWithTheme {
+    PreviewWithThemes {
         PermissionBox(
             icon = IconsWithBottomRightOverlay.person,
             permissionState = PermissionsContract.UiPermissionState.Granted,
@@ -36,7 +36,7 @@ internal fun PermissionBoxGrantedStatePreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun PermissionBoxDeniedStatePreview() {
-    PreviewWithTheme {
+    PreviewWithThemes {
         PermissionBox(
             icon = IconsWithBottomRightOverlay.person,
             permissionState = PermissionsContract.UiPermissionState.Denied,

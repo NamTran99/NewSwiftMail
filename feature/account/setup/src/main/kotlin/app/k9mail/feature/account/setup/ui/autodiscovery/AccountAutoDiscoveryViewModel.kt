@@ -28,6 +28,7 @@ import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryCon
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Validator
+import com.fsck.k9.helper.EmailHelper.getDomainFromEmailAddress
 import com.hungbang.email2018.data.entity.OldMailAccountType
 import kotlinx.coroutines.launch
 
@@ -104,7 +105,7 @@ internal class AccountAutoDiscoveryViewModel(
 
     private fun convertLocalConfig() {
         val savedAccount = EasyMailUtil.getSavedAccountFromEasyMail()
-        val savedMailSigning = EasyMailUtil.getSavedSignInConfigFromEasyMail(savedAccount?.accountEmail)
+        val savedMailSigning = EasyMailUtil.getSavedSignInConfigFromEasyMail(getDomainFromEmailAddress(savedAccount?.accountEmail))
 
         if (savedAccount != null) {
             accountStateRepository.clear()

@@ -39,7 +39,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.k9mail.core.ui.compose.common.mvi.observe
-import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
+import app.k9mail.core.ui.compose.designsystem.PreviewWithThemes
 import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonFilled
 import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonText
 import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonUnderlineText
@@ -328,7 +328,7 @@ internal fun ContentView(
 @Composable
 @Preview(showBackground = true)
 internal fun AccountAutoDiscoveryContentGmailPreview() {
-    PreviewWithTheme {
+    PreviewWithThemes {
         AccountAutoDiscoveryContent(
             state = State(
                 configStep = AccountAutoDiscoveryContract.ConfigStep.LIST_MAIL_SERVER,

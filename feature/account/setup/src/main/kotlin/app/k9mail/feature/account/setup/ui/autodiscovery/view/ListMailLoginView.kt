@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.k9mail.core.ui.compose.common.annotation.PreviewDevices
-import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
+import app.k9mail.core.ui.compose.designsystem.PreviewWithThemes
 import app.k9mail.core.ui.compose.designsystem.atom.DividerHorizontal
 import app.k9mail.core.ui.compose.designsystem.atom.text.TextTitleLarge
 import app.k9mail.core.ui.compose.theme2.MainTheme
@@ -74,7 +74,7 @@ internal fun ListMailLoginView(
 @Preview(showBackground = true)
 @PreviewDevices
 internal fun ColorContentPreview() {
-    PreviewWithTheme {
+    PreviewWithThemes {
         ListMailLoginView(
             listMail = listOf(ConfigStep.GMAIL, ConfigStep.OUTLOOK, ConfigStep.YANDEX, ConfigStep.OTHER), {},
         )

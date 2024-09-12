@@ -3,7 +3,7 @@ package app.k9mail.feature.account.server.certificate.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import app.k9mail.core.ui.compose.common.koin.koinPreview
-import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
+import app.k9mail.core.ui.compose.designsystem.PreviewWithThemes
 import app.k9mail.feature.account.server.certificate.domain.entity.ServerCertificateProperties
 import okio.ByteString.Companion.decodeHex
 
@@ -32,7 +32,7 @@ internal fun ServerCertificateViewPreview() {
         factory<ServerNameFormatter> { DefaultServerNameFormatter() }
         factory<FingerprintFormatter> { DefaultFingerprintFormatter() }
     } WithContent {
-        PreviewWithTheme {
+        PreviewWithThemes {
             ServerCertificateView(
                 serverCertificateProperties = serverCertificateProperties,
             )

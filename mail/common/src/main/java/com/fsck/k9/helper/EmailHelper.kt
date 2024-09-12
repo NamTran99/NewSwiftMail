@@ -8,7 +8,8 @@ object EmailHelper {
     }
 
     @JvmStatic
-    fun getDomainFromEmailAddress(email: String): String? {
+    fun getDomainFromEmailAddress(email: String?): String? {
+        if(email.isNullOrEmpty()) return null
         val index = email.lastIndexOf('@')
         return if (index == -1 || index == email.lastIndex) null else email.substring(index + 1)
     }

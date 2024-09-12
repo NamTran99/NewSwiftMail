@@ -3,12 +3,12 @@ package app.k9mail.feature.account.setup.ui.specialfolders
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
+import app.k9mail.core.ui.compose.designsystem.PreviewWithThemes
 
 @Composable
 @Preview(showBackground = true)
 internal fun SpecialFoldersContentLoadingPreview() {
-    PreviewWithTheme {
+    PreviewWithThemes {
         SpecialFoldersContent(
             state = SpecialFoldersContract.State(
                 isLoading = true,
@@ -23,7 +23,7 @@ internal fun SpecialFoldersContentLoadingPreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun SpecialFoldersContentFormPreview() {
-    PreviewWithTheme {
+    PreviewWithThemes {
         SpecialFoldersContent(
             state = SpecialFoldersContract.State(
                 isLoading = false,
@@ -38,7 +38,7 @@ internal fun SpecialFoldersContentFormPreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun SpecialFoldersContentSuccessPreview() {
-    PreviewWithTheme {
+    PreviewWithThemes {
         SpecialFoldersContent(
             state = SpecialFoldersContract.State(
                 isLoading = false,
@@ -54,7 +54,7 @@ internal fun SpecialFoldersContentSuccessPreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun SpecialFoldersContentErrorPreview() {
-    PreviewWithTheme {
+    PreviewWithThemes {
         SpecialFoldersContent(
             state = SpecialFoldersContract.State(
                 isLoading = false,

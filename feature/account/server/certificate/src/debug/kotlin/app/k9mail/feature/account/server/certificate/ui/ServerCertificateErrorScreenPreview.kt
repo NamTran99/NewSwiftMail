@@ -3,7 +3,7 @@ package app.k9mail.feature.account.server.certificate.ui
 import androidx.compose.runtime.Composable
 import app.k9mail.core.ui.compose.common.annotation.PreviewDevices
 import app.k9mail.core.ui.compose.common.koin.koinPreview
-import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
+import app.k9mail.core.ui.compose.designsystem.PreviewWithThemes
 import app.k9mail.feature.account.server.certificate.data.InMemoryServerCertificateErrorRepository
 import app.k9mail.feature.account.server.certificate.domain.entity.ServerCertificateError
 import app.k9mail.feature.account.server.certificate.domain.usecase.FormatServerCertificateError
@@ -58,7 +58,7 @@ internal fun ServerCertificateErrorScreenPreview() {
         factory<ServerNameFormatter> { DefaultServerNameFormatter() }
         factory<FingerprintFormatter> { DefaultFingerprintFormatter() }
     } WithContent {
-        PreviewWithTheme {
+        PreviewWithThemes {
             ServerCertificateErrorScreen(
                 onCertificateAccepted = {},
                 onBack = {},
