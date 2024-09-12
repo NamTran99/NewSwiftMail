@@ -2,7 +2,7 @@ package app.k9mail.feature.account.setup.ui.autodiscovery
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import app.k9mail.core.ui.compose.designsystem.PreviewWithThemes
+import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
 import app.k9mail.feature.account.common.domain.input.StringInputField
 import app.k9mail.feature.account.server.validation.ui.fake.FakeAccountOAuthViewModel
 import app.k9mail.feature.account.setup.ui.autodiscovery.fake.fakeAutoDiscoveryResultSettings
@@ -10,7 +10,7 @@ import app.k9mail.feature.account.setup.ui.autodiscovery.fake.fakeAutoDiscoveryR
 @Composable
 @Preview(showBackground = true)
 internal fun AccountAutoDiscoveryContentPreview() {
-    PreviewWithThemes {
+    PreviewWithTheme {
         AccountAutoDiscoveryContent(
             state = AccountAutoDiscoveryContract.State(),
             onEvent = {},
@@ -23,7 +23,7 @@ internal fun AccountAutoDiscoveryContentPreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun AccountAutoDiscoveryContentEmailPreview() {
-    PreviewWithThemes {
+    PreviewWithTheme {
         AccountAutoDiscoveryContent(
             state = AccountAutoDiscoveryContract.State(
                 emailAddress = StringInputField(value = "test@example.com"),
@@ -38,7 +38,7 @@ internal fun AccountAutoDiscoveryContentEmailPreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun AccountAutoDiscoveryContentPasswordPreview() {
-    PreviewWithThemes {
+    PreviewWithTheme {
         AccountAutoDiscoveryContent(
             state = AccountAutoDiscoveryContract.State(
                 configStep = AccountAutoDiscoveryContract.ConfigStep.PASSWORD,
@@ -55,7 +55,7 @@ internal fun AccountAutoDiscoveryContentPasswordPreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun AccountAutoDiscoveryContentPasswordUntrustedSettingsPreview() {
-    PreviewWithThemes {
+    PreviewWithTheme {
         AccountAutoDiscoveryContent(
             state = AccountAutoDiscoveryContract.State(
                 configStep = AccountAutoDiscoveryContract.ConfigStep.PASSWORD,
@@ -72,7 +72,7 @@ internal fun AccountAutoDiscoveryContentPasswordUntrustedSettingsPreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun AccountAutoDiscoveryContentPasswordNoSettingsPreview() {
-    PreviewWithThemes {
+    PreviewWithTheme {
         AccountAutoDiscoveryContent(
             state = AccountAutoDiscoveryContract.State(
                 configStep = AccountAutoDiscoveryContract.ConfigStep.PASSWORD,
@@ -88,7 +88,7 @@ internal fun AccountAutoDiscoveryContentPasswordNoSettingsPreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun AccountAutoDiscoveryContentOAuthPreview() {
-    PreviewWithThemes {
+    PreviewWithTheme {
         AccountAutoDiscoveryContent(
             state = AccountAutoDiscoveryContract.State(
                 configStep = AccountAutoDiscoveryContract.ConfigStep.OAUTH,
@@ -106,7 +106,7 @@ internal fun AccountAutoDiscoveryContentOAuthPreview() {
 //@Composable
 //@Preview(showBackground = true)
 //internal fun AccountAutoDiscoveryContentGmailPreview() {
-//    PreviewWithThemes {
+//    PreviewWithTheme {
 //        AccountAutoDiscoveryContent(
 //            state = AccountAutoDiscoveryContract.State(
 //                configStep = AccountAutoDiscoveryContract.ConfigStep.GMAIL,

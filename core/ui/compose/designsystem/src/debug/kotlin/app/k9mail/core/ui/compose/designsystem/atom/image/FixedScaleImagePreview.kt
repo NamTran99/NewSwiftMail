@@ -7,13 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import app.k9mail.core.ui.compose.designsystem.PreviewWithThemes
+import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
 import app.k9mail.core.ui.compose.theme2.MainTheme
 
 @Composable
 @Preview(showBackground = true)
 internal fun FixedScaleImageBottomCenterPreview() {
-    PreviewWithThemes {
+    PreviewWithTheme {
         Box(
             modifier = Modifier
                 .width(MainTheme.sizes.huge)
@@ -30,7 +30,7 @@ internal fun FixedScaleImageBottomCenterPreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun FixedScaleImageCroppedPreview() {
-    PreviewWithThemes {
+    PreviewWithTheme {
         Box(
             modifier = Modifier
                 .width(MainTheme.sizes.medium)
@@ -46,7 +46,7 @@ internal fun FixedScaleImageCroppedPreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun FixedScaleImageHorizontallyCroppedPreview() {
-    PreviewWithThemes {
+    PreviewWithTheme {
         Box(
             modifier = Modifier
                 .width(MainTheme.sizes.huge)
@@ -62,7 +62,7 @@ internal fun FixedScaleImageHorizontallyCroppedPreview() {
 @Composable
 @Preview(showBackground = true)
 internal fun FixedScaleImageVerticallyCroppedPreview() {
-    PreviewWithThemes {
+    PreviewWithTheme {
         Box(
             modifier = Modifier
                 .width(MainTheme.sizes.medium)
