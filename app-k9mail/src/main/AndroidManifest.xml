@@ -7,7 +7,7 @@
 
     <application
         android:name="app.k9mail.K9App"
-        android:icon="@drawable/ic_app_logo"
+        android:icon="@drawable/core_ui_theme2_k9mail_ic_app_logo"
         android:label="@string/app_name"
         >
 

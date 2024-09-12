@@ -148,12 +148,12 @@ android {
             )
 //            debuggable
             //debug
-            enableUnitTestCoverage = testCoverageEnabled
-            enableAndroidTestCoverage = testCoverageEnabled
-
-            isMinifyEnabled = false
-            isShrinkResources = false
-            isDebuggable = true
+//            enableUnitTestCoverage = testCoverageEnabled
+//            enableAndroidTestCoverage = testCoverageEnabled
+//
+//            isMinifyEnabled = false
+//            isShrinkResources = false
+//            isDebuggable = true
         }
     }
 

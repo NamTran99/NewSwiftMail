@@ -40,6 +40,8 @@
 }
 
 -keep class com.fsck.k9.mail.oauth.XOAuth2Response { *; }
+-keep class com.hungbang.email2018.data.entity { *; }
+-keep class javax.mail { *; }
 
 # okhttp rules
 # see: https://github.com/square/okhttp/blob/master/okhttp/src/main/resources/META-INF/proguard/okhttp3.pro
