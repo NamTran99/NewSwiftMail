@@ -25,9 +25,9 @@ interface AccountAutoDiscoveryContract {
 
         fun getDrawable(): Int?{
             return when(this){
-                GMAIL -> R.drawable.ic_mail
-                OUTLOOK -> R.drawable.ic_outlook
-                YANDEX -> R.drawable.ic_yandex
+                GMAIL -> R.drawable.account_setup_ic_mail
+                OUTLOOK -> R.drawable.account_setup_ic_outlook
+                YANDEX -> R.drawable.account_setup_ic_yandex
                 else -> null
             }
         }
