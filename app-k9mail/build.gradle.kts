@@ -111,20 +111,24 @@ android {
     }
 
     signingConfigs {
-        getByName("debug") {
-            storeFile = file("D:\\debug.keystore")
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
+        if (project.hasProperty("swiftmail.keyAlias") &&
+            project.hasProperty("swiftmail.keyPassword") &&
+            project.hasProperty("swiftmail.storeFile") &&
+            project.hasProperty("swiftmail.storePassword")
+        ) {
+            create("release") {
+                keyAlias = project.property("swiftmail.keyAlias") as String
+                keyPassword = project.property("swiftmail.keyPassword") as String
+                storeFile = file(project.property("swiftmail.storeFile") as String)
+                storePassword = project.property("swiftmail.storePassword") as String
+            }
         }
-        createSigningConfig(project, SigningType.K9_RELEASE, isUpload = false)
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByType(SigningType.K9_RELEASE)
-
             isMinifyEnabled = true
+            signingConfig = signingConfigs.findByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android.txt"),
                 "proguard-rules.pro",
