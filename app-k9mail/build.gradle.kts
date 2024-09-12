@@ -128,7 +128,6 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
-            signingConfig = signingConfigs.findByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android.txt"),
                 "proguard-rules.pro",
@@ -136,10 +135,18 @@ android {
         }
 
         debug {
-            enableUnitTestCoverage = testCoverageEnabled
-            enableAndroidTestCoverage = testCoverageEnabled
-
-            isMinifyEnabled = false
+            //release
+            signingConfig = signingConfigs.findByName("release")
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android.txt"),
+                "proguard-rules.pro",
+            )
+            //debug
+//            enableUnitTestCoverage = testCoverageEnabled
+//            enableAndroidTestCoverage = testCoverageEnabled
+//
+//            isMinifyEnabled = false
         }
     }
 
