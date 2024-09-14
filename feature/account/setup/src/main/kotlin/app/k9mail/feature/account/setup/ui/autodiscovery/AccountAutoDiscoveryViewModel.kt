@@ -103,6 +103,7 @@ internal class AccountAutoDiscoveryViewModel(
     }
 
     private fun convertLocalConfig() {
+
         val savedAccount = EasyMailUtil.getSavedAccountFromEasyMail()
         val savedMailSigning = EasyMailUtil.getSavedSignInConfigFromEasyMail(savedAccount?.accountEmail)
 

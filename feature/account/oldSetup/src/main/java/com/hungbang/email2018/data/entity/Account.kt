@@ -11,7 +11,7 @@ enum class OldMailAccountType(val value: Int) {
     }
 }
 
-data class Account1(
+data class Account(
     var accountEmail: String = "",
     var accountType: Int = 0,
     var signedInTime: Long = 0,
