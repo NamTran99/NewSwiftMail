@@ -11,7 +11,7 @@ import assertk.assertions.isEqualTo
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
-class OldAccountAutoDiscoveryScreenKtTest : ComposeTest() {
+class OldAccount1AutoDiscoveryScreenKtTest : ComposeTest() {
 
     @Test
     fun `should delegate navigation effects`() = runTest {

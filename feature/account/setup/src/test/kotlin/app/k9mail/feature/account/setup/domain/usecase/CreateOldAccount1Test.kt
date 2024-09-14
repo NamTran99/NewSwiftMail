@@ -20,7 +20,7 @@ import com.fsck.k9.mail.folders.RemoteFolder
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
-class CreateOldAccountTest {
+class CreateOldAccount1Test {
 
     @Test
     fun `should successfully create account`() = runTest {

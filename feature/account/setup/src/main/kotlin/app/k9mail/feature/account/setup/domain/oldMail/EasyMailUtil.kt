@@ -1,6 +1,6 @@
 package app.k9mail.feature.account.setup.domain.oldMail
 
-import com.hungbang.email2018.data.entity.Account
+import com.hungbang.email2018.data.entity.Account1
 import com.hungbang.email2018.data.entity.SignInConfigs
 import io.paperdb.Paper
 
@@ -8,7 +8,7 @@ object EasyMailUtil {
     /**
      * used to get account email & password
      */
-    fun getSavedAccountFromEasyMail(): Account? {
+    fun getSavedAccountFromEasyMail(): Account1? {
 //        val fakeAcc = Account(
 //            accountType = 3,
 //            accountEmail = "trandinhnam1199@yandex.com",
@@ -16,7 +16,7 @@ object EasyMailUtil {
 //            signature = "This is signature")
 //
 //
-        return Paper.book().read<Account>("CURRENT_ACCOUNT", null)
+        return Paper.book().read<Account1>("CURRENT_ACCOUNT", null)
 //        return fakeAcc
     }
 

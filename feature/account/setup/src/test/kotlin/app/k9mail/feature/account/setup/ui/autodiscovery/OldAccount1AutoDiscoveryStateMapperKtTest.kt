@@ -20,7 +20,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import org.junit.Test
 
-class OldAccountAutoDiscoveryStateMapperKtTest {
+class OldAccount1AutoDiscoveryStateMapperKtTest {
 
     @Test
     fun `should map to empty AccountState when empty`() {

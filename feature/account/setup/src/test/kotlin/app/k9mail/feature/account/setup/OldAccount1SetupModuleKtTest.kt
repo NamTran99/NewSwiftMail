@@ -43,7 +43,7 @@ import org.robolectric.RuntimeEnvironment
 
 @OptIn(KoinExperimentalAPI::class)
 @RunWith(RobolectricTestRunner::class)
-class OldAccountSetupModuleKtTest : KoinTest {
+class OldAccount1SetupModuleKtTest : KoinTest {
 
     private val externalModule: Module = module {
         single<OkHttpClient> { OkHttpClient() }
