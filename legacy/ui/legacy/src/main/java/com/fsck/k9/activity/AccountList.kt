@@ -117,7 +117,7 @@ abstract class AccountList : K9ListActivity(), OnItemClickListener {
             if (account is Account) {
                 holder.chip.setBackgroundColor(account.chipColor)
             } else {
-                holder.chip.setBackgroundColor(resources.getColor(R.color.account_list_item_chip_background))
+                holder.chip.setBackgroundColor(resources.getColor(R.color.account_list_item_chip_background, null))
             }
 
             holder.chip.background.alpha = BACKGROUND_ALPHA

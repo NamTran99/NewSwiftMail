@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
-import android.util.Log
+//import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
@@ -55,16 +55,13 @@ import app.k9mail.core.ui.compose.designsystem.molecule.input.PasswordInput
 import app.k9mail.core.ui.compose.designsystem.organism.TopAppBarWithBackButton
 import app.k9mail.core.ui.compose.designsystem.template.ResponsiveWidthContainer
 import app.k9mail.core.ui.compose.theme2.MainTheme
-import app.k9mail.feature.account.common.domain.input.StringInputField
 import app.k9mail.feature.account.common.ui.loadingerror.rememberContentLoadingErrorViewState
 import app.k9mail.feature.account.oauth.domain.entity.OAuthResult
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract
 import app.k9mail.feature.account.oauth.ui.AccountOAuthContract.Effect
-import app.k9mail.feature.account.server.validation.ui.fake.FakeAccountOAuthViewModel
 import app.k9mail.feature.account.setup.R
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.Event
 import app.k9mail.feature.account.setup.ui.autodiscovery.AccountAutoDiscoveryContract.State
-import app.k9mail.feature.account.setup.ui.autodiscovery.fake.fakeAutoDiscoveryResultSettings
 import app.k9mail.feature.account.setup.ui.autodiscovery.view.ListMailLoginView
 
 @Composable
@@ -325,23 +322,23 @@ internal fun ContentView(
     }
 }
 
-@Composable
-@Preview(showBackground = true)
-internal fun AccountAutoDiscoveryContentGmailPreview() {
-    PreviewWithTheme {
-        AccountAutoDiscoveryContent(
-            state = State(
-                configStep = AccountAutoDiscoveryContract.ConfigStep.LIST_MAIL_SERVER,
-                emailAddress = StringInputField(value = "test@example.com"),
-                isShowToolbar = true,
-                autoDiscoverySettings = fakeAutoDiscoveryResultSettings(isTrusted = true),
-            ),
-            onEvent = {},
-            oAuthViewModel = FakeAccountOAuthViewModel(),
-            appName = "AppName",
-        )
-    }
-}
+//@Composable
+//@Preview(showBackground = true)
+//internal fun AccountAutoDiscoveryContentGmailPreview() {
+//    PreviewWithTheme {
+//        AccountAutoDiscoveryContent(
+//            state = State(
+//                configStep = AccountAutoDiscoveryContract.ConfigStep.LIST_MAIL_SERVER,
+//                emailAddress = StringInputField(value = "test@example.com"),
+//                isShowToolbar = true,
+//                autoDiscoverySettings = fakeAutoDiscoveryResultSettings(isTrusted = true),
+//            ),
+//            onEvent = {},
+//            oAuthViewModel = FakeAccountOAuthViewModel(),
+//            appName = "AppName",
+//        )
+//    }
+//}
 
 
 fun Context.loadPage(uriString: String?) {
