@@ -28,10 +28,6 @@ data class Account(
     var folderNameTrash: String? = null,
     var isStartTls: Int = 1,
 
-    var listAnotherFolder: ArrayList<EmailFolder>? = null,
-
-    private val childFoldersInInbox: ArrayList<String>? = null,
-
     ) {
 
     fun getAccountTypeFromInt() = OldMailAccountType.fromInt(accountType)

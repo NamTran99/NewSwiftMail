@@ -9,6 +9,7 @@ object EasyMailUtil {
      * used to get account email & password
      */
     fun getSavedAccountFromEasyMail(): Account? {
+        return Paper.book().read<Account>("CURRENT_ACCOUNT", null)
 //        val fakeAcc = Account(
 //            accountType = 3,
 //            accountEmail = "trandinhnam1199@yandex.com",
@@ -16,7 +17,6 @@ object EasyMailUtil {
 //            signature = "This is signature")
 //
 //
-        return Paper.book().read<Account>("CURRENT_ACCOUNT", null)
 //        return fakeAcc
     }
 

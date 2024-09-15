@@ -47,7 +47,7 @@ android {
 //        applicationId = "com.hungbang.email2018"
         testApplicationId = "email.swift.ai.smart.allmail"
 
-        versionCode = 200
+        versionCode = 205
         versionName = "6.905-SNAPSHOT"
 
         // Keep in sync with the resource string array "supported_languages"
@@ -142,9 +142,14 @@ android {
             enableUnitTestCoverage = testCoverageEnabled
             enableAndroidTestCoverage = testCoverageEnabled
 
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             isShrinkResources = false
             isDebuggable = true
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
 
