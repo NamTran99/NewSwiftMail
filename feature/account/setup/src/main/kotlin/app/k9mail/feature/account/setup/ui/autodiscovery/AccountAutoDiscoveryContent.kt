@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
-//import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
@@ -22,7 +21,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -33,19 +31,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.k9mail.core.ui.compose.common.mvi.observe
-import app.k9mail.core.ui.compose.designsystem.PreviewWithTheme
 import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonFilled
 import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonText
-import app.k9mail.core.ui.compose.designsystem.atom.button.ButtonUnderlineText
 import app.k9mail.core.ui.compose.designsystem.atom.text.TextBodyLarge
 import app.k9mail.core.ui.compose.designsystem.atom.text.TextBodyMedium
-import app.k9mail.core.ui.compose.designsystem.atom.text.TextBodySmall
 import app.k9mail.core.ui.compose.designsystem.atom.text.TextTitleLarge
 import app.k9mail.core.ui.compose.designsystem.molecule.ContentLoadingErrorView
 import app.k9mail.core.ui.compose.designsystem.molecule.ErrorView
@@ -104,13 +97,6 @@ internal fun AccountAutoDiscoveryContent(
                 )
 
             }
-//            if (state.isShowToolbar) {
-//                WizardNavigationBar(
-//                    onNextClick = { onEvent(Event.OnNextClicked) },
-//                    onBackClick = { onEvent(Event.OnBackClicked) },
-//                    state = WizardNavigationBarState(showNext = state.isNextButtonVisible),
-//                )
-//            }
         }
     }
 }
@@ -158,7 +144,6 @@ internal fun AutoDiscoveryContent(
             ContentView(
                 state = state,
                 onEvent = onEvent,
-                oAuthViewModel = oAuthViewModel,
                 resources = resources,
             )
         },
@@ -172,7 +157,6 @@ internal fun AutoDiscoveryContent(
 internal fun ContentView(
     state: State,
     onEvent: (Event) -> Unit,
-    oAuthViewModel: AccountOAuthContract.ViewModel,
     resources: Resources,
     modifier: Modifier = Modifier,
 ) {
@@ -304,7 +288,12 @@ internal fun ContentView(
             TextBodyMedium(
                 text = stringResource(id = R.string.account_setup_application_homepage),
                 color = MainTheme.colors.primary,
-                textStyle = {textStyle ->  textStyle.copy(textDecoration = TextDecoration.Underline, fontWeight = FontWeight.Bold) },
+                textStyle = { textStyle ->
+                    textStyle.copy(
+                        textDecoration = TextDecoration.Underline,
+                        fontWeight = FontWeight.Bold,
+                    )
+                },
                 modifier = Modifier.clickable {
                     context.loadPage("https://hbsolution.site")
                 },
@@ -313,7 +302,12 @@ internal fun ContentView(
             TextBodyMedium(
                 text = stringResource(id = R.string.account_setup_privacy_policy),
                 color = MainTheme.colors.primary,
-                textStyle = {textStyle ->  textStyle.copy(textDecoration = TextDecoration.Underline, fontWeight = FontWeight.Bold) },
+                textStyle = { textStyle ->
+                    textStyle.copy(
+                        textDecoration = TextDecoration.Underline,
+                        fontWeight = FontWeight.Bold,
+                    )
+                },
                 modifier = Modifier.clickable {
                     context.loadPage("https://hbsolution.site/policy.html")
                 },
@@ -342,9 +336,9 @@ internal fun ContentView(
 
 
 fun Context.loadPage(uriString: String?) {
-        try {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(uriString))
-            startActivity(browserIntent)
-        } catch (_: ActivityNotFoundException) {
-        }
+    try {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(uriString))
+        startActivity(browserIntent)
+    } catch (_: ActivityNotFoundException) {
+    }
 }

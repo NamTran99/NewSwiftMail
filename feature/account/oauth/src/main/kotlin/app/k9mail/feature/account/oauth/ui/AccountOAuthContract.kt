@@ -29,8 +29,8 @@ interface AccountOAuthContract {
             val data: Intent?,
         ) : Event
 
-        object SignInClicked : Event
-        object OnBackClicked : Event
+        data object SignInClicked : Event
+        data object OnBackClicked : Event
         object OnRetryClicked : Event
     }
 
@@ -42,14 +42,14 @@ interface AccountOAuthContract {
         data class NavigateNext(
             val state: AuthorizationState,
         ) : Effect
-        object NavigateBack : Effect
+        data object NavigateBack : Effect
     }
 
     sealed interface Error {
-        object NotSupported : Error
-        object Canceled : Error
+        data object NotSupported : Error
+        data object Canceled : Error
 
-        object BrowserNotAvailable : Error
+        data object BrowserNotAvailable : Error
         data class Unknown(val error: Exception) : Error
     }
 }

@@ -1,7 +1,6 @@
 package app.k9mail.feature.account.oauth.data
 
 import android.content.Intent
-import android.util.Log
 import androidx.core.net.toUri
 import app.k9mail.core.common.oauth.OAuthConfiguration
 import app.k9mail.feature.account.common.domain.AccountDomainContract
