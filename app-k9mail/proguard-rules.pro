@@ -1,6 +1,6 @@
 # Add project specific ProGuard rules here.
 
--dontobfuscate
+#-dontobfuscate
 
 # Preserve the line number information for debugging stack traces.
 -keepattributes SourceFile,LineNumberTable
@@ -61,3 +61,5 @@
 -dontwarn org.slf4j.impl.StaticLoggerBinder
 
 -keep,allowshrinking class com.tokenautocomplete.TokenCompleteTextView
+-keepclassmembers  class com.hungbang.email2018.data.entity.Account
+-applymapping oldmapping.txt

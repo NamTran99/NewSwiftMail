@@ -147,6 +147,8 @@ internal class AccountAutoDiscoveryViewModel(
 
     }
 
+
+
     private fun setUpMailServerConfig(mailState: ConfigStep) {
         val result = getManualDiscovery.execute(mailState, false)
         updateAutoDiscoverySettings(result ?: return)
