@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.emailclient.mailchecker.outlook.hotmail"
+        applicationId = "com.mail.emailapp.easymail2018"
 //        applicationId = "com.hungbang.email2018"
         testApplicationId = "email.swift.ai.smart.allmail"
 
